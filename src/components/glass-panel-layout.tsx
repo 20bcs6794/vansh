@@ -25,8 +25,8 @@ const BentoHomeGrid = () => {
     const [isCopied, setIsCopied] = useState(false);
     const { theme } = useTheme();
 
-    const lightImage = "/images/dark_theme_user.jpg";
-    const darkImage = "/images/light_theme_user.jpg";
+    const lightImage = "/images/light_theme_user.jpg";
+    const darkImage = "/images/dark_theme_user.jpg";
     const certificatesLink = "https://drive.google.com/uc?export=view&id=1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX";
 
     const handleCopyEmail = () => {
@@ -46,7 +46,7 @@ const BentoHomeGrid = () => {
                         style={{ opacity: theme === 'light' ? 1 : 0 }}
                     >
                         <Image
-                            src={lightImage}
+                            src={darkImage}
                             alt="Vanshdeep Verma"
                             data-ai-hint="person professional portrait"
                             fill
@@ -59,7 +59,7 @@ const BentoHomeGrid = () => {
                         style={{ opacity: theme === 'dark' ? 1 : 0 }}
                     >
                         <Image
-                            src={darkImage}
+                            src={lightImage}
                             alt="Vanshdeep Verma"
                             data-ai-hint="person professional portrait"
                             fill
@@ -204,8 +204,8 @@ const ProjectsView = () => {
         tech: ['Next.js', 'Genkit', 'Tailwind'],
         link: 'https://www.linkedin.com/posts/vanshdeep-verma_connections-github-linkedin-activity-7170425782798835712-UpzW?utm_source=share&utm_medium=member_desktop',
         bgColor: 'from-purple-500 to-indigo-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-2',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-2',
       },
       {
         id: 2,
@@ -214,8 +214,8 @@ const ProjectsView = () => {
         tech: ['React', 'API', 'Framer Motion'],
         link: 'https://github.com/Vanshdeep-verma/Quiz-App',
         bgColor: 'from-blue-500 to-cyan-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 3,
@@ -224,8 +224,8 @@ const ProjectsView = () => {
         tech: ['Genkit', 'React', 'Firebase'],
         link: 'https://github.com/Vanshdeep-verma/Story-Generator',
         bgColor: 'from-fuchsia-500 to-pink-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 4,
@@ -234,8 +234,8 @@ const ProjectsView = () => {
         tech: ['React', 'Firebase', 'ShadCN'],
         link: 'https://github.com/Vanshdeep-verma/Dev-Connect',
         bgColor: 'from-indigo-700 to-violet-800',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
     ];
 
@@ -243,7 +243,7 @@ const ProjectsView = () => {
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
             >
                 {projectsData.map(project => (
@@ -728,8 +728,8 @@ export function GlassPanelLayout() {
 
           <div className="flex-1 flex justify-center">
             <GlassPanel className="flex flex-col w-[600px] h-[480px]" isContentPanel={true} activeView={activeView}>
-               <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
-                  <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
+               <ScrollArea className="h-full w-full">
+                  <div className={cn("h-full", !isScrollDisabled && 'pr-4')} style={{overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
                     {renderContent()}
                   </div>
               </ScrollArea>
