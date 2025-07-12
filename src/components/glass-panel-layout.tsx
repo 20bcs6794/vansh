@@ -25,8 +25,8 @@ const BentoHomeGrid = () => {
     const [isCopied, setIsCopied] = useState(false);
     const { theme } = useTheme();
 
-    const lightImage = "/images/light_theme_user.jpg";
-    const darkImage = "/images/dark_theme_user.jpg";
+    const lightImage = "/images/dark_theme_user.jpg";
+    const darkImage = "/images/light_theme_user.jpg";
     const certificatesLink = "https://drive.google.com/uc?export=view&id=1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX";
 
     const handleCopyEmail = () => {
@@ -205,7 +205,7 @@ const ProjectsView = () => {
         link: 'https://www.linkedin.com/posts/vanshdeep-verma_connections-github-linkedin-activity-7170425782798835712-UpzW?utm_source=share&utm_medium=member_desktop',
         bgColor: 'from-purple-500 to-indigo-600',
         colSpan: 'md:col-span-1',
-        rowSpan: 'md:row-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 2,
@@ -214,7 +214,7 @@ const ProjectsView = () => {
         tech: ['React', 'API', 'Framer Motion'],
         link: 'https://github.com/Vanshdeep-verma/Quiz-App',
         bgColor: 'from-blue-500 to-cyan-600',
-        colSpan: 'md:col-span-2',
+        colSpan: 'md:col-span-1',
         rowSpan: 'md:row-span-1',
       },
       {
@@ -243,7 +243,7 @@ const ProjectsView = () => {
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
             >
                 {projectsData.map(project => (
