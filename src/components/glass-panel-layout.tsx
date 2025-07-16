@@ -653,32 +653,41 @@ export function GlassPanelLayout() {
         return <ProjectsView />;
       case 'Personal':
         return (
-           <div className="p-4">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
-            <div className="flex flex-col gap-6">
-                <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                    <p>
-                        Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                        I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                        I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                    </p>
-                    <p>
-                        In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                        I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                    </p>
-                    <p>
-                        Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                    </p>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-black dark:text-white mt-6 mb-4">Tools and Technologies</h3>
-                  <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
-                      {technologiesWithIcons.map((tech) => (
-                          <TechnologyCard key={tech.name} name={tech.name} icon={tech.icon} />
-                      ))}
+           <div className="p-4 h-full flex flex-col">
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 flex-shrink-0">Who Am I ?</h2>
+            <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm mb-6 flex-shrink-0">
+                <p>
+                    Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                    I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                    I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                </p>
+                <p>
+                    In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                    I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                </p>
+                <p>
+                    Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                </p>
+            </div>
+            <div className="flex-grow flex flex-col min-h-0">
+              <h3 className="text-xl font-bold text-black dark:text-white mb-4 flex-shrink-0">Tools and Technologies</h3>
+              <div className="relative flex-grow overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+                  <div className="absolute inset-0 flex flex-col items-center">
+                    <div className="flex flex-col items-center animate-scroll-y hover:[animation-play-state:paused]">
+                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-4 p-2">
+                          {technologiesWithIcons.map((tech) => (
+                              <TechnologyCard key={tech.name} name={tech.name} icon={tech.icon} />
+                          ))}
+                      </div>
+                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-4 p-2" aria-hidden="true">
+                          {technologiesWithIcons.map((tech) => (
+                              <TechnologyCard key={`${tech.name}-duplicate`} name={tech.name} icon={tech.icon} />
+                          ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
               </div>
+            </div>
           </div>
         );
       case 'Career':

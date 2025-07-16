@@ -84,3 +84,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes scroll-y {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+  }
+
+  .animate-scroll-y {
+    animation: scroll-y 40s linear infinite;
+  }
+}
