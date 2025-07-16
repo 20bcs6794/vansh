@@ -364,7 +364,7 @@ const technologiesWithIcons = [
     { name: 'Python', icon: PythonIcon },
     { name: 'HTML', icon: HtmlIcon },
     { name: 'CSS', icon: CssIcon },
-    { name: 'javaScript', icon: JavaScriptIcon },
+    { name: 'JavaScript', icon: JavaScriptIcon },
     { name: 'Bootstrap', icon: BootstrapIcon },
     { name: 'SQLite', icon: SQLiteIcon },
     { name: 'Git', icon: GitIcon },
