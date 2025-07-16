@@ -374,7 +374,7 @@ const technologiesWithIcons = [
     { name: 'Python', icon: PythonIcon },
     { name: 'HTML', icon: HtmlIcon },
     { name: 'CSS', icon: CssIcon },
-    { name: 'javaScript', icon: JavaScriptIcon },
+    { name: 'JavaScript', icon: JavaScriptIcon },
     { name: 'Bootstrap', icon: BootstrapIcon },
     { name: 'SQLite', icon: SQLiteIcon },
     { name: 'Git', icon: GitIcon },
@@ -663,7 +663,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
            <div className="flex flex-col h-full">
-                <div className="p-4 flex-grow basis-4/5">
+                <div className="flex-grow p-4 min-h-0">
                     <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
                     <ScrollArea className="h-full pr-4">
                         <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
@@ -679,7 +679,7 @@ export function GlassPanelLayout() {
                         </div>
                     </ScrollArea>
                 </div>
-                <div className="py-4 flex-shrink-0 basis-1/5">
+                <div className="py-4 flex-shrink-0">
                   <h3 className="text-xl font-bold text-black dark:text-white mb-4 text-center">Tools and Technologies</h3>
                   <div
                     className="group relative flex gap-4 overflow-hidden"
@@ -742,7 +742,7 @@ export function GlassPanelLayout() {
           <div className="flex-1 flex justify-center">
             <GlassPanel className="flex flex-col w-[600px] h-[480px]" isContentPanel={true} activeView={activeView}>
                <ScrollArea className="h-full w-full">
-                  <div className={cn("h-full", !isScrollDisabled && 'pr-4')} style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
+                  <div className={cn("h-full pr-4")} style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
                     {renderContent()}
                   </div>
               </ScrollArea>
