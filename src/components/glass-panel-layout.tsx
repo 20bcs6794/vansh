@@ -204,8 +204,8 @@ const ProjectsView = () => {
         tech: ['Next.js', 'Genkit', 'Tailwind'],
         link: 'https://www.linkedin.com/posts/vanshdeep-verma_connections-github-linkedin-activity-7170425782798835712-UpzW?utm_source=share&utm_medium=member_desktop',
         bgColor: 'from-purple-500 to-indigo-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-2',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-2',
       },
       {
         id: 2,
@@ -214,8 +214,8 @@ const ProjectsView = () => {
         tech: ['React', 'API', 'Framer Motion'],
         link: 'https://github.com/Vanshdeep-verma/Quiz-App',
         bgColor: 'from-blue-500 to-cyan-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 3,
@@ -224,8 +224,8 @@ const ProjectsView = () => {
         tech: ['Genkit', 'React', 'Firebase'],
         link: 'https://github.com/Vanshdeep-verma/Story-Generator',
         bgColor: 'from-fuchsia-500 to-pink-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 4,
@@ -234,16 +234,16 @@ const ProjectsView = () => {
         tech: ['React', 'Firebase', 'ShadCN'],
         link: 'https://github.com/Vanshdeep-verma/Dev-Connect',
         bgColor: 'from-indigo-700 to-violet-800',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
     ];
 
     return (
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col p-4">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
             >
                 {projectsData.map(project => (
@@ -251,6 +251,7 @@ const ProjectsView = () => {
                         key={project.id}
                         className={cn(
                             'transition-all duration-300 ease-in-out',
+                            'col-span-1', // Default to full width on mobile
                             project.colSpan,
                             project.rowSpan,
                             hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm' : '',
@@ -283,7 +284,7 @@ const SocialButton = ({ label, href, children }: { label: string, href: string, 
 
 const PythonIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
+<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c-0.826-3.417-0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
 </svg>
 );
 const HtmlIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -374,7 +375,7 @@ const technologiesWithIcons = [
     { name: 'Python', icon: PythonIcon },
     { name: 'HTML', icon: HtmlIcon },
     { name: 'CSS', icon: CssIcon },
-    { name: 'JavaScript', icon: JavaScriptIcon },
+    { name: 'javaScript', icon: JavaScriptIcon },
     { name: 'Bootstrap', icon: BootstrapIcon },
     { name: 'SQLite', icon: SQLiteIcon },
     { name: 'Git', icon: GitIcon },
@@ -576,7 +577,7 @@ const ContactView = () => {
                 </BentoCard>
 
                 {/* Socials */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
                             <LinkedInIcon className="w-12 h-12" />
@@ -662,46 +663,50 @@ export function GlassPanelLayout() {
         return <ProjectsView />;
       case 'Personal':
         return (
-           <div className="flex flex-col h-full">
-                <div className="flex-grow p-4 min-h-0">
-                    <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
-                    <ScrollArea className="h-full pr-4">
-                        <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                            <p>
-                                Hello, I'm Vanshdeep, an ambitious and results-oriented professional with a robust background in web development and data analytics. I thrive on building dynamic, user-centric web applications and leveraging data to unlock insightful business intelligence. My recent work includes several challenging projects where I honed my skills in React, Next.js, and Power BI.
-                            </p>
-                            <p>
-                                But my passion for technology doesn't stop when I clock out. In my spare time, you’ll find me diving into emerging technologies, contributing to open-source communities, or occasionally jet-setting around the globe to find new inspiration. One of my most formative experiences was building a full-stack application from the ground up—a journey that taught me adaptability, independence, and some seriously impressive problem-solving skills under pressure.
-                            </p>
-                            <p>
-                                I believe in continuous learning and collaboration, and I'm always looking for the next challenge that will push my boundaries. Now, I’m setting my sights on contributing to a forward-thinking team as a Senior Developer. Want to know more? Feel free to explore my projects and get in touch!
-                            </p>
-                        </div>
-                    </ScrollArea>
-                </div>
-                <div className="py-4 flex-shrink-0">
-                  <h3 className="text-xl font-bold text-black dark:text-white mb-4 text-center">Tools and Technologies</h3>
-                  <div
+           <div className="h-full flex flex-col">
+            <div className="flex-grow p-4">
+                <ScrollArea className="h-full w-full pr-4">
+                     <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
+                    <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                        <p>
+                            Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                            I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                            I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                        </p>
+                        <p>
+                           Beyond the code, I'm a passionate traveler and an avid explorer of new cultures, which has taught me adaptability and creative problem-solving. My journey in tech is driven by a desire to build solutions that are not only functional but also intuitive and user-centric. I thrive in collaborative environments where I can contribute to meaningful projects and continuously learn from my peers.
+                        </p>
+                        <p>
+                           Now, I’m setting my sights on a challenging developer role where I can apply my diverse skill set to create impactful digital experiences. Want to know more? Take a look around and uncover the real me!
+                        </p>
+                    </div>
+                </ScrollArea>
+            </div>
+            <div className="flex-shrink-0 p-4">
+                <h3 className="text-xl font-bold text-black dark:text-white mb-4 text-center">Tools and Technologies</h3>
+                 <div
                     className="group relative flex gap-4 overflow-hidden"
-                    style={{ maskImage: 'linear-gradient(to left, transparent 0, black 10%, black 90%, transparent 100%)' }}
+                    style={{
+                      maskImage: 'linear-gradient(to left, transparent 0%, black 20%, black 80%, transparent 100%)'
+                    }}
                   >
-                    <div className="flex shrink-0 animate-scroll-x group-hover:[animation-play-state:paused] gap-4">
+                    <div className="flex min-w-full shrink-0 items-center justify-around gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
                       {technologiesWithIcons.map((tech) => (
-                        <div key={tech.name} className="w-24 shrink-0">
-                          <TechnologyCard name={tech.name} icon={tech.icon} />
-                        </div>
+                          <div key={tech.name} className="w-20 h-20 flex-shrink-0">
+                            <TechnologyCard name={tech.name} icon={tech.icon} />
+                          </div>
                       ))}
                     </div>
-                     <div className="flex shrink-0 animate-scroll-x group-hover:[animation-play-state:paused] gap-4" aria-hidden="true">
+                     <div className="flex min-w-full shrink-0 items-center justify-around gap-4 animate-scroll-x group-hover:[animation-play-state:paused]" aria-hidden="true">
                       {technologiesWithIcons.map((tech) => (
-                         <div key={`${tech.name}-clone`} className="w-24 shrink-0">
-                          <TechnologyCard name={tech.name} icon={tech.icon} />
-                        </div>
+                          <div key={tech.name + '-clone'} className="w-20 h-20 flex-shrink-0">
+                            <TechnologyCard name={tech.name} icon={tech.icon} />
+                          </div>
                       ))}
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+          </div>
         );
       case 'Career':
         return <CareerTimeline />;
@@ -711,8 +716,6 @@ export function GlassPanelLayout() {
         return null;
     }
   }
-
-  const isScrollDisabled = activeView === 'Contact';
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
@@ -741,8 +744,8 @@ export function GlassPanelLayout() {
 
           <div className="flex-1 flex justify-center">
             <GlassPanel className="flex flex-col w-[600px] h-[480px]" isContentPanel={true} activeView={activeView}>
-               <ScrollArea className="h-full w-full">
-                  <div className={cn("h-full pr-4")} style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
+               <ScrollArea className="h-full w-full" style={{ overflowY: activeView === 'Personal' ? 'hidden' : 'auto' }}>
+                  <div className={cn("h-full", activeView !== 'Personal' && 'pr-4')}>
                     {renderContent()}
                   </div>
               </ScrollArea>
