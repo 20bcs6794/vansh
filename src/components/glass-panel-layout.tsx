@@ -123,7 +123,7 @@ const GlassPanel = forwardRef<HTMLDivElement, { className?: string, children: Re
   return (
     <div ref={ref} style={style} className={cn(
       "bg-white/15 dark:bg-black/30 backdrop-blur-[1px] border border-white/10 dark:border-white/10 rounded-[20px] shadow-lg p-6",
-      isContactView && "bg-transparent dark:bg-transparent backdrop-blur-0 border-none shadow-none p-0",
+      isContactView && "bg-transparent dark:bg-transparent backdrop-blur-0 border-none shadow-none p-0 overflow-hidden",
       className
     )}>
       {children}
@@ -378,7 +378,7 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
-    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105">
+    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105 shrink-0">
         <Icon className="w-10 h-10" />
         <span className="font-medium text-xs text-neutral-800 dark:text-neutral-100">{name}</span>
     </div>
@@ -531,60 +531,56 @@ const ContactView = () => {
 
     return (
         <div className="h-full flex flex-col p-4 gap-4">
-             <h2 className="text-2xl font-bold text-black dark:text-white text-center mb-0">Get In Touch</h2>
-            <div className="flex flex-col gap-4 flex-grow">
-                {/* Form */}
-                <BentoCard className="col-span-2 row-span-1 p-4">
-                    <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-3">
-                        <h3 className="font-bold text-lg">Send a Message</h3>
-                        <div className="relative">
-                            <Input 
-                                name="email" 
-                                type="email" 
-                                placeholder="Your Email" 
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600"
-                            />
-                            {errors.email && <p className="text-destructive text-xs mt-1 absolute">{errors.email}</p>}
-                        </div>
-                        <div className="relative flex-grow">
-                            <Textarea 
-                                name="message" 
-                                placeholder="Your message..." 
-                                value={formData.message}
-                                onChange={handleInputChange}
-                                className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600 h-full resize-none"
-                            />
-                             {errors.message && <p className="text-destructive text-xs mt-1 absolute">{errors.message}</p>}
-                        </div>
-                        <Button type="submit" className="w-full bg-primary/80 hover:bg-primary">
-                            Send Message <Send className="w-4 h-4 ml-2" />
-                        </Button>
-                    </form>
-                </BentoCard>
+            <h2 className="text-2xl font-bold text-black dark:text-white text-center mb-0">Get In Touch</h2>
+            <BentoCard className="flex-grow p-4">
+                <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-3">
+                    <h3 className="font-bold text-lg">Send a Message</h3>
+                    <div className="relative">
+                        <Input 
+                            name="email" 
+                            type="email" 
+                            placeholder="Your Email" 
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600"
+                        />
+                        {errors.email && <p className="text-destructive text-xs mt-1 absolute">{errors.email}</p>}
+                    </div>
+                    <div className="relative flex-grow">
+                        <Textarea 
+                            name="message" 
+                            placeholder="Your message..." 
+                            value={formData.message}
+                            onChange={handleInputChange}
+                            className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600 h-full resize-none"
+                        />
+                         {errors.message && <p className="text-destructive text-xs mt-1 absolute">{errors.message}</p>}
+                    </div>
+                    <Button type="submit" className="w-full bg-primary/80 hover:bg-primary">
+                        Send Message <Send className="w-4 h-4 ml-2" />
+                    </Button>
+                </form>
+            </BentoCard>
 
-                {/* Socials */}
-                <div className="grid grid-cols-3 gap-4">
-                    <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <LinkedInIcon className="w-12 h-12" />
-                            <p className="font-bold mt-2">LinkedIn</p>
-                        </BentoCard>
-                    </a>
-                    <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <WhatsAppIcon className="w-12 h-12"/>
-                            <p className="font-bold mt-2">WhatsApp</p>
-                        </BentoCard>
-                    </a>
-                    <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <GmailIcon className="w-12 h-12"/>
-                            <p className="font-bold mt-2">Gmail</p>
-                        </BentoCard>
-                    </a>
-                </div>
+            <div className="grid grid-cols-3 gap-4">
+                <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
+                    <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
+                        <LinkedInIcon className="w-12 h-12" />
+                        <p className="font-bold mt-2">LinkedIn</p>
+                    </BentoCard>
+                </a>
+                <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
+                    <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
+                        <WhatsAppIcon className="w-12 h-12"/>
+                        <p className="font-bold mt-2">WhatsApp</p>
+                    </BentoCard>
+                </a>
+                <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
+                    <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
+                        <GmailIcon className="w-12 h-12"/>
+                        <p className="font-bold mt-2">Gmail</p>
+                    </BentoCard>
+                </a>
             </div>
         </div>
     );
@@ -652,32 +648,36 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
            <div className="p-4 h-full flex flex-col">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 flex-shrink-0">Who Am I ?</h2>
-            <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm mb-6 flex-shrink-0">
-                <p>
-                    Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                    I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                    I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                </p>
-                <p>
-                    In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                    I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                </p>
-                <p>
-                    Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                </p>
+            <div className="flex-[4_4_0%] min-h-0">
+              <ScrollArea className="h-full pr-4">
+                  <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
+                  <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                      <p>
+                          Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                          I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                          I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                      </p>
+                      <p>
+                          In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                          I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                      </p>
+                      <p>
+                          Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                      </p>
+                  </div>
+              </ScrollArea>
             </div>
-            <div className="flex-grow flex flex-col min-h-0">
+            <div className="flex-1 flex flex-col min-h-0 pt-4">
               <h3 className="text-xl font-bold text-black dark:text-white mb-4 flex-shrink-0">Tools and Technologies</h3>
-              <div className="relative flex-grow overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-                  <div className="absolute inset-0 flex flex-col items-center">
-                    <div className="flex flex-col items-center animate-scroll-y hover:[animation-play-state:paused]">
-                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-4 p-2">
+              <div className="relative flex-grow w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+                  <div className="absolute inset-y-0 left-0 flex items-center">
+                    <div className="flex items-center animate-scroll-x hover:[animation-play-state:paused]">
+                      <div className="flex gap-4 p-2">
                           {technologiesWithIcons.map((tech) => (
                               <TechnologyCard key={tech.name} name={tech.name} icon={tech.icon} />
                           ))}
                       </div>
-                      <div className="grid grid-cols-4 sm:grid-cols-5 gap-4 p-2" aria-hidden="true">
+                      <div className="flex gap-4 p-2" aria-hidden="true">
                           {technologiesWithIcons.map((tech) => (
                               <TechnologyCard key={`${tech.name}-duplicate`} name={tech.name} icon={tech.icon} />
                           ))}
