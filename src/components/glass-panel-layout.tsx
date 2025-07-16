@@ -243,7 +243,7 @@ const ProjectsView = () => {
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
             >
                 {projectsData.map(project => (
@@ -576,7 +576,7 @@ const ContactView = () => {
                 </BentoCard>
 
                 {/* Socials */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
                             <LinkedInIcon className="w-12 h-12" />
@@ -668,16 +668,13 @@ export function GlassPanelLayout() {
                     <ScrollArea className="h-full pr-4">
                         <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
                             <p>
-                                Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                                I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                                I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                                Hello, I'm Vanshdeep, an ambitious and results-oriented professional with a robust background in web development and data analytics. I thrive on building dynamic, user-centric web applications and leveraging data to unlock insightful business intelligence. My recent work includes several challenging projects where I honed my skills in React, Next.js, and Power BI.
                             </p>
                             <p>
-                                In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                                I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                                But my passion for technology doesn't stop when I clock out. In my spare time, you’ll find me diving into emerging technologies, contributing to open-source communities, or occasionally jet-setting around the globe to find new inspiration. One of my most formative experiences was building a full-stack application from the ground up—a journey that taught me adaptability, independence, and some seriously impressive problem-solving skills under pressure.
                             </p>
                             <p>
-                                Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                                I believe in continuous learning and collaboration, and I'm always looking for the next challenge that will push my boundaries. Now, I’m setting my sights on contributing to a forward-thinking team as a Senior Developer. Want to know more? Feel free to explore my projects and get in touch!
                             </p>
                         </div>
                     </ScrollArea>
