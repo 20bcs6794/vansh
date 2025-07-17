@@ -390,8 +390,8 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
-    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105">
-        <Icon className="w-10 h-10" />
+    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 flex-shrink-0 transition-transform hover:scale-105">
+        <Icon className="w-12 h-12" />
         <span className="font-medium text-xs text-neutral-800 dark:text-neutral-100">{name}</span>
     </div>
 );
@@ -664,7 +664,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
           <div className="flex flex-col h-full p-4">
-            <div className="h-4/5">
+            <div className="flex-grow">
               <ScrollArea className="h-full w-full">
                 <div className="pr-4">
                   <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
@@ -685,15 +685,13 @@ export function GlassPanelLayout() {
                 </div>
               </ScrollArea>
             </div>
-            <div className="h-1/5 flex flex-col justify-end">
-              <h3 className="text-2xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
+            <div className="flex-shrink-0 pt-4">
+              <h3 className="text-lg font-bold text-black dark:text-white mb-2 text-center">Tools and Technologies</h3>
               <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
                     {technologiesWithIcons.map((tech) => (
                         <TechnologyCard key={`${tech.name}-1`} name={tech.name} icon={tech.icon} />
                     ))}
-                </div>
-                <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]" aria-hidden="true">
                     {technologiesWithIcons.map((tech) => (
                         <TechnologyCard key={`${tech.name}-2`} name={tech.name} icon={tech.icon} />
                     ))}
@@ -711,7 +709,7 @@ export function GlassPanelLayout() {
     }
   }
 
-  const isScrollDisabled = activeView === 'Contact' || activeView === 'Personal' ;
+  const isScrollDisabled = activeView === 'Contact';
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
