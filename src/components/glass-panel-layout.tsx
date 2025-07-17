@@ -227,7 +227,7 @@ const ProjectsView = () => {
         colSpan: 'md:col-span-1',
         rowSpan: 'md:row-span-1',
       },
-       {
+      {
         id: 4,
         name: 'Dev-Connect Platform',
         description: 'A platform connecting new developers with real-world projects to gain experience and build their portfolio.',
@@ -243,7 +243,7 @@ const ProjectsView = () => {
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-2 md:grid-cols-3 grid-rows-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
             >
                 {projectsData.map(project => (
@@ -251,8 +251,9 @@ const ProjectsView = () => {
                         key={project.id}
                         className={cn(
                             'transition-all duration-300 ease-in-out',
-                            project.colSpan,
+                            'col-span-1', 
                             project.rowSpan,
+                            project.colSpan,
                             hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm' : '',
                             hoveredId === project.id ? 'scale-105 z-10' : ''
                         )}
@@ -283,7 +284,7 @@ const SocialButton = ({ label, href, children }: { label: string, href: string, 
 
 const PythonIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
+<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c-0.826-3.417-0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
 </svg>
 );
 const HtmlIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -298,7 +299,7 @@ const CssIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 const BootstrapIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-        <linearGradient id="Q_pn21O5LDDqwJlze0Upoa_g9mmSxx3SwAI_gr1" x1="24" x2="24" y1="41" y2="7" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#643499"></stop><stop offset=".011" stopColor="#68369f"></stop><stop offset=".135" stopColor="#773db6"></stop><stop offset=".193" stopColor="#8042c3"></stop><stop offset=".248" stopColor="#8343c8"></stop><stop offset=".388" stopColor="#8444c9"></stop><stop offset=".732" stopColor="#9751d2"></stop><stop offset=".997" stopColor="#9c55d4"></stop><stop offset=".998" stopColor="#9c55d4"></stop><stop offset="1" stopColor="#9c55d4"></stop></linearGradient><path fill="url(#Q_pn21O5LDDqwJlze0Upoa_g9mmSxx3SwAI_gr1)" d="M7.373,11.443C7.293,9.132,9.094,7,11.529,7h24.946c2.435,0,4.236,2.132,4.155,4.443	c-0.077,2.221,0.023,5.097,0.747,7.443c0.681,2.207,1.801,3.652,3.593,3.981c0.206,0.038,0.363,0.205,0.363,0.415v1.438	c0,0.21-0.157,0.377-0.363,0.415c-1.792,0.328-2.912,1.773-3.593,3.981c-0.724,2.345-0.824,5.222-0.747,7.443	C40.71,38.868,38.909,41,36.475,41H11.529c-2.434,0-4.236-2.132-4.155-4.443c0.077-2.221-0.023-5.097-0.747-7.443	c-0.681-2.207-1.804-3.652-3.596-3.981c-0.206-0.038-0.363-0.205-0.363-0.415v-1.438c0-0.21,0.157,0.377,0.363-0.415	c1.792-0.328,2.915-1.773,3.596-3.981C7.35,16.54,7.451,13.664,7.373,11.443z"></path><path fill="#fff" d="M27.073,23.464v-0.028c1.853-0.32,3.299-2.057,3.299-3.97c0-1.352-0.52-2.498-1.504-3.312	c-0.981-0.812-2.357-1.241-3.981-1.241H17.45V33.08h7.475c1.942,0,3.555-0.474,4.663-1.372c1.109-0.899,1.696-2.207,1.696-3.783	C31.283,25.544,29.593,23.756,27.073,23.464z M23.59,22.608h-3.181V17.29h3.784c2.076,0,3.219,0.911,3.219,2.565	C27.413,21.63,26.055,22.608,23.59,22.608z M20.409,24.834h3.759c2.716,0,4.092,0.981,4.092,2.916c0,1.932-1.357,2.953-3.925,2.953	h-3.926V24.834z"></path>
+        <linearGradient id="Q_pn21O5LDDqwJlze0Upoa_g9mmSxx3SwAI_gr1" x1="24" x2="24" y1="41" y2="7" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#643499"></stop><stop offset=".011" stopColor="#68369f"></stop><stop offset=".135" stopColor="#773db6"></stop><stop offset=".193" stopColor="#8042c3"></stop><stop offset=".248" stopColor="#8343c8"></stop><stop offset=".388" stopColor="#8444c9"></stop><stop offset=".732" stopColor="#9751d2"></stop><stop offset=".997" stopColor="#9c55d4"></stop><stop offset=".998" stopColor="#9c55d4"></stop><stop offset="1" stopColor="#9c55d4"></stop></linearGradient><path fill="url(#Q_pn21O5LDDqwJlze0Upoa_g9mmSxx3SwAI_gr1)" d="M7.373,11.443C7.293,9.132,9.094,7,11.529,7h24.946c2.435,0,4.236,2.132,4.155,4.443	c-0.077,2.221,0.023,5.097,0.747,7.443c0.681,2.207,1.801,3.652,3.593,3.981c0.206,0.038,0.363,0.205,0.363,0.415v1.438	c0,0.21-0.157,0.377-0.363,0.415c-1.792,0.328-2.912,1.773-3.593,3.981c-0.724,2.345-0.824,5.222-0.747,7.443	C40.71,38.868,38.909,41,36.475,41H11.529c-2.434,0-4.236-2.132-4.155-4.443c0.077-2.221-0.023-5.097-0.747-7.443	c-0.681-2.207-1.804-3.652-3.596-3.981c-0.206-0.038-0.363-0.205-0.363-0.415v-1.438c0-0.21,0.157-0.377,0.363-0.415	c1.792-0.328,2.915-1.773,3.596-3.981C7.35,16.54,7.451,13.664,7.373,11.443z"></path><path fill="#fff" d="M27.073,23.464v-0.028c1.853-0.32,3.299-2.057,3.299-3.97c0-1.352-0.52-2.498-1.504-3.312	c-0.981-0.812-2.357-1.241-3.981-1.241H17.45V33.08h7.475c1.942,0,3.555-0.474,4.663-1.372c1.109-0.899,1.696-2.207,1.696-3.783	C31.283,25.544,29.593,23.756,27.073,23.464z M23.59,22.608h-3.181V17.29h3.784c2.076,0,3.219,0.911,3.219,2.565	C27.413,21.63,26.055,22.608,23.59,22.608z M20.409,24.834h3.759c2.716,0,4.092,0.981,4.092,2.916c0,1.932-1.357,2.953-3.925,2.953	h-3.926V24.834z"></path>
     </svg>
 );
 
@@ -354,7 +355,7 @@ const MySqlIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const AwsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" {...props}  x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-  <path fill="#252f3e" d="M13.527,21.529c0,0.597,0.064,1.08,0.176,1.435c0.128,0.355,0.287,0.742,0.511,1.161 c0.08,0.129,0.112,0.258,0.112,0.371c0,0.161-0.096,0.322-0.303,0.484l-1.006,0.677c-0.144,0.097-0.287,0.145-0.415,0.145 c-0.16,0-0.319-0.081-0.479-0.226c-0.224-0.242-0.415-0.5-0.575-0.758c-0.16-0.274-0.319-0.58-0.495-0.951 c-1.245,1.483-2.81,2.225-4.694,2.225c-1.341,0-2.411-0.387-3.193-1.161s-1.181-1.806-1.181-3.096c0-1.37,0.479-2.483,1.453-3.321 s2.267-1.258,3.911-1.258c0.543,0,1.102,0.048,1.692,0.129s1.197,0.21,1.836,0.355v-1.177c0-1.225-0.255-2.08-0.75-2.58 c-0.511-0.5-1.373-0.742-2.602-0.742c-0.559,0-1.133,0.064-1.724,0.21c-0.591,0.145-1.165,0.322-1.724,0.548 c-0.255,0.113-0.447,0.177-0.559,0.21c-0.112,0.032-0.192,0.048-0.255,0.048c-0.224,0-0.335-0.161-0.335-0.5v-0.79 c0-0.258,0.032-0.451,0.112-0.564c0.08-0.113,0.224-0.226,0.447-0.339c0.559-0.29,1.229-0.532,2.012-0.726 c0.782-0.21,1.612-0.306,2.49-0.306c1.9,0,3.289,0.435,4.183,1.306c0.878,0.871,1.325,2.193,1.325,3.966v5.224H13.527z M7.045,23.979c0.527,0,1.07-0.097,1.644-0.29c0.575-0.193,1.086-0.548,1.517-1.032c0.255-0.306,0.447-0.645,0.543-1.032 c0.096-0.387,0.16-0.855,0.16-1.403v-0.677c-0.463-0.113-0.958-0.21-1.469-0.274c-0.511-0.064-1.006-0.097-1.501-0.097 c-1.07,0-1.852,0.21-2.379,0.645s-0.782,1.048-0.782,1.854c0,0.758,0.192,1.322,0.591,1.709 C5.752,23.786,6.311,23.979,7.045,23.979z M19.865,25.721c-0.287,0-0.479-0.048-0.607-0.161c-0.128-0.097-0.239-0.322-0.335-0.629 l-3.752-12.463c-0.096-0.322-0.144-0.532-0.144-0.645c0-0.258,0.128-0.403,0.383-0.403h1.565c0.303,0,0.511,0.048,0.623,0.161 c0.128,0.097,0.223,0.322,0.319,0.629l2.682,10.674l2.49-10.674c0.08-0.322,0.176-0.532,0.303-0.629 c0.128-0.097,0.351-0.161,0.639-0.161h1.277c0.303,0,0.511,0.048,0.639,0.161c0.128,0.097,0.239,0.322,0.303,0.629l2.522,10.803 l2.762-10.803c0.096-0.322,0.208-0.532,0.319-0.629c0.128-0.097,0.335-0.161,0.623-0.161h1.485c0.255,0,0.399,0.129,0.399,0.403 c0,0.081-0.016,0.161-0.032,0.258s-0.048,0.226-0.112,0.403l-3.847,12.463c-0.096,0.322-0.208,0.532-0.335,0.629 s-0.335,0.161-0.607,0.161h-1.373c-0.303,0-0.511-0.048-0.639-0.161c-0.128-0.113-0.239-0.322-0.303-0.645l-2.474-10.4 L22.18,24.915c-0.08,0.322-0.176,0.532-0.303,0.645c-0.128,0.113-0.351,0.161-0.639,0.161H19.865z M40.379,26.156 c-0.83,0-1.66-0.097-2.458-0.29c-0.798-0.193-1.421-0.403-1.836-0.645c-0.255-0.145-0.431-0.306-0.495-0.451 c-0.064-0.145-0.096-0.306-0.096-0.451v-0.822c0-0.339,0.128-0.5,0.367-0.5c0.096,0,0.192,0.016,0.287,0.048 c0.096,0.032,0.239,0.097,0.399,0.161c0.543,0.242,1.133,0.435,1.756,0.564c0.639,0.129,1.261,0.193,1.9,0.193 c1.006,0,1.788-0.177,2.331-0.532c0.543-0.355,0.83-0.871,0.83-1.532c0-0.451-0.144-0.822-0.431-1.129 c-0.287-0.306-0.83-0.58-1.612-0.838l-2.315-0.726c-1.165-0.371-2.027-0.919-2.554-1.645c-0.527-0.709-0.798-1.499-0.798-2.338 c0-0.677,0.144-1.274,0.431-1.79s0.671-0.967,1.149-1.322c0.479-0.371,1.022-0.645,1.66-0.838C39.533,11.081,40.203,11,40.906,11 c0.351,0,0.718,0.016,1.07,0.064c0.367,0.048,0.702,0.113,1.038,0.177c0.319,0.081,0.623,0.161,0.91,0.258s0.511,0.193,0.671,0.29 c0.224,0.129,0.383,0.258,0.479,0.403c0.096,0.129,0.144,0.306,0.144,0.532v0.758c0,0.339-0.128,0.516-0.367,0.516 c-0.128,0-0.335-0.064-0.607-0.193c-0.91-0.419-1.932-0.629-3.065-0.629c-0.91,0-1.628,0.145-2.123,0.451 c-0.495,0.306-0.75,0.774-0.75,1.435c0,0.451,0.16,0.838,0.479,1.145c0.319,0.306,0.91,0.613,1.756,0.887l2.267,0.726 c1.149,0.371,1.98,0.887,2.474,1.548s0.734,1.419,0.734,2.257c0,0.693-0.144,1.322-0.415,1.87 c-0.287,0.548-0.671,1.032-1.165,1.419c-0.495,0.403-1.086,0.693-1.772,0.903C41.943,26.043,41.193,26.156,40.379,26.156z"></path><path fill="#f90" d="M43.396,33.992c-5.252,3.918-12.883,5.998-19.445,5.998c-9.195,0-17.481-3.434-23.739-9.142 c-0.495-0.451-0.048-1.064,0.543-0.709c6.769,3.966,15.118,6.369,23.755,6.369c5.827,0,12.229-1.225,18.119-3.741 C43.508,32.364,44.258,33.347,43.396,33.992z M45.583,31.477c-0.671-0.871-4.438-0.419-6.146-0.21 c-0.511,0.064-0.591-0.387-0.128-0.726c3.001-2.128,7.934-1.516,8.509-0.806c0.575,0.726-0.16,5.708-2.969,8.094 c-0.431,0.371-0.846,0.177-0.655-0.306C44.833,35.927,46.254,32.331,45.583,31.477z"></path>
+  <path fill="#252f3e" d="M13.527,21.529c0,0.597,0.064,1.08,0.176,1.435c0.128,0.355,0.287,0.742,0.511,1.161 c0.08,0.129,0.112,0.258,0.112,0.371c0,0.161-0.096,0.322-0.303,0.484l-1.006,0.677c-0.144,0.097-0.287,0.145-0.415,0.145 c-0.16,0-0.319-0.081-0.479-0.226c-0.224-0.242-0.415-0.5-0.575-0.758c-0.16-0.274-0.319-0.58-0.495-0.951 c-1.245,1.483-2.81,2.225-4.694,2.225c-1.341,0-2.411-0.387-3.193-1.161s-1.181-1.806-1.181-3.096c0-1.37,0.479-2.483,1.453-3.321 s2.267-1.258,3.911-1.258c0.543,0,1.102,0.048,1.692,0.129s1.197,0.21,1.836,0.355v-1.177c0-1.225-0.255-2.08-0.75-2.58 c-0.511-0.5-1.373-0.742-2.602-0.742c-0.559,0-1.133,0.064-1.724,0.21c-0.591,0.145-1.165,0.322-1.724,0.548 c-0.255,0.113-0.447,0.177-0.559,0.21c-0.112,0.032-0.192,0.048-0.255,0.048c-0.224,0-0.335-0.161-0.335-0.5v-0.79 c0-0.258,0.032-0.451,0.112-0.564c0.08-0.113,0.224-0.226,0.447-0.339c0.559-0.29,1.229-0.532,2.012-0.726 c0.782-0.21,1.612-0.306,2.49-0.306c1.9,0,3.289,0.435,4.183,1.306c0.878,0.871,1.325,2.193,1.325,3.966v5.224H13.527z M7.045,23.979c0.527,0,1.07-0.097,1.644-0.29c0.575-0.193,1.086-0.548,1.517-1.032c0.255-0.306,0.447-0.645,0.543-1.032 c0.096-0.387,0.16-0.855,0.16-1.403v-0.677c-0.463-0.113-0.958-0.21-1.469-0.274c-0.511-0.064-1.006-0.097-1.501-0.097 c-1.07,0-1.852,0.21-2.379,0.645s-0.782,1.048-0.782,1.854c0,0.758,0.192,1.322,0.591,1.709 C5.752,23.786,6.311,23.979,7.045,23.979z M19.865,25.721c-0.287,0-0.479-0.048-0.607-0.161c-0.128-0.097-0.239-0.322-0.335-0.629 l-3.752-12.463c-0.096-0.322-0.144-0.532-0.144-0.645c0-0.258,0.128-0.403,0.383-0.403h1.565c0.303,0,0.511,0.048,0.623,0.161 c0.128,0.097,0.223,0.322,0.319,0.629l2.682,10.674l2.49-10.674c0.08-0.322,0.176-0.532,0.303-0.629 c0.128-0.097,0.351-0.161,0.639-0.161h1.277c0.303,0,0.511,0.048,0.639,0.161c0.128-0.097,0.239,0.322,0.303,0.629l2.522,10.803 l2.762-10.803c0.096-0.322,0.208-0.532,0.319-0.629c0.128-0.097,0.335-0.161,0.623-0.161h1.485c0.255,0,0.399,0.129,0.399,0.403 c0,0.081-0.016,0.161-0.032,0.258s-0.048,0.226-0.112,0.403l-3.847,12.463c-0.096,0.322-0.208,0.532-0.335,0.629 s-0.335,0.161-0.607,0.161h-1.373c-0.303,0-0.511-0.048-0.639-0.161c-0.128-0.113-0.239-0.322-0.303-0.645l-2.474-10.4 L22.18,24.915c-0.08,0.322-0.176,0.532-0.303,0.645c-0.128,0.113-0.351,0.161-0.639,0.161H19.865z M40.379,26.156 c-0.83,0-1.66-0.097-2.458-0.29c-0.798-0.193-1.421-0.403-1.836-0.645c-0.255-0.145-0.431-0.306-0.495-0.451 c-0.064-0.145-0.096-0.306-0.096-0.451v-0.822c0-0.339,0.128-0.5,0.367-0.5c0.096,0,0.192,0.016,0.287,0.048 c0.096,0.032,0.239,0.097,0.399,0.161c0.543,0.242,1.133,0.435,1.756,0.564c0.639,0.129,1.261,0.193,1.9,0.193 c1.006,0,1.788-0.177,2.331-0.532c0.543-0.355,0.83-0.871,0.83-1.532c0-0.451-0.144-0.822-0.431-1.129 c-0.287-0.306-0.83-0.58-1.612-0.838l-2.315-0.726c-1.165-0.371-2.027-0.919-2.554-1.645c-0.527-0.709-0.798-1.499-0.798-2.338 c0-0.677,0.144-1.274,0.431-1.79s0.671-0.967,1.149-1.322c0.479-0.371,1.022-0.645,1.66-0.838C39.533,11.081,40.203,11,40.906,11 c0.351,0,0.718,0.016,1.07,0.064c0.367,0.048,0.702,0.113,1.038,0.177c0.319,0.081,0.623,0.161,0.91,0.258s0.511,0.193,0.671,0.29 c0.224,0.129,0.383,0.258,0.479,0.403c0.096,0.129,0.144,0.306,0.144,0.532v0.758c0,0.339-0.128,0.516-0.367,0.516 c-0.128,0-0.335-0.064-0.607-0.193c-0.91-0.419-1.932-0.629-3.065-0.629c-0.91,0-1.628,0.145-2.123,0.451 c-0.495,0.306-0.75,0.774-0.75,1.435c0,0.451,0.16,0.838,0.479,1.145c0.319,0.306,0.91,0.613,1.756,0.887l2.267,0.726 c1.149,0.371,1.98,0.887,2.474,1.548s0.734,1.419,0.734,2.257c0,0.693-0.144,1.322-0.415,1.87 c-0.287,0.548-0.671,1.032-1.165,1.419c-0.495,0.403-1.086,0.693-1.772,0.903C41.943,26.043,41.193,26.156,40.379,26.156z"></path><path fill="#f90" d="M43.396,33.992c-5.252,3.918-12.883,5.998-19.445,5.998c-9.195,0-17.481-3.434-23.739-9.142 c-0.495-0.451-0.048-1.064,0.543-0.709c6.769,3.966,15.118,6.369,23.755,6.369c5.827,0,12.229-1.225,18.119-3.741 C43.508,32.364,44.258,33.347,43.396,33.992z M45.583,31.477c-0.671-0.871-4.438-0.419-6.146-0.21 c-0.511,0.064-0.591-0.387-0.128-0.726c3.001-2.128,7.934-1.516,8.509-0.806c0.575,0.726-0.16,5.708-2.969,8.094 c-0.431,0.371-0.846,0.177-0.655-0.306C44.833,35.927,46.254,32.331,45.583,31.477z"></path>
   </svg>
 );
 
@@ -389,7 +390,7 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
-    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105 w-24 h-24 flex-shrink-0">
+    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105">
         <Icon className="w-10 h-10" />
         <span className="font-medium text-xs text-neutral-800 dark:text-neutral-100">{name}</span>
     </div>
@@ -662,41 +663,43 @@ export function GlassPanelLayout() {
         return <ProjectsView />;
       case 'Personal':
         return (
-          <div className="h-full flex flex-col p-4">
-              <div className="h-4/5">
-                <ScrollArea className="h-full w-full pr-4">
-                   <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
-                    <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                        <p>
-                            Hello, I'm Vanshdeep, a dynamic and ambitious professional with a robust background in web development and data analytics. I thrive on crafting elegant, high-performance web applications and transforming raw data into actionable business intelligence. My recent projects have centered on cutting-edge technologies like React, Next.js, and Power BI, where I've honed my skills in creating seamless user experiences and insightful data visualizations.
-                        </p>
-                        <p>
-                            But my journey isn't just about code and certificates. When I'm not at my desk, you'll find me exploring the latest tech trends, contributing to open-source communities, or occasionally jet-setting to new destinations. I once challenged myself to build a full-stack application from the ground up—a solo adventure that taught me invaluable lessons in adaptability, resilience, and creative problem-solving.
-                        </p>
-                        <p>
-                           I am a firm believer in continuous learning and growth, always seeking new challenges to expand my expertise. My goal is to not only build great software but also to architect solutions that make a tangible impact. With a keen eye for detail and a passion for innovation, I’m now ready to take on my next big challenge and aiming for a Senior Developer role where I can lead, innovate, and inspire.
-                        </p>
-                        <p>
-                            Want to know more? Feel free to explore my portfolio and get in touch!
-                        </p>
-                    </div>
-                </ScrollArea>
-              </div>
-              <div className="h-1/5 flex flex-col justify-center">
-                   <h3 className="text-xl font-bold text-black dark:text-white mb-4 text-center">Tools and Technologies</h3>
-                  <div className="relative group flex gap-4 overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                      <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                          {technologiesWithIcons.map((tech) => (
-                              <TechnologyCard key={`${tech.name}-1`} name={tech.name} icon={tech.icon} />
-                          ))}
-                      </div>
-                      <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]" aria-hidden="true">
-                          {technologiesWithIcons.map((tech) => (
-                              <TechnologyCard key={`${tech.name}-2`} name={tech.name} icon={tech.icon} />
-                          ))}
-                      </div>
+          <div className="flex flex-col h-full p-4">
+            <div className="h-4/5">
+              <ScrollArea className="h-full w-full">
+                <div className="pr-4">
+                  <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Who Am I ?</h2>
+                  <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                      <p>
+                          Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                          I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                          I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                      </p>
+                      <p>
+                          In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                          I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                      </p>
+                      <p>
+                          Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                      </p>
                   </div>
+                </div>
+              </ScrollArea>
+            </div>
+            <div className="h-1/5 flex flex-col justify-end">
+              <h3 className="text-2xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
+              <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                    {technologiesWithIcons.map((tech) => (
+                        <TechnologyCard key={`${tech.name}-1`} name={tech.name} icon={tech.icon} />
+                    ))}
+                </div>
+                <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]" aria-hidden="true">
+                    {technologiesWithIcons.map((tech) => (
+                        <TechnologyCard key={`${tech.name}-2`} name={tech.name} icon={tech.icon} />
+                    ))}
+                </div>
               </div>
+            </div>
           </div>
         );
       case 'Career':
@@ -708,7 +711,7 @@ export function GlassPanelLayout() {
     }
   }
 
-  const isScrollDisabled = activeView === 'Contact';
+  const isScrollDisabled = activeView === 'Contact' || activeView === 'Personal' ;
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
@@ -738,7 +741,7 @@ export function GlassPanelLayout() {
           <div className="flex-1 flex justify-center">
             <GlassPanel className="flex flex-col w-[600px] h-[480px]" isContentPanel={true} activeView={activeView}>
                <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
-                  <div className={cn("h-full", !isScrollDisabled && activeView !== 'Personal' && 'pr-4')}>
+                  <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
                     {renderContent()}
                   </div>
               </ScrollArea>
@@ -753,7 +756,7 @@ export function GlassPanelLayout() {
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
                 <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                  <a href="https://docs.google.com/document/d/1vHpjB02clp2g23p2Z38kE43Y3hJ1P8J0/edit?usp=drive_link&ouid=113084798151978715878&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
                     <span>Resume</span>
                   </a>
@@ -775,5 +778,3 @@ export function GlassPanelLayout() {
     </div>
   );
 }
-
-    
