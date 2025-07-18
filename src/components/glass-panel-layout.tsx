@@ -662,28 +662,30 @@ export function GlassPanelLayout() {
         return <ProjectsView />;
       case 'Personal':
         return (
-          <div className="p-4 h-full flex flex-col gap-4">
-              <ScrollArea className="flex-grow pr-4">
-                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
-                    <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
-                    <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                        <p>
-                            Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                            I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                            I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                        </p>
-                        <p>
-                            In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                            I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                        </p>
-                        <p>
-                            Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                        </p>
-                    </div>
-                </div>
-              </ScrollArea>
+          <div className="p-4 h-full flex flex-col">
+              <div className="flex-grow min-h-0">
+                <ScrollArea className="h-full w-full pr-4">
+                  <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
+                      <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
+                      <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                          <p>
+                              Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                              I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                              I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                          </p>
+                          <p>
+                              In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                              I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                          </p>
+                          <p>
+                              Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                          </p>
+                      </div>
+                  </div>
+                </ScrollArea>
+              </div>
 
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 pt-4">
                 <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
                 <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                     <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
