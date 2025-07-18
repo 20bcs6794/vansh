@@ -389,8 +389,8 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
-    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 aspect-square transition-transform hover:scale-105">
-        <Icon className="w-5 h-5" />
+    <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform hover:scale-105">
+        <Icon className="w-8 h-8" />
         <span className="font-medium text-xs text-neutral-800 dark:text-neutral-100">{name}</span>
     </div>
 );
@@ -663,7 +663,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
           <div className="p-4 h-full flex flex-col gap-4">
-              <ScrollArea className="flex-grow pr-2 -mr-4">
+              <ScrollArea className="flex-grow pr-4">
                 <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
                     <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
                     <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
