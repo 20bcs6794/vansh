@@ -663,10 +663,10 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="p-4 h-full flex flex-col gap-4">
-                 <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col overflow-hidden">
-                    <ScrollArea className="flex-grow w-full pr-4">
-                        <div className="space-y-3 text-sm">
-                            <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
+                <div className="flex-grow flex flex-col gap-4 overflow-hidden">
+                    <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
+                    <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 overflow-hidden">
+                        <ScrollArea className="h-full w-full pr-4">
                             <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
                                 <p>
                                     Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
@@ -681,20 +681,7 @@ export function GlassPanelLayout() {
                                     Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
                                 </p>
                             </div>
-                        </div>
-                    </ScrollArea>
-                </div>
-                 <div className="flex-shrink-0">
-                    <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
-                     <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                        <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
-                        </div>
+                        </ScrollArea>
                     </div>
                 </div>
             </div>
@@ -752,6 +739,21 @@ export function GlassPanelLayout() {
                     </div>
                 </ScrollArea>
               </GlassPanel>
+              {activeView === 'Personal' && (
+                <div className="w-[600px]">
+                     <h3 className="text-xl font-bold text-white mb-4">Tools and Technologies</h3>
+                     <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                        <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                            {technologiesWithIcons.map((tech, index) => (
+                                <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                            ))}
+                            {technologiesWithIcons.map((tech, index) => (
+                                <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+              )}
             </div>
           
           <GlassPanel
@@ -768,14 +770,18 @@ export function GlassPanelLayout() {
                 </Button>
             </div>
             
-            <ScrollArea className="flex-grow pr-2">
-              <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
-                  <h3 className="font-semibold text-black dark:text-white text-sm">How to use this website?</h3>
-                  <p className="text-neutral-800 dark:text-neutral-100">Hello everyone, welcome to my portfolio website! This website offers a 3D experience created.</p>
-                  <p className="text-neutral-800 dark:text-neutral-100">I know what you're thinking: "A portfolio website in 3D for a front-end developer? Is that really necessary?" In short, the answer is no. But it is fun! And it's a great way to showcase my work.</p>
-                  <p className="text-neutral-800 dark:text-neutral-100">On this website, you'll find a collection of my projects, personal information, and information on my education and career. I hope you enjoy seeing what I can do. I won't keep you waiting any longer, so go take a look!</p>
+            
+              <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm h-full">
+                <ScrollArea className="h-full pr-2">
+                    <div>
+                        <h3 className="font-semibold text-black dark:text-white text-sm">How to use this website?</h3>
+                        <p className="text-neutral-800 dark:text-neutral-100">Hello everyone, welcome to my portfolio website! This website offers a 3D experience created.</p>
+                        <p className="text-neutral-800 dark:text-neutral-100">I know what you're thinking: "A portfolio website in 3D for a front-end developer? Is that really necessary?" In short, the answer is no. But it is fun! And it's a great way to showcase my work.</p>
+                        <p className="text-neutral-800 dark:text-neutral-100">On this website, you'll find a collection of my projects, personal information, and information on my education and career. I hope you enjoy seeing what I can do. I won't keep you waiting any longer, so go take a look!</p>
+                    </div>
+                </ScrollArea>
               </div>
-            </ScrollArea>
+            
           </GlassPanel>
         </div>
       </div>
