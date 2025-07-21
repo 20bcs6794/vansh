@@ -663,27 +663,25 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="p-4 h-full flex flex-col">
-                 <div className="flex-grow min-h-0">
-                     <ScrollArea className="h-full w-full pr-4">
-                        <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
-                            <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
-                            <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                                <p>
-                                    Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                                    I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                                    I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                                </p>
-                                <p>
-                                    In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                                    I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                                </p>
-                                <p>
-                                    Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                                </p>
-                            </div>
+                 <ScrollArea className="h-full w-full pr-4">
+                    <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
+                        <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
+                        <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                            <p>
+                                Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                                I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                                I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                            </p>
+                            <p>
+                                In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                                I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                            </p>
+                            <p>
+                                Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                            </p>
                         </div>
-                    </ScrollArea>
-                </div>
+                    </div>
+                </ScrollArea>
             </div>
         );
       case 'Career':
@@ -705,22 +703,24 @@ export function GlassPanelLayout() {
           className="flex items-start justify-center gap-6 w-full max-w-[1300px] pt-16"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
-          <GlassPanel
-            className="w-[200px] h-fit p-4 flex-col hidden md:flex"
-            style={getPanelStyle('left')}
-          >
-            <div className="space-y-1">
-              {navItems.map(item => (
-                <NavItem 
-                  key={item.label}
-                  icon={item.icon} 
-                  label={item.label}
-                  isActive={activeView === item.label}
-                  onClick={() => setActiveView(item.label)} 
-                />
-              ))}
-            </div>
-          </GlassPanel>
+          <div className="h-[480px] hidden md:flex items-center">
+            <GlassPanel
+              className="w-[200px] h-fit p-4 flex-col"
+              style={getPanelStyle('left')}
+            >
+              <div className="space-y-1">
+                {navItems.map(item => (
+                  <NavItem 
+                    key={item.label}
+                    icon={item.icon} 
+                    label={item.label}
+                    isActive={activeView === item.label}
+                    onClick={() => setActiveView(item.label)} 
+                  />
+                ))}
+              </div>
+            </GlassPanel>
+          </div>
 
           <div className="flex-1 flex justify-center">
             <GlassPanel 
@@ -767,17 +767,19 @@ export function GlassPanelLayout() {
       </div>
       
       {activeView === 'Personal' && (
-        <div className="absolute bottom-4 left-0 right-0 flex flex-col items-center z-30">
-            <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
-            <div className="relative group w-full max-w-4xl overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                    {technologiesWithIcons.map((tech, index) => (
-                        <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                    ))}
-                    {/* Duplicate for seamless scroll */}
-                     {technologiesWithIcons.map((tech, index) => (
-                        <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                    ))}
+        <div className="relative bottom-0 left-0 right-0 flex flex-col items-center z-30 mt-4">
+            <div className="w-[600px] flex flex-col items-center">
+                <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
+                <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                    <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                        {technologiesWithIcons.map((tech, index) => (
+                            <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                        ))}
+                        {/* Duplicate for seamless scroll */}
+                         {technologiesWithIcons.map((tech, index) => (
+                            <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
