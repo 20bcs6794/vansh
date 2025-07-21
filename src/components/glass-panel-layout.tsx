@@ -663,7 +663,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="p-4 h-full flex flex-col gap-4">
-                <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col">
+                 <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col overflow-hidden">
                     <ScrollArea className="flex-grow w-full pr-4">
                         <div className="space-y-3 text-sm">
                             <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
@@ -686,6 +686,16 @@ export function GlassPanelLayout() {
                 </div>
                  <div className="flex-shrink-0">
                     <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
+                     <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                        <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                            {technologiesWithIcons.map((tech, index) => (
+                                <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                            ))}
+                            {technologiesWithIcons.map((tech, index) => (
+                                <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
@@ -730,7 +740,8 @@ export function GlassPanelLayout() {
            <div className="flex flex-col items-center gap-4">
               <GlassPanel 
                   className={cn(
-                      "w-[600px] h-[480px] transition-all duration-300"
+                      "w-[600px] transition-all duration-300",
+                      activeView === 'Personal' ? 'h-[336px]' : 'h-[480px]'
                   )} 
                   isContentPanel={true} 
                   activeView={activeView}
@@ -741,23 +752,8 @@ export function GlassPanelLayout() {
                     </div>
                 </ScrollArea>
               </GlassPanel>
-               {activeView === 'Personal' && (
-                  <div className="w-[600px]">
-                      <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                          <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                              {technologiesWithIcons.map((tech, index) => (
-                                  <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                              ))}
-                              {technologiesWithIcons.map((tech, index) => (
-                                  <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                              ))}
-                          </div>
-                      </div>
-                  </div>
-              )}
             </div>
           
-
           <GlassPanel
             className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
             style={getPanelStyle('right')}
@@ -786,5 +782,3 @@ export function GlassPanelLayout() {
     </div>
   );
 }
-
-    
