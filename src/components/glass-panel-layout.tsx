@@ -283,7 +283,7 @@ const SocialButton = ({ label, href, children }: { label: string, href: string, 
 
 const PythonIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
+<path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549,2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862,5-4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5,1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
 </svg>
 );
 const HtmlIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -664,8 +664,8 @@ export function GlassPanelLayout() {
         return (
             <div className="p-4 h-full flex flex-col">
                 <div className="flex-grow">
-                    <ScrollArea className="h-full w-full pr-4">
-                        <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm h-full">
+                     <ScrollArea className="h-full w-full pr-4">
+                        <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-3 text-sm h-full">
                             <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
                             <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
                                 <p>
@@ -684,19 +684,8 @@ export function GlassPanelLayout() {
                         </div>
                     </ScrollArea>
                 </div>
-                <div className="flex-shrink-0 pt-4">
+                 <div className="flex-shrink-0 pt-4">
                     <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
-                    <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                        <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
-                            {/* Duplicate for seamless scroll */}
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </div>
         );
@@ -738,22 +727,36 @@ export function GlassPanelLayout() {
             </GlassPanel>
           </div>
           
-          <div className="flex flex-col items-center gap-4">
-            <GlassPanel 
-              className={cn(
-                "w-[600px] transition-all duration-300", 
-                activeView === 'Personal' ? 'h-[480px]' : 'h-[480px]'
-              )} 
-              isContentPanel={true} 
-              activeView={activeView}
-            >
-               <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
-                  <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
-                    {renderContent()}
+           <div className="flex flex-col items-center gap-4">
+              <GlassPanel 
+                  className={cn(
+                      "w-[600px] transition-all duration-300", 
+                      activeView === 'Personal' ? 'h-[288px]' : 'h-[480px]'
+                  )} 
+                  isContentPanel={true} 
+                  activeView={activeView}
+              >
+                 <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
+                    <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
+                      {renderContent()}
+                    </div>
+                </ScrollArea>
+              </GlassPanel>
+               {activeView === 'Personal' && (
+                  <div className="w-[600px]">
+                      <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                          <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                              {technologiesWithIcons.map((tech, index) => (
+                                  <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                              ))}
+                              {technologiesWithIcons.map((tech, index) => (
+                                  <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                              ))}
+                          </div>
+                      </div>
                   </div>
-              </ScrollArea>
-            </GlassPanel>
-          </div>
+              )}
+            </div>
           
 
           <GlassPanel
@@ -770,7 +773,7 @@ export function GlassPanelLayout() {
                 </Button>
             </div>
             
-            <ScrollArea className="flex-grow pr-2 -mr-4">
+            <ScrollArea className="flex-grow pr-2">
               <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
                   <h3 className="font-semibold text-black dark:text-white text-sm">How to use this website?</h3>
                   <p className="text-neutral-800 dark:text-neutral-100">Hello everyone, welcome to my portfolio website! This website offers a 3D experience created.</p>
@@ -784,3 +787,5 @@ export function GlassPanelLayout() {
     </div>
   );
 }
+
+    
