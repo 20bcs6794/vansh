@@ -700,7 +700,7 @@ export function GlassPanelLayout() {
       <div style={{ perspective: '2000px' }}>
         <div 
           ref={panelsContainerRef}
-          className="flex items-start justify-center gap-6 w-full max-w-[1300px] pt-16"
+          className="flex items-center justify-center gap-6 w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
           <div className="h-[480px] hidden md:flex items-center">
@@ -721,8 +721,8 @@ export function GlassPanelLayout() {
               </div>
             </GlassPanel>
           </div>
-
-          <div className="flex-1 flex justify-center">
+          
+          <div className="flex flex-col gap-4">
             <GlassPanel 
               className={cn(
                 "flex flex-col w-[600px] transition-all duration-300", 
@@ -737,6 +737,25 @@ export function GlassPanelLayout() {
                   </div>
               </ScrollArea>
             </GlassPanel>
+
+            {activeView === 'Personal' && (
+              <div className="flex flex-col items-center z-30">
+                  <div className="w-[600px] flex flex-col items-center">
+                      <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
+                      <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                          <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
+                              {technologiesWithIcons.map((tech, index) => (
+                                  <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                              ))}
+                              {/* Duplicate for seamless scroll */}
+                              {technologiesWithIcons.map((tech, index) => (
+                                  <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                              ))}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            )}
           </div>
           
 
@@ -765,25 +784,6 @@ export function GlassPanelLayout() {
           </GlassPanel>
         </div>
       </div>
-      
-      {activeView === 'Personal' && (
-        <div className="relative bottom-0 left-0 right-0 flex flex-col items-center z-30 mt-4">
-            <div className="w-[600px] flex flex-col items-center">
-                <h3 className="text-xl font-bold text-black dark:text-white mb-4">Tools and Technologies</h3>
-                <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                    <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                        {technologiesWithIcons.map((tech, index) => (
-                            <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                        ))}
-                        {/* Duplicate for seamless scroll */}
-                         {technologiesWithIcons.map((tech, index) => (
-                            <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-      )}
     </div>
   );
 }
