@@ -662,28 +662,27 @@ export function GlassPanelLayout() {
         return <ProjectsView />;
       case 'Personal':
         return (
-            <div className="p-4 h-full flex flex-col gap-4">
-                <div className="flex-grow flex flex-col gap-4 overflow-hidden">
-                    <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
-                    <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 overflow-hidden">
-                        <ScrollArea className="h-full w-full pr-4">
-                            <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                                <p>
-                                    Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                                    I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                                    I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                                </p>
-                                <p>
-                                    In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                                    I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                                </p>
-                                <p>
-                                    Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                                </p>
-                            </div>
-                        </ScrollArea>
-                    </div>
+            <div className="h-full flex flex-col gap-4">
+                <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
+                <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 overflow-hidden">
+                    <ScrollArea className="h-full w-full pr-4">
+                        <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                            <p>
+                                Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                                I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                                I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                            </p>
+                            <p>
+                                In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                                I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                            </p>
+                            <p>
+                                Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                            </p>
+                        </div>
+                    </ScrollArea>
                 </div>
+                <h3 className="text-xl font-bold text-white mb-0 text-left">Tools and Technologies</h3>
             </div>
         );
       case 'Career':
@@ -741,7 +740,6 @@ export function GlassPanelLayout() {
               </GlassPanel>
               {activeView === 'Personal' && (
                 <div className="w-[600px]">
-                     <h3 className="text-xl font-bold text-white mb-4">Tools and Technologies</h3>
                      <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                         <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
                             {technologiesWithIcons.map((tech, index) => (
