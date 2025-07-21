@@ -702,7 +702,7 @@ export function GlassPanelLayout() {
       <div style={{ perspective: '2000px' }}>
         <div 
           ref={panelsContainerRef}
-          className="flex items-center justify-center gap-6 w-full max-w-[1300px]"
+          className="flex items-start justify-center gap-6 w-full max-w-[1300px] pt-16"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
           <GlassPanel
