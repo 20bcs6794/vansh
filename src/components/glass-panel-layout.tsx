@@ -664,7 +664,7 @@ export function GlassPanelLayout() {
         return (
             <div className="p-4 h-full flex flex-col">
                  <ScrollArea className="h-full w-full pr-4">
-                    <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm">
+                    <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm h-full">
                         <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
                         <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
                             <p>
