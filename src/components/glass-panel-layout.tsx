@@ -366,7 +366,7 @@ const PowerBiIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const ExcelIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-        <rect width="16" height="9" x="28" y="15" fill="#21a366"></rect><path fill="#185c37" d="M44,24H12v16c0,1.105,0.895,2,2,2h28c1.105,0,2-0.895,2-2V24z"></path><rect width="16" height="9" x="28" y="24" fill="#107c42"></rect><rect width="16" height="9" x="12" y="15" fill="#3fa071"></rect><path fill="#33c481" d="M42,6H28v9h16V8C44,6.895,43.105,6,42,6z"></path><path fill="#21a366" d="M14,6h14v9H12V8C12,6.895,12.895,6,14,6z"></path><path d="M22.319,13H12v24h10.319C24.352,37,26,35.352,26,33.319V16.681C26,14.648,24.352,13,22.319,13z" opacity=".05"></path><path d="M22.213,36H12V13.333h10.213c1.724,0,3.121,1.397,3.121,3.121v16.425	C25.333,34.603,23.936,36,22.213,36z" opacity=".07"></path><path d="M22.106,35H12V13.667h10.106c1.414,0,2.56,1.146,2.56,1.414V32.44C24.667,33.854,23.52,35,22.106,35z" opacity=".09"></path><linearGradient id="flEJnwg7q~uKUdkX0KCyBa_UECmBSgBOvPT_gr1" x1="4.725" x2="23.055" y1="14.725" y2="33.055" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#18884f"></stop><stop offset="1" stopColor="#0b6731"></stop></linearGradient><path fill="url(#flEJnwg7q~uKUdkX0KCyBa_UECmBSgBOvPT_gr1)" d="M22,34H6c-1.105,0-2-0.895,2-2V16c0-1.105,0.895-2,2-2h16c1.105,0,2,0.895,2,2v16	C24,33.105,23.105,34,22,34z"></path><path fill="#fff" d="M9.807,19h2.386l1.936,3.754L16.175,19h2.229l-3.071,5l3.141,5h-2.351l-2.11-3.93L11.912,29H9.526	l3.193-5.018L9.807,19z"></path>
+        <rect width="20" height="20" x="28" y="15" fill="#21a366"></rect><path fill="#185c37" d="M44,24H12v16c0,1.105,0.895,2,2,2h28c1.105,0,2-0.895,2-2V24z"></path><rect width="16" height="9" x="28" y="24" fill="#107c42"></rect><rect width="16" height="9" x="12" y="15" fill="#3fa071"></rect><path fill="#33c481" d="M42,6H28v9h16V8C44,6.895,43.105,6,42,6z"></path><path fill="#21a366" d="M14,6h14v9H12V8C12,6.895,12.895,6,14,6z"></path><path d="M22.319,13H12v24h10.319C24.352,37,26,35.352,26,33.319V16.681C26,14.648,24.352,13,22.319,13z" opacity=".05"></path><path d="M22.213,36H12V13.333h10.213c1.724,0,3.121,1.397,3.121,3.121v16.425	C25.333,34.603,23.936,36,22.213,36z" opacity=".07"></path><path d="M22.106,35H12V13.667h10.106c1.414,0,2.56,1.146,2.56,1.414V32.44C24.667,33.854,23.52,35,22.106,35z" opacity=".09"></path><linearGradient id="flEJnwg7q~uKUdkX0KCyBa_UECmBSgBOvPT_gr1" x1="4.725" x2="23.055" y1="14.725" y2="33.055" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#18884f"></stop><stop offset="1" stopColor="#0b6731"></stop></linearGradient><path fill="url(#flEJnwg7q~uKUdkX0KCyBa_UECmBSgBOvPT_gr1)" d="M22,34H6c-1.105,0-2-0.895,2-2V16c0-1.105,0.895-2,2-2h16c1.105,0,2,0.895,2,2v16	C24,33.105,23.105,34,22,34z"></path><path fill="#fff" d="M9.807,19h2.386l1.936,3.754L16.175,19h2.229l-3.071,5l3.141,5h-2.351l-2.11-3.93L11.912,29H9.526	l3.193-5.018L9.807,19z"></path>
     </svg>
 );
 
@@ -390,7 +390,7 @@ const technologiesWithIcons = [
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
     <div className="bg-white/80 dark:bg-black/70 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform hover:scale-105">
-        <Icon className="w-8 h-8" />
+        <Icon className="w-10 h-10" />
         <span className="font-medium text-xs text-neutral-800 dark:text-neutral-100">{name}</span>
     </div>
 );
@@ -665,21 +665,19 @@ export function GlassPanelLayout() {
             <div className="h-full flex flex-col gap-4">
                 <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
                 <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 overflow-hidden">
-                    <ScrollArea className="h-full w-full pr-4">
-                        <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                            <p>
-                                Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                                I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                                I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                            </p>
-                            <p>
-                                In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                                I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                            </p>
-                            <p>
-                                Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                            </p>
-                        </div>
+                    <ScrollArea className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm h-full w-full pr-4">
+                        <p>
+                            Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                            I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                            I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                        </p>
+                        <p>
+                            In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                            I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                        </p>
+                        <p>
+                            Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                        </p>
                     </ScrollArea>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-0 text-left">Tools and Technologies</h3>
@@ -732,22 +730,27 @@ export function GlassPanelLayout() {
                   isContentPanel={true} 
                   activeView={activeView}
               >
-                 <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
                     <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
+                    <ScrollArea className="h-full w-full" style={{ overflowY: isScrollDisabled ? 'hidden' : 'auto' }}>
                       {renderContent()}
+                      </ScrollArea>
                     </div>
-                </ScrollArea>
+                
               </GlassPanel>
               {activeView === 'Personal' && (
-                <div className="w-[600px]">
+                <div className="w-[600px] mt-4">
                      <div className="relative group w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                        <div className="flex shrink-0 gap-4 animate-scroll-x group-hover:[animation-play-state:paused]">
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
-                            {technologiesWithIcons.map((tech, index) => (
-                                <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                            ))}
+                        <div className="flex animate-scroll-x group-hover:[animation-play-state:paused]">
+                            <div className="flex shrink-0 gap-4">
+                                {technologiesWithIcons.map((tech, index) => (
+                                    <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                                ))}
+                            </div>
+                            <div className="flex shrink-0 gap-4">
+                                {technologiesWithIcons.map((tech, index) => (
+                                    <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -92,7 +92,7 @@
   }
 
   .animate-scroll-x {
-    animation: scroll-x 20s linear infinite;
+    animation: scroll-x 10s linear infinite;
   }
 
   @keyframes scroll-y {
