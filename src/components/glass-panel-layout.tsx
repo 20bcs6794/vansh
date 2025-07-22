@@ -742,9 +742,9 @@ export function GlassPanelLayout() {
                 
               </GlassPanel>
               {activeView === 'Personal' && (
-                <div className="w-[600px] mt-4">
+                <div className="w-[600px] mt-0">
                     <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                        <div className="flex w-max animate-scroll-x group-hover:[animation-play-state:paused]">
+                        <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                             <div className="flex shrink-0 gap-4">
                                 {technologiesWithIcons.map((tech, index) => (
                                     <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
