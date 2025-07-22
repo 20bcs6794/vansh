@@ -818,12 +818,7 @@ export function GlassPanelLayout() {
                   isContentPanel={true} 
                   activeView={activeView}
               >
-                    <div className={cn("h-full", !isScrollDisabled && 'pr-4')}>
-                     <ScrollArea className="h-full pr-4">
-                      {renderContent()}
-                      </ScrollArea>
-                    </div>
-                
+                {renderContent()}
               </GlassPanel>
               {activeView === 'Personal' && (
                 <div className="w-[600px] mt-0">
@@ -877,6 +872,7 @@ export function GlassPanelLayout() {
     </div>
   );
 }
+
 
 
 
