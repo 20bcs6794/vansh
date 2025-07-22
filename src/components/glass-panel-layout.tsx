@@ -749,7 +749,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="h-full flex flex-col gap-4">
-                <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col">
+                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col h-[144px]">
                     <h3 className="font-semibold text-black dark:text-white text-lg mb-2">Who Am I ?</h3>
                     <div className="relative flex-grow">
                         <ScrollArea className="absolute inset-0 pr-4">
