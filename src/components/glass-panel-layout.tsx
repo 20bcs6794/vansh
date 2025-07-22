@@ -663,26 +663,28 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="h-full flex flex-col gap-4">
-                <h3 className="font-semibold text-black dark:text-white text-lg">Who Am I ?</h3>
-                <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 overflow-hidden">
-                    <ScrollArea className="h-full w-full pr-4">
-                        <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
-                            <p>
-                                Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
-                                I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
-                                I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
-                            </p>
-                            <p>
-                                In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
-                                I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
-                            </p>
-                            <p>
-                                Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
-                            </p>
-                        </div>
-                    </ScrollArea>
+                <div className="flex-grow bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col">
+                    <h3 className="font-semibold text-black dark:text-white text-lg mb-2">Who Am I ?</h3>
+                    <div className="flex-grow overflow-hidden">
+                        <ScrollArea className="h-full w-full pr-4">
+                            <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                                <p>
+                                    Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
+                                    I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
+                                    I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates! 
+                                </p>
+                                <p>
+                                    In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe. 
+                                    I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way. 
+                                </p>
+                                <p>
+                                    Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                                </p>
+                            </div>
+                        </ScrollArea>
+                    </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-0 text-left">Tools and Technologies</h3>
+                <h3 className="text-xl font-bold text-black dark:text-white mb-0 text-left">Tools and Technologies</h3>
             </div>
         );
       case 'Career':
@@ -742,13 +744,12 @@ export function GlassPanelLayout() {
               {activeView === 'Personal' && (
                 <div className="w-[600px] mt-4">
                     <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                        <div className="flex animate-scroll-x group-hover:[animation-play-state:paused]">
+                        <div className="flex w-max animate-scroll-x group-hover:[animation-play-state:paused]">
                             <div className="flex shrink-0 gap-4">
                                 {technologiesWithIcons.map((tech, index) => (
                                     <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
                                 ))}
                             </div>
-                            {/* Duplicate for seamless looping */}
                             <div className="flex shrink-0 gap-4">
                                 {technologiesWithIcons.map((tech, index) => (
                                     <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
