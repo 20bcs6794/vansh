@@ -749,10 +749,10 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="h-full flex flex-col gap-4">
-                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col h-[144px]">
+                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col h-full">
                     <h3 className="font-semibold text-black dark:text-white text-lg mb-2">Who Am I ?</h3>
                     <div className="flex-grow min-h-0">
-                         <ScrollArea className="h-full pr-4">
+                        <ScrollArea className="h-full pr-4">
                             <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
                                 <p>
                                     Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
@@ -814,8 +814,7 @@ export function GlassPanelLayout() {
            <div className="flex flex-col items-center gap-4">
               <GlassPanel 
                   className={cn(
-                      "w-[600px] transition-all duration-300",
-                      activeView === 'Personal' ? 'h-[336px]' : 'h-[480px]'
+                      "w-[600px] h-[480px] transition-all duration-300"
                   )} 
                   isContentPanel={true} 
                   activeView={activeView}
