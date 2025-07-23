@@ -749,8 +749,8 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="h-full flex flex-col gap-4">
-                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col h-60">
-                    <h3 className="font-semibold text-black dark:text-white text-lg mb-2">Who Am I ?</h3>
+                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col flex-grow min-h-0">
+                    <h3 className="font-semibold text-black dark:text-white text-lg mb-2 shrink-0">Who Am I ?</h3>
                     <div className="flex-grow min-h-0">
                         <ScrollArea className="h-full pr-4">
                             <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
@@ -770,7 +770,7 @@ export function GlassPanelLayout() {
                         </ScrollArea>
                     </div>
                 </div>
-                <h3 className="text-xl font-bold text-black dark:text-white mb-0 text-left">Tools and Technologies</h3>
+                <h3 className="text-xl font-bold text-black dark:text-white mb-0 text-left shrink-0">Tools and Technologies</h3>
             </div>
         );
       case 'Career':
