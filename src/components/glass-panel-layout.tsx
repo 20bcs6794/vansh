@@ -572,26 +572,30 @@ const ContactView = () => {
                 <BentoCard className="col-span-2 row-span-1 p-4 animate-expand-y" style={{animationDelay: '0.1s'}}>
                     <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-3">
                         <h3 className="font-bold text-lg">Send a Message</h3>
-                        <div className="relative">
+                        <div>
                             <Input 
                                 name="email" 
                                 type="email" 
-                                placeholder="Your Email" 
+                                placeholder={errors.email || "Your Email"} 
                                 value={formData.email}
                                 onChange={handleInputChange}
-                                className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600"
+                                className={cn(
+                                    "bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600",
+                                    errors.email && "placeholder:text-destructive/80"
+                                )}
                             />
-                            {errors.email && <p className="text-destructive text-xs mt-1 absolute">{errors.email}</p>}
                         </div>
-                        <div className="relative flex-grow">
+                        <div className="flex-grow">
                             <Textarea 
                                 name="message" 
-                                placeholder="Your message..." 
+                                placeholder={errors.message || "Your message..."}
                                 value={formData.message}
                                 onChange={handleInputChange}
-                                className="bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600 h-full resize-none"
+                                className={cn(
+                                    "bg-white/80 dark:bg-black/70 border-gray-400 dark:border-gray-600 h-full resize-none",
+                                    errors.message && "placeholder:text-destructive/80"
+                                )}
                             />
-                             {errors.message && <p className="text-destructive text-xs mt-1 absolute">{errors.message}</p>}
                         </div>
                         <Button type="submit" className="w-full bg-primary/80 hover:bg-primary">
                             Send Message <Send className="w-4 h-4 ml-2" />
