@@ -103,4 +103,19 @@
   .animate-scroll-y {
     animation: scroll-y 40s linear infinite;
   }
+  
+  @keyframes expand-from-center {
+    from {
+      transform: scaleX(0);
+      transform-origin: center;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: center;
+    }
+  }
+
+  .animate-expand-from-center {
+    animation: expand-from-center 0.5s ease-out forwards;
+  }
 }
