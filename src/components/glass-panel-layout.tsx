@@ -39,7 +39,7 @@ const BentoHomeGrid = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-fr gap-4 h-full w-full p-1">
-            <BentoCard className="md:col-span-2 md:row-span-2 p-4 flex flex-col justify-start">
+            <BentoCard className="md:col-span-2 md:row-span-2 p-4 flex flex-col justify-start animate-expand-y" style={{ animationDelay: '0s' }}>
                 <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                      <div
                         className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -78,7 +78,7 @@ const BentoHomeGrid = () => {
                 </div>
             </BentoCard>
             
-            <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group">
+            <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group animate-expand-x" style={{ animationDelay: '0.1s' }}>
                 <BentoCard className="col-span-1 md:col-span-1 h-full flex flex-col items-center justify-center cursor-pointer">
                     <div className="text-center">
                         <h3 className="font-bold text-lg">My Certificates</h3>
@@ -89,12 +89,12 @@ const BentoHomeGrid = () => {
                 </BentoCard>
             </a>
 
-            <BentoCard className="col-span-1 md:col-span-1 flex flex-col items-center justify-center">
+            <BentoCard className="col-span-1 md:col-span-1 flex flex-col items-center justify-center animate-expand-x" style={{ animationDelay: '0.2s' }}>
                  <h3 className="text-5xl font-bold">07+</h3>
                  <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
             </BentoCard>
             
-            <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center">
+            <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
                 <Button 
                     onClick={handleCopyEmail} 
@@ -206,6 +206,8 @@ const ProjectsView = () => {
         bgColor: 'from-purple-500 to-indigo-600',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-2',
+        animation: 'animate-expand-y',
+        delay: '0s',
       },
       {
         id: 2,
@@ -216,6 +218,8 @@ const ProjectsView = () => {
         bgColor: 'from-blue-500 to-cyan-600',
         colSpan: 'col-span-2',
         rowSpan: 'row-span-1',
+        animation: 'animate-expand-x',
+        delay: '0.1s',
       },
       {
         id: 3,
@@ -226,6 +230,8 @@ const ProjectsView = () => {
         bgColor: 'from-fuchsia-500 to-pink-600',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-1',
+        animation: 'animate-expand-y',
+        delay: '0.2s',
       },
       {
         id: 4,
@@ -236,12 +242,14 @@ const ProjectsView = () => {
         bgColor: 'from-indigo-700 to-violet-800',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-1',
+        animation: 'animate-expand-y',
+        delay: '0.3s',
       },
     ];
 
     return (
         <div className="h-full flex flex-col">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4">My Works</h2>
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 animate-expand-x">My Works</h2>
             <div 
                 className="flex-grow grid grid-cols-3 grid-rows-2 gap-4"
                 onMouseLeave={() => setHoveredId(null)}
@@ -253,9 +261,11 @@ const ProjectsView = () => {
                             'transition-all duration-300 ease-in-out',
                             project.colSpan,
                             project.rowSpan,
+                            project.animation,
                             hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm' : '',
                             hoveredId === project.id ? 'scale-105 z-10' : ''
                         )}
+                        style={{ animationDelay: project.delay }}
                         onMouseEnter={() => setHoveredId(project.id)}
                     >
                         <ProjectBentoCard 
@@ -468,14 +478,14 @@ const careerTimelineData = [
 const CareerTimeline = () => {
     return (
         <div className="h-full flex flex-col">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0">Where I’ve Been, What I’ve Done</h2>
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
             <div className="flex-grow min-h-0">
                 <ScrollArea className="h-full pr-4">
                     <div className="relative flex flex-col gap-y-10">
-                        <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2 " />
+                        <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2 animate-expand-y" />
 
                         {careerTimelineData.map((item, index) => (
-                            <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start">
+                            <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start animate-expand-x" style={{animationDelay: `${index * 0.1 + 0.1}s`}}>
                                 <div className="w-28 text-left">
                                     <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
                                         <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
@@ -556,10 +566,10 @@ const ContactView = () => {
 
     return (
         <div className="h-full flex flex-col p-4 gap-4">
-             <h2 className="text-2xl font-bold text-black dark:text-white text-center mb-0">Get In Touch</h2>
+             <h2 className="text-2xl font-bold text-black dark:text-white text-center mb-0 animate-expand-x" style={{animationDelay: '0s'}}>Get In Touch</h2>
             <div className="flex flex-col gap-4 flex-grow">
                 {/* Form */}
-                <BentoCard className="col-span-2 row-span-1 p-4">
+                <BentoCard className="col-span-2 row-span-1 p-4 animate-expand-y" style={{animationDelay: '0.1s'}}>
                     <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-3">
                         <h3 className="font-bold text-lg">Send a Message</h3>
                         <div className="relative">
@@ -591,19 +601,19 @@ const ContactView = () => {
 
                 {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
-                    <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
+                    <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group animate-expand-y" style={{animationDelay: '0.2s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
                             <LinkedInIcon className="w-12 h-12" />
                             <p className="font-bold mt-2">LinkedIn</p>
                         </BentoCard>
                     </a>
-                    <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
+                    <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group animate-expand-y" style={{animationDelay: '0.3s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
                             <WhatsAppIcon className="w-12 h-12"/>
                             <p className="font-bold mt-2">WhatsApp</p>
                         </BentoCard>
                     </a>
-                    <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
+                    <a href="mailto:mr.vanshverma2001@gmail.com" className="group animate-expand-y" style={{animationDelay: '0.4s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
                             <GmailIcon className="w-12 h-12"/>
                             <p className="font-bold mt-2">Gmail</p>
@@ -677,7 +687,7 @@ export function GlassPanelLayout() {
       case 'Personal':
         return (
             <div className="h-full flex flex-col">
-                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col flex-grow min-h-0">
+                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col flex-grow min-h-0 animate-expand-y" style={{ animationDelay: '0s' }}>
                     <h3 className="font-semibold text-black dark:text-white text-lg mb-2 shrink-0">Who Am I ?</h3>
                     <div className="relative flex-grow">
                         <div className="absolute inset-0">
@@ -700,7 +710,7 @@ export function GlassPanelLayout() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col mt-4">
+                <div className="flex flex-col mt-4 animate-expand-x" style={{ animationDelay: '0.1s' }}>
                     <h3 className="text-xl font-bold text-black dark:text-white text-left shrink-0 mb-2">Tools and Technologies</h3>
                      <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                         <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
@@ -765,7 +775,7 @@ export function GlassPanelLayout() {
                   isContentPanel={true} 
                   activeView={activeView}
               >
-                <div key={activeView} className="animate-expand-from-center h-full">
+                <div key={activeView} className="h-full">
                   {renderContent()}
                 </div>
               </GlassPanel>

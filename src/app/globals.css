@@ -104,7 +104,7 @@
     animation: scroll-y 40s linear infinite;
   }
   
-  @keyframes expand-from-center {
+  @keyframes expand-x {
     from {
       transform: scaleX(0);
       transform-origin: center;
@@ -115,7 +115,22 @@
     }
   }
 
-  .animate-expand-from-center {
-    animation: expand-from-center 0.5s ease-out forwards;
+  .animate-expand-x {
+    animation: expand-x 0.5s ease-out forwards;
+  }
+  
+  @keyframes expand-y {
+    from {
+      transform: scaleY(0);
+      transform-origin: center;
+    }
+    to {
+      transform: scaleY(1);
+      transform-origin: center;
+    }
+  }
+
+  .animate-expand-y {
+    animation: expand-y 0.5s ease-out forwards;
   }
 }
