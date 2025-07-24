@@ -195,7 +195,7 @@ const ProjectBentoCard = ({ project, isHovered }: { project: any, isHovered: boo
   );
 };
 
-const ProjectsView = () => {
+const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string | null) => void }) => {
     const [hoveredId, setHoveredId] = useState<number | null>(null);
 
     const projectsData = [
@@ -203,6 +203,7 @@ const ProjectsView = () => {
         id: 1,
         name: 'AI Chatbot Generator',
         description: 'A platform to create and deploy AI-powered chatbots for businesses with ease, improving customer engagement.',
+        fullDescription: "The AI Chatbot Generator is a full-stack application built with Next.js and Genkit. It allows users to create, customize, and deploy AI-driven chatbots for their websites. The platform features a user-friendly interface for designing conversation flows, integrating knowledge bases, and configuring the chatbot's personality. The backend, powered by Firebase and Genkit, handles the natural language processing and serves the chatbot responses. This project demonstrates proficiency in modern web technologies and generative AI integration.",
         tech: ['Next.js', 'Genkit', 'Tailwind'],
         link: 'https://www.linkedin.com/posts/vanshdeep-verma_connections-github-linkedin-activity-7170425782798835712-UpzW?utm_source=share&utm_medium=member_desktop',
         bgColor: 'from-purple-500 to-indigo-600',
@@ -215,6 +216,7 @@ const ProjectsView = () => {
         id: 2,
         name: 'Mystery Quiz Game',
         description: 'A fun and interactive mini-game that challenges users with a series of mysterious and brain-teasing questions.',
+        fullDescription: 'This interactive Mystery Quiz Game, built with React, challenges players with a series of engaging and puzzling questions. The game utilizes the Framer Motion library for smooth animations and transitions, creating a dynamic user experience. It fetches quiz data from a third-party API, showcasing skills in handling asynchronous data and state management in a React application. The design is responsive and visually appealing, making it a fun experience on any device.',
         tech: ['React', 'API', 'Framer Motion'],
         link: 'https://github.com/Vanshdeep-verma/Quiz-App',
         bgColor: 'from-blue-500 to-cyan-600',
@@ -227,6 +229,7 @@ const ProjectsView = () => {
         id: 3,
         name: 'AI Story Generator',
         description: 'Use the power of generative AI to create unique and enchanting fantasy bedtime stories for children.',
+        fullDescription: "The AI Story Generator is a creative tool that leverages Genkit's generative capabilities to produce unique bedtime stories. Built with React and Firebase, this application allows users to input prompts, such as characters and settings, to generate imaginative tales. The project showcases the ability to work with generative AI models and structure their output in a user-friendly format. It's a demonstration of combining AI with a simple, intuitive interface to create a delightful user experience.",
         tech: ['Genkit', 'React', 'Firebase'],
         link: 'https://github.com/Vanshdeep-verma/Story-Generator',
         bgColor: 'from-fuchsia-500 to-pink-600',
@@ -239,6 +242,7 @@ const ProjectsView = () => {
         id: 4,
         name: 'Dev-Connect Platform',
         description: 'A platform connecting new developers with real-world projects to gain experience and build their portfolio.',
+        fullDescription: "Dev-Connect is a conceptual platform designed to bridge the gap between aspiring developers and real-world projects. Using React and Firebase for the backend and data storage, it features user authentication, project listings, and a system for developers to apply for opportunities. The UI is built with ShadCN components, resulting in a modern and clean interface. This project highlights skills in full-stack development, database management, and building community-focused applications.",
         tech: ['React', 'Firebase', 'ShadCN'],
         link: 'https://github.com/Vanshdeep-verma/Dev-Connect',
         bgColor: 'from-indigo-700 to-violet-800',
@@ -249,12 +253,22 @@ const ProjectsView = () => {
       },
     ];
 
+    const handleMouseEnter = (project: any) => {
+        setHoveredId(project.id);
+        onProjectHover(project.fullDescription);
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredId(null);
+        onProjectHover(null);
+    };
+
     return (
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4 animate-expand-x">My Works</h2>
             <div 
                 className="flex-grow grid grid-cols-3 grid-rows-2 gap-4"
-                onMouseLeave={() => setHoveredId(null)}
+                onMouseLeave={handleMouseLeave}
             >
                 {projectsData.map(project => (
                     <div
@@ -268,7 +282,7 @@ const ProjectsView = () => {
                             hoveredId === project.id ? 'scale-105 z-10' : ''
                         )}
                         style={{ animationDelay: project.delay }}
-                        onMouseEnter={() => setHoveredId(project.id)}
+                        onMouseEnter={() => handleMouseEnter(project)}
                     >
                         <ProjectBentoCard 
                             project={project} 
@@ -295,7 +309,7 @@ const SocialButton = ({ label, href, children }: { label: string, href: string, 
 
 const PythonIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-  <path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
+  <path fill="#0277BD" d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"></path><path fill="#FFC107" d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764-5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"></path>
 </svg>
 );
 
@@ -680,6 +694,7 @@ const ContactView = () => {
 export function GlassPanelLayout() {
   const panelsContainerRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState('Home');
+  const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -736,7 +751,7 @@ export function GlassPanelLayout() {
         content = <BentoHomeGrid />;
         break;
       case 'Projects':
-        content = <ProjectsView />;
+        content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
         break;
       case 'Personal':
         content = (
@@ -802,6 +817,15 @@ export function GlassPanelLayout() {
 
   const isScrollDisabled = activeView === 'Contact' || activeView === 'Career'
 
+  const originalAboutContent = (
+      <div>
+          <h3 className="font-semibold text-black dark:text-white text-sm">How to use this website?</h3>
+          <p className="text-neutral-800 dark:text-neutral-100">Hello everyone, welcome to my portfolio website! This website offers a 3D experience created.</p>
+          <p className="text-neutral-800 dark:text-neutral-100">I know what you're thinking: "A portfolio website in 3D for a front-end developer? Is that really necessary?" In short, the answer is no. But it is fun! And it's a great way to showcase my work.</p>
+          <p className="text-neutral-800 dark:text-neutral-100">On this website, you'll find a collection of my projects, personal information, and information on my education and career. I hope you enjoy seeing what I can do. I won't keep you waiting any longer, so go take a look!</p>
+      </div>
+  );
+
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <div style={{ perspective: '2000px' }}>
@@ -855,28 +879,21 @@ export function GlassPanelLayout() {
                 </Button>
             </div>
             
-            
-              <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 space-y-4 text-sm h-full">
-                
-                    <div>
-                        <h3 className="font-semibold text-black dark:text-white text-sm">How to use this website?</h3>
-                        <p className="text-neutral-800 dark:text-neutral-100">Hello everyone, welcome to my portfolio website! This website offers a 3D experience created.</p>
-                        <p className="text-neutral-800 dark:text-neutral-100">I know what you're thinking: "A portfolio website in 3D for a front-end developer? Is that really necessary?" In short, the answer is no. But it is fun! And it's a great way to showcase my work.</p>
-                        <p className="text-neutral-800 dark:text-neutral-100">On this website, you'll find a collection of my projects, personal information, and information on my education and career. I hope you enjoy seeing what I can do. I won't keep you waiting any longer, so go take a look!</p>
-                    </div>
-                
-              </div>
-            
+            <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
+              <ScrollArea className="flex-grow">
+                <div className="text-neutral-800 dark:text-neutral-100 space-y-2 pr-2">
+                   {projectDescriptionForRightPanel ? (
+                      <div>
+                          <h3 className="font-semibold text-black dark:text-white text-sm mb-2">Project Details</h3>
+                          <p>{projectDescriptionForRightPanel}</p>
+                      </div>
+                  ) : originalAboutContent}
+                </div>
+              </ScrollArea>
+            </div>
           </GlassPanel>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-    
-
-    
