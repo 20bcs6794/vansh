@@ -267,19 +267,19 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4 animate-expand-x">My Works</h2>
             <div 
-                className="flex-grow grid grid-cols-3 grid-rows-2 gap-4"
+                className="flex-grow grid grid-cols-3 grid-rows-2 gap-4 relative"
                 onMouseLeave={handleMouseLeave}
             >
                 {projectsData.map(project => (
                     <div
                         key={project.id}
                         className={cn(
-                            'transition-all duration-300 ease-in-out',
-                            project.colSpan,
-                            project.rowSpan,
-                            project.animation,
-                            hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm' : '',
-                            hoveredId === project.id ? 'scale-105 z-10' : ''
+                            'transition-all duration-500 ease-in-out',
+                             project.animation,
+                            hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm scale-90' : '',
+                            hoveredId === project.id 
+                              ? 'absolute inset-0 w-4/5 h-4/5 m-auto z-10'
+                              : `${project.colSpan} ${project.rowSpan}`
                         )}
                         style={{ animationDelay: project.delay }}
                         onMouseEnter={() => handleMouseEnter(project)}
