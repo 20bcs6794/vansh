@@ -730,13 +730,16 @@ export function GlassPanelLayout() {
   };
 
   const renderContent = () => {
+    let content;
     switch (activeView) {
       case 'Home':
-        return <BentoHomeGrid />;
+        content = <BentoHomeGrid />;
+        break;
       case 'Projects':
-        return <ProjectsView />;
+        content = <ProjectsView />;
+        break;
       case 'Personal':
-        return (
+        content = (
             <div className="h-full flex flex-col">
                 <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col flex-grow min-h-0 animate-expand-y" style={{ animationDelay: '0s' }}>
                     <h3 className="font-semibold text-black dark:text-white text-lg mb-2 shrink-0">Who Am I ?</h3>
@@ -780,13 +783,21 @@ export function GlassPanelLayout() {
                 </div>
             </div>
         );
+        break;
       case 'Career':
-        return <CareerTimeline />;
+        content = <CareerTimeline />;
+        break;
       case 'Contact':
-        return <ContactView />;
+        content = <ContactView />;
+        break;
       default:
-        return null;
+        content = null;
     }
+    return (
+      <div key={activeView} className="h-full">
+        {content}
+      </div>
+    );
   }
 
   const isScrollDisabled = activeView === 'Contact' || activeView === 'Career'
@@ -826,9 +837,7 @@ export function GlassPanelLayout() {
                   isContentPanel={true} 
                   activeView={activeView}
               >
-                <div key={activeView} className="h-full">
-                  {renderContent()}
-                </div>
+                {renderContent()}
               </GlassPanel>
             </div>
           

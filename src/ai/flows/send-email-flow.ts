@@ -22,10 +22,28 @@ const sendEmailFlow = ai.defineFlow(
     outputSchema: SendEmailOutputSchema,
   },
   async (input) => {
-    console.log(`Simulating sending email:`, input);
+    console.log(`Simulating sending email to mr.vanshverma2001@gmail.com from ${input.email} with message: ${input.message}`);
+    
     // In a real implementation, you would use a service to send the email.
     // For example, using Nodemailer or an API like SendGrid.
-    // If the email is sent successfully, return success: true.
+    // Replace the following simulation with your actual email sending logic.
+    //
+    // Example with a hypothetical email service:
+    //
+    // try {
+    //   await yourEmailService.send({
+    //     to: 'mr.vanshverma2001@gmail.com',
+    //     from: input.email,
+    //     subject: 'New message from your portfolio',
+    //     text: input.message,
+    //   });
+    //   return { success: true, message: 'Email sent successfully!' };
+    // } catch (error) {
+    //   console.error('Failed to send email:', error);
+    //   return { success: false, message: 'Failed to send email.' };
+    // }
+
+    // For now, we'll just return a success response.
     return {
       success: true,
       message: 'Email sent successfully!',
