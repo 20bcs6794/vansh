@@ -1,9 +1,10 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
+import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -148,23 +149,34 @@ const NavItem = ({ icon, label, isActive, onClick }: { icon: React.ElementType, 
   );
 };
 
-const ProjectBentoCard = ({ project, isHovered }: { project: any, isHovered: boolean }) => {
+const ProjectBentoCard = ({ project, isExpanded, onExpand, onClose }: { project: any, isExpanded: boolean, onExpand: () => void, onClose: (e: React.MouseEvent) => void }) => {
   return (
     <div
+      onClick={!isExpanded ? onExpand : undefined}
       className={cn(
-        "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col h-full",
+        "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col h-full group",
         project.bgColor
       )}
     >
+        {isExpanded && (
+            <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-4 right-4 z-20 text-white hover:bg-white/20 hover:text-white"
+                onClick={onClose}
+            >
+                <X className="w-5 h-5" />
+            </Button>
+        )}
       <div className="relative flex-grow flex flex-col justify-between">
         {/* Expanded Content */}
         <div className={cn(
           "absolute inset-0 flex flex-col transition-opacity duration-500 delay-200 p-6",
-          isHovered ? "opacity-100" : "opacity-0 pointer-events-none"
+          isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
         )}>
           <div className="flex justify-between items-start">
             <h3 className="font-bold text-xl">{project.name}</h3>
-            <div className="flex gap-2 flex-wrap justify-end max-w-[50%]">
+            <div className="flex gap-2 flex-wrap justify-end max-w-[50%] mt-8">
               {project.tech.map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-1 rounded-full whitespace-nowrap">{t}</span>)}
             </div>
           </div>
@@ -184,8 +196,9 @@ const ProjectBentoCard = ({ project, isHovered }: { project: any, isHovered: boo
         {/* Collapsed Content */}
         <div className={cn(
           "flex flex-col items-center justify-center h-full transition-opacity duration-300",
-          isHovered ? "opacity-0" : "opacity-100"
+          isExpanded ? "opacity-0" : "opacity-100"
         )}>
+          <Maximize className="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />
           <h3 className="font-bold text-lg text-center">
             {project.name}
           </h3>
@@ -195,8 +208,8 @@ const ProjectBentoCard = ({ project, isHovered }: { project: any, isHovered: boo
   );
 };
 
-const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string | null) => void }) => {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
+const ProjectsView = ({ onProjectSelect }: { onProjectSelect: (description: string | null) => void }) => {
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const projectsData = [
       {
@@ -253,40 +266,39 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
       },
     ];
 
-    const handleMouseEnter = (project: any) => {
-        setHoveredId(project.id);
-        onProjectHover(project.fullDescription);
+    const handleExpand = (project: any) => {
+        setSelectedId(project.id);
+        onProjectSelect(project.fullDescription);
     };
 
-    const handleMouseLeave = () => {
-        setHoveredId(null);
-        onProjectHover(null);
+    const handleClose = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setSelectedId(null);
+        onProjectSelect(null);
     };
 
     return (
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4 animate-expand-x">My Works</h2>
-            <div 
-                className="flex-grow grid grid-cols-3 grid-rows-2 gap-4 relative"
-                onMouseLeave={handleMouseLeave}
-            >
+            <div className="flex-grow grid grid-cols-3 grid-rows-2 gap-4 relative">
                 {projectsData.map(project => (
                     <div
                         key={project.id}
                         className={cn(
                             'transition-all duration-500 ease-in-out',
-                             project.animation,
-                            hoveredId && hoveredId !== project.id ? 'opacity-50 blur-sm scale-90' : '',
-                            hoveredId === project.id 
+                            project.animation,
+                            selectedId && selectedId !== project.id ? 'opacity-50 blur-sm scale-90' : '',
+                            selectedId === project.id 
                               ? 'absolute inset-0 w-full h-full m-auto z-10'
                               : `${project.colSpan} ${project.rowSpan}`
                         )}
                         style={{ animationDelay: project.delay }}
-                        onMouseEnter={() => handleMouseEnter(project)}
                     >
                         <ProjectBentoCard 
                             project={project} 
-                            isHovered={hoveredId === project.id}
+                            isExpanded={selectedId === project.id}
+                            onExpand={() => handleExpand(project)}
+                            onClose={handleClose}
                         />
                     </div>
                 ))}
@@ -751,7 +763,7 @@ export function GlassPanelLayout() {
         content = <BentoHomeGrid />;
         break;
       case 'Projects':
-        content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
+        content = <ProjectsView onProjectSelect={setProjectDescriptionForRightPanel} />;
         break;
       case 'Personal':
         content = (
@@ -897,4 +909,5 @@ export function GlassPanelLayout() {
     </div>
   );
 }
+
 
