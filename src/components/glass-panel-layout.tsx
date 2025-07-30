@@ -198,10 +198,12 @@ const ProjectBentoCard = ({ project, isExpanded, onExpand, onClose }: { project:
           "flex flex-col items-center justify-center h-full transition-opacity duration-300",
           isExpanded ? "opacity-0" : "opacity-100"
         )}>
-          <Maximize className="w-6 h-6 absolute top-4 right-4 text-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-          <h3 className="font-bold text-lg text-center">
-            {project.name}
-          </h3>
+          <div className="flex flex-col items-center justify-center text-center">
+            <Maximize className="w-8 h-8 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:scale-110 mb-2" />
+            <h3 className="font-bold text-lg text-center transition-all duration-300 group-hover:blur-sm">
+                {project.name}
+            </h3>
+          </div>
         </div>
       </div>
     </div>
@@ -909,5 +911,6 @@ export function GlassPanelLayout() {
     </div>
   );
 }
+
 
 
