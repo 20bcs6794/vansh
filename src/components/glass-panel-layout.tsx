@@ -219,11 +219,11 @@ const ProjectsView = ({ onProjectSelect }: { onProjectSelect: (description: stri
     const projectsData = [
       {
         id: 1,
-        name: 'AI Chatbot Generator',
-        description: 'A platform to create and deploy AI-powered chatbots for businesses with ease, improving customer engagement.',
-        fullDescription: "The AI Chatbot Generator is a full-stack application built with Next.js and Genkit. It allows users to create, customize, and deploy AI-driven chatbots for their websites. The platform features a user-friendly interface for designing conversation flows, integrating knowledge bases, and configuring the chatbot's personality. The backend, powered by Firebase and Genkit, handles the natural language processing and serves the chatbot responses. This project demonstrates proficiency in modern web technologies and generative AI integration.",
-        tech: ['Next.js', 'Genkit', 'Tailwind'],
-        link: 'https://www.linkedin.com/posts/vanshdeep-verma_connections-github-linkedin-activity-7170425782798835712-UpzW?utm_source=share&utm_medium=member_desktop',
+        name: 'Helpdesk Performance Dashboard',
+        description: 'A Power BI dashboard analyzing customer interactions and help desk performance.',
+        fullDescription: "This Power BI dashboard provides insights into help desk performance, tracking metrics like customer interactions and issue resolution times. It highlights how agents effectively manage hardware issues and maintain service levels, ensuring solutions are provided without breaching SLAs.",
+        tech: ['Power BI', 'SQL', 'DAX'],
+        link: 'https://app.powerbi.com/reportEmbed?reportId=a4f4d3a9-b969-4371-ae4c-37eb50af0c9f&autoAuth=true&ctid=301286c1-17fc-48da-84b1-ea115f6778b4',
         bgColor: 'from-purple-500 to-indigo-600',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-2',
@@ -389,7 +389,7 @@ const SQLiteIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const NextJsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#212121" d="M18.974,31.5c0,0.828-0.671,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-14c0-0.653,0.423-1.231,1.045-1.43 c0.625-0.198,1.302,0.03,1.679,0.563l16.777,23.704C40.617,36.709,44,30.735,44,24c0-11-9-20-20-20S4,13,4,24s9,20,20,20 c3.192,0,6.206-0.777,8.89-2.122L18.974,22.216V31.5z M28.974,16.5c0-0.828,0.671-1.5,1.5-1.5s1.5,0.672,1.5,1.5v13.84l-3-4.227 V16.5z"></path>
+<path fill="#212121" d="M18.974,31.5c0,0.828-0.671,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-14c0-0.653,0.423-1.231,1.045-1.43 c0.625-0.198,1.302,0.03,1.679,0.563l16.777,23.704C40.617,36.709,44,30.735,44,24c0-11-9-20-20-20S4,13,4,24s9,20,20,20 c3.192,0,6.206-0.777,8.89-2.122L18.974,22.216V31.5z M28.974,16.5c0-0.828,0.671-1.5-1.5-1.5s1.5,0.672,1.5,1.5v13.84l-3-4.227 V16.5z"></path>
 </svg>
 );
 
