@@ -184,7 +184,7 @@ const ProjectBentoCard = ({ project, isExpanded, onExpand, onClose }: { project:
             <p className="text-sm mt-2">{project.description}</p>
           </div>
           <div className="flex justify-end">
-             <Button asChild variant="secondary" className="bg-white/90 text-black font-bold hover:bg-white transition-colors">
+             <Button asChild variant="secondary" className="bg-white/90 text-black font-bold hover:bg-white transition-colors" onClick={(e) => e.stopPropagation()}>
               <a href={project.link} target="_blank" rel="noopener noreferrer">
                   <LinkIcon className="w-4 h-4 mr-2" />
                   Preview
