@@ -93,7 +93,7 @@ const BentoHomeGrid = () => {
             </a>
 
             <BentoCard className="col-span-1 md:col-span-1 flex flex-col items-center justify-center animate-expand-x" style={{ animationDelay: '0.2s' }}>
-                 <h3 className="text-5xl font-bold">07+</h3>
+                 <h3 className="text-5xl font-bold">09+</h3>
                  <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
             </BentoCard>
             
