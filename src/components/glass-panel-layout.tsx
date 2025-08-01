@@ -174,26 +174,26 @@ const ProjectBentoCard = ({ project, isExpanded, onExpand, onClose }: { project:
           "absolute inset-0 flex flex-col transition-opacity duration-500 delay-200 p-6",
           isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
         )}>
-          <div className="flex justify-between items-start">
-            <h3 className="font-bold text-xl">{project.name}</h3>
-            <div className="flex gap-2 flex-wrap justify-end max-w-[50%] mt-8">
-              {project.tech.map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-1 rounded-full whitespace-nowrap">{t}</span>)}
+            <div className="flex flex-col h-full">
+                <h3 className="font-bold text-xl">{project.name}</h3>
+                <div className="flex gap-2 flex-wrap mt-2">
+                  {project.tech.map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-1 rounded-full whitespace-nowrap">{t}</span>)}
+                </div>
+                <div className="flex-grow flex items-center justify-center">
+                    <p className="text-sm my-4 text-center">{project.description}</p>
+                </div>
+                <div className="flex justify-end">
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-white font-bold hover:underline"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      View Project
+                    </a>
+                </div>
             </div>
-          </div>
-          <div className="flex-grow flex items-center">
-            <p className="text-sm mt-2">{project.description}</p>
-          </div>
-          <div className="flex justify-end">
-             <a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-white font-bold hover:underline"
-              onClick={(e) => e.stopPropagation()}
-            >
-              View Project
-            </a>
-          </div>
         </div>
 
         {/* Collapsed Content */}
