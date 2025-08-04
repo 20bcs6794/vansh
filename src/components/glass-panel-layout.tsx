@@ -149,76 +149,35 @@ const NavItem = ({ icon, label, isActive, onClick }: { icon: React.ElementType, 
   );
 };
 
-const ProjectBentoCard = ({ project, isExpanded, onExpand, onClose }: { project: any, isExpanded: boolean, onExpand: () => void, onClose: (e: React.MouseEvent) => void }) => {
-  return (
-    <div
-      onClick={!isExpanded ? onExpand : undefined}
-      className={cn(
-        "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col h-full group",
-        project.bgColor
-      )}
-    >
-        {isExpanded && (
-            <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 z-20 text-white hover:bg-white/20 hover:text-white"
-                onClick={onClose}
-            >
-                <X className="w-5 h-5" />
-            </Button>
-        )}
-      <div className="relative flex-grow flex flex-col justify-between">
-        {/* Expanded Content */}
-        <div className={cn(
-          "absolute inset-0 flex flex-col transition-opacity duration-500 delay-200 p-6",
-          isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
-        )}>
-            <div className="flex flex-col h-full">
-                <h3 className="font-bold text-xl">{project.name}</h3>
-                <div className="flex gap-2 flex-wrap mt-2">
-                  {project.tech.map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-1 rounded-full whitespace-nowrap">{t}</span>)}
-                </div>
-                <div className="flex-grow flex items-center justify-center">
-                    <p className="text-sm my-4 text-center">{project.description}</p>
-                </div>
-                <div className="flex justify-end">
-                    <a 
-                      href={project.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-white font-bold hover:underline"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      View Project
-                    </a>
+const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (description: string | null) => void }) => {
+    return (
+        <div
+            onMouseEnter={() => onHover(project.fullDescription)}
+            onMouseLeave={() => onHover(null)}
+            className={cn(
+                "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col justify-center items-center h-full group",
+                project.bgColor
+            )}
+        >
+            <div className="text-center transition-all duration-300 group-hover:blur-sm group-hover:scale-90">
+                <h3 className="font-bold text-lg">{project.name}</h3>
+                <div className="flex gap-1 flex-wrap mt-1 justify-center">
+                    {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
                 </div>
             </div>
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Button asChild variant="secondary" className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                        <LinkIcon className="w-4 h-4 mr-2" />
+                        View Project
+                    </a>
+                </Button>
+            </div>
         </div>
-
-        {/* Collapsed Content */}
-        <div className={cn(
-          "flex flex-col items-center justify-center h-full transition-opacity duration-300",
-          isExpanded ? "opacity-0" : "opacity-100"
-        )}>
-          <div className="flex flex-col items-center justify-center text-center">
-            <Maximize className="w-8 h-8 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:scale-150 group-hover:w-15 group-hover:h-15 mb-2" />
-            <h3 className="font-bold text-lg text-center transition-all duration-300 group-hover:blur-sm">
-                {project.name}
-            </h3>
-            <p className="text-xs text-white/70 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                Click to view description
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-const ProjectsView = ({ onProjectSelect }: { onProjectSelect: (description: string | null) => void }) => {
-    const [selectedId, setSelectedId] = useState<number | null>(null);
-
+const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string | null) => void }) => {
     const projectsData = [
       {
         id: 1,
@@ -321,46 +280,26 @@ const ProjectsView = ({ onProjectSelect }: { onProjectSelect: (description: stri
       },
     ].map((p, i) => ({ ...p, animation: 'animate-expand-y', delay: `${i * 0.1}s` }));
 
-    const handleExpand = (project: any) => {
-        setSelectedId(project.id);
-        onProjectSelect(project.fullDescription);
-    };
-
-    const handleClose = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        setSelectedId(null);
-        onProjectSelect(null);
-    };
-
     return (
         <div className="h-full flex flex-col">
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0 animate-expand-x">My Works</h2>
             <div className="flex-grow min-h-0 relative">
-              <ScrollArea className="absolute inset-0 h-full w-full">
-                <div className="grid grid-cols-4 auto-rows-fr gap-4 p-1">
-                    {projectsData.map(project => (
-                        <div
-                            key={project.id}
-                            className={cn(
-                                'transition-all duration-500 ease-in-out',
-                                project.animation,
-                                selectedId && selectedId !== project.id ? 'opacity-50 blur-sm scale-90' : '',
-                                selectedId === project.id 
-                                  ? 'absolute inset-0 w-full h-full m-auto z-10'
-                                  : `${project.colSpan} ${project.rowSpan}`
-                            )}
-                            style={{ animationDelay: project.delay }}
-                        >
-                            <ProjectBentoCard 
-                                project={project} 
-                                isExpanded={selectedId === project.id}
-                                onExpand={() => handleExpand(project)}
-                                onClose={handleClose}
-                            />
-                        </div>
-                    ))}
-                </div>
-              </ScrollArea>
+                <ScrollArea className="absolute inset-0 h-full w-full">
+                    <div className="grid grid-cols-4 auto-rows-fr gap-4 p-1">
+                        {projectsData.map(project => (
+                            <div
+                                key={project.id}
+                                className={cn(
+                                    project.animation,
+                                    `${project.colSpan} ${project.rowSpan}`
+                                )}
+                                style={{ animationDelay: project.delay }}
+                            >
+                                <ProjectBentoCard project={project} onHover={onProjectHover} />
+                            </div>
+                        ))}
+                    </div>
+                </ScrollArea>
             </div>
         </div>
     );
@@ -822,7 +761,7 @@ export function GlassPanelLayout() {
         content = <BentoHomeGrid />;
         break;
       case 'Projects':
-        content = <ProjectsView onProjectSelect={setProjectDescriptionForRightPanel} />;
+        content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
         break;
       case 'Personal':
         content = (
