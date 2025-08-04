@@ -862,17 +862,15 @@ export function GlassPanelLayout() {
             </GlassPanel>
           </div>
           
-           <div className="flex flex-col items-center gap-4">
-              <GlassPanel 
-                  className={cn(
-                      "w-[600px] h-[480px] transition-all duration-300"
-                  )} 
-                  isContentPanel={true} 
-                  activeView={activeView}
-              >
-                {renderContent()}
-              </GlassPanel>
-            </div>
+          <GlassPanel 
+              className={cn(
+                  "w-[600px] h-[480px] transition-all duration-300"
+              )} 
+              isContentPanel={true} 
+              activeView={activeView}
+          >
+            {renderContent()}
+          </GlassPanel>
           
           <GlassPanel
             className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
