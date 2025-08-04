@@ -744,11 +744,11 @@ export function GlassPanelLayout() {
   }, []);
 
   const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
-    const baseRotation = panel === 'left' ? -25 : 25;
+    const baseRotation = panel === 'left' ? 25 : -25;
     
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: panel === 'left' ? 'right center' : 'left center',
+      transformOrigin: panel === 'left' ? 'left center' : 'right center',
       transition: 'transform 0.4s ease-out',
     };
   };
