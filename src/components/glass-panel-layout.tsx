@@ -840,27 +840,25 @@ export function GlassPanelLayout() {
       <div style={{ perspective: '2000px' }}>
         <div 
           ref={panelsContainerRef}
-          className="flex items-center justify-center gap-2 w-full max-w-[1300px]"
+          className="flex items-center justify-center gap-1 w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
-          <div className="h-[480px] hidden md:flex items-center">
-            <GlassPanel
-              className="w-[200px] h-fit p-4 flex-col"
-              style={getPanelStyle('left')}
-            >
-              <div className="space-y-1">
-                {navItems.map(item => (
-                  <NavItem 
-                    key={item.label}
-                    icon={item.icon} 
-                    label={item.label}
-                    isActive={activeView === item.label}
-                    onClick={() => setActiveView(item.label)} 
-                  />
-                ))}
-              </div>
-            </GlassPanel>
-          </div>
+          <GlassPanel
+            className="w-[200px] h-[480px] p-4 flex-col hidden md:flex"
+            style={getPanelStyle('left')}
+          >
+            <div className="space-y-1">
+              {navItems.map(item => (
+                <NavItem 
+                  key={item.label}
+                  icon={item.icon} 
+                  label={item.label}
+                  isActive={activeView === item.label}
+                  onClick={() => setActiveView(item.label)} 
+                />
+              ))}
+            </div>
+          </GlassPanel>
           
           <GlassPanel 
               className={cn(
