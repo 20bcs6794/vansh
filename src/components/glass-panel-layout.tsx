@@ -165,8 +165,8 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
                     {project.tech.slice(0, 5).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
                 </div>
             </div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg">
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
+                <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-auto">
                     <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                         View Project
                     </a>
@@ -748,7 +748,7 @@ export function GlassPanelLayout() {
     
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: panel === 'left' ? 'left center' : 'right center',
+      transformOrigin: panel === 'left' ? 'right center' : 'left center',
       transition: 'transform 0.4s ease-out',
     };
   };
