@@ -162,7 +162,7 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
             <div className="text-center transition-all duration-300 group-hover:blur-sm group-hover:scale-90">
                 <h3 className="font-bold text-lg">{project.name}</h3>
                 <div className="flex gap-1 flex-wrap mt-1 justify-center">
-                    {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
+                    {project.tech.slice(0, 5).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
                 </div>
             </div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -722,8 +722,8 @@ export function GlassPanelLayout() {
       
       if (panelsContainerRef.current) {
         panelsContainerRef.current.style.transform = `
-          rotateY(${x * 7}deg)
-          rotateX(${-y * 7}deg)
+          rotateY(${x * 10}deg)
+          rotateX(${-y * 10}deg)
         `;
       }
     };
@@ -748,7 +748,7 @@ export function GlassPanelLayout() {
     
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: panel === 'left' ? 'right center' : 'left center',
+      transformOrigin: panel === 'left' ? 'left center' : 'right center',
       transition: 'transform 0.4s ease-out',
     };
   };
