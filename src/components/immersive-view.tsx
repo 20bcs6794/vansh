@@ -24,9 +24,10 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const xPos = (clientX / offsetWidth - 0.5) * 2;
       const yPos = (clientY / offsetHeight - 0.5) * 2;
       
-      const moveStrength = 80;
+      const horizontalMoveStrength = 80;
+      const verticalMoveStrength = 20;
 
-      element.style.transform = `translate3d(${-xPos * moveStrength}px, ${-yPos * moveStrength}px, 0) scale(1.1)`;
+      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
     };
 
     const handleMouseLeave = () => {
