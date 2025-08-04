@@ -840,7 +840,7 @@ export function GlassPanelLayout() {
       <div style={{ perspective: '2000px' }}>
         <div 
           ref={panelsContainerRef}
-          className="flex items-center justify-center gap-6 w-full max-w-[1300px]"
+          className="flex items-center justify-center gap-2 w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
           <div className="h-[480px] hidden md:flex items-center">
