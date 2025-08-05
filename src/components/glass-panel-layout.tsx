@@ -716,6 +716,12 @@ export function GlassPanelLayout() {
   ];
 
   useEffect(() => {
+    const applyTransform = (element: HTMLElement | null, x: number, y: number, rotationFactor: number) => {
+      if (!element) return;
+      const transform = `perspective(1000px) rotateY(${x * rotationFactor}deg) rotateX(${-y * rotationFactor}deg)`;
+      element.style.transform = `${element.style.transform.split(' perspective')[0]} ${transform}`;
+    };
+
     const handleMouseMove = (event: MouseEvent) => {
       const { clientX, clientY } = event;
       const { innerWidth, innerHeight } = window;
@@ -723,17 +729,9 @@ export function GlassPanelLayout() {
       const y = (clientY - innerHeight / 2) / (innerHeight / 2);
       const rotationFactor = 10;
       
-      const transform = `perspective(1000px) rotateY(${x * rotationFactor}deg) rotateX(${-y * rotationFactor}deg)`;
-
-      if (leftPanelRef.current) {
-        leftPanelRef.current.style.transform = `perspective(1000px) rotateY(25deg) ${transform}`;
-      }
-      if (mainPanelRef.current) {
-        mainPanelRef.current.style.transform = transform;
-      }
-      if (rightPanelRef.current) {
-        rightPanelRef.current.style.transform = `perspective(1000px) rotateY(-25deg) ${transform}`;
-      }
+      applyTransform(leftPanelRef.current, x, y, rotationFactor);
+      applyTransform(mainPanelRef.current, x, y, rotationFactor);
+      applyTransform(rightPanelRef.current, x, y, rotationFactor);
     };
     
     const handleMouseLeave = () => {
@@ -880,7 +878,7 @@ export function GlassPanelLayout() {
                 </GlassPanel>
             </div>
             
-            <div className="mx-[5rem]">
+            <div className="mx-2">
               <GlassPanel 
                   ref={mainPanelRef}
                   className={cn("w-[600px] h-[480px] transition-all duration-300")} 
