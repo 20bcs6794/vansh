@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -140,7 +139,7 @@ const NavItem = ({ icon, label, isActive, onClick }: { icon: React.ElementType, 
   const Icon = icon;
   return (
     <button onClick={onClick} className={cn(
-      "flex w-full items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors font-bold text-base",
+      "flex items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors font-bold text-base",
       isActive && "bg-white/10 dark:bg-white/10 shadow-[0_0_8px_1px_rgba(255,255,255,0.4)] text-black dark:text-white"
     )}>
       <Icon className="w-5 h-5" />
@@ -850,7 +849,7 @@ export function GlassPanelLayout() {
           style={{ transition: 'transform 0.3s ease-out' }}
         >
             <GlassPanel
-              className="w-[200px] flex-col hidden md:flex"
+              className="w-auto flex-col hidden md:flex"
               style={getPanelStyle('left')}
             >
               <div className="space-y-1">
@@ -907,8 +906,6 @@ export function GlassPanelLayout() {
     </div>
   );
 }
-
-
-
+    
 
     
