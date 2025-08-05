@@ -701,9 +701,7 @@ const ContactView = () => {
 
 
 export function GlassPanelLayout() {
-  const leftPanelRef = useRef<HTMLDivElement>(null);
-  const mainPanelRef = useRef<HTMLDivElement>(null);
-  const rightPanelRef = useRef<HTMLDivElement>(null);
+  const layoutRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   
@@ -719,7 +717,7 @@ export function GlassPanelLayout() {
     const applyTransform = (element: HTMLElement | null, x: number, y: number, rotationFactor: number) => {
       if (!element) return;
       const transform = `perspective(1000px) rotateY(${x * rotationFactor}deg) rotateX(${-y * rotationFactor}deg)`;
-      element.style.transform = `${element.style.transform.split(' perspective')[0]} ${transform}`;
+      element.style.transform = transform;
     };
 
     const handleMouseMove = (event: MouseEvent) => {
@@ -729,20 +727,12 @@ export function GlassPanelLayout() {
       const y = (clientY - innerHeight / 2) / (innerHeight / 2);
       const rotationFactor = 10;
       
-      applyTransform(leftPanelRef.current, x, y, rotationFactor);
-      applyTransform(mainPanelRef.current, x, y, rotationFactor);
-      applyTransform(rightPanelRef.current, x, y, rotationFactor);
+      applyTransform(layoutRef.current, x, y, rotationFactor);
     };
     
     const handleMouseLeave = () => {
-      if (leftPanelRef.current) {
-        leftPanelRef.current.style.transform = 'perspective(1000px) rotateY(25deg)';
-      }
-      if (mainPanelRef.current) {
-        mainPanelRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-      }
-       if (rightPanelRef.current) {
-        rightPanelRef.current.style.transform = 'perspective(1000px) rotateY(-25deg)';
+      if (layoutRef.current) {
+        layoutRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
       }
     }
 
@@ -755,18 +745,20 @@ export function GlassPanelLayout() {
     };
   }, []);
 
-  const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
+  const getPanelStyle = (panel: 'left' | 'main' | 'right'): CSSProperties => {
     let baseRotation, transformOrigin;
     if (panel === 'left') {
         baseRotation = 25;
         transformOrigin = 'right center';
-    } else {
+    } else if (panel === 'right') {
         baseRotation = -25;
         transformOrigin = 'left center';
+    } else {
+        return { transition: 'transform 0.3s ease-out' };
     }
     
     return {
-      transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
+      transform: `rotateY(${baseRotation}deg)`,
       transformOrigin: transformOrigin,
       transition: 'transform 0.3s ease-out',
     };
@@ -857,10 +849,13 @@ export function GlassPanelLayout() {
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <div style={{ perspective: '2000px' }}>
-         <div className="flex items-center justify-center w-full max-w-[1300px]">
+         <div 
+          ref={layoutRef}
+          className="flex items-center justify-center w-full max-w-[1300px]"
+          style={{ transition: 'transform 0.3s ease-out' }}
+          >
              <div className="hidden md:flex items-center">
                 <GlassPanel
-                  ref={leftPanelRef}
                   className="w-[200px] h-fit p-4 flex-col"
                   style={getPanelStyle('left')}
                 >
@@ -878,11 +873,10 @@ export function GlassPanelLayout() {
                 </GlassPanel>
             </div>
             
-            <div className="mx-2">
+            <div className="mx-6">
               <GlassPanel 
-                  ref={mainPanelRef}
                   className={cn("w-[600px] h-[480px] transition-all duration-300")} 
-                  style={{ transition: 'transform 0.3s ease-out' }}
+                  style={getPanelStyle('main')}
                   isContentPanel={true} 
                   activeView={activeView}
               >
@@ -891,7 +885,6 @@ export function GlassPanelLayout() {
             </div>
           
             <GlassPanel
-              ref={rightPanelRef}
               className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
               style={getPanelStyle('right')}
             >
