@@ -166,7 +166,7 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
                 </div>
             </div>
             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
-                <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-auto">
+                <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
                     <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                         View Project
                     </a>
@@ -701,11 +701,82 @@ const ContactView = () => {
 
 
 export function GlassPanelLayout() {
-  const leftPanelRef = useRef<HTMLDivElement>(null);
-  const centerPanelRef = useRef<HTMLDivElement>(null);
-  const rightPanelRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
+
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const mainPanelRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const { clientX, clientY } = event;
+      const { innerWidth, innerHeight } = window;
+      const x = (clientX - innerWidth / 2) / (innerWidth / 2);
+      const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+      
+      const setTransform = (element: HTMLElement | null) => {
+        if (element) {
+          element.style.transform = `
+            perspective(1000px)
+            rotateY(${x * 10}deg)
+            rotateX(${-y * 10}deg)
+          `;
+        }
+      };
+
+      setTransform(leftPanelRef.current);
+      setTransform(mainPanelRef.current);
+      setTransform(rightPanelRef.current);
+    };
+
+    const handleMouseLeave = () => {
+      const resetTransform = (element: HTMLElement | null) => {
+        if (element) {
+          element.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        }
+      };
+      resetTransform(leftPanelRef.current);
+      resetTransform(mainPanelRef.current);
+      resetTransform(rightPanelRef.current);
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+    document.body.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.body.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  const getPanelStyle = (panel: 'left' | 'right' | 'main'): CSSProperties => {
+    const baseStyle = {
+      transition: 'transform 0.3s ease-out',
+    };
+
+    switch (panel) {
+      case 'left':
+        return {
+          ...baseStyle,
+          transform: 'perspective(1000px) rotateY(-25deg)',
+          transformOrigin: 'left center',
+        };
+      case 'right':
+        return {
+          ...baseStyle,
+          transform: 'perspective(1000px) rotateY(25deg)',
+          transformOrigin: 'right center',
+        };
+      case 'main':
+      default:
+        return {
+          ...baseStyle,
+          transform: 'perspective(1000px) rotateY(0deg)',
+          margin: '0 5rem'
+        };
+    }
+  };
   
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -714,41 +785,6 @@ export function GlassPanelLayout() {
     { icon: Briefcase, label: "Career" },
     { icon: Bell, label: "Contact" },
   ];
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      const { clientX, clientY } = event;
-      const { innerWidth, innerHeight } = window;
-      const x = (clientX - innerWidth / 2) / (innerWidth / 2);
-      const y = (clientY - innerHeight / 2) / (innerHeight / 2);
-
-      const panels = [leftPanelRef.current, centerPanelRef.current, rightPanelRef.current];
-      
-      panels.forEach(panel => {
-        if (panel) {
-          panel.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
-        }
-      });
-    };
-    
-    const handleMouseLeave = () => {
-        const panels = [leftPanelRef.current, centerPanelRef.current, rightPanelRef.current];
-        panels.forEach(panel => {
-            if (panel) {
-                panel.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-            }
-        });
-    }
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
 
   const renderContent = () => {
     let content;
@@ -834,71 +870,70 @@ export function GlassPanelLayout() {
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
-      <div style={{ perspective: '2000px' }}>
-        <div 
-          className="flex items-center justify-center w-full max-w-[1300px]"
-          style={{ transition: 'transform 0.3s ease-out' }}
+      <div 
+        className="flex items-center justify-center w-full max-w-[1300px]"
+      >
+        <GlassPanel
+          ref={leftPanelRef}
+          className="w-[200px] h-fit p-4 flex-col hidden md:flex"
+          style={getPanelStyle('left')}
         >
-          <GlassPanel
-            ref={leftPanelRef}
-            className="w-[200px] p-4 flex-col hidden md:flex"
-            style={{transition: 'transform 0.3s ease-out'}}
-          >
-            <div className="space-y-1">
-              {navItems.map(item => (
-                <NavItem 
-                  key={item.label}
-                  icon={item.icon} 
-                  label={item.label}
-                  isActive={activeView === item.label}
-                  onClick={() => setActiveView(item.label)} 
-                />
-              ))}
-            </div>
-          </GlassPanel>
+          <div className="space-y-1">
+            {navItems.map(item => (
+              <NavItem 
+                key={item.label}
+                icon={item.icon} 
+                label={item.label}
+                isActive={activeView === item.label}
+                onClick={() => setActiveView(item.label)} 
+              />
+            ))}
+          </div>
+        </GlassPanel>
+        
+        <GlassPanel 
+            ref={mainPanelRef}
+            className={cn(
+                "w-[600px] h-[480px] transition-all duration-300"
+            )} 
+            style={getPanelStyle('main')}
+            isContentPanel={true} 
+            activeView={activeView}
+        >
+          {renderContent()}
+        </GlassPanel>
+        
+        <GlassPanel
+          ref={rightPanelRef}
+          className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
+          style={getPanelStyle('right')}
+        >
+          <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
+              <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
+                <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  <span>Resume</span>
+                </a>
+              </Button>
+          </div>
           
-          <GlassPanel 
-              ref={centerPanelRef}
-              className={cn(
-                  "w-[600px] h-[480px] transition-all duration-300 mx-[5rem]"
-              )} 
-              style={{transition: 'transform 0.3s ease-out'}}
-              isContentPanel={true} 
-              activeView={activeView}
-          >
-            {renderContent()}
-          </GlassPanel>
-          
-          <GlassPanel
-            ref={rightPanelRef}
-            className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
-            style={{transition: 'transform 0.3s ease-out'}}
-          >
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
-                <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                  <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <Download className="w-4 h-4" />
-                    <span>Resume</span>
-                  </a>
-                </Button>
-            </div>
-            
-            <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
-              <ScrollArea className="flex-grow">
-                <div className="text-neutral-800 dark:text-neutral-100 space-y-2 pr-2">
-                   {projectDescriptionForRightPanel ? (
-                      <div>
-                          <h3 className="font-semibold text-black dark:text-white text-sm mb-2">Project Details</h3>
-                          <p>{projectDescriptionForRightPanel}</p>
-                      </div>
-                  ) : originalAboutContent}
-                </div>
-              </ScrollArea>
-            </div>
-          </GlassPanel>
-        </div>
+          <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
+            <ScrollArea className="flex-grow">
+              <div className="text-neutral-800 dark:text-neutral-100 space-y-2 pr-2">
+                 {projectDescriptionForRightPanel ? (
+                    <div>
+                        <h3 className="font-semibold text-black dark:text-white text-sm mb-2">Project Details</h3>
+                        <p>{projectDescriptionForRightPanel}</p>
+                    </div>
+                ) : originalAboutContent}
+              </div>
+            </ScrollArea>
+          </div>
+        </GlassPanel>
       </div>
     </div>
   );
 }
+
+
