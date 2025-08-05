@@ -744,11 +744,11 @@ export function GlassPanelLayout() {
   }, []);
 
   const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
-    const baseRotation = panel === 'left' ? -25 : 25;
+    const baseRotation = panel === 'left' ? 25 : -25;
     
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: panel === 'left' ? 'left center' : 'right center',
+      transformOrigin: panel === 'left' ? 'right center' : 'left center',
       transition: 'transform 0.4s ease-out',
     };
   };
@@ -843,9 +843,9 @@ export function GlassPanelLayout() {
           className="flex items-center justify-center w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
-          <div className="h-[480px] hidden md:flex items-center">
+          <div className="h-auto hidden md:flex items-center">
             <GlassPanel
-              className="w-auto h-fit p-4 flex-col"
+              className="w-auto p-4 flex-col"
               style={getPanelStyle('left')}
             >
               <div className="space-y-1">
