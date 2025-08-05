@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -721,8 +722,8 @@ export function GlassPanelLayout() {
       
       if (panelsContainerRef.current) {
         panelsContainerRef.current.style.transform = `
-          rotateY(${x * 10}deg)
-          rotateX(${-y * 10}deg)
+          rotateY(${x * 7}deg)
+          rotateX(${-y * 7}deg)
         `;
       }
     };
@@ -743,18 +744,11 @@ export function GlassPanelLayout() {
   }, []);
 
   const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
-    let baseRotation, transformOrigin;
-    if (panel === 'left') {
-        baseRotation = 25;
-        transformOrigin = 'right center';
-    } else { // right
-        baseRotation = -25;
-        transformOrigin = 'left center';
-    }
+    const baseRotation = panel === 'left' ? -25 : 25;
     
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: transformOrigin,
+      transformOrigin: panel === 'left' ? 'left center' : 'right center',
       transition: 'transform 0.4s ease-out',
     };
   };
@@ -843,13 +837,15 @@ export function GlassPanelLayout() {
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
+      <div style={{ perspective: '2000px' }}>
         <div 
           ref={panelsContainerRef}
           className="flex items-center justify-center w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
+          <div className="h-[480px] hidden md:flex items-center">
             <GlassPanel
-              className="w-auto flex-col hidden md:flex"
+              className="w-auto h-fit p-4 flex-col"
               style={getPanelStyle('left')}
             >
               <div className="space-y-1">
@@ -864,48 +860,47 @@ export function GlassPanelLayout() {
                 ))}
               </div>
             </GlassPanel>
+          </div>
           
            <GlassPanel 
-                className={cn(
-                    "w-[600px] h-[480px] transition-all duration-300 mx-6"
-                )} 
-                isContentPanel={true} 
-                activeView={activeView}
-            >
-              {renderContent()}
-            </GlassPanel>
+               className={cn(
+                   "w-[600px] h-[480px] transition-all duration-300 mx-6"
+               )} 
+               isContentPanel={true} 
+               activeView={activeView}
+           >
+             {renderContent()}
+           </GlassPanel>
           
-            <GlassPanel
-              className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
-              style={getPanelStyle('right')}
-            >
-              <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
-                  <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                    <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                      <Download className="w-4 h-4" />
-                      <span>Resume</span>
-                    </a>
-                  </Button>
-              </div>
-              
-              <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
-                <ScrollArea className="flex-grow">
-                  <div className="text-neutral-800 dark:text-neutral-100 space-y-2 pr-2">
-                     {projectDescriptionForRightPanel ? (
-                        <div>
-                            <h3 className="font-semibold text-black dark:text-white text-sm mb-2">Project Details</h3>
-                            <p>{projectDescriptionForRightPanel}</p>
-                        </div>
-                    ) : originalAboutContent}
-                  </div>
-                </ScrollArea>
-              </div>
-            </GlassPanel>
+          <GlassPanel
+            className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
+            style={getPanelStyle('right')}
+          >
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
+                <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
+                  <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                    <Download className="w-4 h-4" />
+                    <span>Resume</span>
+                  </a>
+                </Button>
+            </div>
+            
+            <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
+              <ScrollArea className="flex-grow">
+                <div className="text-neutral-800 dark:text-neutral-100 space-y-2 pr-2">
+                   {projectDescriptionForRightPanel ? (
+                      <div>
+                          <h3 className="font-semibold text-black dark:text-white text-sm mb-2">Project Details</h3>
+                          <p>{projectDescriptionForRightPanel}</p>
+                      </div>
+                  ) : originalAboutContent}
+                </div>
+              </ScrollArea>
+            </div>
+          </GlassPanel>
         </div>
+      </div>
     </div>
   );
 }
-    
-
-    
