@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { sendEmail } from '@/ai/flows/send-email-flow';
 import { type SendEmailInput } from '@/ai/schemas/send-email';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
     <div
@@ -24,7 +25,7 @@ const BentoCard = ({ children, className, ...props }: { children: ReactNode, cla
     </div>
 );
 
-const BentoHomeGrid = () => {
+const BentoHomeGrid = ({ isMobile = false }) => {
     const [isCopied, setIsCopied] = useState(false);
     const { theme } = useTheme();
 
@@ -39,6 +40,84 @@ const BentoHomeGrid = () => {
             setIsCopied(false);
         }, 5000); // Revert back after 5 seconds
     };
+    
+    const CardComponent = isMobile ? 'div' : BentoCard;
+
+    if (isMobile) {
+        return (
+            <div className="flex flex-col gap-4 w-full px-4">
+                 <CardComponent className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col items-center text-center">
+                    <div className="relative w-32 h-32 rounded-full overflow-hidden mb-4">
+                        <div
+                            className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                            style={{ opacity: theme === 'light' ? 1 : 0 }}
+                        >
+                            <Image
+                                src={lightImage}
+                                alt="Vanshdeep Verma"
+                                data-ai-hint="person professional portrait"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                        <div
+                            className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                            style={{ opacity: theme === 'dark' ? 1 : 0 }}
+                        >
+                            <Image
+                                src={darkImage}
+                                alt="Vanshdeep Verma"
+                                data-ai-hint="person professional portrait"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                    </div>
+                    <h2 className="text-xl font-bold">Hi, I'm Vanshdeep —</h2>
+                    <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                </CardComponent>
+
+                <CardComponent className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col justify-center items-center">
+                     <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
+                     <Button 
+                        onClick={handleCopyEmail} 
+                        className={cn(
+                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors", 
+                            isCopied && "bg-green-600 hover:bg-green-700"
+                        )}
+                    >
+                        {isCopied ? (
+                            <span className="flex items-center justify-center">
+                                <Check className="w-4 h-4 mr-2" />
+                                Copied!
+                            </span>
+                        ) : (
+                           "Copy my email"
+                        )}
+                    </Button>
+                </CardComponent>
+
+                <div className="grid grid-cols-3 gap-4">
+                    <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group">
+                        <CardComponent className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 h-full flex flex-col items-center justify-center text-center">
+                            <h3 className="font-bold text-base">My Certificates</h3>
+                             <ChevronRight className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 mt-1" />
+                        </CardComponent>
+                    </a>
+                     <CardComponent className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col items-center justify-center">
+                         <h3 className="text-4xl font-bold">09+</h3>
+                         <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                    </CardComponent>
+                    <CardComponent className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                         <MapPin className="w-6 h-6 mb-1" />
+                         <p className="text-muted-foreground text-sm">New Delhi, India</p>
+                    </CardComponent>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-fr gap-4 h-full w-full p-1">
@@ -186,8 +265,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['Power BI', 'SQL', 'DAX', 'Python', 'Excel'],
         link: 'https://app.powerbi.com/reportEmbed?reportId=a4f4d3a9-b969-4371-ae4c-37eb50af0c9f&autoAuth=true&ctid=301286c1-17fc-48da-84b1-ea115f6778b4',
         bgColor: 'from-purple-500 to-indigo-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 2,
@@ -197,8 +276,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['Gen AI', 'Next.js', 'Dialogflow', 'REST API', 'JavaScript', 'Tailwind CSS'],
         link: 'https://dabur-project-vanshdeep.netlify.app/',
         bgColor: 'from-red-500 to-orange-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 3,
@@ -208,8 +287,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'JWT Auth', 'React Router', 'Fetch API', 'Tailwind CSS'],
         link: 'https://getjobby43.ccbp.tech/',
         bgColor: 'from-blue-500 to-cyan-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 4,
@@ -219,8 +298,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'JavaScript', 'JSX', 'CSS3', 'Flexbox'],
         link: 'https://moneymanager43.ccbp.tech/',
         bgColor: 'from-green-500 to-teal-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 5,
@@ -230,8 +309,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'React Router', 'JWT Auth', 'JavaScript', 'CSS3'],
         link: 'https://primeclone43.ccbp.tech/',
         bgColor: 'from-sky-500 to-indigo-500',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 6,
@@ -241,8 +320,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'JSX', 'JavaScript', 'CSS3'],
         link: 'https://worktimeline.ccbp.tech/',
         bgColor: 'from-fuchsia-500 to-pink-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 7,
@@ -252,8 +331,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'Recharts', 'CSS3', 'JavaScript', 'REST API'],
         link: 'https://cowin2022.ccbp.tech/',
         bgColor: 'from-amber-500 to-yellow-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-2',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 8,
@@ -263,8 +342,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'React Router', 'REST API', 'JWT Auth'],
         link: 'https://vanshtrendz.ccbp.tech/',
         bgColor: 'from-rose-500 to-red-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
       {
         id: 9,
@@ -274,8 +353,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'GitHub REST API', 'JavaScript', 'CSS3'],
         link: 'https://vanshrepos.ccbp.tech/',
         bgColor: 'from-slate-600 to-gray-800',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
+        colSpan: 'md:col-span-1',
+        rowSpan: 'md:row-span-1',
       },
     ].map((p, i) => ({ ...p, animation: 'animate-expand-y', delay: `${i * 0.1}s` }));
 
@@ -284,7 +363,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
             <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0 animate-expand-x">My Works</h2>
             <div className="flex-grow min-h-0 relative">
                 <ScrollArea className="absolute inset-0 h-full w-full">
-                    <div className="grid grid-cols-4 auto-rows-fr gap-4 p-1">
+                    <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-fr gap-4 p-1">
                         {projectsData.map(project => (
                             <div
                                 key={project.id}
@@ -704,6 +783,7 @@ export function GlassPanelLayout() {
   const panelsContainerRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
+  const isMobile = useIsMobile();
   
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -714,6 +794,8 @@ export function GlassPanelLayout() {
   ];
 
   useEffect(() => {
+    if (isMobile) return;
+
     const handleMouseMove = (event: MouseEvent) => {
       const { clientX, clientY } = event;
       const { innerWidth, innerHeight } = window;
@@ -741,7 +823,7 @@ export function GlassPanelLayout() {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [isMobile]);
 
   const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
     const baseRotation = panel === 'left' ? 25 : -25;
@@ -757,7 +839,7 @@ export function GlassPanelLayout() {
     let content;
     switch (activeView) {
       case 'Home':
-        content = <BentoHomeGrid />;
+        content = <BentoHomeGrid isMobile={isMobile} />;
         break;
       case 'Projects':
         content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
@@ -818,13 +900,11 @@ export function GlassPanelLayout() {
         content = null;
     }
     return (
-      <div key={activeView} className="h-full">
+      <div key={activeView} className="h-full w-full">
         {content}
       </div>
     );
   }
-
-  const isScrollDisabled = activeView === 'Contact' || activeView === 'Career'
 
   const originalAboutContent = (
       <div>
@@ -834,6 +914,41 @@ export function GlassPanelLayout() {
           <p className="text-neutral-800 dark:text-neutral-100">On this website, you'll find a collection of my projects, personal information, and information on my education and career. I hope you enjoy seeing what I can do. I won't keep you waiting any longer, so go take a look!</p>
       </div>
   );
+
+  if (isMobile) {
+    return (
+        <div className="relative z-20 w-full h-screen flex flex-col items-center pt-4">
+            <div className="w-full px-4 mb-2">
+                 <div className="bg-white/10 dark:bg-black/20 backdrop-blur-sm rounded-full p-1">
+                     <div className="flex justify-around items-center">
+                        {navItems.filter(item => item.label !== activeView).map(item => (
+                             <Button 
+                                key={item.label}
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => setActiveView(item.label)}
+                                className={cn(
+                                    "rounded-full text-sm font-medium",
+                                    activeView === item.label 
+                                        ? "bg-white/30 text-black dark:text-white"
+                                        : "text-neutral-800 dark:text-neutral-200"
+                                )}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            
+            <ScrollArea className="w-full flex-grow">
+                <div className="flex flex-col items-center gap-y-4 pb-4">
+                  {renderContent()}
+                </div>
+            </ScrollArea>
+        </div>
+    )
+  }
 
   return (
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">

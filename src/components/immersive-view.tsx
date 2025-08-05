@@ -1,21 +1,51 @@
 
 "use client";
 
-import { useRef, useEffect, type ReactNode } from 'react';
+import { useRef, useEffect, type ReactNode, useState } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 export function ImmersiveView({ children }: { children?: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const tiltRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const [gyroPermission, setGyroPermission] = useState<'granted' | 'denied' | 'prompt'>('prompt');
 
   const lightImage = "/images/light_theme_bg.jpg";
   const darkImage = "/images/dark_theme_bg.jpg";
 
   useEffect(() => {
+    const requestGyroPermission = async () => {
+      if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+        try {
+          const permissionState = await (DeviceOrientationEvent as any).requestPermission();
+          if (permissionState === 'granted') {
+            setGyroPermission('granted');
+          } else {
+            setGyroPermission('denied');
+          }
+        } catch (error) {
+          setGyroPermission('denied');
+        }
+      } else {
+        // For non-iOS 13+ devices
+        setGyroPermission('granted');
+      }
+    };
+
+    if (isMobile && gyroPermission === 'prompt') {
+      // Automatically prompt or wait for user interaction
+    }
+  }, [isMobile, gyroPermission]);
+
+
+  useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
+      if (isMobile) return;
       const { clientX, clientY } = event;
       const element = tiltRef.current;
       if (!element) return;
@@ -31,26 +61,62 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     };
 
     const handleMouseLeave = () => {
+       if (isMobile) return;
       const element = tiltRef.current;
       if (element) {
         element.style.transform = 'translate3d(0, 0, 0) scale(1.1)';
       }
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
     
-    handleMouseLeave();
+    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+        if (!isMobile) return;
+        const element = tiltRef.current;
+        if (!element) return;
+
+        const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
+        
+        const yPos = (beta ? beta - 45 : 0) / 45; // Normalize beta (adjust 45 for neutral position)
+        const xPos = (gamma ?? 0) / 45; // Normalize gamma
+        
+        const horizontalMoveStrength = 60;
+        const verticalMoveStrength = 30;
+
+        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
+    };
+
+
+    if (isMobile && gyroPermission === 'granted') {
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+    } else {
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseleave', handleMouseLeave);
+        handleMouseLeave();
+    }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
+      if (isMobile) {
+        window.removeEventListener('deviceorientation', handleDeviceOrientation);
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseleave', handleMouseLeave);
+      }
     };
-  }, []);
+  }, [isMobile, gyroPermission]);
   
   const vignetteStyle = {
     dark: 'inset 0 0 120px 40px hsl(var(--background))',
     light: 'none',
+  };
+
+  const handlePermissionRequest = async () => {
+    if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+        const permissionState = await (DeviceOrientationEvent as any).requestPermission();
+        if (permissionState === 'granted') {
+            setGyroPermission('granted');
+        } else {
+            setGyroPermission('denied');
+        }
+    }
   };
 
   return (
@@ -97,6 +163,15 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         </div>
       </div>
       
+       {isMobile && gyroPermission === 'prompt' && (
+         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/50">
+           <div className="bg-background p-6 rounded-lg text-center">
+              <p className="mb-4">Enable gyroscope for a better experience.</p>
+              <Button onClick={handlePermissionRequest}>Enable Gyroscope</Button>
+           </div>
+         </div>
+       )}
+      
       {children}
       
       <div 
@@ -108,7 +183,12 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         variant="outline" 
         size="icon" 
         onClick={toggleTheme}
-        className="absolute top-4 right-4 z-50"
+        className={cn(
+          "absolute z-50",
+          isMobile 
+            ? "top-16 right-4" 
+            : "top-4 right-4"
+        )}
       >
         <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
         <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
