@@ -73,12 +73,12 @@ const BentoHomeGrid = ({ isMobile = false }) => {
                             />
                         </div>
                     </div>
-                    <h2 className="text-xl font-bold">Hi, I'm Vanshdeep —</h2>
-                    <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                    <h2 className="text-xl font-bold text-black dark:text-white">Hi, I'm Vanshdeep —</h2>
+                    <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
                 </div>
 
                 <div className="bg-white/10 dark:bg-black/20 rounded-2xl p-6 flex flex-col justify-center items-center">
-                     <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
+                     <h3 className="font-bold text-lg mb-4 text-center text-black dark:text-white">Have a project in mind?</h3>
                      <Button 
                         onClick={handleCopyEmail} 
                         className={cn(
@@ -100,36 +100,36 @@ const BentoHomeGrid = ({ isMobile = false }) => {
                 <div className="grid grid-cols-3 gap-4">
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group">
                         <div className="h-full bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                            <h3 className="font-bold text-base">My Certificates</h3>
-                             <ChevronRight className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 mt-1" />
+                            <h3 className="font-bold text-base text-black dark:text-white">My Certificates</h3>
+                             <ChevronRight className="w-5 h-5 text-neutral-800 dark:text-neutral-200 transition-transform duration-300 group-hover:translate-x-1 mt-1" />
                         </div>
                     </a>
                      <div className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex-col items-center justify-center">
-                         <h3 className="text-4xl font-bold text-center">09+</h3>
-                         <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                         <h3 className="text-4xl font-bold text-center text-black dark:text-white">09+</h3>
+                         <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </div>
                     <div className="bg-white/10 dark:bg-black/20 rounded-2xl p-4 flex flex-col items-center justify-center text-center">
-                         <MapPin className="w-6 h-6 mx-auto mb-1" />
-                         <p className="text-muted-foreground text-sm">New Delhi, India</p>
+                         <MapPin className="w-6 h-6 mx-auto mb-1 text-black dark:text-white" />
+                         <p className="text-neutral-800 dark:text-neutral-200 text-sm">New Delhi, India</p>
                     </div>
                 </div>
                  <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <div className="h-full bg-white/10 dark:bg-black/20 rounded-2xl p-4 items-center justify-center transition-transform group-hover:scale-105 text-center">
                             <LinkedInIcon className="w-12 h-12 mx-auto" />
-                            <p className="font-bold mt-2">LinkedIn</p>
+                            <p className="font-bold mt-2 text-black dark:text-white">LinkedIn</p>
                         </div>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                         <div className="h-full bg-white/10 dark:bg-black/20 rounded-2xl p-4 items-center justify-center transition-transform group-hover:scale-105 text-center">
                             <WhatsAppIcon className="w-12 h-12 mx-auto"/>
-                            <p className="font-bold mt-2">WhatsApp</p>
+                            <p className="font-bold mt-2 text-black dark:text-white">WhatsApp</p>
                         </div>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                         <div className="h-full bg-white/10 dark:bg-black/20 rounded-2xl p-4 items-center justify-center transition-transform group-hover:scale-105 text-center">
                             <GmailIcon className="w-12 h-12 mx-auto"/>
-                            <p className="font-bold mt-2">Gmail</p>
+                            <p className="font-bold mt-2 text-black dark:text-white">Gmail</p>
                         </div>
                     </a>
                 </div>
@@ -533,7 +533,7 @@ const technologiesWithIcons = [
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
     <div className="bg-white/10 dark:bg-black/20 rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform hover:scale-105">
         <Icon className="w-10 h-10" />
-        <span className="font-medium text-xs text-white"><strong>{name}</strong></span>
+        <span className="font-medium text-xs text-black dark:text-white"><strong>{name}</strong></span>
     </div>
 );
 
@@ -611,7 +611,7 @@ const CareerTimeline = ({ isMobile = false }) => {
                             <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start animate-expand-x" style={{animationDelay: `${index * 0.1 + 0.1}s`}}>
                                 <div className="w-28 text-left">
                                      <div className="bg-white/10 dark:bg-black/20 p-3 rounded-lg shadow-md">
-                                        <p className="font-bold text-base">{item.period}</p>
+                                        <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
                                     </div>
                                 </div>
 
@@ -622,18 +622,18 @@ const CareerTimeline = ({ isMobile = false }) => {
                                 </div>
                                 
                                 <div className="bg-white/10 dark:bg-black/20 p-4 rounded-lg ml-4 shadow-md">
-                                    <h3 className="font-bold text-base">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">
+                                    <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
+                                    <p className="text-sm text-neutral-800 dark:text-neutral-200 mt-1">
                                         {item.company} 
                                         {item.grade && ` | ${item.grade}`}
                                     </p>
                                     {item.location && (
-                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                        <div className="flex items-center text-sm text-neutral-800 dark:text-neutral-200 mt-1">
                                             <MapPin className="w-4 h-4 mr-2" />
                                             <span>{item.location}</span>
                                         </div>
                                     )}
-                                    <div className="text-sm mt-2">{item.description}</div>
+                                    <div className="text-sm mt-2 text-neutral-800 dark:text-neutral-200">{item.description}</div>
                                 </div>
                             </div>
                         ))}
@@ -801,13 +801,13 @@ export function GlassPanelLayout() {
         return <ProjectsView onProjectHover={() => {}} isMobile={isMobile} />;
       case 'Personal':
         return (
-            <div className="h-full flex flex-col gap-4 px-4 pt-4 text-white">
+            <div className="h-full flex flex-col gap-4 px-4 pt-4 text-black dark:text-white">
                 <div className="bg-white/10 dark:bg-black/20 rounded-[20px] p-4 flex flex-col flex-grow min-h-0">
                     <h3 className="font-semibold text-lg mb-2 shrink-0">Who Am I ?</h3>
                     <div className="relative flex-grow">
                         <div className="absolute inset-0">
                             <ScrollArea className="h-full pr-4">
-                                <div className="space-y-3 text-sm">
+                                <div className="space-y-3 text-sm text-neutral-800 dark:text-neutral-200">
                                     <p>
                                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
                                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
@@ -862,7 +862,7 @@ export function GlassPanelLayout() {
 
   if (isMobile) {
     return (
-        <div className="relative z-20 w-full h-screen flex flex-col items-center pt-4 text-white">
+        <div className="relative z-20 w-full h-screen flex flex-col items-center pt-4">
             <div className="w-full px-4 mb-2">
                  <div className="bg-white/10 dark:bg-black/20 backdrop-blur-sm rounded-full p-1">
                      <div className="flex justify-around items-center">
