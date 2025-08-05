@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useRef, useEffect, type ReactNode, useState } from 'react';
+import { useRef, useEffect, type ReactNode, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
@@ -13,37 +13,57 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const tiltRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  const [gyroPermission, setGyroPermission] = useState<'granted' | 'denied' | 'prompt'>('prompt');
-
+  const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
+  
   const lightImage = "/images/light_theme_bg.jpg";
   const darkImage = "/images/dark_theme_bg.jpg";
-
-  useEffect(() => {
-    const requestGyroPermission = async () => {
-      if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-        try {
-          const permissionState = await (DeviceOrientationEvent as any).requestPermission();
-          if (permissionState === 'granted') {
-            setGyroPermission('granted');
-          } else {
-            setGyroPermission('denied');
-          }
-        } catch (error) {
-          setGyroPermission('denied');
+  
+  const requestDeviceOrientationPermission = useCallback(async () => {
+    if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
+      try {
+        const permissionState = await (DeviceOrientationEvent as any).requestPermission();
+        if (permissionState === 'granted') {
+          setGyroPermissionGranted(true);
         }
-      } else {
-        // For non-iOS 13+ devices
-        setGyroPermission('granted');
+      } catch (error) {
+        console.error("Permission request for device orientation failed:", error);
       }
-    };
-
-    if (isMobile && gyroPermission === 'prompt') {
-      // Automatically prompt or wait for user interaction
+    } else {
+      // For non-iOS 13+ devices, permission is granted by default
+      setGyroPermissionGranted(true);
     }
-  }, [isMobile, gyroPermission]);
-
+  }, []);
 
   useEffect(() => {
+    // For non-iOS devices, we can try to enable it by default
+    if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
+       setGyroPermissionGranted(true);
+    }
+  }, [isMobile]);
+  
+  useEffect(() => {
+    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+        const element = tiltRef.current;
+        if (!element) return;
+
+        const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
+        
+        const yPos = (beta ? beta - 45 : 0) / 45; // Normalize beta (adjust 45 for neutral position)
+        const xPos = (gamma ?? 0) / 45; // Normalize gamma
+        
+        const horizontalMoveStrength = 60;
+        const verticalMoveStrength = 30;
+
+        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
+    };
+    
+    if (isMobile && isGyroPermissionGranted) {
+        window.addEventListener('deviceorientation', handleDeviceOrientation);
+        return () => {
+            window.removeEventListener('deviceorientation', handleDeviceOrientation);
+        };
+    }
+
     const handleMouseMove = (event: MouseEvent) => {
       if (isMobile) return;
       const { clientX, clientY } = event;
@@ -68,59 +88,27 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       }
     };
     
-    const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
-        if (!isMobile) return;
-        const element = tiltRef.current;
-        if (!element) return;
-
-        const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
-        
-        const yPos = (beta ? beta - 45 : 0) / 45; // Normalize beta (adjust 45 for neutral position)
-        const xPos = (gamma ?? 0) / 45; // Normalize gamma
-        
-        const horizontalMoveStrength = 60;
-        const verticalMoveStrength = 30;
-
-        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
-    };
-
-
-    if (isMobile && gyroPermission === 'granted') {
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
-    } else {
+    if (!isMobile) {
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseleave', handleMouseLeave);
         handleMouseLeave();
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseleave', handleMouseLeave);
+        };
     }
-
-    return () => {
-      if (isMobile) {
-        window.removeEventListener('deviceorientation', handleDeviceOrientation);
-      } else {
-        window.removeEventListener('mousemove', handleMouseMove);
-        window.removeEventListener('mouseleave', handleMouseLeave);
-      }
-    };
-  }, [isMobile, gyroPermission]);
+  }, [isMobile, isGyroPermissionGranted]);
   
   const vignetteStyle = {
     dark: 'inset 0 0 120px 40px hsl(var(--background))',
     light: 'none',
   };
 
-  const handlePermissionRequest = async () => {
-    if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-        const permissionState = await (DeviceOrientationEvent as any).requestPermission();
-        if (permissionState === 'granted') {
-            setGyroPermission('granted');
-        } else {
-            setGyroPermission('denied');
-        }
-    }
-  };
-
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-background">
+    <div 
+      className="relative w-full h-screen overflow-hidden bg-background"
+      onClick={isMobile && !isGyroPermissionGranted ? requestDeviceOrientationPermission : undefined}
+    >
       <div 
         ref={tiltRef} 
         className="absolute inset-[-4%]"
@@ -163,11 +151,10 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         </div>
       </div>
       
-       {isMobile && gyroPermission === 'prompt' && (
-         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/50">
+       {isMobile && !isGyroPermissionGranted && typeof (DeviceOrientationEvent as any).requestPermission === 'function' && (
+         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/50 pointer-events-none">
            <div className="bg-background p-6 rounded-lg text-center">
-              <p className="mb-4">Enable gyroscope for a better experience.</p>
-              <Button onClick={handlePermissionRequest}>Enable Gyroscope</Button>
+              <p className="mb-4">Tap to enable gyroscope for a better experience.</p>
            </div>
          </div>
        )}
@@ -182,7 +169,10 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       <Button 
         variant="outline" 
         size="icon" 
-        onClick={toggleTheme}
+        onClick={(e) => {
+            e.stopPropagation();
+            toggleTheme();
+        }}
         className={cn(
           "absolute z-50",
           isMobile 
