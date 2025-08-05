@@ -701,7 +701,9 @@ const ContactView = () => {
 
 
 export function GlassPanelLayout() {
-  const panelsContainerRef = useRef<HTMLDivElement>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const centerPanelRef = useRef<HTMLDivElement>(null);
+  const rightPanelRef = useRef<HTMLDivElement>(null);
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   
@@ -719,19 +721,23 @@ export function GlassPanelLayout() {
       const { innerWidth, innerHeight } = window;
       const x = (clientX - innerWidth / 2) / (innerWidth / 2);
       const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+
+      const panels = [leftPanelRef.current, centerPanelRef.current, rightPanelRef.current];
       
-      if (panelsContainerRef.current) {
-        panelsContainerRef.current.style.transform = `
-          rotateY(${x * 10}deg)
-          rotateX(${-y * 10}deg)
-        `;
-      }
+      panels.forEach(panel => {
+        if (panel) {
+          panel.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+        }
+      });
     };
     
     const handleMouseLeave = () => {
-      if (panelsContainerRef.current) {
-        panelsContainerRef.current.style.transform = 'rotateY(0deg) rotateX(0deg)';
-      }
+        const panels = [leftPanelRef.current, centerPanelRef.current, rightPanelRef.current];
+        panels.forEach(panel => {
+            if (panel) {
+                panel.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+            }
+        });
     }
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -743,15 +749,6 @@ export function GlassPanelLayout() {
     };
   }, []);
 
-  const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
-    const baseRotation = panel === 'left' ? 25 : -25;
-    
-    return {
-      transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
-      transformOrigin: panel === 'left' ? 'left center' : 'right center',
-      transition: 'transform 0.4s ease-out',
-    };
-  };
 
   const renderContent = () => {
     let content;
@@ -839,13 +836,13 @@ export function GlassPanelLayout() {
     <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
       <div style={{ perspective: '2000px' }}>
         <div 
-          ref={panelsContainerRef}
           className="flex items-center justify-center w-full max-w-[1300px]"
           style={{ transition: 'transform 0.3s ease-out' }}
         >
           <GlassPanel
+            ref={leftPanelRef}
             className="w-[200px] p-4 flex-col hidden md:flex"
-            style={getPanelStyle('left')}
+            style={{transition: 'transform 0.3s ease-out'}}
           >
             <div className="space-y-1">
               {navItems.map(item => (
@@ -861,9 +858,11 @@ export function GlassPanelLayout() {
           </GlassPanel>
           
           <GlassPanel 
+              ref={centerPanelRef}
               className={cn(
-                  "w-[600px] h-[480px] transition-all duration-300"
+                  "w-[600px] h-[480px] transition-all duration-300 mx-[5rem]"
               )} 
+              style={{transition: 'transform 0.3s ease-out'}}
               isContentPanel={true} 
               activeView={activeView}
           >
@@ -871,8 +870,9 @@ export function GlassPanelLayout() {
           </GlassPanel>
           
           <GlassPanel
+            ref={rightPanelRef}
             className="w-[300px] h-[480px] p-6 flex-col hidden md:flex"
-            style={getPanelStyle('right')}
+            style={{transition: 'transform 0.3s ease-out'}}
           >
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
