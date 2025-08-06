@@ -34,6 +34,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // For non-iOS 13+ devices, permission is not required
     if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
        setGyroPermissionGranted(true);
     }
@@ -46,6 +47,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
 
         const { beta, gamma } = event; 
         
+        // Normalize beta/gamma to a range (e.g., -1 to 1)
+        // Center point for beta is often around 90 (upright) or 45 depending on hold
         const yPos = (beta ? beta - 45 : 0) / 45; 
         const xPos = (gamma ?? 0) / 45; 
         
@@ -64,6 +67,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         };
     }
 
+    // Fallback to mouse movement for desktop
     const handleMouseMove = (event: MouseEvent) => {
       const { clientX, clientY } = event;
       const element = tiltRef.current;
@@ -88,7 +92,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
-    handleMouseLeave();
+    handleMouseLeave(); // Initial state
     return () => {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseleave', handleMouseLeave);
@@ -148,7 +152,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       </div>
       
        {isMobile && !isGyroPermissionGranted && typeof (DeviceOrientationEvent as any).requestPermission === 'function' && (
-         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/50 pointer-events-none">
+         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/50 pointer-events-auto">
            <div className="bg-background p-6 rounded-lg text-center">
               <p className="mb-4">Tap to enable gyroscope for a better experience.</p>
            </div>
@@ -172,7 +176,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className={cn(
           "absolute z-50",
           isMobile 
-            ? "top-16 right-4" 
+            ? "top-20 right-4" 
             : "top-4 right-4"
         )}
       >
