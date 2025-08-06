@@ -643,6 +643,33 @@ const CareerTimeline = () => {
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-black dark:text-white"
       : "h-full flex flex-col p-4";
+
+    if (isMobile) {
+        return (
+            <div className={containerClasses}>
+                <h2 className="text-2xl font-bold mb-4 shrink-0 text-black dark:text-white">Where I’ve Been, What I’ve Done</h2>
+                <div className="flex-grow min-h-0">
+                    <ScrollArea className="h-full pr-4">
+                        <div className="flex flex-col gap-y-4">
+                            {careerTimelineData.map((item, index) => (
+                                <div key={index} className="bg-white/80 dark:bg-black/70 p-4 rounded-lg shadow-md w-full">
+                                    <div className="flex justify-between items-start">
+                                        <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
+                                        <p className="font-bold text-xs text-black dark:text-white text-right shrink-0 ml-4">{item.period}</p>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground mt-1">
+                                        {item.company} 
+                                        {item.grade && ` | ${item.grade}`}
+                                    </p>
+                                    <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">{item.description}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </ScrollArea>
+                </div>
+            </div>
+        )
+    }
       
     return (
         <div className={containerClasses}>
@@ -946,7 +973,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const renderContent = () => {
     let content;
     const containerClasses = isMobile
-        ? "h-full w-full overflow-y-auto pt-4"
+        ? "h-full w-full overflow-y-auto pt-16 px-4"
         : "h-full";
     switch (activeView) {
       case 'Home':
@@ -957,20 +984,28 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         break;
       case 'Personal':
         content = (
-          <div className="h-full flex flex-col p-4">
+          <div className="h-full flex flex-col p-4 gap-4">
             <div
               className={cn(
                 "p-4 flex flex-col",
-                isMobile
-                  ? "bg-white/10 dark:bg-black/20 rounded-[20px] flex-grow-0"
+                 isMobile
+                  ? "bg-white/10 dark:bg-black/20 rounded-[20px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
-              <h3 className={cn("font-semibold text-lg mb-2 shrink-0", isMobile && "text-white")}>Who Am I ?</h3>
-              <div className="relative flex-grow">
+              <div className="flex justify-between items-center mb-2 shrink-0">
+                  <h3 className={cn("font-semibold text-lg", isMobile ? "text-black dark:text-white" : "")}>Who Am I ?</h3>
+                   {isMobile && (
+                     <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
+                       <Download className="w-3 h-3" />
+                       <span>Resume</span>
+                     </a>
+                   )}
+              </div>
+              <div className={cn("relative", !isMobile && "flex-grow")}>
                 <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
                   <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
-                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-white" : "text-neutral-800 dark:text-neutral-100")}>
+                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-black dark:text-white" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics.
                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence.
@@ -989,7 +1024,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className="flex flex-col mt-4 animate-expand-x" style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile && "text-white")}>Tools and Technologies</h3>
+              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-black dark:text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                   <div className="flex shrink-0 gap-4">
@@ -1037,7 +1072,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   
   if (isMobile) {
       return (
-          <div className="relative z-20 w-full h-screen flex flex-col items-center justify-start pt-16">
+          <div className="relative z-20 w-full h-screen flex flex-col items-center justify-start">
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
               <div ref={panelsContainerRef} className="w-full h-full overflow-y-auto" style={{ transition: 'transform 0.1s ease-out' }}>
                 {renderContent()}
@@ -1115,5 +1150,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-
-    
