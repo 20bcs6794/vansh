@@ -176,7 +176,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className={cn(
           "absolute z-50",
           isMobile 
-            ? "top-20 right-4" 
+            ? "top-16 right-4" 
             : "top-4 right-4"
         )}
       >
