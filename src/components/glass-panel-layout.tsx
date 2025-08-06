@@ -63,9 +63,9 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-4 h-full w-full p-4">
+            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start">
+                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20">
                     <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -96,8 +96,8 @@ const BentoHomeGrid = () => {
                     </div>
                     <div className="flex flex-col">
                         <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-muted-foreground mt-2 text-sm">
+                        <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <div className="flex items-center text-neutral-800 dark:text-neutral-200 mt-2 text-sm">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
@@ -106,18 +106,18 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center">
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20">
                          <h3 className="text-3xl font-bold">09+</h3>
-                         <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                         <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
-                                     <ChevronRight className="w-6 h-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-2" />
+                                     <ChevronRight className="w-6 h-6 text-neutral-800 dark:text-neutral-200 transition-transform duration-300 group-hover:translate-x-2" />
                                 </div>
                             </div>
                         </BentoCard>
@@ -125,7 +125,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center">
+                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20">
                     <h3 className="font-bold text-base mb-4 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -148,19 +148,19 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
                             <LinkedInIcon className="w-8 h-8" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
                             <WhatsAppIcon className="w-8 h-8"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
                             <GmailIcon className="w-8 h-8"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
@@ -307,6 +307,7 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
 };
 
 const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string | null) => void }) => {
+    const isMobile = useIsMobile();
     const projectsData = [
       {
         id: 1,
@@ -409,18 +410,22 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
       },
     ].map((p, i) => ({ ...p, animation: 'animate-expand-y', delay: `${i * 0.1}s` }));
 
+    const containerClasses = isMobile
+      ? "h-full flex flex-col p-4 text-black dark:text-white"
+      : "h-full flex flex-col p-4";
+
     return (
-        <div className="h-full flex flex-col p-4">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0 animate-expand-x">My Works</h2>
+        <div className={containerClasses}>
+            <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x">My Works</h2>
             <div className="flex-grow min-h-0 relative">
                 <ScrollArea className="absolute inset-0 h-full w-full">
-                    <div className="grid grid-cols-4 auto-rows-fr gap-4 p-1">
+                    <div className={cn("gap-4 p-1", isMobile ? "grid grid-cols-1" : "grid grid-cols-4 auto-rows-fr")}>
                         {projectsData.map(project => (
                             <div
                                 key={project.id}
                                 className={cn(
                                     project.animation,
-                                    `col-span-4 md:${project.colSpan} ${project.rowSpan}`
+                                    isMobile ? "col-span-1" : `md:${project.colSpan} ${project.rowSpan}`
                                 )}
                                 style={{ animationDelay: project.delay }}
                             >
@@ -633,9 +638,15 @@ const careerTimelineData = [
 ];
 
 const CareerTimeline = () => {
+    const isMobile = useIsMobile();
+
+    const containerClasses = isMobile
+      ? "h-full flex flex-col p-4 text-black dark:text-white"
+      : "h-full flex flex-col p-4";
+      
     return (
-        <div className="h-full flex flex-col p-4">
-            <h2 className="text-2xl font-bold text-black dark:text-white mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
+        <div className={containerClasses}>
+            <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
             <div className="flex-grow min-h-0">
                 <ScrollArea className="h-full pr-4">
                     <div className="relative flex flex-col gap-y-10">
@@ -815,7 +826,7 @@ const ContactView = () => {
 };
 
 const MobileNav = ({ activeView, setActiveView, navItems }: { activeView: string, setActiveView: (view: string) => void, navItems: any[] }) => {
-    const { theme, toggleTheme } = useTheme();
+    const { toggleTheme } = useTheme();
     return (
         <div className="fixed top-0 left-0 right-0 z-30 bg-black/30 backdrop-blur-sm p-2">
             <div className="flex justify-around items-center">
@@ -934,6 +945,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
   const renderContent = () => {
     let content;
+    const containerClasses = isMobile
+        ? "h-full w-full overflow-y-auto px-4 pt-4"
+        : "h-full";
     switch (activeView) {
       case 'Home':
         content = <BentoHomeGrid />;
@@ -943,13 +957,13 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         break;
       case 'Personal':
         content = (
-            <div className="h-full flex flex-col p-4">
-                <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 flex flex-col flex-grow min-h-0 animate-expand-y" style={{ animationDelay: '0s' }}>
-                    <h3 className="font-semibold text-black dark:text-white text-lg mb-2 shrink-0">Who Am I ?</h3>
+            <div className="h-full flex flex-col p-4 text-black dark:text-white">
+                <div className={cn("bg-white/10 dark:bg-black/20 rounded-[20px] p-4 flex flex-col", isMobile ? "flex-grow-0" : "flex-grow min-h-0")}>
+                    <h3 className="font-semibold text-lg mb-2 shrink-0">Who Am I ?</h3>
                     <div className="relative flex-grow">
-                        <div className="absolute inset-0">
-                            <ScrollArea className="h-full pr-4">
-                                <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm">
+                        <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
+                             <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
+                                <div className="text-neutral-800 dark:text-neutral-100 space-y-3 text-sm pr-2">
                                     <p>
                                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
                                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
@@ -968,7 +982,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                     </div>
                 </div>
                 <div className="flex flex-col mt-4 animate-expand-x" style={{ animationDelay: '0.1s' }}>
-                    <h3 className="text-xl font-bold text-black dark:text-white text-left shrink-0 mb-2">Tools and Technologies</h3>
+                    <h3 className="text-xl font-bold text-left shrink-0 mb-2">Tools and Technologies</h3>
                      <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                         <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                             <div className="flex shrink-0 gap-4">
@@ -997,7 +1011,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         content = null;
     }
     return (
-      <div key={activeView} className="h-full">
+      <div key={activeView} className={containerClasses}>
         {content}
       </div>
     );
