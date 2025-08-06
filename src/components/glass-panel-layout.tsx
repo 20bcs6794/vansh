@@ -996,7 +996,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-semibold text-lg", isMobile ? "text-black dark:text-white" : "")}>Who Am I ?</h3>
                    {isMobile && (
-                     <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
+                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
                        <Download className="w-3 h-3" />
                        <span>Resume</span>
                      </a>
@@ -1129,7 +1129,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
                 <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
                     <span>Resume</span>
                   </a>
@@ -1154,5 +1154,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-
-    
