@@ -1,19 +1,21 @@
 
 "use client";
 
-import { useRef, useEffect, type ReactNode, useState, useCallback } from 'react';
+import React, { useRef, useEffect, type ReactNode, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+import { GlassPanelLayout } from '@/components/glass-panel-layout';
 
 export function ImmersiveView({ children }: { children?: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
   const tiltRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
+  const [orientation, setOrientation] = useState<{ beta: number | null, gamma: number | null }>({ beta: null, gamma: null });
   
   const lightImage = "/images/light_theme_bg.jpg";
   const darkImage = "/images/dark_theme_bg.jpg";
@@ -34,7 +36,6 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    // For non-iOS 13+ devices, permission is not required
     if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
        setGyroPermissionGranted(true);
     }
@@ -42,13 +43,12 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   
   useEffect(() => {
     const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+        setOrientation({ beta: event.beta, gamma: event.gamma });
         const element = tiltRef.current;
         if (!element) return;
 
         const { beta, gamma } = event; 
         
-        // Normalize beta/gamma to a range (e.g., -1 to 1)
-        // Center point for beta is often around 90 (upright) or 45 depending on hold
         const yPos = (beta ? beta - 45 : 0) / 45; 
         const xPos = (gamma ?? 0) / 45; 
         
@@ -92,7 +92,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
-    handleMouseLeave(); // Initial state
+    handleMouseLeave(); 
     return () => {
         window.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener('mouseleave', handleMouseLeave);
@@ -103,6 +103,13 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     dark: 'inset 0 0 120px 40px hsl(var(--background))',
     light: 'none',
   };
+
+  const childrenWithProps = React.Children.map(children, child => {
+    if (React.isValidElement(child) && child.type === GlassPanelLayout) {
+      return React.cloneElement(child as React.ReactElement<any>, { orientation });
+    }
+    return child;
+  });
 
   return (
     <div 
@@ -159,7 +166,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
          </div>
        )}
       
-      {children}
+      {childrenWithProps}
       
       <div 
         className="absolute inset-0 z-10 pointer-events-none"
