@@ -55,7 +55,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const horizontalMoveStrength = 60;
         const verticalMoveStrength = 30;
 
-        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
+        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
     };
     
     if (isMobile) {
@@ -118,7 +118,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     >
       <div 
         ref={tiltRef} 
-        className="absolute inset-[-4%]"
+        className="absolute inset-[-10%]"
         style={{ 
           transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
           transform: 'scale(1.3)',
@@ -173,24 +173,21 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         style={{ boxShadow: theme === 'dark' ? vignetteStyle.dark : vignetteStyle.light }}
       />
       
-      <Button 
-        variant="outline" 
-        size="icon" 
-        onClick={(e) => {
-            e.stopPropagation();
-            toggleTheme();
-        }}
-        className={cn(
-          "absolute z-50",
-          isMobile 
-            ? "top-16 right-4" 
-            : "top-4 right-4"
-        )}
-      >
-        <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-        <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-        <span className="sr-only">Toggle theme</span>
-      </Button>
+      {!isMobile && (
+        <Button 
+          variant="outline" 
+          size="icon" 
+          onClick={(e) => {
+              e.stopPropagation();
+              toggleTheme();
+          }}
+          className="absolute z-50 top-4 right-4"
+        >
+          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      )}
     </div>
   );
 }
