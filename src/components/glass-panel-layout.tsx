@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -49,8 +48,8 @@ const BentoHomeGrid = () => {
     const { theme } = useTheme();
     const isMobile = useIsMobile();
 
-    const lightImage = "/images/dark_theme_user.jpg";
-    const darkImage = "/images/light_theme_user.jpg";
+    const lightImage = "/images/light_theme_user.jpg";
+    const darkImage = "/images/dark_theme_user.jpg";
     const certificatesLink = "https://drive.google.com/uc?export=view&id=1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX";
 
     const handleCopyEmail = () => {
@@ -855,7 +854,7 @@ const ContactView = () => {
 const MobileNav = ({ activeView, setActiveView, navItems }: { activeView: string, setActiveView: (view: string) => void, navItems: any[] }) => {
     const { toggleTheme } = useTheme();
     return (
-        <div className="fixed top-0 left-0 right-0 z-30 bg-black/30 backdrop-blur-sm p-2">
+        <div className="fixed top-0 left-0 right-0 z-30 bg-black/30 backdrop-blur-sm p-2 m-2 rounded-lg">
             <div className="flex justify-around items-center">
                 {navItems.map(item => (
                     <button
@@ -974,7 +973,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const renderContent = () => {
     let content;
     const containerClasses = isMobile
-        ? "h-full w-full overflow-y-auto pt-16 px-4"
+        ? "h-full w-full overflow-y-auto pt-20 px-4"
         : "h-full";
     switch (activeView) {
       case 'Home':
@@ -997,7 +996,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-semibold text-lg", isMobile ? "text-black dark:text-white" : "")}>Who Am I ?</h3>
                    {isMobile && (
-                     <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
+                     <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
                        <Download className="w-3 h-3" />
                        <span>Resume</span>
                      </a>
@@ -1130,7 +1129,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
                 <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                  <a href="https://drive.google.com/file/d/1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                  <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                     <Download className="w-4 h-4" />
                     <span>Resume</span>
                   </a>
@@ -1155,3 +1154,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+
+    
