@@ -84,6 +84,25 @@ const BentoHomeGrid = ({ isMobile = false }) => {
                     </div>
                 </BentoCard>
 
+                <div className="grid grid-cols-2 gap-4">
+                    <a href="#/projects" className="group">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
+                             <h3 className="text-3xl font-bold">09+</h3>
+                             <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                        </BentoCard>
+                     </a>
+                    <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
+                            <div className="text-center">
+                                <h3 className="font-bold text-base">My Certificates</h3>
+                                <div className="flex justify-center items-center mt-2">
+                                     <ChevronRight className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
+                                </div>
+                            </div>
+                        </BentoCard>
+                    </a>
+                </div>
+                
                 <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20">
                     <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
                     <Button 
@@ -103,24 +122,6 @@ const BentoHomeGrid = ({ isMobile = false }) => {
                         )}
                     </Button>
                 </BentoCard>
-
-                 <a href="#/projects" className="group">
-                    <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
-                         <h3 className="text-5xl font-bold">09+</h3>
-                         <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
-                    </BentoCard>
-                 </a>
-
-                <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group">
-                    <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
-                        <div className="text-center">
-                            <h3 className="font-bold text-lg">My Certificates</h3>
-                            <div className="flex justify-center items-center mt-2">
-                                 <ChevronRight className="w-6 h-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-2" />
-                            </div>
-                        </div>
-                    </BentoCard>
-                </a>
                 
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
@@ -887,7 +888,7 @@ export function GlassPanelLayout() {
                     <div className="relative flex-grow">
                         <div className="absolute inset-0">
                             <ScrollArea className="h-full pr-4">
-                                <div className="space-y-3 text-sm">
+                                <div className="space-y-3 text-sm text-black dark:text-white">
                                     <p>
                                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics. 
                                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence. 
