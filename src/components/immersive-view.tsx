@@ -36,12 +36,14 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (isMobile === undefined) return;
     if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
        setGyroPermissionGranted(true);
     }
   }, [isMobile]);
   
   useEffect(() => {
+    if (isMobile === undefined) return;
     const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
         setOrientation({ beta: event.beta, gamma: event.gamma });
         const element = tiltRef.current;
@@ -111,6 +113,10 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     return child;
   });
 
+  if (isMobile === undefined) {
+    return null; // Render nothing on server or until hook is ready
+  }
+
   return (
     <div 
       className="relative w-full h-screen overflow-hidden bg-background"
@@ -118,7 +124,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     >
       <div 
         ref={tiltRef} 
-        className="absolute inset-[-10%]"
+        className="absolute inset-[-15%]"
         style={{ 
           transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
           transform: 'scale(1.3)',

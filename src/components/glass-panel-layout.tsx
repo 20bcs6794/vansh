@@ -65,7 +65,7 @@ const BentoHomeGrid = () => {
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20">
+                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                     <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -106,14 +106,14 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20">
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                          <h3 className="text-3xl font-bold">09+</h3>
                          <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -125,7 +125,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20">
+                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                     <h3 className="font-bold text-base mb-4 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -148,19 +148,19 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                             <LinkedInIcon className="w-8 h-8" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                             <WhatsAppIcon className="w-8 h-8"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
                             <GmailIcon className="w-8 h-8"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
@@ -652,7 +652,7 @@ const CareerTimeline = () => {
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className="bg-white/80 dark:bg-black/70 p-4 rounded-lg shadow-md w-full">
+                                <div key={index} className="bg-white/80 dark:bg-black/70 backdrop-blur-sm p-4 rounded-lg shadow-md w-full">
                                     <div className="flex justify-between items-start">
                                         <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
                                         <p className="font-bold text-xs text-black dark:text-white text-right shrink-0 ml-4">{item.period}</p>
@@ -911,6 +911,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   ];
 
   useEffect(() => {
+    if (isMobile === undefined) return;
     if (isMobile) {
         const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
         const yPos = (beta ? beta - 45 : 0) / 45;
@@ -989,7 +990,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-white/10 dark:bg-black/20 rounded-[20px]"
+                  ? "bg-white/10 dark:bg-black/20 rounded-[20px] backdrop-blur-sm"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
@@ -1070,6 +1071,10 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       </div>
   );
   
+  if (isMobile === undefined) {
+    return null; // Don't render anything on the server or until the hook is ready
+  }
+
   if (isMobile) {
       return (
           <div className="relative z-20 w-full h-screen flex flex-col items-center justify-start">
