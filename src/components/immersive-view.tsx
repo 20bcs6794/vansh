@@ -29,13 +29,11 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         console.error("Permission request for device orientation failed:", error);
       }
     } else {
-      // For non-iOS 13+ devices, permission is granted by default
       setGyroPermissionGranted(true);
     }
   }, []);
 
   useEffect(() => {
-    // For non-iOS devices, we can try to enable it by default
     if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
        setGyroPermissionGranted(true);
     }
@@ -46,10 +44,10 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const element = tiltRef.current;
         if (!element) return;
 
-        const { beta, gamma } = event; // beta: front-back tilt, gamma: left-right tilt
+        const { beta, gamma } = event; 
         
-        const yPos = (beta ? beta - 45 : 0) / 45; // Normalize beta (adjust 45 for neutral position)
-        const xPos = (gamma ?? 0) / 45; // Normalize gamma
+        const yPos = (beta ? beta - 45 : 0) / 45; 
+        const xPos = (gamma ?? 0) / 45; 
         
         const horizontalMoveStrength = 60;
         const verticalMoveStrength = 30;
@@ -57,15 +55,16 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
     };
     
-    if (isMobile && isGyroPermissionGranted) {
-        window.addEventListener('deviceorientation', handleDeviceOrientation);
+    if (isMobile) {
+        if(isGyroPermissionGranted) {
+            window.addEventListener('deviceorientation', handleDeviceOrientation);
+        }
         return () => {
             window.removeEventListener('deviceorientation', handleDeviceOrientation);
         };
     }
 
     const handleMouseMove = (event: MouseEvent) => {
-      if (isMobile) return;
       const { clientX, clientY } = event;
       const element = tiltRef.current;
       if (!element) return;
@@ -81,22 +80,19 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     };
 
     const handleMouseLeave = () => {
-       if (isMobile) return;
       const element = tiltRef.current;
       if (element) {
         element.style.transform = 'translate3d(0, 0, 0) scale(1.1)';
       }
     };
     
-    if (!isMobile) {
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseleave', handleMouseLeave);
-        handleMouseLeave();
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    handleMouseLeave();
+    return () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, [isMobile, isGyroPermissionGranted]);
   
   const vignetteStyle = {
