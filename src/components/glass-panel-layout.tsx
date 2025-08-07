@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { sendEmail } from '@/ai/flows/send-email-flow';
 import { type SendEmailInput } from '@/ai/schemas/send-email';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
@@ -893,7 +894,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   const isMobile = useIsMobile();
-  const touchStartX = useRef(0);
+  const [swipeDirection, setSwipeDirection] = useState(0);
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -914,29 +915,15 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     const currentIndex = mobileNavItems.findIndex(item => item.label === activeView);
     let nextIndex;
     if (direction === 'left') {
+        setSwipeDirection(1);
         nextIndex = (currentIndex + 1) % mobileNavItems.length;
     } else {
+        setSwipeDirection(-1);
         nextIndex = (currentIndex - 1 + mobileNavItems.length) % mobileNavItems.length;
     }
     setActiveView(mobileNavItems[nextIndex].label);
   };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEndX = e.changedTouches[0].clientX;
-    const deltaX = touchEndX - touchStartX.current;
-    if (Math.abs(deltaX) > 50) { // Swipe threshold
-        if (deltaX < 0) {
-            handleSwipe('left');
-        } else {
-            handleSwipe('right');
-        }
-    }
-  };
-
+  
   useEffect(() => {
     if (isMobile === undefined) return;
     if (isMobile) {
@@ -996,6 +983,23 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
       transition: 'transform 0.4s ease-out',
     };
+  };
+
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
   };
 
   const renderContent = () => {
@@ -1081,9 +1085,36 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         content = null;
     }
     return (
-      <div key={activeView} className={containerClasses}>
-        {content}
-      </div>
+       <AnimatePresence initial={false} custom={swipeDirection}>
+        <motion.div
+          key={activeView}
+          className={containerClasses}
+          custom={swipeDirection}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={1}
+          onDragEnd={(e, { offset, velocity }) => {
+            const swipe = Math.abs(offset.x);
+            if (swipe > 50) {
+              if (offset.x < 0) {
+                handleSwipe('left');
+              } else {
+                handleSwipe('right');
+              }
+            }
+          }}
+        >
+          {content}
+        </motion.div>
+      </AnimatePresence>
     );
   }
 
@@ -1105,12 +1136,10 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   if (isMobile) {
       return (
           <div 
-              className="relative z-20 w-full h-screen flex flex-col items-center justify-start"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+              className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
           >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
-              <div ref={panelsContainerRef} className="w-full h-full overflow-y-auto" style={{ transition: 'transform 0.2s ease-out' }}>
+              <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.2s ease-out' }}>
                 {renderContent()}
               </div>
           </div>
