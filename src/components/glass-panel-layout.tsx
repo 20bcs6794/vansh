@@ -65,7 +65,7 @@ const BentoHomeGrid = () => {
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
                 <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                    <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
+                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-4">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -893,7 +893,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   const isMobile = useIsMobile();
-  
+  const touchStartX = useRef(0);
+
   const navItems = [
     { icon: HomeIcon, label: "Home" },
     { icon: Heart, label: "Projects" },
@@ -908,6 +909,33 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     { icon: Briefcase, label: "Career" },
     { icon: Heart, label: "Projects" }
   ];
+
+  const handleSwipe = (direction: 'left' | 'right') => {
+    const currentIndex = mobileNavItems.findIndex(item => item.label === activeView);
+    let nextIndex;
+    if (direction === 'left') {
+        nextIndex = (currentIndex + 1) % mobileNavItems.length;
+    } else {
+        nextIndex = (currentIndex - 1 + mobileNavItems.length) % mobileNavItems.length;
+    }
+    setActiveView(mobileNavItems[nextIndex].label);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const deltaX = touchEndX - touchStartX.current;
+    if (Math.abs(deltaX) > 50) { // Swipe threshold
+        if (deltaX < 0) {
+            handleSwipe('left');
+        } else {
+            handleSwipe('right');
+        }
+    }
+  };
 
   useEffect(() => {
     if (isMobile === undefined) return;
@@ -1076,7 +1104,11 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
   if (isMobile) {
       return (
-          <div className="relative z-20 w-full h-screen flex flex-col items-center justify-start">
+          <div 
+              className="relative z-20 w-full h-screen flex flex-col items-center justify-start"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+          >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
               <div ref={panelsContainerRef} className="w-full h-full overflow-y-auto" style={{ transition: 'transform 0.2s ease-out' }}>
                 {renderContent()}
