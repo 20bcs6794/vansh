@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { sendEmail } from '@/ai/flows/send-email-flow';
 import { type SendEmailInput } from '@/ai/schemas/send-email';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { motion, AnimatePresence } from 'framer-motion';
 
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
@@ -894,7 +893,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const [activeView, setActiveView] = useState('Home');
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   const isMobile = useIsMobile();
-  const [swipeDirection, setSwipeDirection] = useState(0);
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -910,19 +908,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     { icon: Briefcase, label: "Career" },
     { icon: Heart, label: "Projects" }
   ];
-
-  const handleSwipe = (direction: 'left' | 'right') => {
-    const currentIndex = mobileNavItems.findIndex(item => item.label === activeView);
-    let nextIndex;
-    if (direction === 'left') {
-        setSwipeDirection(1);
-        nextIndex = (currentIndex + 1) % mobileNavItems.length;
-    } else {
-        setSwipeDirection(-1);
-        nextIndex = (currentIndex - 1 + mobileNavItems.length) % mobileNavItems.length;
-    }
-    setActiveView(mobileNavItems[nextIndex].label);
-  };
   
   useEffect(() => {
     if (isMobile === undefined) return;
@@ -983,23 +968,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
       transition: 'transform 0.4s ease-out',
     };
-  };
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? '100%' : '-100%',
-      opacity: 0,
-    }),
   };
 
   const renderContent = () => {
@@ -1084,38 +1052,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       default:
         content = null;
     }
-    return (
-       <AnimatePresence initial={false} custom={swipeDirection}>
-        <motion.div
-          key={activeView}
-          className={containerClasses}
-          custom={swipeDirection}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 }
-          }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            const swipe = Math.abs(offset.x);
-            if (swipe > 50) {
-              if (offset.x < 0) {
-                handleSwipe('left');
-              } else {
-                handleSwipe('right');
-              }
-            }
-          }}
-        >
-          {content}
-        </motion.div>
-      </AnimatePresence>
-    );
+    return <div className={containerClasses}>{content}</div>;
   }
 
   const isScrollDisabled = activeView === 'Contact' || activeView === 'Career'
