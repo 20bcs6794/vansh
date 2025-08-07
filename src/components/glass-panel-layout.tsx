@@ -64,8 +64,8 @@ const BentoHomeGrid = () => {
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-4">
+                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                    <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -94,10 +94,10 @@ const BentoHomeGrid = () => {
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-neutral-800 dark:text-neutral-200 mt-2 text-sm">
-                            <MapPin className="w-4 h-4 mr-2" />
+                        <h2 className="text-md font-bold">Hi, I'm Vanshdeep —</h2>
+                        <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-xs">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <div className="flex items-center text-neutral-800 dark:text-neutral-200 mt-2 text-xs">
+                            <MapPin className="w-3 h-3 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
                     </div>
@@ -105,18 +105,18 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                         <h3 className="text-3xl font-bold">09+</h3>
-                         <p className="text-neutral-800 dark:text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                         <h3 className="text-2xl font-bold">09+</h3>
+                         <p className="text-neutral-800 dark:text-neutral-200 text-[10px] uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-sm">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
                             <div className="text-center">
-                                <h3 className="font-bold text-base">My Certificates</h3>
+                                <h3 className="font-bold text-sm">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
-                                     <ChevronRight className="w-6 h-6 text-neutral-800 dark:text-neutral-200 transition-transform duration-300 group-hover:translate-x-2" />
+                                     <ChevronRight className="w-5 h-5 text-neutral-800 dark:text-neutral-200 transition-transform duration-300 group-hover:translate-x-1" />
                                 </div>
                             </div>
                         </BentoCard>
@@ -124,18 +124,18 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                    <h3 className="font-bold text-base mb-4 text-center">Have a project in mind?</h3>
+                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                    <h3 className="font-bold text-sm mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
                         className={cn(
-                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors", 
+                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors text-xs h-8", 
                             isCopied && "bg-green-600 hover:bg-green-700"
                         )}
                     >
                         {isCopied ? (
                             <span className="flex items-center justify-center">
-                                <Check className="w-4 h-4 mr-2" />
+                                <Check className="w-3 h-3 mr-2" />
                                 Copied!
                             </span>
                         ) : (
@@ -147,21 +147,21 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                            <LinkedInIcon className="w-8 h-8" />
-                            <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                            <LinkedInIcon className="w-6 h-6" />
+                            <p className="font-bold mt-1 text-[10px] text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                            <WhatsAppIcon className="w-8 h-8"/>
-                            <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                            <WhatsAppIcon className="w-6 h-6"/>
+                            <p className="font-bold mt-1 text-[10px] text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm">
-                            <GmailIcon className="w-8 h-8"/>
-                            <p className="font-bold mt-1 text-xs text-center">Gmail</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                            <GmailIcon className="w-6 h-6"/>
+                            <p className="font-bold mt-1 text-[10px] text-center">Gmail</p>
                         </BentoCard>
                     </a>
                 </div>
