@@ -5,17 +5,21 @@ import React, { useRef, useEffect, type ReactNode, useState, useCallback } from 
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, Code, Database, BrainCircuit, Bot } from 'lucide-react';
+import { Moon, Sun, Code, Database, BrainCircuit, Bot, Atom, Cog, GitBranch, Terminal } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { GlassPanelLayout } from '@/components/glass-panel-layout';
 
 const FloatingIcons = ({ orientation }: { orientation: { beta: number | null, gamma: number | null } }) => {
     const icons = [
-        { id: 'code', icon: Code, initialPos: { top: '20%', left: '10%' }, speed: { x: 0.5, y: 0.3 } },
-        { id: 'db', icon: Database, initialPos: { top: '80%', left: '20%' }, speed: { x: -0.4, y: -0.6 } },
-        { id: 'brain', icon: BrainCircuit, initialPos: { top: '15%', left: '80%' }, speed: { x: -0.6, y: 0.4 } },
-        { id: 'bot', icon: Bot, initialPos: { top: '70%', left: '90%' }, speed: { x: 0.3, y: -0.5 } },
+        { id: 'code', icon: Code, initialPos: { top: '20%', left: '10%' }, speed: { x: 0.1, y: 0.08 } },
+        { id: 'db', icon: Database, initialPos: { top: '80%', left: '20%' }, speed: { x: -0.08, y: -0.12 } },
+        { id: 'brain', icon: BrainCircuit, initialPos: { top: '15%', left: '80%' }, speed: { x: -0.12, y: 0.08 } },
+        { id: 'bot', icon: Bot, initialPos: { top: '70%', left: '90%' }, speed: { x: 0.06, y: -0.1 } },
+        { id: 'atom', icon: Atom, initialPos: { top: '50%', left: '50%' }, speed: { x: 0.15, y: -0.15 } },
+        { id: 'cog', icon: Cog, initialPos: { top: '90%', left: '60%' }, speed: { x: -0.1, y: -0.05 } },
+        { id: 'git', icon: GitBranch, initialPos: { top: '40%', left: '5%' }, speed: { x: 0.08, y: 0.12 } },
+        { id: 'terminal', icon: Terminal, initialPos: { top: '5%', left: '40%' }, speed: { x: 0.05, y: -0.1 } },
     ];
 
     const [positions, setPositions] = useState(icons.map(i => ({...i.initialPos})));
@@ -30,8 +34,8 @@ const FloatingIcons = ({ orientation }: { orientation: { beta: number | null, ga
                 const gyroX = (gamma ?? 0) / 45;
                 const gyroY = (beta ? beta - 45 : 0) / 45;
 
-                let newX = parseFloat(pos.left) + icon.speed.x + gyroX * 0.5;
-                let newY = parseFloat(pos.top) + icon.speed.y + gyroY * 0.5;
+                let newX = parseFloat(pos.left) + icon.speed.x + gyroX * 1.5;
+                let newY = parseFloat(pos.top) + icon.speed.y + gyroY * 1.5;
 
                 if (newX > 100 || newX < 0) icon.speed.x *= -1;
                 if (newY > 100 || newY < 0) icon.speed.y *= -1;
@@ -118,8 +122,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const yPos = (beta ? beta - 45 : 0) / 45; 
         const xPos = (gamma ?? 0) / 45; 
         
-        const horizontalMoveStrength = 80;
-        const verticalMoveStrength = 60;
+        const horizontalMoveStrength = 100;
+        const verticalMoveStrength = 80;
 
         element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
     };

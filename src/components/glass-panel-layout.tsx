@@ -50,7 +50,7 @@ const BentoHomeGrid = () => {
 
     const lightImage = "/images/light_theme_user.jpg";
     const darkImage = "/images/dark_theme_user.jpg";
-    const certificatesLink = "https://drive.google.com/uc?export=view&id=1JdGrWi9uYqEd4LDoCwGS9tesLgxQHWFX";
+    const certificatesLink = "/document/resume.pdf";
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('mr.vanshverma2001@gmail.com');
@@ -922,8 +922,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         if (panelsContainerRef.current) {
             panelsContainerRef.current.style.transform = `
                 perspective(1000px)
-                rotateY(${xPos * 5}deg)
-                rotateX(${-yPos * 5}deg)
+                rotateY(${xPos * 7}deg)
+                rotateX(${-yPos * 7}deg)
                 translateX(${-xPos * horizontalMoveStrength}px)
                 translateY(${-yPos * verticalMoveStrength}px)
             `;
@@ -1078,7 +1078,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       return (
           <div className="relative z-20 w-full h-screen flex flex-col items-center justify-start">
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
-              <div ref={panelsContainerRef} className="w-full h-full overflow-y-auto" style={{ transition: 'transform 0.1s ease-out' }}>
+              <div ref={panelsContainerRef} className="w-full h-full overflow-y-auto" style={{ transition: 'transform 0.2s ease-out' }}>
                 {renderContent()}
               </div>
           </div>
