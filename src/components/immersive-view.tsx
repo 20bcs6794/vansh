@@ -5,10 +5,74 @@ import React, { useRef, useEffect, type ReactNode, useState, useCallback } from 
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, Code, Database, BrainCircuit, Bot } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { GlassPanelLayout } from '@/components/glass-panel-layout';
+
+const FloatingIcons = ({ orientation }: { orientation: { beta: number | null, gamma: number | null } }) => {
+    const icons = [
+        { id: 'code', icon: Code, initialPos: { top: '20%', left: '10%' }, speed: { x: 0.5, y: 0.3 } },
+        { id: 'db', icon: Database, initialPos: { top: '80%', left: '20%' }, speed: { x: -0.4, y: -0.6 } },
+        { id: 'brain', icon: BrainCircuit, initialPos: { top: '15%', left: '80%' }, speed: { x: -0.6, y: 0.4 } },
+        { id: 'bot', icon: Bot, initialPos: { top: '70%', left: '90%' }, speed: { x: 0.3, y: -0.5 } },
+    ];
+
+    const [positions, setPositions] = useState(icons.map(i => ({...i.initialPos})));
+    const animationFrameId = useRef<number>();
+
+    useEffect(() => {
+        const animate = () => {
+            setPositions(prevPositions => prevPositions.map((pos, index) => {
+                const icon = icons[index];
+                const { beta, gamma } = orientation;
+
+                const gyroX = (gamma ?? 0) / 45;
+                const gyroY = (beta ? beta - 45 : 0) / 45;
+
+                let newX = parseFloat(pos.left) + icon.speed.x + gyroX * 0.5;
+                let newY = parseFloat(pos.top) + icon.speed.y + gyroY * 0.5;
+
+                if (newX > 100 || newX < 0) icon.speed.x *= -1;
+                if (newY > 100 || newY < 0) icon.speed.y *= -1;
+                
+                newX = Math.max(0, Math.min(100, newX));
+                newY = Math.max(0, Math.min(100, newY));
+
+                return { left: `${newX}%`, top: `${newY}%` };
+            }));
+            animationFrameId.current = requestAnimationFrame(animate);
+        };
+
+        animationFrameId.current = requestAnimationFrame(animate);
+
+        return () => {
+            if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+            }
+        };
+    }, [orientation]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+    return (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+            {icons.map((icon, index) => {
+                const IconComponent = icon.icon;
+                return (
+                    <IconComponent
+                        key={icon.id}
+                        className="absolute text-white/20 dark:text-white/10"
+                        size={60}
+                        style={{
+                            ...positions[index],
+                            transition: 'left 0.5s linear, top 0.5s linear'
+                        }}
+                    />
+                );
+            })}
+        </div>
+    );
+}
 
 export function ImmersiveView({ children }: { children?: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
@@ -54,8 +118,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const yPos = (beta ? beta - 45 : 0) / 45; 
         const xPos = (gamma ?? 0) / 45; 
         
-        const horizontalMoveStrength = 60;
-        const verticalMoveStrength = 30;
+        const horizontalMoveStrength = 80;
+        const verticalMoveStrength = 60;
 
         element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
     };
@@ -171,6 +235,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
            </div>
          </div>
        )}
+      
+      {isMobile && isGyroPermissionGranted && <FloatingIcons orientation={orientation} />}
       
       {childrenWithProps}
       
