@@ -64,8 +64,8 @@ const BentoHomeGrid = () => {
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                    <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
+                <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                    <div className="relative w-full max-w-[70%] aspect-square rounded-lg overflow-hidden mb-4">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -75,7 +75,7 @@ const BentoHomeGrid = () => {
                                 alt="Vanshdeep Verma"
                                 data-ai-hint="person professional portrait"
                                 fill
-                                className="object-cover"
+                                className="object-contain"
                                 priority
                             />
                         </div>
@@ -88,15 +88,15 @@ const BentoHomeGrid = () => {
                                 alt="Vanshdeep Verma"
                                 data-ai-hint="person professional portrait"
                                 fill
-                                className="object-cover"
+                                className="object-contain"
                                 priority
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-center">
                         <h2 className="text-md font-bold">Hi, I'm Vanshdeep —</h2>
                         <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-xs">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-neutral-800 dark:text-neutral-200 mt-2 text-xs">
+                        <div className="flex items-center justify-center text-neutral-800 dark:text-neutral-200 mt-2 text-xs">
                             <MapPin className="w-3 h-3 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
@@ -989,7 +989,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-white/10 dark:bg-black/20 rounded-[20px] backdrop-blur-sm"
+                  ? "bg-white/10 dark:bg-black/20 rounded-[20px] backdrop-blur-[2px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
@@ -1023,7 +1023,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 </div>
               </div>
             </div>
-            <div className="flex flex-col mt-4 animate-expand-x" style={{ animationDelay: '0.1s' }}>
+            <div className={cn("flex flex-col animate-expand-x", isMobile ? "mt-2" : "mt-4")} style={{ animationDelay: '0.1s' }}>
               <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-black dark:text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
@@ -1052,10 +1052,16 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       default:
         content = null;
     }
-    return <div className={containerClasses}>{content}</div>;
-  }
+    
+    let finalContainerClasses = containerClasses;
+    if (isMobile) {
+      if (activeView === 'Home' || activeView === 'Personal') {
+        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-4";
+      }
+    }
 
-  const isScrollDisabled = activeView === 'Contact' || activeView === 'Career'
+    return <div className={finalContainerClasses}>{content}</div>;
+  }
 
   const originalAboutContent = (
       <div>
