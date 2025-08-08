@@ -1018,7 +1018,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     let finalContainerClasses = containerClasses;
     if (isMobile) {
       if (activeView === 'Home' || activeView === 'Personal') {
-        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-4";
+        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-2";
       }
     }
 
@@ -1031,7 +1031,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         break;
       case 'Personal':
         content = (
-          <div className="h-full flex flex-col p-4 gap-4">
+          <div className="h-full flex flex-col p-4 gap-2">
             <div
               className={cn(
                 "p-4 flex flex-col",
@@ -1117,11 +1117,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         }}
                         drag="x"
                         dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={1}
+                        dragElastic={0.5}
+                        dragPropagation
                         onDragEnd={(e, { offset, velocity }) => {
                             const swipe = Math.abs(offset.x);
                             if (swipe > 50) {
-                                paginate(offset.x > 0 ? -1 : 1);
+                                paginate(offset.x < 0 ? 1 : -1);
                             }
                         }}
                         className="h-full w-full"

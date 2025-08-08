@@ -26,35 +26,26 @@ const FloatingIcons = ({ orientation }: { orientation: { beta: number | null, ga
     const animationFrameId = useRef<number>();
 
     useEffect(() => {
-        const animate = () => {
-            setPositions(prevPositions => prevPositions.map((pos, index) => {
-                const icon = icons[index];
-                const { beta, gamma } = orientation;
+        // NOTE: The animation loop was removed to improve performance on mobile devices.
+        // The icons will now be static unless gyro movement is detected.
+        if (orientation.beta === null && orientation.gamma === null) return;
+        
+        setPositions(prevPositions => prevPositions.map((pos, index) => {
+            const icon = icons[index];
+            const { beta, gamma } = orientation;
 
-                const gyroX = (gamma ?? 0) / 45;
-                const gyroY = (beta ? beta - 45 : 0) / 45;
+            const gyroX = (gamma ?? 0) / 45;
+            const gyroY = (beta ? beta - 45 : 0) / 45;
 
-                let newX = parseFloat(pos.left) + icon.speed.x + gyroX * 1.5;
-                let newY = parseFloat(pos.top) + icon.speed.y + gyroY * 1.5;
+            let newX = parseFloat(pos.left) + gyroX * 1.5;
+            let newY = parseFloat(pos.top) + gyroY * 1.5;
 
-                if (newX > 100 || newX < 0) icon.speed.x *= -1;
-                if (newY > 100 || newY < 0) icon.speed.y *= -1;
-                
-                newX = Math.max(0, Math.min(100, newX));
-                newY = Math.max(0, Math.min(100, newY));
+            newX = Math.max(0, Math.min(100, newX));
+            newY = Math.max(0, Math.min(100, newY));
 
-                return { left: `${newX}%`, top: `${newY}%` };
-            }));
-            animationFrameId.current = requestAnimationFrame(animate);
-        };
-
-        animationFrameId.current = requestAnimationFrame(animate);
-
-        return () => {
-            if (animationFrameId.current) {
-                cancelAnimationFrame(animationFrameId.current);
-            }
-        };
+            return { left: `${newX}%`, top: `${newY}%` };
+        }));
+        
     }, [orientation]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
