@@ -14,6 +14,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { sendEmail } from '@/ai/flows/send-email-flow';
 import { type SendEmailInput } from '@/ai/schemas/send-email';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
@@ -75,7 +76,7 @@ const BentoHomeGrid = () => {
                                 alt="Vanshdeep Verma"
                                 data-ai-hint="person professional portrait"
                                 fill
-                                className="object-contain"
+                                className="object-cover"
                                 priority
                             />
                         </div>
@@ -88,7 +89,7 @@ const BentoHomeGrid = () => {
                                 alt="Vanshdeep Verma"
                                 data-ai-hint="person professional portrait"
                                 fill
-                                className="object-contain"
+                                className="object-cover"
                                 priority
                             />
                         </div>
@@ -890,9 +891,10 @@ const MobileNav = ({ activeView, setActiveView, navItems }: { activeView: string
 
 export function GlassPanelLayout({ orientation }: { orientation?: { beta: number | null, gamma: number | null } }) {
   const panelsContainerRef = useRef<HTMLDivElement>(null);
-  const [activeView, setActiveView] = useState('Home');
+  const [activeViewIndex, setActiveViewIndex] = useState(0);
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   const isMobile = useIsMobile();
+  const [direction, setDirection] = useState(0);
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -908,6 +910,28 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     { icon: Briefcase, label: "Career" },
     { icon: Heart, label: "Projects" }
   ];
+
+  const activeView = navItems[activeViewIndex].label;
+  const setActiveView = (label: string) => {
+      const newIndex = navItems.findIndex(item => item.label === label);
+      if (newIndex > activeViewIndex) {
+        setDirection(1);
+      } else {
+        setDirection(-1);
+      }
+      setActiveViewIndex(newIndex);
+  };
+  
+  const paginate = (newDirection: number) => {
+    let newIndex = activeViewIndex + newDirection;
+    if (newIndex < 0) {
+        newIndex = mobileNavItems.length -1;
+    } else if (newIndex >= mobileNavItems.length) {
+        newIndex = 0;
+    }
+    setDirection(newDirection);
+    setActiveViewIndex(newIndex);
+  };
   
   useEffect(() => {
     if (isMobile === undefined) return;
@@ -970,11 +994,34 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     };
   };
 
+  const animationVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+    }),
+  };
+
   const renderContent = () => {
     let content;
     const containerClasses = isMobile
         ? "h-full w-full overflow-y-auto pt-20 px-4"
         : "h-full";
+        
+    let finalContainerClasses = containerClasses;
+    if (isMobile) {
+      if (activeView === 'Home' || activeView === 'Personal') {
+        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-4";
+      }
+    }
+
     switch (activeView) {
       case 'Home':
         content = <BentoHomeGrid />;
@@ -1053,14 +1100,40 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         content = null;
     }
     
-    let finalContainerClasses = containerClasses;
-    if (isMobile) {
-      if (activeView === 'Home' || activeView === 'Personal') {
-        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-4";
-      }
-    }
-
-    return <div className={finalContainerClasses}>{content}</div>;
+    return (
+        <div className={finalContainerClasses}>
+            {isMobile ? (
+                 <AnimatePresence initial={false} custom={direction}>
+                    <motion.div
+                        key={activeViewIndex}
+                        custom={direction}
+                        variants={animationVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{
+                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            opacity: { duration: 0.2 }
+                        }}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={1}
+                        onDragEnd={(e, { offset, velocity }) => {
+                            const swipe = Math.abs(offset.x);
+                            if (swipe > 50) {
+                                paginate(offset.x > 0 ? -1 : 1);
+                            }
+                        }}
+                        className="h-full w-full"
+                    >
+                        {content}
+                    </motion.div>
+                </AnimatePresence>
+            ) : (
+                content
+            )}
+        </div>
+    );
   }
 
   const originalAboutContent = (
@@ -1158,5 +1231,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-
-    
