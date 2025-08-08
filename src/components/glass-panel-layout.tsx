@@ -62,10 +62,10 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-1 h-full w-full p-2 text-black dark:text-white">
+            <div className="grid grid-cols-1 gap-1 h-full w-full p-1 text-black dark:text-white">
                 {/* Profile Card */}
                 <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                    <div className="relative w-full max-w-[70%] aspect-square rounded-lg overflow-hidden mb-2">
+                    <div className="relative w-full max-w-[70%] aspect-square rounded-lg overflow-hidden">
                          <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -105,14 +105,14 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
                          <h3 className="text-2xl font-bold">09+</h3>
                          <p className="text-neutral-800 dark:text-neutral-200 text-[10px] uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
                             <div className="text-center">
                                 <h3 className="font-bold text-sm">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -1158,3 +1158,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+
+    
