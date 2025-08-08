@@ -62,7 +62,7 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-black dark:text-white">
+            <div className="grid grid-cols-1 gap-2 h-full w-full p-4 text-black dark:text-white">
                 {/* Profile Card */}
                 <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
                     <div className="relative w-full max-w-[70%] aspect-square rounded-lg overflow-hidden mb-4">
@@ -1023,7 +1023,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 </div>
               </div>
             </div>
-            <div className={cn("flex flex-col animate-expand-x", isMobile ? "mt-2" : "mt-4")} style={{ animationDelay: '0.1s' }}>
+            <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
               <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-black dark:text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
