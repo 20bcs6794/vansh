@@ -124,7 +124,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
+                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
                     <h3 className="font-bold text-sm mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
