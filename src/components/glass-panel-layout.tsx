@@ -63,11 +63,11 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-1 h-full w-full p-1 text-black dark:text-white">
+            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                    <div className="relative w-full max-w-[70%] aspect-square rounded-lg overflow-hidden">
-                         <div
+                <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20">
+                    <div className="relative w-full max-w-[80%] aspect-square rounded-lg overflow-hidden">
+                        <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
                         >
@@ -94,11 +94,11 @@ const BentoHomeGrid = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col text-center">
-                        <h2 className="text-md font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="text-neutral-800 dark:text-neutral-200 mt-1 text-xs">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center justify-center text-neutral-800 dark:text-neutral-200 mt-2 text-xs">
-                            <MapPin className="w-3 h-3 mr-2" />
+                    <div className="flex flex-col text-center mt-2">
+                        <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
+                        <p className="text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <div className="flex items-center justify-center text-neutral-200 mt-2 text-xs">
+                            <MapPin className="w-4 h-4 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
                     </div>
@@ -106,18 +106,18 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
-                         <h3 className="text-2xl font-bold">09+</h3>
-                         <p className="text-neutral-800 dark:text-neutral-200 text-[10px] uppercase tracking-wider text-center">Deployed Projects</p>
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20">
+                         <h3 className="text-3xl font-bold">09+</h3>
+                         <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
                             <div className="text-center">
-                                <h3 className="font-bold text-sm">My Certificates</h3>
+                                <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
-                                     <ChevronRight className="w-5 h-5 text-neutral-800 dark:text-neutral-200 transition-transform duration-300 group-hover:translate-x-1" />
+                                     <ChevronRight className="w-6 h-6 text-neutral-200 transition-transform duration-300 group-hover:translate-x-1" />
                                 </div>
                             </div>
                         </BentoCard>
@@ -125,18 +125,18 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20 backdrop-blur-[2px] py-2">
-                    <h3 className="font-bold text-sm mb-2 text-center">Have a project in mind?</h3>
+                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20">
+                    <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
                         className={cn(
-                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors text-xs h-8", 
+                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors text-sm h-9", 
                             isCopied && "bg-green-600 hover:bg-green-700"
                         )}
                     >
                         {isCopied ? (
                             <span className="flex items-center justify-center">
-                                <Check className="w-3 h-3 mr-2" />
+                                <Check className="w-4 h-4 mr-2" />
                                 Copied!
                             </span>
                         ) : (
@@ -148,21 +148,21 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                            <LinkedInIcon className="w-6 h-6" />
-                            <p className="font-bold mt-1 text-[10px] text-center">LinkedIn</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                            <LinkedInIcon className="w-8 h-8" />
+                            <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                            <WhatsAppIcon className="w-6 h-6"/>
-                            <p className="font-bold mt-1 text-[10px] text-center">WhatsApp</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                            <WhatsAppIcon className="w-8 h-8"/>
+                            <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-[2px]">
-                            <GmailIcon className="w-6 h-6"/>
-                            <p className="font-bold mt-1 text-[10px] text-center">Gmail</p>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
+                            <GmailIcon className="w-8 h-8"/>
+                            <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
                     </a>
                 </div>
@@ -411,7 +411,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
     ].map((p, i) => ({ ...p, animation: 'animate-expand-y', delay: `${i * 0.1}s` }));
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col p-4 text-black dark:text-white"
+      ? "h-full flex flex-col p-4 text-white"
       : "h-full flex flex-col p-4";
 
     return (
@@ -641,27 +641,27 @@ const CareerTimeline = () => {
     const isMobile = useIsMobile();
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col p-4 text-black dark:text-white"
+      ? "h-full flex flex-col p-4 text-white"
       : "h-full flex flex-col p-4";
 
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-2xl font-bold mb-4 shrink-0 text-black dark:text-white">Where I’ve Been, What I’ve Done</h2>
+                <h2 className="text-2xl font-bold mb-4 shrink-0 text-white">Where I’ve Been, What I’ve Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className="bg-white/80 dark:bg-black/70 backdrop-blur-sm p-4 rounded-lg shadow-md w-full">
+                                <div key={index} className="bg-white/10 dark:bg-black/20 p-4 rounded-lg shadow-md w-full">
                                     <div className="flex justify-between items-start">
-                                        <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
-                                        <p className="font-bold text-xs text-black dark:text-white text-right shrink-0 ml-4">{item.period}</p>
+                                        <h3 className="font-bold text-base text-white">{item.title}</h3>
+                                        <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
-                                    <p className="text-sm text-muted-foreground mt-1">
+                                    <p className="text-sm text-neutral-300 mt-1">
                                         {item.company} 
                                         {item.grade && ` | ${item.grade}`}
                                     </p>
-                                    <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">{item.description}</div>
+                                    <div className="text-sm text-neutral-100 mt-2">{item.description}</div>
                                 </div>
                             ))}
                         </div>
@@ -1031,28 +1031,28 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         break;
       case 'Personal':
         content = (
-          <div className="h-full flex flex-col p-4 gap-2">
+          <div className="h-full flex flex-col p-4 gap-4">
             <div
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-white/10 dark:bg-black/20 rounded-[20px] backdrop-blur-[2px]"
+                  ? "bg-white/10 dark:bg-black/20 rounded-[20px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
-                  <h3 className={cn("font-semibold text-lg", isMobile ? "text-black dark:text-white" : "")}>Who Am I ?</h3>
+                  <h3 className={cn("font-semibold text-lg", isMobile ? "text-white" : "")}>Who Am I ?</h3>
                    {isMobile && (
-                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-black dark:text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
+                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
                        <Download className="w-3 h-3" />
                        <span>Resume</span>
                      </a>
                    )}
               </div>
-              <div className={cn("relative mb-0", !isMobile && "flex-grow")}>
+              <div className={cn("relative mb-2", !isMobile && "flex-grow")}>
                 <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
                   <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
-                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-black dark:text-white" : "text-neutral-800 dark:text-neutral-100")}>
+                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-white" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics.
                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence.
@@ -1071,7 +1071,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-black dark:text-white" : "")}>Tools and Technologies</h3>
+              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                   <div className="flex shrink-0 gap-4">
