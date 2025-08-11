@@ -912,13 +912,19 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     { icon: Heart, label: "Projects" }
   ];
 
-  const activeView = navItems[activeViewIndex].label;
+  const activeView = isMobile ? mobileNavItems[activeViewIndex].label : navItems[activeViewIndex].label;
+
   const setActiveView = (label: string) => {
-      const newIndex = navItems.findIndex(item => item.label === label);
+      const itemArray = isMobile ? mobileNavItems : navItems;
+      const newIndex = itemArray.findIndex(item => item.label === label);
+      if (newIndex === -1) return;
+
       if (newIndex > activeViewIndex) {
         setDirection(1);
-      } else {
+      } else if (newIndex < activeViewIndex) {
         setDirection(-1);
+      } else {
+        setDirection(0);
       }
       setActiveViewIndex(newIndex);
   };
@@ -1156,7 +1162,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
           <div 
               className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
           >
-              <MobileNav activeView={mobileNavItems[activeViewIndex].label} setActiveView={setActiveView} navItems={mobileNavItems} />
+              <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
               <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.2s ease-out' }}>
                 {renderContent()}
               </div>
