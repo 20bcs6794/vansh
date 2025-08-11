@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -63,9 +64,9 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-2 h-full w-full p-1 text-white">
+            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start bg-black/70 text-white">
+                <BentoCard className="p-4 flex flex-col justify-start bg-black/30 text-white">
                     <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
                         <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -104,16 +105,16 @@ const BentoHomeGrid = () => {
                     </div>
                 </BentoCard>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 py-2 flex flex-col items-center justify-center bg-black/70 text-white">
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-black/30 text-white">
                          <h3 className="text-3xl font-bold">09+</h3>
                          <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full py-2 flex flex-col items-center justify-center cursor-pointer bg-black/70 text-white">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-black/30 text-white">
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -125,7 +126,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center py-2 bg-black/70 text-white">
+                <BentoCard className="flex flex-col justify-center items-center bg-black/30 text-white">
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -146,22 +147,22 @@ const BentoHomeGrid = () => {
                 </BentoCard>
                 
                  {/* Socials */}
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <LinkedInIcon className="w-12 h-12" />
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                            <LinkedInIcon className="w-10 h-10" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <WhatsAppIcon className="w-12 h-12"/>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                            <WhatsAppIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <GmailIcon className="w-12 h-12"/>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                            <GmailIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
                     </a>
@@ -652,7 +653,7 @@ const CareerTimeline = () => {
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className="bg-black/70 p-4 rounded-lg shadow-md w-full">
+                                <div key={index} className="bg-black/30 p-4 rounded-lg shadow-md w-full">
                                     <div className="flex justify-between items-start">
                                         <h3 className="font-bold text-base text-white">{item.title}</h3>
                                         <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
@@ -1036,7 +1037,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-black/70 text-white rounded-[20px]"
+                  ? "bg-black/30 text-white rounded-[20px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
@@ -1155,7 +1156,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
           <div 
               className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
           >
-              <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
+              <MobileNav activeView={mobileNavItems[activeViewIndex].label} setActiveView={setActiveView} navItems={mobileNavItems} />
               <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.2s ease-out' }}>
                 {renderContent()}
               </div>
