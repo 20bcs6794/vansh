@@ -65,8 +65,8 @@ const BentoHomeGrid = () => {
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start items-center bg-white/10 dark:bg-black/20">
-                    <div className="relative w-full max-w-[80%] aspect-square rounded-lg overflow-hidden">
+                <BentoCard className="p-4 flex flex-col justify-start bg-black/70 text-white">
+                    <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
                         <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -94,10 +94,10 @@ const BentoHomeGrid = () => {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col text-center mt-2">
+                    <div className="flex flex-col text-left mt-2">
                         <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
                         <p className="text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center justify-center text-neutral-200 mt-2 text-xs">
+                        <div className="flex items-center text-neutral-200 mt-2 text-xs">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
@@ -106,14 +106,14 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-white/10 dark:bg-black/20">
+                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-black/70 text-white">
                          <h3 className="text-3xl font-bold">09+</h3>
                          <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-white/10 dark:bg-black/20">
+                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-black/70 text-white">
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -125,7 +125,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-white/10 dark:bg-black/20">
+                <BentoCard className="flex flex-col justify-center items-center bg-black/70 text-white">
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -148,20 +148,20 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
-                            <LinkedInIcon className="w-8 h-8" />
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
+                            <LinkedInIcon className="w-10 h-10" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
-                            <WhatsAppIcon className="w-8 h-8"/>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
+                            <WhatsAppIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-white/10 dark:bg-black/20">
-                            <GmailIcon className="w-8 h-8"/>
+                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
+                            <GmailIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
                     </a>
@@ -652,7 +652,7 @@ const CareerTimeline = () => {
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className="bg-white/10 dark:bg-black/20 p-4 rounded-lg shadow-md w-full">
+                                <div key={index} className="bg-black/70 p-4 rounded-lg shadow-md w-full">
                                     <div className="flex justify-between items-start">
                                         <h3 className="font-bold text-base text-white">{item.title}</h3>
                                         <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
@@ -929,7 +929,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     } else if (newIndex >= mobileNavItems.length) {
         newIndex = 0;
     }
-    setDirection(newDirection);
+    setDirection(newDirection > 0 ? 1 : -1);
     setActiveViewIndex(newIndex);
   };
   
@@ -1036,7 +1036,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-white/10 dark:bg-black/20 rounded-[20px]"
+                  ? "bg-black/70 text-white rounded-[20px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
@@ -1122,7 +1122,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         onDragEnd={(e, { offset, velocity }) => {
                             const swipe = Math.abs(offset.x);
                             if (swipe > 50) {
-                                paginate(offset.x < 0 ? 1 : -1);
+                                paginate(offset.x > 0 ? -1 : 1);
                             }
                         }}
                         className="h-full w-full"

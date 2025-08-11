@@ -5,69 +5,10 @@ import React, { useRef, useEffect, type ReactNode, useState, useCallback } from 
 import Image from 'next/image';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, Code, Database, BrainCircuit, Bot, Atom, Cog, GitBranch, Terminal } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { cn } from '@/lib/utils';
 import { GlassPanelLayout } from '@/components/glass-panel-layout';
 
-const FloatingIcons = ({ orientation }: { orientation: { beta: number | null, gamma: number | null } }) => {
-    const icons = [
-        { id: 'code', icon: Code, initialPos: { top: '20%', left: '10%' }, speed: { x: 0.1, y: 0.08 } },
-        { id: 'db', icon: Database, initialPos: { top: '80%', left: '20%' }, speed: { x: -0.08, y: -0.12 } },
-        { id: 'brain', icon: BrainCircuit, initialPos: { top: '15%', left: '80%' }, speed: { x: -0.12, y: 0.08 } },
-        { id: 'bot', icon: Bot, initialPos: { top: '70%', left: '90%' }, speed: { x: 0.06, y: -0.1 } },
-        { id: 'atom', icon: Atom, initialPos: { top: '50%', left: '50%' }, speed: { x: 0.15, y: -0.15 } },
-        { id: 'cog', icon: Cog, initialPos: { top: '90%', left: '60%' }, speed: { x: -0.1, y: -0.05 } },
-        { id: 'git', icon: GitBranch, initialPos: { top: '40%', left: '5%' }, speed: { x: 0.08, y: 0.12 } },
-        { id: 'terminal', icon: Terminal, initialPos: { top: '5%', left: '40%' }, speed: { x: 0.05, y: -0.1 } },
-    ];
-
-    const [positions, setPositions] = useState(icons.map(i => ({...i.initialPos})));
-    const animationFrameId = useRef<number>();
-
-    useEffect(() => {
-        // NOTE: The animation loop was removed to improve performance on mobile devices.
-        // The icons will now be static unless gyro movement is detected.
-        if (orientation.beta === null && orientation.gamma === null) return;
-        
-        setPositions(prevPositions => prevPositions.map((pos, index) => {
-            const icon = icons[index];
-            const { beta, gamma } = orientation;
-
-            const gyroX = (gamma ?? 0) / 45;
-            const gyroY = (beta ? beta - 45 : 0) / 45;
-
-            let newX = parseFloat(pos.left) + gyroX * 1.5;
-            let newY = parseFloat(pos.top) + gyroY * 1.5;
-
-            newX = Math.max(0, Math.min(100, newX));
-            newY = Math.max(0, Math.min(100, newY));
-
-            return { left: `${newX}%`, top: `${newY}%` };
-        }));
-        
-    }, [orientation]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-    return (
-        <div className="absolute inset-0 z-0 pointer-events-none">
-            {icons.map((icon, index) => {
-                const IconComponent = icon.icon;
-                return (
-                    <IconComponent
-                        key={icon.id}
-                        className="absolute text-white/20 dark:text-white/10"
-                        size={60}
-                        style={{
-                            ...positions[index],
-                            transition: 'left 0.5s linear, top 0.5s linear'
-                        }}
-                    />
-                );
-            })}
-        </div>
-    );
-}
 
 export function ImmersiveView({ children }: { children?: ReactNode }) {
   const { theme, toggleTheme } = useTheme();
@@ -76,8 +17,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
   const [orientation, setOrientation] = useState<{ beta: number | null, gamma: number | null }>({ beta: null, gamma: null });
   
-  const lightImage = isMobile ? "/images/mobile-white.jpg" : "/images/light-bg.jpg";
-  const darkImage = isMobile ? "/images/mobile-dark.jpg" : "/images/dark-bg.jpg";
+  const lightImage = isMobile ? "/images/mobile-white.jpg" : "/images/light_theme_bg.jpg";
+  const darkImage = isMobile ? "/images/mobile-dark.jpg" : "/images/dark_theme_bg.jpg";
   
   const requestDeviceOrientationPermission = useCallback(async () => {
     if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
@@ -230,8 +171,6 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
            </div>
          </div>
        )}
-      
-      {!isMobile && <FloatingIcons orientation={orientation} />}
       
       {childrenWithProps}
       
