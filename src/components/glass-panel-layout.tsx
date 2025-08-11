@@ -63,7 +63,7 @@ const BentoHomeGrid = () => {
     };
 
     if (isMobile) {
-        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/30 dark:text-white";
+        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/40 dark:text-white";
         
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
@@ -642,13 +642,18 @@ const careerTimelineData = [
 
 const CareerTimeline = () => {
     const isMobile = useIsMobile();
+    const { theme } = useTheme();
 
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white"
       : "h-full flex flex-col p-4";
 
     if (isMobile) {
-        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/30 dark:text-white";
+        const mobileCardClasses = cn(
+            "p-4 rounded-lg shadow-md w-full",
+            "bg-black/40 text-white dark:bg-black/40 dark:text-white",
+            theme === 'light' && 'backdrop-blur-sm'
+        );
         return (
             <div className={containerClasses}>
                 <h2 className="text-2xl font-bold mb-4 shrink-0 text-white">Where I’ve Been, What I’ve Done</h2>
@@ -656,7 +661,7 @@ const CareerTimeline = () => {
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className={cn(mobileCardClasses, "p-4 rounded-lg shadow-md w-full")}>
+                                <div key={index} className={mobileCardClasses}>
                                     <div className="flex justify-between items-start">
                                         <h3 className="font-bold text-base text-white">{item.title}</h3>
                                         <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
@@ -899,6 +904,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const [projectDescriptionForRightPanel, setProjectDescriptionForRightPanel] = useState<string | null>(null);
   const isMobile = useIsMobile();
   const [direction, setDirection] = useState(0);
+  const { theme } = useTheme();
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -1046,7 +1052,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-black/40 text-white dark:bg-black/30 rounded-[20px]"
+                  ? cn("bg-black/40 text-white dark:bg-black/40 dark:text-white rounded-[20px]", theme === 'light' && 'backdrop-blur-sm')
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
