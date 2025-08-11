@@ -63,7 +63,7 @@ const BentoHomeGrid = () => {
 
     if (isMobile) {
         return (
-            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
+            <div className="grid grid-cols-1 gap-2 h-full w-full p-1 text-white">
                 {/* Profile Card */}
                 <BentoCard className="p-4 flex flex-col justify-start bg-black/70 text-white">
                     <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
@@ -104,16 +104,16 @@ const BentoHomeGrid = () => {
                     </div>
                 </BentoCard>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-black/70 text-white">
+                    <BentoCard className="col-span-1 py-2 flex flex-col items-center justify-center bg-black/70 text-white">
                          <h3 className="text-3xl font-bold">09+</h3>
                          <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-black/70 text-white">
+                        <BentoCard className="h-full py-2 flex flex-col items-center justify-center cursor-pointer bg-black/70 text-white">
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -125,7 +125,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-black/70 text-white">
+                <BentoCard className="flex flex-col justify-center items-center py-2 bg-black/70 text-white">
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -146,22 +146,22 @@ const BentoHomeGrid = () => {
                 </BentoCard>
                 
                  {/* Socials */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-2">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <LinkedInIcon className="w-10 h-10" />
+                            <LinkedInIcon className="w-12 h-12" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <WhatsAppIcon className="w-10 h-10"/>
+                            <WhatsAppIcon className="w-12 h-12"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                         <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/70 text-white">
-                            <GmailIcon className="w-10 h-10"/>
+                            <GmailIcon className="w-12 h-12"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
                     </a>
@@ -661,7 +661,7 @@ const CareerTimeline = () => {
                                         {item.company} 
                                         {item.grade && ` | ${item.grade}`}
                                     </p>
-                                    <div className="text-sm text-neutral-100 mt-2">{item.description}</div>
+                                    <div className="text-sm text-white mt-2">{item.description}</div>
                                 </div>
                             ))}
                         </div>
