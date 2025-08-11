@@ -76,8 +76,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
   const [orientation, setOrientation] = useState<{ beta: number | null, gamma: number | null }>({ beta: null, gamma: null });
   
-  const lightImage = isMobile ? "/images/mobile-white.jpg" : "/images/light_bg.jpg";
-  const darkImage = isMobile ? "/images/mobile-dark.jpg" : "/images/dark_bg.jpg";
+  const lightImage = isMobile ? "/images/mobile-white.jpg" : "/images/light-bg.jpg";
+  const darkImage = isMobile ? "/images/mobile-dark.jpg" : "/images/dark-bg.jpg";
   
   const requestDeviceOrientationPermission = useCallback(async () => {
     if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
@@ -231,7 +231,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
          </div>
        )}
       
-      {isMobile && isGyroPermissionGranted && <FloatingIcons orientation={orientation} />}
+      {!isMobile && <FloatingIcons orientation={orientation} />}
       
       {childrenWithProps}
       
