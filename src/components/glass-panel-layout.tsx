@@ -63,10 +63,12 @@ const BentoHomeGrid = () => {
     };
 
     if (isMobile) {
+        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/30 dark:text-white";
+        
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
                 {/* Profile Card */}
-                <BentoCard className="p-4 flex flex-col justify-start bg-black/30 text-white">
+                <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                     <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
                         <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -107,14 +109,14 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className="col-span-1 flex flex-col items-center justify-center bg-black/30 text-white">
+                    <BentoCard className={cn(mobileCardClasses, "col-span-1 flex flex-col items-center justify-center")}>
                          <h3 className="text-3xl font-bold">09+</h3>
                          <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className="h-full flex flex-col items-center justify-center cursor-pointer bg-black/30 text-white">
+                        <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center cursor-pointer")}>
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
@@ -126,7 +128,7 @@ const BentoHomeGrid = () => {
                 </div>
 
                 {/* Have a project in mind */}
-                <BentoCard className="flex flex-col justify-center items-center bg-black/30 text-white">
+                <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                     <Button 
                         onClick={handleCopyEmail} 
@@ -149,19 +151,19 @@ const BentoHomeGrid = () => {
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
                             <LinkedInIcon className="w-10 h-10" />
                             <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
                             <WhatsAppIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className="aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2 bg-black/30 text-white">
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
                             <GmailIcon className="w-10 h-10"/>
                             <p className="font-bold mt-1 text-xs text-center">Gmail</p>
                         </BentoCard>
@@ -543,7 +545,7 @@ const AwsIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const PowerBiIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-  <linearGradient id="zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stopColor="#ebb112"></stop><stop offset="1" stopColor="#bb5c17"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895-2,2v36	C25,43.105,25.895,44,27,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#fed35d"></stop><stop offset=".281" stopColor="#f6c648"></stop><stop offset=".857" stopColor="#e3a513"></stop><stop offset=".989" stopColor="#de9d06"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895-2,2v26	C17,43.105,17.895,44,19,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#ffd869"></stop><stop offset=".983" stopColor="#ffdf26"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895-2,2v16	C9,43.105,9.895,44,11,44z"></path>
+  <linearGradient id="zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stopColor="#ebb112"></stop><stop offset="1" stopColor="#bb5c17"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895,2,2v36	C25,43.105,25.895,44,27,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#fed35d"></stop><stop offset=".281" stopColor="#f6c648"></stop><stop offset=".857" stopColor="#e3a513"></stop><stop offset=".989" stopColor="#de9d06"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895,2,2v26	C17,43.105,17.895,44,19,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#ffd869"></stop><stop offset=".983" stopColor="#ffdf26"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895,2,2v16	C9,43.105,9.895,44,11,44z"></path>
   </svg>
 );
 
@@ -587,10 +589,10 @@ const careerTimelineData = [
     period: "May 2025 - Present",
     description: (
       <>
-        <p className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">
+        <p className="text-sm mt-2">
             Streamlined internal tools and reporting processes to improve speed, accuracy, and data usability.
         </p>
-        <ul className="list-disc list-inside mt-2 space-y-1 text-sm text-neutral-800 dark:text-neutral-100">
+        <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
           <li><strong>Boosted data visualization efficiency by 40%</strong> through Power BI dashboards using Excel and SQL.</li>
           <li><strong>Enhanced internal workflows by 15%</strong> by optimizing tools built with React.js.</li>
           <li><strong>Reduced manual reporting effort by 30%</strong> via Python-based Excel automation.</li>
@@ -607,10 +609,10 @@ const careerTimelineData = [
     period: "July 2024 - Jan 2025",
     description: (
        <>
-        <p className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">
+        <p className="text-sm mt-2">
             Contributed to AI automation and SEO strategies to boost user support efficiency and digital reach.
         </p>
-        <ul className="list-disc list-inside mt-2 space-y-1 text-sm text-neutral-800 dark:text-neutral-100">
+        <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
           <li>Developed an AI assistant that <strong>automated 500+ daily customer queries</strong>, reducing manual support by <strong>40%</strong>.</li>
           <li>Implemented SEO-focused content strategies, resulting in <strong>30% growth in organic traffic</strong> within 3 months.</li>
           <li>Collaborated with tech and content teams to enhance chatbot performance and user engagement.</li>
@@ -646,6 +648,7 @@ const CareerTimeline = () => {
       : "h-full flex flex-col p-4";
 
     if (isMobile) {
+        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/30 dark:text-white";
         return (
             <div className={containerClasses}>
                 <h2 className="text-2xl font-bold mb-4 shrink-0 text-white">Where I’ve Been, What I’ve Done</h2>
@@ -653,7 +656,7 @@ const CareerTimeline = () => {
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
-                                <div key={index} className="bg-black/30 p-4 rounded-lg shadow-md w-full">
+                                <div key={index} className={cn(mobileCardClasses, "p-4 rounded-lg shadow-md w-full")}>
                                     <div className="flex justify-between items-start">
                                         <h3 className="font-bold text-base text-white">{item.title}</h3>
                                         <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
@@ -1043,7 +1046,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? "bg-black/30 text-white rounded-[20px]"
+                  ? "bg-black/40 text-white dark:bg-black/30 rounded-[20px]"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
