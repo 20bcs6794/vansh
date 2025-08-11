@@ -49,8 +49,8 @@ const BentoHomeGrid = () => {
     const { theme } = useTheme();
     const isMobile = useIsMobile();
 
-    const lightImage = "/images/light_theme_user.jpg";
-    const darkImage = "/images/dark_theme_user.jpg";
+    const lightImage = "/images/light_user.jpg";
+    const darkImage = "/images/dark_user.jpg";
     const certificatesLink = "/document/resume.pdf";
 
     const handleCopyEmail = () => {
