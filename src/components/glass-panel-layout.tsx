@@ -432,7 +432,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                     <div
                                         key={project.id}
                                         className={cn(
-                                            "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center",
+                                            "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
                                             project.bgColor
                                         )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
@@ -1302,3 +1302,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+
+    
