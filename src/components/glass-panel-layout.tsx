@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -63,10 +62,10 @@ const BentoHomeGrid = () => {
     };
 
     if (isMobile) {
-        const mobileCardClasses = "bg-black/40 text-white dark:bg-black/40 dark:text-white";
+        const mobileCardClasses = "bg-white/30 text-neutral-800 dark:bg-black/40 dark:text-white";
         
         return (
-            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white">
+            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
                 {/* Profile Card */}
                 <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                     <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
@@ -99,8 +98,8 @@ const BentoHomeGrid = () => {
                     </div>
                     <div className="flex flex-col text-left mt-2">
                         <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="text-neutral-200 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-neutral-200 mt-2 text-xs">
+                        <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <div className="flex items-center text-muted-foreground mt-2 text-xs">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span>New Delhi, India</span>
                         </div>
@@ -111,7 +110,7 @@ const BentoHomeGrid = () => {
                      {/* Deployed Projects */}
                     <BentoCard className={cn(mobileCardClasses, "col-span-1 flex flex-col items-center justify-center")}>
                          <h3 className="text-3xl font-bold">09+</h3>
-                         <p className="text-neutral-200 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                         <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
@@ -120,7 +119,7 @@ const BentoHomeGrid = () => {
                             <div className="text-center">
                                 <h3 className="font-bold text-base">My Certificates</h3>
                                 <div className="flex justify-center items-center mt-2">
-                                     <ChevronRight className="w-6 h-6 text-neutral-200 transition-transform duration-300 group-hover:translate-x-1" />
+                                     <ChevronRight className="w-6 h-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
                                 </div>
                             </div>
                         </BentoCard>
@@ -534,7 +533,7 @@ const BootstrapIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const TailwindCssIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-  <path fill="#00acc1" d="M24,9.604c-6.4,0-10.4,3.199-12,9.597c2.4-3.199,5.2-4.398,8.4-3.599 c1.826,0.456,3.131,1.781,4.576,3.247C27.328,21.236,30.051,24,36,24c6.4,0,10.4-3.199,12-9.598c-2.4,3.199-5.2,4.399-8.4,3.6 c-1.825-0.456-3.13-1.781-4.575-3.247C32.672,12.367,29.948,9.604,24,9.604L24,9.604z M12,24c-6.4,0-10.4,3.199-12,9.598 c2.4-3.199,5.2-4.399,8.4-3.599c1.825,0.457,3.13,1.781,4.575,3.246c2.353,2.388,5.077,5.152,11.025,5.152 c6.4,0,10.4-3.199,12-9.598c-2.4,3.199-5.2,4.399-8.4,3.599c-1.826-0.456-3.131-1.781-4.576-3.246C20.672,26.764,17.949,24,12,24 L12,24z"></path>
+  <path fill="#00acc1" d="M24,9.604c-6.4,0-10.4,3.199-12,9.597c2.4-3.199,5.2-4.398,8.4-3.599 c 1.826,0.456,3.131,1.781,4.576,3.247C27.328,21.236,30.051,24,36,24c6.4,0,10.4-3.199,12-9.598c-2.4,3.199-5.2,4.399-8.4,3.6 c-1.825-0.456-3.13-1.781-4.575-3.247C32.672,12.367,29.948,9.604,24,9.604L24,9.604z M12,24c-6.4,0-10.4,3.199-12,9.598 c2.4-3.199,5.2-4.399,8.4-3.599c1.825,0.457,3.13,1.781,4.575,3.246c2.353,2.388,5.077,5.152,11.025,5.152 c6.4,0,10.4-3.199,12-9.598c-2.4,3.199-5.2,4.399-8.4,3.599c-1.826-0.456-3.131-1.781-4.576-3.246C20.672,26.764,17.949,24,12,24 L12,24z"></path>
   </svg>
 );
 
@@ -575,7 +574,7 @@ const SQLiteIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const NextJsIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#212121" d="M18.974,31.5c0,0.828-0.671,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-14c0-0.653,0.423-1.231,1.045-1.43 c0.625-0.198,1.302,0.03,1.679,0.563l16.777,23.704C40.617,36.709,44,30.735,44,24c0-11-9-20-20-20S4,13,4,24s9,20,20,20 c3.192,0,6.206-0.777,8.89-2.122L18.974,22.216V31.5z M28.974,16.5c0-0.828,0.671-1.5-1.5-1.5s1.5,0.672,1.5,1.5v13.84l-3-4.227 V16.5z"></path>
+<path fill="#212121" d="M18.974,31.5c0,0.828-0.671,1.5-1.5,1.5s-1.5-0.672-1.5-1.5v-14c0-0.653,0.423-1.231,1.045-1.43 c0.625-0.198,1.302,0.03,1.679,0.563l16.777,23.704C40.617,36.709,44,30.735,44,24c0-11-9-20-20-20S4,13,4,24s9,20,20,20 c3.192,0,6.206-0.777,8.89-2.122L18.974,22.216V31.5z M28.974,16.5c0-0.828,0.671-1.5-1.5-1.5s1.5,0.672,1.5,1.5v13.84l-3-4.227V16.5z"></path>
 </svg>
 );
 
@@ -705,26 +704,25 @@ const CareerTimeline = () => {
     if (isMobile) {
         const mobileCardClasses = cn(
             "p-4 rounded-lg shadow-md w-full",
-            "bg-black/40 text-white dark:bg-black/40 dark:text-white",
-            theme === 'light' && 'backdrop-blur-sm'
+            "bg-white/30 text-neutral-800 dark:bg-black/40 dark:text-white"
         );
         return (
             <div className={containerClasses}>
-                <h2 className="text-2xl font-bold mb-4 shrink-0 text-white">Where I’ve Been, What I’ve Done</h2>
+                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I’ve Been, What I’ve Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
                                 <div key={index} className={mobileCardClasses}>
                                     <div className="flex justify-between items-start">
-                                        <h3 className="font-bold text-base text-white">{item.title}</h3>
-                                        <p className="font-bold text-xs text-white text-right shrink-0 ml-4">{item.period}</p>
+                                        <h3 className="font-bold text-base">{item.title}</h3>
+                                        <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
-                                    <p className="text-sm text-neutral-300 mt-1">
+                                    <p className="text-sm mt-1">
                                         {item.company} 
                                         {item.grade && ` | ${item.grade}`}
                                     </p>
-                                    <div className="text-sm text-white mt-2">{item.description}</div>
+                                    <div className="text-sm mt-2">{item.description}</div>
                                 </div>
                             ))}
                         </div>
@@ -970,12 +968,13 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   
   const mobileNavItems = [
     { icon: HomeIcon, label: "Home" },
-    { icon: User, label: "Personal" },
+    { icon: Personal, label: "Personal" },
     { icon: Briefcase, label: "Career" },
     { icon: Heart, label: "Projects" }
   ];
 
-  const activeView = isMobile ? mobileNavItems[activeViewIndex].label : navItems[activeViewIndex].label;
+  const activeView = (isMobile ? mobileNavItems : navItems)[activeViewIndex]?.label;
+
 
   const setActiveView = (label: string) => {
       const itemArray = isMobile ? mobileNavItems : navItems;
@@ -1106,14 +1105,14 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-black/40 text-white dark:bg-black/40 dark:text-white rounded-[20px]", theme === 'light' && 'backdrop-blur-sm')
+                  ? cn("bg-white/30 text-neutral-800 dark:bg-black/40 dark:text-white rounded-[20px]", theme === 'light' && 'backdrop-blur-sm')
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
-                  <h3 className={cn("font-semibold text-lg", isMobile ? "text-white" : "")}>Who Am I ?</h3>
+                  <h3 className={cn("font-semibold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
                    {isMobile && (
-                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
+                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
                        <Download className="w-3 h-3" />
                        <span>Resume</span>
                      </a>
@@ -1122,7 +1121,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               <div className={cn("relative mb-2", !isMobile && "flex-grow")}>
                 <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
                   <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
-                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-white" : "text-neutral-800 dark:text-neutral-100")}>
+                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
                         Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics.
                         I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence.
@@ -1141,7 +1140,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
+              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-neutral-800 dark:text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                   <div className="flex shrink-0 gap-4">
@@ -1302,5 +1301,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-
-    
