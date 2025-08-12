@@ -82,13 +82,13 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const horizontalMoveStrength = 80;
       const verticalMoveStrength = 20;
 
-      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
+      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.0)`;
     };
 
     const handleMouseLeave = () => {
       const element = tiltRef.current;
       if (element) {
-        element.style.transform = 'translate3d(0, 0, 0) scale(1.1)';
+        element.style.transform = 'translate3d(0, 0, 0) scale(1.0)';
       }
     };
     
