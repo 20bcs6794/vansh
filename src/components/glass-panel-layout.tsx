@@ -63,13 +63,13 @@ const BentoHomeGrid = () => {
     };
 
     if (isMobile) {
-        const mobileCardClasses = "bg-white/50 text-neutral-800 dark:bg-black/20 dark:text-white";
+        const mobileCardClasses = "bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white";
         
         return (
             <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
                 {/* Profile Card */}
                 <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
-                    <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-lg overflow-hidden">
+                    <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
                         <div
                             className="absolute inset-0 transition-opacity duration-500 ease-in-out"
                             style={{ opacity: theme === 'light' ? 1 : 0 }}
@@ -100,7 +100,7 @@ const BentoHomeGrid = () => {
                     <div className="flex flex-col text-left mt-2">
                         <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
                         <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-muted-foreground mt-2 text-xs">
+                        <div className="flex items-center text-muted-foreground mt-2 text-sm">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span className="font-bold">New Delhi, India</span>
                         </div>
@@ -152,20 +152,18 @@ const BentoHomeGrid = () => {
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <LinkedInIcon className="w-10 h-10" />
-                            <p className="font-bold mt-1 text-xs text-center">LinkedIn</p>
+                            <LinkedInIcon className="size-16" />
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <WhatsAppIcon className="w-10 h-10"/>
-                            <p className="font-bold mt-1 text-xs text-center">WhatsApp</p>
+                            <WhatsAppIcon className="size-16"/>
+                           
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <GmailIcon className="w-10 h-10"/>
-                            <p className="font-bold mt-1 text-xs text-center">Gmail</p>
+                            <GmailIcon className="size-16"/>
                         </BentoCard>
                     </a>
                 </div>
@@ -709,7 +707,7 @@ const CareerTimeline = () => {
         );
         return (
             <div className={containerClasses}>
-                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I’ve Been, What I’ve Done</h2>
+                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-900 dark:text-white">Where I’ve Been, What I’ve Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
