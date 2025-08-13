@@ -710,12 +710,10 @@ const CareerTimeline = () => {
                                         <h3 className="font-bold text-base">{item.title}</h3>
                                         <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
-                                    <div className="flex items-center text-sm mt-1">
-                                      <item.icon className="w-4 h-4 mr-2" />
-                                      <span>
-                                        {item.company} 
-                                        {item.grade && ` | ${item.grade}`}
-                                      </span>
+                                    <div className="flex items-center mt-2">
+                                      <item.icon className="w-5 h-5 mr-2" />
+                                      <span className="text-base font-bold">{item.company}</span>
+                                      {item.grade && <span className="text-sm text-muted-foreground ml-2">| {item.grade}</span>}
                                     </div>
                                     <div className="text-sm mt-2">{item.description}</div>
                                 </div>
