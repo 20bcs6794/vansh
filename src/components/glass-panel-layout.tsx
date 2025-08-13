@@ -49,8 +49,8 @@ const BentoHomeGrid = () => {
     const { theme } = useTheme();
     const isMobile = useIsMobile();
 
-    const lightImage = "/images/light_user.jpg";
-    const darkImage = "/images/dark_user.jpg";
+    const lightImage = "/images/light_user-removebg.png";
+    const darkImage = "/images/dark_user-removebg-preview.png";
     const certificatesLink = "/document/resume.pdf";
 
     const handleCopyEmail = () => {
@@ -704,7 +704,7 @@ const CareerTimeline = () => {
     if (isMobile) {
         const mobileCardClasses = cn(
             "p-4 rounded-lg shadow-md w-full",
-            "bg-white/50 text-neutral-800 dark:bg-black/20 dark:text-white"
+            "bg-white/50 text-neutral-800 dark:bg-black/60 backdrop-blur-[4px] dark:text-white"
         );
         return (
             <div className={containerClasses}>
@@ -1105,7 +1105,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-white/50 text-neutral-800 dark:bg-black/20 dark:text-white rounded-[20px]", theme === 'light' && 'backdrop-blur-sm')
+                  ? cn("bg-white/50 text-neutral-900 backdrop-blur-[3px] dark:bg-black/70 dark:text-white rounded-[20px]")
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
