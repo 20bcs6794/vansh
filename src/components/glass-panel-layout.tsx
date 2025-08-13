@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -230,7 +228,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
                 <div className="w-[80%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
-                    <span className="text-sm font-mono text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
+                    <span className="text-sm font-sans  text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                     <Button
                         variant="ghost"
                         size="icon"
@@ -1294,5 +1292,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-
-    
