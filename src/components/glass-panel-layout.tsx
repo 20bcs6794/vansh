@@ -3,7 +3,7 @@
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon, Copy } from 'lucide-react';
+import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon, Copy, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -19,7 +19,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
     <div
-        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300", className)}
+        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 ease-in-out", className)}
         {...props}
     >
         {children}
@@ -145,20 +145,20 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                 </BentoCard>
                 
                  {/* Socials */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-5">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
                             <LinkedInIcon className="size-14" />
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
                             <WhatsAppIcon className="size-14"/>
                            
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
                             <GmailIcon className="size-14"/>
                         </BentoCard>
                     </a>
@@ -264,7 +264,7 @@ const NavItem = ({ icon, label, isActive, onClick }: { icon: React.ElementType, 
   const Icon = icon;
   return (
     <button onClick={onClick} className={cn(
-      "flex items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors font-bold text-base",
+      "flex items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors duration-300 ease-in-out font-bold text-base",
       isActive && "bg-white/10 dark:bg-white/10 shadow-[0_0_8px_1px_rgba(255,255,255,0.4)] text-black dark:text-white"
     )}>
       <Icon className="w-5 h-5" />
@@ -619,7 +619,7 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.ElementType }) => (
-    <div className="bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform hover:scale-105">
+    <div className="bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105">
         <Icon className="w-10 h-10" />
         <span className="font-medium text-xs text-neutral-800"><strong>{name}</strong></span>
     </div>
@@ -700,7 +700,7 @@ const CareerTimeline = () => {
         );
         return (
             <div className={containerClasses}>
-                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I’ve Been, What I’ve Done</h2>
+                <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I have Been, What I have Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4 hide-scrollbar">
                         <div className="flex flex-col gap-y-4">
@@ -711,8 +711,8 @@ const CareerTimeline = () => {
                                         <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
                                     <div className="flex items-center mt-2">
-                                      <item.icon className="w-5 h-5 mr-2" />
-                                      <span className="text-base font-bold">{item.company}</span>
+                                      <item.icon className="w-6 h-6 mr-2" />
+                                      <span className="text-base font-extrabold">{item.company}</span>
                                       {item.grade && <span className="text-sm text-muted-foreground ml-2">| {item.grade}</span>}
                                     </div>
                                     <div className="text-sm mt-2">{item.description}</div>
@@ -916,7 +916,7 @@ const MobileNav = ({ activeView, setActiveView, navItems }: { activeView: string
                         key={item.label}
                         onClick={() => setActiveView(item.label)}
                         className={cn(
-                            "flex flex-col items-center gap-1 text-xs p-1 rounded-md text-white flex-1",
+                            "flex flex-col items-center gap-1 text-xs p-1 rounded-md text-white flex-1 transition-colors duration-300 ease-in-out",
                             activeView === item.label ? "bg-white/20" : ""
                         )}
                     >
@@ -1174,7 +1174,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            x: { type: "spring", stiffness: 250, damping: 25 },
                             opacity: { duration: 0.2 }
                         }}
                         drag="x"
@@ -1254,7 +1254,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
           
            <GlassPanel 
                className={cn(
-                   "w-[600px] h-[480px] transition-all duration-300 mx-6"
+                   "w-[600px] h-[480px] transition-all duration-500 ease-in-out mx-6"
                )} 
                isContentPanel={true} 
                activeView={activeView}

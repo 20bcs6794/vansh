@@ -126,7 +126,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         ref={tiltRef} 
         className="absolute inset-[-15%]"
         style={{ 
-          transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
+          transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
           transform: 'scale(1.3)',
         }}
       >
@@ -197,5 +197,3 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     </div>
   );
 }
-
-    
