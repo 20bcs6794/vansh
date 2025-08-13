@@ -228,7 +228,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
             
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
-                <div className="w-[80%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                <div className="w-[90%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
                     <span className="text-xs font-sans text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                     <Button
                         variant="ghost"
@@ -710,10 +710,13 @@ const CareerTimeline = () => {
                                         <h3 className="font-bold text-base">{item.title}</h3>
                                         <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
-                                    <p className="text-sm mt-1">
+                                    <div className="flex items-center text-sm mt-1">
+                                      <item.icon className="w-4 h-4 mr-2" />
+                                      <span>
                                         {item.company} 
                                         {item.grade && ` | ${item.grade}`}
-                                    </p>
+                                      </span>
+                                    </div>
                                     <div className="text-sm mt-2">{item.description}</div>
                                 </div>
                             ))}
