@@ -4,7 +4,7 @@
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon } from 'lucide-react';
+import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -45,7 +45,7 @@ const LinkedInIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 
-const BentoHomeGrid = () => {
+const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void}) => {
     const [isCopied, setIsCopied] = useState(false);
     const { theme } = useTheme();
     const isMobile = useIsMobile();
@@ -59,7 +59,7 @@ const BentoHomeGrid = () => {
         setIsCopied(true);
         setTimeout(() => {
             setIsCopied(false);
-        }, 5000); 
+        }, 2000); 
     };
 
     if (isMobile) {
@@ -109,10 +109,12 @@ const BentoHomeGrid = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                      {/* Deployed Projects */}
-                    <BentoCard className={cn(mobileCardClasses, "col-span-1 flex flex-col items-center justify-center")}>
-                         <h3 className="text-3xl font-bold">09+</h3>
-                         <p className="dark:text-neutral-400 text-gray-600 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
-                    </BentoCard>
+                    <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
+                        <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center")}>
+                             <h3 className="text-3xl font-bold">09+</h3>
+                             <p className="dark:text-neutral-400 text-gray-600 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                        </BentoCard>
+                    </a>
 
                     {/* Certificates */}
                     <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
@@ -130,22 +132,17 @@ const BentoHomeGrid = () => {
                 {/* Have a project in mind */}
                 <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                    <Button 
-                        onClick={handleCopyEmail} 
-                        className={cn(
-                            "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors text-sm h-9", 
-                            isCopied && "bg-green-600 hover:bg-green-700"
-                        )}
-                    >
-                        {isCopied ? (
-                            <span className="flex items-center justify-center">
-                                <Check className="w-4 h-4 mr-2" />
-                                Copied!
-                            </span>
-                        ) : (
-                           "Copy my email"
-                        )}
-                    </Button>
+                    <div className="flex items-center gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                        <span className="text-sm font-mono text-black dark:text-white">mr.vanshverma2001@gmail.com</span>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={handleCopyEmail}
+                            className={cn("h-7 w-7", isCopied ? "text-green-500" : "text-black dark:text-white")}
+                        >
+                            {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        </Button>
+                    </div>
                 </BentoCard>
                 
                  {/* Socials */}
@@ -223,29 +220,26 @@ const BentoHomeGrid = () => {
                 </BentoCard>
             </a>
 
-            <BentoCard className="col-span-1 md:col-span-1 flex flex-col items-center justify-center animate-expand-x" style={{ animationDelay: '0.2s' }}>
-                 <h3 className="text-5xl font-bold">09+</h3>
-                 <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
-            </BentoCard>
+            <a onClick={() => setActiveView("Projects")} className="group animate-expand-x cursor-pointer" style={{ animationDelay: '0.2s' }}>
+                <BentoCard className="col-span-1 md:col-span-1 h-full flex flex-col items-center justify-center">
+                     <h3 className="text-5xl font-bold">09+</h3>
+                     <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                </BentoCard>
+            </a>
             
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
-                <Button 
-                    onClick={handleCopyEmail} 
-                    className={cn(
-                        "w-full max-w-xs bg-primary/80 hover:bg-primary text-primary-foreground transition-colors", 
-                        isCopied && "bg-green-600 hover:bg-green-700"
-                    )}
-                >
-                    {isCopied ? (
-                        <span className="flex items-center justify-center">
-                            <Check className="w-4 h-4 mr-2" />
-                            Copied!
-                        </span>
-                    ) : (
-                       "Copy my email"
-                    )}
-                </Button>
+                <div className="flex items-center gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                    <span className="text-sm font-mono text-black dark:text-white">mr.vanshverma2001@gmail.com</span>
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={handleCopyEmail}
+                        className={cn("h-7 w-7", isCopied ? "text-green-500" : "text-black dark:text-white")}
+                    >
+                        {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                </div>
             </BentoCard>
         </div>
     );
@@ -1092,7 +1086,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
     switch (activeView) {
       case 'Home':
-        content = <BentoHomeGrid />;
+        content = <BentoHomeGrid setActiveView={setActiveView} />;
         break;
       case 'Projects':
         content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
@@ -1300,3 +1294,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+
+    
