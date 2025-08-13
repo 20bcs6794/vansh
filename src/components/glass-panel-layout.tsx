@@ -96,8 +96,8 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         </div>
                     </div>
                     <div className="flex flex-col text-left mt-2">
-                        <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="dark:text-neutral-400 text-neutral-600 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
+                        <p className="dark:text-neutral-400 text-neutral-700 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
                         <div className="flex items-center text-muted-foreground mt-2 text-sm">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span className="font-bold">New Delhi, India</span>
@@ -130,8 +130,8 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                 {/* Have a project in mind */}
                 <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                    <div className="flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-full">
-                        <span className="text-sm font-mono text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
+                    <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-full">
+                        <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                         <Button
                             variant="ghost"
                             size="icon"
@@ -146,18 +146,18 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                  {/* Socials */}
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
                             <LinkedInIcon className="size-14" />
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
                             <WhatsAppIcon className="size-14"/>
                            
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
+                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform ")}>
                             <GmailIcon className="size-14"/>
                         </BentoCard>
                     </a>
@@ -227,8 +227,8 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
             
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
-                <div className="w-[80%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
-                    <span className="text-sm font-sans  text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
+                <div className="w-full flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                    <span className="text-xs font-sans text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                     <Button
                         variant="ghost"
                         size="icon"
@@ -695,11 +695,11 @@ const CareerTimeline = () => {
     if (isMobile) {
         const mobileCardClasses = cn(
             "p-4 rounded-lg shadow-md w-full",
-            "bg-white/70 text-neutral-800 dark:bg-black/60 backdrop-blur-[4px] dark:text-white"
+            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-[4px] dark:text-white"
         );
         return (
             <div className={containerClasses}>
-                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-900 dark:text-white">Where I’ve Been, What I’ve Done</h2>
+                <h2 className="text-2xl font-bold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I’ve Been, What I’ve Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4">
                         <div className="flex flex-col gap-y-4">
@@ -1096,12 +1096,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white rounded-[20px]")
+                  ? cn("bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px]")
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
-                  <h3 className={cn("font-semibold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
+                  <h3 className={cn("font-extrabold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
                    {isMobile && (
                      <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
                        <Download className="w-3 h-3" />
@@ -1131,7 +1131,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-neutral-800 dark:text-white" : "")}>Tools and Technologies</h3>
+              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
                   <div className="flex shrink-0 gap-4">
