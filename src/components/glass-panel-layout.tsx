@@ -1,3 +1,4 @@
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -414,7 +415,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
             <div className={containerClasses}>
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
-                    <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
+                    <ScrollArea className="absolute inset-0 h-full w-full">
                         <div className="grid grid-cols-1 gap-4 p-1">
                             {projectsData.map(project => {
                                 const isExpanded = expandedProjectId === project.id;
@@ -465,7 +466,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         <div className={containerClasses}>
             <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x">My Works</h2>
             <div className="flex-grow min-h-0 relative">
-                <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
+                <ScrollArea className="absolute inset-0 h-full w-full">
                     <div className={cn("gap-4 p-1", isMobile ? "grid grid-cols-1" : "grid grid-cols-4 auto-rows-fr")}>
                         {projectsData.map(project => (
                             <div
