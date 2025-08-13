@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -32,16 +33,14 @@ const ScrollBar = React.forwardRef<
     orientation={orientation}
     className={cn(
       "flex touch-none select-none transition-colors",
-      "bg-transparent w-0 h-0",
-      orientation === "vertical" &&
-        "h-full w-0 border-l border-l-transparent p-0",
-      orientation === "horizontal" &&
-        "h-0 flex-col border-t border-t-transparent p-0",
+      "data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:h-2.5",
+      "data-[orientation=vertical]:border-l data-[orientation=vertical]:border-l-transparent data-[orientation=vertical]:p-[1px]",
+      "data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:border-t data-[orientation=horizontal]:border-t-transparent data-[orientation=horizontal]:p-[1px]",
       className
     )}
     {...props}
   >
-    <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-transparent" />
+    <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-black/20 dark:bg-white/20 transition-colors duration-300 hover:bg-black/40 dark:hover:bg-white/40" />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ))
 ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
