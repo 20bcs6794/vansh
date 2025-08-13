@@ -132,13 +132,13 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                 {/* Have a project in mind */}
                 <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                    <div className="flex items-center gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
-                        <span className="text-sm font-mono text-black dark:text-white">mr.vanshverma2001@gmail.com</span>
+                    <div className="flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-full">
+                        <span className="text-sm font-mono text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                         <Button
                             variant="ghost"
                             size="icon"
                             onClick={handleCopyEmail}
-                            className={cn("h-7 w-7", isCopied ? "text-green-500" : "text-black dark:text-white")}
+                            className={cn("h-7 w-7 shrink-0", isCopied ? "text-green-500" : "text-black dark:text-white")}
                         >
                             {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         </Button>
@@ -229,13 +229,13 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
             
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
-                <div className="w-auto inline-flex items-center gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
-                    <span className="text-sm font-mono text-black dark:text-white">mr.vanshverma2001@gmail.com</span>
+                <div className="w-[80%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                    <span className="text-sm font-mono text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                     <Button
                         variant="ghost"
                         size="icon"
                         onClick={handleCopyEmail}
-                        className={cn("h-7 w-7", isCopied ? "text-green-500" : "text-black dark:text-white")}
+                        className={cn("h-7 w-7 shrink-0", isCopied ? "text-green-500" : "text-black dark:text-white")}
                     >
                         {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </Button>
@@ -1098,7 +1098,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-white/70 text-neutral-900 backdrop-blur-[5px] dark:bg-black/70 dark:text-white rounded-[20px]")
+                  ? cn("bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white rounded-[20px]")
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
