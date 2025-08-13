@@ -99,7 +99,7 @@ const BentoHomeGrid = () => {
                     </div>
                     <div className="flex flex-col text-left mt-2">
                         <h2 className="text-lg font-bold">Hi, I'm Vanshdeep —</h2>
-                        <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                        <p className="dark:text-neutral-400 text-neutral-600 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
                         <div className="flex items-center text-muted-foreground mt-2 text-sm">
                             <MapPin className="w-4 h-4 mr-2" />
                             <span className="font-bold">New Delhi, India</span>
@@ -111,7 +111,7 @@ const BentoHomeGrid = () => {
                      {/* Deployed Projects */}
                     <BentoCard className={cn(mobileCardClasses, "col-span-1 flex flex-col items-center justify-center")}>
                          <h3 className="text-3xl font-bold">09+</h3>
-                         <p className="text-muted-foreground text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                         <p className="dark:text-neutral-400 text-gray-600 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
                     </BentoCard>
 
                     {/* Certificates */}
@@ -152,18 +152,18 @@ const BentoHomeGrid = () => {
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <LinkedInIcon className="size-16" />
+                            <LinkedInIcon className="size-14" />
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <WhatsAppIcon className="size-16"/>
+                            <WhatsAppIcon className="size-14"/>
                            
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform group-hover:scale-105 p-2")}>
-                            <GmailIcon className="size-16"/>
+                            <GmailIcon className="size-14"/>
                         </BentoCard>
                     </a>
                 </div>
@@ -703,7 +703,7 @@ const CareerTimeline = () => {
     if (isMobile) {
         const mobileCardClasses = cn(
             "p-4 rounded-lg shadow-md w-full",
-            "bg-white/50 text-neutral-800 dark:bg-black/60 backdrop-blur-[4px] dark:text-white"
+            "bg-white/70 text-neutral-800 dark:bg-black/60 backdrop-blur-[4px] dark:text-white"
         );
         return (
             <div className={containerClasses}>
@@ -1104,7 +1104,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-white/50 text-neutral-900 backdrop-blur-[3px] dark:bg-black/70 dark:text-white rounded-[20px]")
+                  ? cn("bg-white/70 text-neutral-900 backdrop-blur-[5px] dark:bg-black/70 dark:text-white rounded-[20px]")
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
