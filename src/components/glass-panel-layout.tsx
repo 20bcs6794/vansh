@@ -444,8 +444,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                             display: 'grid',
                             gridTemplateAreas: `
                                 "a a b c"
-                                "d d e c"
-                                "f f g g"
+                                "d e e c"
+                                "f g g g"
                             `,
                             gridTemplateColumns: '1fr 1fr 1fr 1fr',
                             gridTemplateRows: '1fr 1fr 1fr',
@@ -1274,4 +1274,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   );
 }
     
+
 
