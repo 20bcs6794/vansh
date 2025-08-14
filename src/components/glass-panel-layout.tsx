@@ -154,7 +154,6 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                         <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
                             <WhatsAppIcon className="size-14"/>
-                           
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
@@ -445,8 +444,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                             display: 'grid',
                             gridTemplateAreas: `
                                 "a a b c"
-                                "d e e c"
-                                "d f g g"
+                                "d d d c"
+                                "e f g g"
                             `,
                             gridTemplateColumns: '1fr 1fr 1fr 1fr',
                             gridTemplateRows: '1fr 1fr 1fr',
