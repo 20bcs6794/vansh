@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -131,7 +132,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                 {/* Have a project in mind */}
                 <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                     <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                    <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-full">
+                    <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
                         <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                         <Button
                             variant="ghost"
@@ -306,17 +307,6 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
 
     const projectsData = [
       {
-        id: 1,
-        name: 'Helpdesk Performance Dashboard',
-        description: 'A Power BI dashboard analyzing customer interactions and help desk performance, tracking metrics like issue resolution times and SLAs.',
-        fullDescription: "This Power BI dashboard provides insights into help desk performance, tracking metrics like customer interactions and issue resolution times. It highlights how agents effectively manage hardware issues and maintain service levels, ensuring solutions are provided without breaching SLAs.",
-        tech: ['Power BI', 'SQL', 'DAX', 'Python', 'Excel'],
-        link: 'https://app.powerbi.com/reportEmbed?reportId=a4f4d3a9-b969-4371-ae4c-37eb50af0c9f&autoAuth=true&ctid=301286c1-17fc-48da-84b1-ea115f6778b4',
-        bgColor: 'from-purple-500 to-indigo-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
-      },
-      {
         id: 2,
         name: 'Dabur Bot Clone',
         description: 'A conversational AI bot powered by Gen AI and Dialogflow to automate customer support and handle queries efficiently.',
@@ -335,6 +325,28 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'JWT Auth', 'React Router', 'Fetch API', 'Tailwind CSS'],
         link: 'https://getjobby43.ccbp.tech/',
         bgColor: 'from-blue-500 to-cyan-600',
+        colSpan: 'col-span-2',
+        rowSpan: 'row-span-1',
+      },
+      {
+        id: 1,
+        name: 'Helpdesk Performance Dashboard',
+        description: 'A Power BI dashboard analyzing customer interactions and help desk performance, tracking metrics like issue resolution times and SLAs.',
+        fullDescription: "This Power BI dashboard provides insights into help desk performance, tracking metrics like customer interactions and issue resolution times. It highlights how agents effectively manage hardware issues and maintain service levels, ensuring solutions are provided without breaching SLAs.",
+        tech: ['Power BI', 'SQL', 'DAX', 'Python', 'Excel'],
+        link: 'https://app.powerbi.com/reportEmbed?reportId=a4f4d3a9-b969-4371-ae4c-37eb50af0c9f&autoAuth=true&ctid=301286c1-17fc-48da-84b1-ea115f6778b4',
+        bgColor: 'from-purple-500 to-indigo-600',
+        colSpan: 'col-span-2',
+        rowSpan: 'row-span-1',
+      },
+      {
+        id: 8,
+        name: 'Trendz App',
+        description: 'An e-commerce style application for browsing products, featuring secure authentication and a modern, responsive design.',
+        fullDescription: 'Trendz is a mock e-commerce application built with React. It includes user authentication with JWT, protected routes using React Router, and fetches product data from a REST API. The project demonstrates the ability to build a feature-rich, secure, and modern web application.',
+        tech: ['React.js', 'React Router', 'REST API', 'JWT Auth'],
+        link: 'https://vanshtrendz.ccbp.tech/',
+        bgColor: 'from-rose-500 to-red-600',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-1',
       },
@@ -350,17 +362,6 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         rowSpan: 'row-span-1',
       },
       {
-        id: 5,
-        name: 'Prime Clone',
-        description: 'A clone of the popular streaming service, built with React and featuring secure JWT authentication for user access.',
-        fullDescription: 'This project is a functional clone of a major streaming platform, built with React. It features a responsive UI, routing with React Router, and secure user login using JWT authentication. It demonstrates the ability to replicate complex UIs and implement secure front-end systems.',
-        tech: ['React.js', 'React Router', 'JWT Auth', 'JavaScript', 'CSS3'],
-        link: 'https://primeclone43.ccbp.tech/',
-        bgColor: 'from-sky-500 to-indigo-500',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
-      },
-      {
         id: 6,
         name: 'Timeline App',
         description: 'A responsive timeline component to display events or historical data in a clear and chronological order.',
@@ -368,28 +369,6 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
         tech: ['React.js', 'JSX', 'JavaScript', 'CSS3'],
         link: 'https://worktimeline.ccbp.tech/',
         bgColor: 'from-fuchsia-500 to-pink-600',
-        colSpan: 'col-span-1',
-        rowSpan: 'row-span-1',
-      },
-      {
-        id: 7,
-        name: 'CoWIN Dashboard',
-        description: 'A data visualization dashboard for COVID-19 vaccination data, built with React and the Recharts library.',
-        fullDescription: 'This project is a data visualization dashboard displaying COVID-19 vaccination statistics. It uses React and the Recharts library to create interactive charts and graphs from data fetched via a REST API. It highlights skills in data visualization and API integration.',
-        tech: ['React.js', 'Recharts', 'CSS3', 'JavaScript', 'REST API'],
-        link: 'https://cowin2022.ccbp.tech/',
-        bgColor: 'from-amber-500 to-yellow-600',
-        colSpan: 'col-span-2',
-        rowSpan: 'row-span-1',
-      },
-      {
-        id: 8,
-        name: 'Trendz App',
-        description: 'An e-commerce style application for browsing products, featuring secure authentication and a modern, responsive design.',
-        fullDescription: 'Trendz is a mock e-commerce application built with React. It includes user authentication with JWT, protected routes using React Router, and fetches product data from a REST API. The project demonstrates the ability to build a feature-rich, secure, and modern web application.',
-        tech: ['React.js', 'React Router', 'REST API', 'JWT Auth'],
-        link: 'https://vanshtrendz.ccbp.tech/',
-        bgColor: 'from-rose-500 to-red-600',
         colSpan: 'col-span-1',
         rowSpan: 'row-span-1',
       },
