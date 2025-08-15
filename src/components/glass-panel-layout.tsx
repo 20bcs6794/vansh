@@ -422,7 +422,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 gap-4 p-1 pb-2">
+                        <div className="grid grid-cols-1 gap-4 p-1">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
                                 return (
@@ -447,7 +447,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                                 initial={{ opacity: 0, height: 0, marginTop: 0 }}
                                                 animate={{ opacity: 1, height: 'auto', marginTop: '1rem' }}
                                                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                                transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
                                                 className="overflow-hidden"
                                             >
                                                 <p className="text-sm text-center mb-4">{project.fullDescription}</p>
@@ -1197,7 +1197,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            x: { type: "spring", stiffness: 350, damping: 35 },
                             opacity: { duration: 0.2 }
                         }}
                         drag="x"
