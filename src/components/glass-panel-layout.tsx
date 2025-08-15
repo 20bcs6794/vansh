@@ -216,7 +216,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         <span className="font-bold">New Delhi, India</span>
                     </div>
                     <div className="mt-auto pt-4">
-                         <Button asChild className="w-full bg-primary text-primary-foreground dark:bg-primary dark:text-primary-foreground" size="lg">
+                         <Button asChild className="w-full bg-primary/20 text-black dark:bg-primary dark:text-primary-foreground font-bold hover:bg-primary/30 dark:hover:bg-primary/90" size="default">
                             <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
                                 <Download className="w-4 h-4 mr-2" />
                                 Download Resume
@@ -1291,12 +1291,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
           >
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-black dark:text-white">About</h2>
-                <Button asChild variant="ghost" className="text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-1 text-sm h-auto font-bold">
-                  <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                    <Download className="w-4 h-4" />
-                    <span>Resume</span>
-                  </a>
-                </Button>
             </div>
             
             <div className="bg-white/80 dark:bg-black/70 rounded-[20px] p-4 text-sm h-full flex flex-col">
@@ -1320,6 +1314,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
