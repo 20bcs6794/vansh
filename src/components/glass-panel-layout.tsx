@@ -1095,16 +1095,13 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                   <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
-                        Hello, I'm Vanshdeep, an ambitious young professional with a background in web development and data analytics.
-                        I hold a strong foundation in creating dynamic web applications and leveraging data for insightful business intelligence.
-                        I recently completed several projects focusing on React, Next.js, and Power BI. But wait, it’s not all about formalities and certificates!
+                        I’m Vanshdeep Verma, a results-driven Data Analyst and Frontend Developer who bridges the gap between data insights and user-focused digital solutions. I help businesses leverage Power BI dashboards, SQL queries, Python automation, and React.js applications to improve efficiency, decision-making, and customer experience.
                       </p>
                       <p>
-                        In my spare time, you’ll find me exploring new technologies, contributing to open-source projects, or jet-setting around the globe.
-                        I once embarked on an adventurous journey to build a complete full-stack application from scratch, acquiring adaptability, independence, and some seriously impressive problem-solving skills along the way.
+                        My work has delivered 40%+ operational efficiency gains, 30% reductions in manual reporting, and increased user engagement through interactive dashboards and optimized UI/UX design. By combining data visualization, process automation, and responsive web development, I create solutions that directly impact business growth and ROI.
                       </p>
                       <p>
-                        Now, I’m setting my sights on the role of a Senior Developer. Want to know more? Take a look around and uncover the real me!
+                        With expertise in business intelligence tools, data-driven strategies, and modern web frameworks, I’m committed to helping organizations scale smarter, operate faster, and make data-backed decisions that deliver measurable results. Below are the teck stacks I used in my services.
                       </p>
                     </div>
                   </ScrollArea>
@@ -1275,4 +1272,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 }
     
 
-
+    
