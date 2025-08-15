@@ -1077,12 +1077,13 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         content = (
           <div className="h-full flex flex-col p-4 gap-4">
             <div
-              className={cn(
-                "p-4 flex flex-col",
-                 isMobile
-                  ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow min-h-0"
-                  : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
-              )}
+                className={cn(
+                    "p-4 flex flex-col",
+                    isMobile 
+                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow min-h-0" 
+                        : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0",
+                    isMobile && "h-[70vh]"
+                )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-extrabold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
@@ -1093,8 +1094,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                      </a>
                    )}
               </div>
-              <div className={cn("relative mb-2", !isMobile && "flex-grow min-h-0")}>
-                <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
+              <div className={cn("relative mb-2 flex-grow min-h-0")}>
+                <div className={cn("space-y-3 text-sm absolute inset-0")}>
                   <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
