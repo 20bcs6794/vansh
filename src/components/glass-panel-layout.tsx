@@ -643,7 +643,7 @@ const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.Elemen
 const careerTimelineData = [
   {
     icon: Briefcase,
-    logo: '/icons/cache_digitech_pvt_ltd_logo.jpeg',
+    logo: '/icons/cache_digitech_pvt_ltd_logo.webp',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -664,7 +664,7 @@ const careerTimelineData = [
   },
   {
     icon: Briefcase,
-    logo: '/icons/dabur_logo.png',
+    logo: '/icons/Dabur_Logo.svg',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -685,9 +685,9 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/icons/chandigarh_university_logo.png',
+    logo: '/icons/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
-    company: "Chandigarh University ",
+    company: "Chandigarh University",
     location: "Punjab, India",
     period: "2020 - 2024",
     grade: "Grade: A+",
@@ -732,9 +732,9 @@ const CareerTimeline = () => {
                                         <div className="flex-grow">
                                             <h3 className="font-bold text-base">{item.title}</h3>
                                             <p className="text-sm font-semibold">{item.company}</p>
-                                            <p className="text-xs text-muted-foreground mt-1">{item.period}</p>
-                                            {item.location && (
-                                                <p className="text-xs text-muted-foreground">{item.location}</p>
+                                            <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
+                                            {item.grade && (
+                                                <p className="text-sm text-muted-foreground">{item.grade}</p>
                                             )}
                                         </div>
                                     </div>
