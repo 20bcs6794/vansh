@@ -1080,9 +1080,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 className={cn(
                     "p-4 flex flex-col",
                     isMobile 
-                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow h-[60%]" 
+                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] h-[70%]" 
                         : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0",
-                    isMobile && ""
                 )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
@@ -1102,10 +1101,10 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         I’m <strong>Vanshdeep Verma</strong>, a technology professional who blends <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to create solutions that deliver measurable business impact. I bridge the gap between technical execution, business objectives, and cross-team collaboration, ensuring every project achieves tangible ROI.
                       </p>
                       <p>My work has consistently resulted in:</p>
-                      <ul className="list-disc list-inside space-y-1">
-                          <li><strong>40%+</strong> operational efficiency gains through automation</li>
-                          <li><strong>30%</strong> faster reporting cycles via workflow optimization</li>
-                          <li>Higher customer engagement through improved digital experiences</li>
+                      <ul className="list-disc list-inside">
+                          <li ><strong>40%+</strong> operational efficiency gains through automation</li>
+                          <li ><strong>30%</strong> faster reporting cycles via workflow optimization</li>
+                          <li >Higher customer engagement through improved digital experiences</li>
                       </ul>
                       <p>
                         With experience across data-driven strategy, automation, and user-focused innovation, I help organizations scale smarter, operate faster, and make decisions backed by actionable insights.
@@ -1124,7 +1123,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
               <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
               <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                <div className="flex w-max animate-scroll-x gap-4 group-hover:[animation-play-state:paused]">
+                <div className="flex w-max animate-scroll-x gap-4 mt-3 group-hover:[animation-play-state:paused]">
                   <div className="flex shrink-0 gap-4">
                     {technologiesWithIcons.map((tech, index) => (
                       <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
