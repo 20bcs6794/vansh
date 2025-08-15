@@ -733,10 +733,11 @@ const CareerTimeline = () => {
                                             <h3 className="font-bold text-base">{item.title}</h3>
                                             <p className="text-sm font-semibold">{item.company}</p>
                                             {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                            <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
-                                            {item.location && (
-                                                <p className="text-sm text-muted-foreground">{item.location}</p>
-                                            )}
+                                            <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
+                                                <span>{item.period}</span>
+                                                {item.location && <span>•</span>}
+                                                {item.location && <span>{item.location}</span>}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="text-sm mt-3">{item.description}</div>
@@ -1345,5 +1346,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
-
 
