@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -408,7 +407,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 setTimeout(() => {
                     projectRefs.current[projectIndex]?.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'nearest',
+                        block: 'end',
                     });
                 }, 300); // Wait for animation to finish
             }
@@ -1321,3 +1320,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
 
 
+
+
+    
