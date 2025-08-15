@@ -228,7 +228,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
             
             <BentoCard className="col-span-1 md:col-span-2 flex flex-col justify-center items-center animate-expand-y" style={{ animationDelay: '0.3s' }}>
                 <h3 className="font-bold text-lg mb-4 text-center">Have a project in mind?</h3>
-                <div className="w-[90%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
+                <div className="w-[80%] flex items-center justify-between gap-2 bg-primary/20 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg">
                     <span className="text-xs font-sans text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                     <Button
                         variant="ghost"
@@ -1059,8 +1059,10 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         
     let finalContainerClasses = containerClasses;
     if (isMobile) {
-      if (activeView === 'Home' || activeView === 'Personal') {
+      if (activeView === 'Home') {
         finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-2";
+      } else if (activeView === 'Personal') {
+        finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
       }
     }
 
@@ -1078,7 +1080,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className={cn(
                 "p-4 flex flex-col",
                  isMobile
-                  ? cn("bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px]")
+                  ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow min-h-0"
                   : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0"
               )}
             >
@@ -1091,9 +1093,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                      </a>
                    )}
               </div>
-              <div className={cn("relative mb-2", !isMobile && "flex-grow")}>
+              <div className={cn("relative mb-2", !isMobile && "flex-grow min-h-0")}>
                 <div className={cn("space-y-3 text-sm", !isMobile && "absolute inset-0")}>
-                  <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
+                  <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
                         I’m <strong>Vanshdeep Verma</strong>, a technology professional who blends <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to create solutions that deliver measurable business impact. I bridge the gap between technical execution, business objectives, and cross-team collaboration, ensuring every project achieves tangible ROI.
