@@ -643,7 +643,7 @@ const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.Elemen
 const careerTimelineData = [
   {
     icon: Briefcase,
-    logo: '/logo/cache.png',
+    logo: '/icons/cache_digitech_pvt_ltd_logo.jpeg',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -664,7 +664,7 @@ const careerTimelineData = [
   },
   {
     icon: Briefcase,
-    logo: '/logo/dabur.png',
+    logo: '/icons/dabur_logo.png',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -685,7 +685,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/logo/cu.png',
+    logo: '/icons/chandigarh_university_logo.png',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University ",
     location: "Punjab, India",
@@ -695,7 +695,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/logo/midtown.png',
+    logo: '/icons/ddps_logo.jpeg',
     title: "Senior Secondary School Diploma",
     company: "Midtown School [D.D.P.S Bijnor]",
     location: "Bijnor, India",
@@ -715,7 +715,7 @@ const CareerTimeline = () => {
     if (isMobile) {
         const mobileCardClasses = cn(
             "p-4 rounded-lg shadow-md w-full",
-            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-[4px] dark:text-white"
+            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
         );
         return (
             <div className={containerClasses}>
@@ -727,8 +727,8 @@ const CareerTimeline = () => {
                                 <div key={index} className={mobileCardClasses}>
                                     <div className="flex justify-between items-start mb-2">
                                         <div className="flex items-center gap-3">
-                                            {typeof item.icon === 'string' ? (
-                                                <Image src={item.icon} alt={`${item.company} logo`} width={40} height={40} className="rounded-full bg-white p-1" />
+                                            {item.logo ? (
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={40} height={40} className="rounded-full bg-white p-1" />
                                             ) : (
                                                 <item.icon className="w-10 h-10" />
                                             )}
