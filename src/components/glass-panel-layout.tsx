@@ -1135,8 +1135,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             </div>
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
               <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
-              <div className="group relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                <div className="flex w-max animate-scroll-x gap-4 mt-3 group-hover:[animation-play-state:paused]">
+              <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
+                <div className="flex w-max animate-scroll-x gap-4 mt-3">
                   <div className="flex shrink-0 gap-4">
                     {technologiesWithIcons.map((tech, index) => (
                       <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
