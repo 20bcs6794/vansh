@@ -687,10 +687,9 @@ const careerTimelineData = [
     icon: GraduationCap,
     logo: '/icons/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
-    company: "Chandigarh University",
+    company: "Chandigarh University | Grade: A+",
     location: "Punjab, India",
     period: "2020 - 2024",
-    grade: "Grade: A+",
     description: "Graduated with honors, specializing in Artificial Intelligence and machine learning. Completed a final year project on an complete AI Model which will reduce the human work on computer Systems. Graduated with a solid academic record and multiple industry-recognized certifications, while actively applying skills through projects and internships."
   },
   {
@@ -733,8 +732,8 @@ const CareerTimeline = () => {
                                             <h3 className="font-bold text-base">{item.title}</h3>
                                             <p className="text-sm font-semibold">{item.company}</p>
                                             <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
-                                            {item.grade && (
-                                                <p className="text-sm text-muted-foreground">{item.grade}</p>
+                                            {item.location && (
+                                                <p className="text-sm text-muted-foreground">{item.location}</p>
                                             )}
                                         </div>
                                     </div>
@@ -781,7 +780,6 @@ const CareerTimeline = () => {
                                                 <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
                                                 <p className="text-md text-muted-foreground font-semibold">
                                                     {item.company} 
-                                                    {item.grade && ` | ${item.grade}`}
                                                 </p>
                                                 {item.location && (
                                                     <div className="flex items-center text-sm text-muted-foreground mt-1">
@@ -1344,3 +1342,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
