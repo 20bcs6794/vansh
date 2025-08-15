@@ -643,6 +643,7 @@ const TechnologyCard = ({ name, icon: Icon }: { name: string, icon: React.Elemen
 const careerTimelineData = [
   {
     icon: Briefcase,
+    logo: '/logo/cache.png',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -663,6 +664,7 @@ const careerTimelineData = [
   },
   {
     icon: Briefcase,
+    logo: '/logo/dabur.png',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -683,6 +685,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
+    logo: '/logo/cu.png',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University ",
     location: "Punjab, India",
@@ -692,6 +695,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
+    logo: '/logo/midtown.png',
     title: "Senior Secondary School Diploma",
     company: "Midtown School [D.D.P.S Bijnor]",
     location: "Bijnor, India",
@@ -721,14 +725,19 @@ const CareerTimeline = () => {
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
                                 <div key={index} className={mobileCardClasses}>
-                                    <div className="flex justify-between items-start">
-                                        <h3 className="font-bold text-base">{item.title}</h3>
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div className="flex items-center gap-3">
+                                            {typeof item.icon === 'string' ? (
+                                                <Image src={item.icon} alt={`${item.company} logo`} width={40} height={40} className="rounded-full bg-white p-1" />
+                                            ) : (
+                                                <item.icon className="w-10 h-10" />
+                                            )}
+                                            <div>
+                                                <h3 className="font-bold text-base">{item.title}</h3>
+                                                <p className="text-sm font-semibold">{item.company}</p>
+                                            </div>
+                                        </div>
                                         <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
-                                    </div>
-                                    <div className="flex items-center mt-2">
-                                      <item.icon className="w-6 h-6 mr-2" />
-                                      <span className="text-base font-extrabold">{item.company}</span>
-                                      {item.grade && <span className="text-sm text-muted-foreground ml-2">| {item.grade}</span>}
                                     </div>
                                     <div className="text-sm mt-2">{item.description}</div>
                                 </div>
@@ -748,36 +757,44 @@ const CareerTimeline = () => {
                     <div className="relative flex flex-col gap-y-10">
                         <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2 animate-expand-y" />
 
-                        {careerTimelineData.map((item, index) => (
-                            <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start animate-expand-x" style={{animationDelay: `${index * 0.1 + 0.1}s`}}>
-                                <div className="w-28 text-left">
-                                    <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
-                                        <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center justify-center">
-                                    <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
-                                        <item.icon className="w-5 h-5 text-black dark:text-white" />
-                                    </div>
-                                </div>
-                                
-                                <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
-                                    <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">
-                                        {item.company} 
-                                        {item.grade && ` | ${item.grade}`}
-                                    </p>
-                                    {item.location && (
-                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
-                                            <MapPin className="w-4 h-4 mr-2" />
-                                            <span>{item.location}</span>
+                        {careerTimelineData.map((item, index) => {
+                            const Icon = item.icon;
+                            return (
+                                <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start animate-expand-x" style={{animationDelay: `${index * 0.1 + 0.1}s`}}>
+                                    <div className="w-28 text-left">
+                                        <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
+                                            <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
                                         </div>
-                                    )}
-                                    <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">{item.description}</div>
+                                    </div>
+
+                                    <div className="flex items-center justify-center">
+                                        <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
+                                            <Icon className="w-5 h-5 text-black dark:text-white" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
+                                        <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
+                                        <div className="flex items-center gap-2 mt-1">
+                                            {item.logo && (
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={24} height={24} className="rounded-full bg-white p-0.5" />
+                                            )}
+                                            <p className="text-sm text-muted-foreground">
+                                                {item.company} 
+                                                {item.grade && ` | ${item.grade}`}
+                                            </p>
+                                        </div>
+                                        {item.location && (
+                                            <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                                <MapPin className="w-4 h-4 mr-2" />
+                                                <span>{item.location}</span>
+                                            </div>
+                                        )}
+                                        <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">{item.description}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            )
+                        })}
                     </div>
                 </ScrollArea>
             </div>
@@ -1322,5 +1339,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
 
 
+
+    
 
     
