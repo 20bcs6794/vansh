@@ -1080,9 +1080,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 className={cn(
                     "p-4 flex flex-col",
                     isMobile 
-                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow min-h-0" 
+                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] flex-grow h-[55%]" 
                         : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0",
-                    isMobile && "h-[70vh]"
+                    isMobile && ""
                 )}
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
