@@ -422,7 +422,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 gap-4 p-1">
+                        <div className="grid grid-cols-1 gap-4 p-1 pb-2">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
                                 return (
@@ -1314,6 +1314,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
