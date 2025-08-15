@@ -447,7 +447,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                                 initial={{ opacity: 0, height: 0, marginTop: 0 }}
                                                 animate={{ opacity: 1, height: 'auto', marginTop: '1rem' }}
                                                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                                 className="overflow-hidden"
                                             >
                                                 <p className="text-sm text-center mb-4">{project.fullDescription}</p>
@@ -1115,7 +1115,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 className={cn(
                     "p-4 flex flex-col",
                     isMobile 
-                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] h-[55%]" 
+                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] h-[70%]" 
                         : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0",
                 )}
             >
@@ -1197,7 +1197,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 250, damping: 25 },
+                            x: { type: "spring", stiffness: 300, damping: 30 },
                             opacity: { duration: 0.2 }
                         }}
                         drag="x"
@@ -1314,6 +1314,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
