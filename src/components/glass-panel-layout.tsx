@@ -605,7 +605,7 @@ const AwsIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const PowerBiIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-  <linearGradient id="zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stopColor="#ebb112"></stop><stop offset="1" stopColor="#bb5c17"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895-2,2v36	C25,43.105,25.895,44,27,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#fed35d"></stop><stop offset=".281" stopColor="#f6c648"></stop><stop offset=".857" stopColor="#e3a513"></stop><stop offset=".989" stopColor="#de9d06"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895-2,2v26	C17,43.105,17.895,44,19,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#ffd869"></stop><stop offset=".983" stopColor="#ffdf26"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895-2,2v16	C9,43.105,9.895,44,11,44z"></path>
+  <linearGradient id="zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1" x1="32" x2="32" y1="3.947" y2="44.751" gradientUnits="userSpaceOnUse"><stop offset=".006" stopColor="#ebb112"></stop><stop offset="1" stopColor="#bb5c17"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0a_3sGOUDo9nJ4k_gr1)" d="M27,44h10c1.105,0,2-0.895,2-2V6c0-1.105-0.895-2-2-2H27c-1.105,0-2,0.895,2,2v36	C25,43.105,25.895,44,27,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2" x1="22.089" x2="26.009" y1="13.14" y2="45.672" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#fed35d"></stop><stop offset=".281" stopColor="#f6c648"></stop><stop offset=".857" stopColor="#e3a513"></stop><stop offset=".989" stopColor="#de9d06"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0b_3sGOUDo9nJ4k_gr2)" d="M19,44h10c1.105,0,2-0.895,2-2V16c0-1.105-0.895-2-2-2H19c-1.105,0-2,0.895,2,2v26	C17,43.105,17.895,44,19,44z"></path><linearGradient id="zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3" x1="9.803" x2="21.335" y1="22.781" y2="43.658" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#ffd869"></stop><stop offset=".983" stopColor="#ffdf26"></stop></linearGradient><path fill="url(#zlT103XX9RAwCGfF9JpW0c_3sGOUDo9nJ4k_gr3)" d="M11,44h10c1.105,0,2-0.895,2-2V26c0-1.105-0.895-2-2-2H11c-1.105,0-2,0.895,2,2v16	C9,43.105,9.895,44,11,44z"></path>
   </svg>
 );
 
@@ -687,7 +687,8 @@ const careerTimelineData = [
     icon: GraduationCap,
     logo: '/icons/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
-    company: "Chandigarh University | Grade: A+",
+    company: "Chandigarh University",
+    grade: "Grade: A+",
     location: "Punjab, India",
     period: "2020 - 2024",
     description: "Graduated with honors, specializing in Artificial Intelligence and machine learning. Completed a final year project on an complete AI Model which will reduce the human work on computer Systems. Graduated with a solid academic record and multiple industry-recognized certifications, while actively applying skills through projects and internships."
@@ -731,6 +732,7 @@ const CareerTimeline = () => {
                                         <div className="flex-grow">
                                             <h3 className="font-bold text-base">{item.title}</h3>
                                             <p className="text-sm font-semibold">{item.company}</p>
+                                            {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
                                             <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
                                             {item.location && (
                                                 <p className="text-sm text-muted-foreground">{item.location}</p>
@@ -781,6 +783,7 @@ const CareerTimeline = () => {
                                                 <p className="text-md text-muted-foreground font-semibold">
                                                     {item.company} 
                                                 </p>
+                                                {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
                                                 {item.location && (
                                                     <div className="flex items-center text-sm text-muted-foreground mt-1">
                                                         <MapPin className="w-4 h-4 mr-2" />
@@ -1342,4 +1345,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
