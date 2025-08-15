@@ -66,104 +66,114 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
         const mobileCardClasses = "bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white";
         
         return (
-            <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
-                {/* Profile Card */}
-                <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
-                    <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
-                        <div
-                            className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                            style={{ opacity: theme === 'light' ? 1 : 0 }}
-                        >
-                            <Image
-                                src={lightImage}
-                                alt="Vanshdeep Verma"
-                                data-ai-hint="person professional portrait"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
-                        <div
-                            className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                            style={{ opacity: theme === 'dark' ? 1 : 0 }}
-                        >
-                            <Image
-                                src={darkImage}
-                                alt="Vanshdeep Verma"
-                                data-ai-hint="person professional portrait"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
-                    </div>
-                    <div className="flex flex-col text-left mt-2">
-                        <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
-                        <p className="dark:text-neutral-400 text-neutral-700 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                        <div className="flex items-center text-muted-foreground mt-2 text-sm">
-                            <MapPin className="w-4 h-4 mr-2" />
-                            <span className="font-bold">New Delhi, India</span>
-                        </div>
-                    </div>
-                </BentoCard>
-
-                <div className="grid grid-cols-2 gap-4">
-                     {/* Deployed Projects */}
-                    <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
-                        <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center")}>
-                             <h3 className="text-3xl font-bold">09+</h3>
-                             <p className="dark:text-neutral-400 text-gray-600 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
-                        </BentoCard>
-                    </a>
-
-                    {/* Certificates */}
-                    <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
-                        <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center cursor-pointer")}>
-                            <div className="text-center">
-                                <h3 className="font-bold text-base">My Certificates</h3>
-                                <div className="flex justify-center items-center mt-2">
-                                     <ChevronRight className="w-6 h-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
-                                </div>
+            <ScrollArea className="h-full w-full">
+                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
+                    {/* Profile Card */}
+                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
+                        <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
+                            <div
+                                className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                style={{ opacity: theme === 'light' ? 1 : 0 }}
+                            >
+                                <Image
+                                    src={lightImage}
+                                    alt="Vanshdeep Verma"
+                                    data-ai-hint="person professional portrait"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
                             </div>
-                        </BentoCard>
-                    </a>
-                </div>
+                            <div
+                                className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                style={{ opacity: theme === 'dark' ? 1 : 0 }}
+                            >
+                                <Image
+                                    src={darkImage}
+                                    alt="Vanshdeep Verma"
+                                    data-ai-hint="person professional portrait"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-col text-left mt-2">
+                            <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
+                            <p className="dark:text-neutral-400 text-neutral-700 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                            <div className="flex items-center justify-between text-muted-foreground mt-2 text-sm">
+                                <div className="flex items-center">
+                                    <MapPin className="w-4 h-4 mr-2" />
+                                    <span className="font-bold">New Delhi, India</span>
+                                </div>
+                                <Button asChild variant="secondary" size="sm" className="h-8">
+                                    <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
+                                        <Download className="w-3 h-3 mr-1" />
+                                        Resume
+                                    </a>
+                                </Button>
+                            </div>
+                        </div>
+                    </BentoCard>
 
-                {/* Have a project in mind */}
-                <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
-                    <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                    <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
-                        <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={handleCopyEmail}
-                            className={cn("h-7 w-7 shrink-0", isCopied ? "text-green-500" : "text-black dark:text-white")}
-                        >
-                            {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                        </Button>
+                    <div className="grid grid-cols-2 gap-4">
+                         {/* Deployed Projects */}
+                        <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
+                            <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center")}>
+                                 <h3 className="text-3xl font-bold">09+</h3>
+                                 <p className="dark:text-neutral-400 text-gray-600 text-xs uppercase tracking-wider text-center">Deployed Projects</p>
+                            </BentoCard>
+                        </a>
+
+                        {/* Certificates */}
+                        <a href={certificatesLink} target="_blank" rel="noopener noreferrer" className="group col-span-1">
+                            <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center cursor-pointer")}>
+                                <div className="text-center">
+                                    <h3 className="font-bold text-base">My Certificates</h3>
+                                    <div className="flex justify-center items-center mt-2">
+                                         <ChevronRight className="w-6 h-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
+                                    </div>
+                                </div>
+                            </BentoCard>
+                        </a>
                     </div>
-                </BentoCard>
-                
-                 {/* Socials */}
-                <div className="grid grid-cols-3 gap-5">
-                    <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
-                            <LinkedInIcon className="size-14" />
-                        </BentoCard>
-                    </a>
-                    <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
-                            <WhatsAppIcon className="size-14"/>
-                        </BentoCard>
-                    </a>
-                    <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                        <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
-                            <GmailIcon className="size-14"/>
-                        </BentoCard>
-                    </a>
+
+                    {/* Have a project in mind */}
+                    <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
+                        <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
+                        <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
+                            <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={handleCopyEmail}
+                                className={cn("h-7 w-7 shrink-0", isCopied ? "text-green-500" : "text-black dark:text-white")}
+                            >
+                                {isCopied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                            </Button>
+                        </div>
+                    </BentoCard>
+                    
+                     {/* Socials */}
+                    <div className="grid grid-cols-3 gap-5">
+                        <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
+                                <LinkedInIcon className="size-14" />
+                            </BentoCard>
+                        </a>
+                        <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
+                                <WhatsAppIcon className="size-14"/>
+                            </BentoCard>
+                        </a>
+                        <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105")}>
+                                <GmailIcon className="size-14"/>
+                            </BentoCard>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </ScrollArea>
         );
     }
 
@@ -198,12 +208,20 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         />
                     </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col flex-grow">
                     <h2 className="text-xl font-bold">Hi, I'm Vanshdeep —</h2>
                     <p className="text-muted-foreground mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
                     <div className="flex items-center text-muted-foreground mt-2 text-sm">
                         <MapPin className="w-4 h-4 mr-2" />
                         <span className="font-bold">New Delhi, India</span>
+                    </div>
+                    <div className="mt-auto pt-4">
+                         <Button asChild className="w-full" size="lg">
+                            <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
+                                <Download className="w-4 h-4 mr-2" />
+                                Download Resume
+                            </a>
+                        </Button>
                     </div>
                 </div>
             </BentoCard>
@@ -395,7 +413,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 }, 300); // Wait for animation to finish
             }
         }
-    }, [expandedProjectId, isMobile]);
+    }, [expandedProjectId, isMobile, projectsData]);
 
 
     if(isMobile) {
@@ -410,7 +428,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                 return (
                                     <div
                                         key={project.id}
-                                        ref={el => projectRefs.current[index] = el}
+                                        ref={el => { if (projectRefs.current) projectRefs.current[index] = el; }}
                                         className={cn(
                                             "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
                                             project.bgColor
@@ -1119,8 +1137,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                       </p>
                       <p>My work has consistently resulted in:</p>
                       <ul className="list-disc list-inside">
-                          <li ><strong>40%+</strong> operational efficiency gains through automation</li>
-                          <li ><strong>30%</strong> faster reporting cycles via workflow optimization</li>
+                          <li ><strong>40%+ operational efficiency gains through automation</strong></li>
+                          <li ><strong>30% faster reporting cycles via workflow optimization</strong></li>
                           <li >Higher customer engagement through improved digital experiences</li>
                       </ul>
                       <p>
@@ -1302,4 +1320,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
