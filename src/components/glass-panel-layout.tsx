@@ -304,6 +304,7 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
 const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string | null) => void }) => {
     const isMobile = useIsMobile();
     const [expandedProjectId, setExpandedProjectId] = useState<number | null>(null);
+    const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const projectsData = [
       {
@@ -378,6 +379,17 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
       },
     ].map((p, i) => ({ ...p, animation: 'animate-expand-y', delay: `${i * 0.1}s` }));
 
+    useEffect(() => {
+        if (isMobile && expandedProjectId !== null) {
+            const projectIndex = projectsData.findIndex(p => p.id === expandedProjectId);
+            if (projectIndex !== -1 && projectRefs.current[projectIndex]) {
+                setTimeout(() => {
+                    projectRefs.current[projectIndex]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300); // Delay to allow animation to start
+            }
+        }
+    }, [expandedProjectId, isMobile, projectsData]);
+
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white"
       : "h-full flex flex-col p-4";
@@ -389,11 +401,12 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
                         <div className="grid grid-cols-1 gap-4 p-1">
-                            {projectsData.map(project => {
+                            {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
                                 return (
                                     <div
                                         key={project.id}
+                                        ref={el => projectRefs.current[index] = el}
                                         className={cn(
                                             "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
                                             project.bgColor
@@ -1285,4 +1298,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
-
