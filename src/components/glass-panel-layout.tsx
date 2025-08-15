@@ -422,7 +422,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 gap-4 p-1">
+                        <div className="grid grid-cols-1 gap-4 p-1 pb-2">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
                                 return (
@@ -725,21 +725,20 @@ const CareerTimeline = () => {
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => (
                                 <div key={index} className={mobileCardClasses}>
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className="flex items-center gap-3">
-                                            {item.logo ? (
-                                                <Image src={item.logo} alt={`${item.company} logo`} width={40} height={40} className="rounded-full bg-white p-1" />
-                                            ) : (
-                                                <item.icon className="w-10 h-10" />
+                                    <div className="flex items-start gap-4">
+                                        {item.logo && (
+                                            <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" />
+                                        )}
+                                        <div className="flex-grow">
+                                            <h3 className="font-bold text-base">{item.title}</h3>
+                                            <p className="text-sm font-semibold">{item.company}</p>
+                                            <p className="text-xs text-muted-foreground mt-1">{item.period}</p>
+                                            {item.location && (
+                                                <p className="text-xs text-muted-foreground">{item.location}</p>
                                             )}
-                                            <div>
-                                                <h3 className="font-bold text-base">{item.title}</h3>
-                                                <p className="text-sm font-semibold">{item.company}</p>
-                                            </div>
                                         </div>
-                                        <p className="font-bold text-xs text-right shrink-0 ml-4">{item.period}</p>
                                     </div>
-                                    <div className="text-sm mt-2">{item.description}</div>
+                                    <div className="text-sm mt-3">{item.description}</div>
                                 </div>
                             ))}
                         </div>
@@ -774,23 +773,25 @@ const CareerTimeline = () => {
                                     </div>
                                     
                                     <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
-                                        <h3 className="font-bold text-base text-black dark:text-white">{item.title}</h3>
-                                        <div className="flex items-center gap-2 mt-1">
+                                        <div className="flex items-start gap-4">
                                             {item.logo && (
-                                                <Image src={item.logo} alt={`${item.company} logo`} width={24} height={24} className="rounded-full bg-white p-0.5" />
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" />
                                             )}
-                                            <p className="text-sm text-muted-foreground">
-                                                {item.company} 
-                                                {item.grade && ` | ${item.grade}`}
-                                            </p>
-                                        </div>
-                                        {item.location && (
-                                            <div className="flex items-center text-sm text-muted-foreground mt-1">
-                                                <MapPin className="w-4 h-4 mr-2" />
-                                                <span>{item.location}</span>
+                                            <div className="flex-grow">
+                                                <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
+                                                <p className="text-md text-muted-foreground font-semibold">
+                                                    {item.company} 
+                                                    {item.grade && ` | ${item.grade}`}
+                                                </p>
+                                                {item.location && (
+                                                    <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                                        <MapPin className="w-4 h-4 mr-2" />
+                                                        <span>{item.location}</span>
+                                                    </div>
+                                                )}
                                             </div>
-                                        )}
-                                        <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-2">{item.description}</div>
+                                        </div>
+                                        <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
                                     </div>
                                 </div>
                             )
