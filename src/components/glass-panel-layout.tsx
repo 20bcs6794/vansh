@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -1095,14 +1096,23 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                   <ScrollArea className={cn(isMobile ? "" : "h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
-                        I’m Vanshdeep Verma, a results-driven Data Analyst and Frontend Developer who bridges the gap between data insights and user-focused digital solutions. I help businesses leverage Power BI dashboards, SQL queries, Python automation, and React.js applications to improve efficiency, decision-making, and customer experience.
+                        I’m <strong>Vanshdeep Verma</strong>, a technology professional who blends <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to create solutions that deliver measurable business impact. I bridge the gap between technical execution, business objectives, and cross-team collaboration, ensuring every project achieves tangible ROI.
                       </p>
+                      <p>My work has consistently resulted in:</p>
+                      <ul className="list-disc list-inside space-y-1">
+                          <li><strong>40%+</strong> operational efficiency gains through automation</li>
+                          <li><strong>30%</strong> faster reporting cycles via workflow optimization</li>
+                          <li>Higher customer engagement through improved digital experiences</li>
+                      </ul>
                       <p>
-                        My work has delivered 40%+ operational efficiency gains, 30% reductions in manual reporting, and increased user engagement through interactive dashboards and optimized UI/UX design. By combining data visualization, process automation, and responsive web development, I create solutions that directly impact business growth and ROI.
+                        With experience across data-driven strategy, automation, and user-focused innovation, I help organizations scale smarter, operate faster, and make decisions backed by actionable insights.
                       </p>
-                      <p>
-                        With expertise in business intelligence tools, data-driven strategies, and modern web frameworks, I’m committed to helping organizations scale smarter, operate faster, and make data-backed decisions that deliver measurable results. Below are the teck stacks I used in my services.
-                      </p>
+                      <p>I focus on delivering value at three levels:</p>
+                      <ul className="list-disc list-inside space-y-1">
+                          <li><strong>Technical</strong> – Building scalable, data-powered tools and digital platforms</li>
+                          <li><strong>Business</strong> – Aligning solutions with strategic goals to maximize ROI</li>
+                          <li><strong>Management</strong> – Coordinating with stakeholders to ensure on-time, high-quality delivery.</li>
+                      </ul>
                     </div>
                   </ScrollArea>
                 </div>
