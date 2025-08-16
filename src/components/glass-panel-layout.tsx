@@ -716,97 +716,51 @@ const CareerTimeline = () => {
         <div className={containerClasses}>
             <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
             <div className="flex-grow min-h-0 relative">
-                <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_10%,black_90%,transparent_100%)]">
-                    <div className="h-full w-full animate-scroll-y">
-                        <div className="relative flex flex-col gap-y-10">
-                            <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2" />
-                            {careerTimelineData.map((item, index) => {
-                                const Icon = item.icon;
-                                return (
-                                    <div key={`${item.id}-${index}`} className="grid grid-cols-[auto_auto_1fr] items-start">
-                                        <div className="w-28 text-left">
-                                            <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
-                                                <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-center justify-center">
-                                            <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
-                                                <Icon className="w-5 h-5 text-black dark:text-white" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
-                                            <div className="flex items-start gap-4">
-                                                {item.logo && (
-                                                    <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
-                                                )}
-                                                <div className="flex-grow">
-                                                    <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
-                                                    <p className="text-md text-muted-foreground font-semibold">
-                                                        {item.company} 
-                                                    </p>
-                                                    {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                                    {item.location && (
-                                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
-                                                            <MapPin className="w-4 h-4 mr-2" />
-                                                            <span>{item.location}</span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+                <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
+                    <div className="relative flex flex-col gap-y-10">
+                        <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2" />
+                        {careerTimelineData.map((item, index) => {
+                            const Icon = item.icon;
+                            return (
+                                <div key={`${item.id}-${index}`} className="grid grid-cols-[auto_auto_1fr] items-start">
+                                    <div className="w-28 text-left">
+                                        <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
+                                            <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
                                         </div>
                                     </div>
-                                )
-                            })}
-                        </div>
-                        {/* Duplicate content for seamless scrolling */}
-                        <div className="relative flex flex-col gap-y-10" aria-hidden="true">
-                            <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2" />
-                            {careerTimelineData.map((item, index) => {
-                                const Icon = item.icon;
-                                return (
-                                    <div key={`${item.id}-duplicate-${index}`} className="grid grid-cols-[auto_auto_1fr] items-start">
-                                        <div className="w-28 text-left">
-                                            <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
-                                                <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
-                                            </div>
-                                        </div>
 
-                                        <div className="flex items-center justify-center">
-                                            <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
-                                                <Icon className="w-5 h-5 text-black dark:text-white" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
-                                            <div className="flex items-start gap-4">
-                                                {item.logo && (
-                                                    <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
-                                                )}
-                                                <div className="flex-grow">
-                                                    <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
-                                                    <p className="text-md text-muted-foreground font-semibold">
-                                                        {item.company} 
-                                                    </p>
-                                                    {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                                    {item.location && (
-                                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
-                                                            <MapPin className="w-4 h-4 mr-2" />
-                                                            <span>{item.location}</span>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+                                    <div className="flex items-center justify-center">
+                                        <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
+                                            <Icon className="w-5 h-5 text-black dark:text-white" />
                                         </div>
                                     </div>
-                                )
-                            })}
-                        </div>
+                                    
+                                    <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
+                                        <div className="flex items-start gap-4">
+                                            {item.logo && (
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
+                                            )}
+                                            <div className="flex-grow">
+                                                <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
+                                                <p className="text-md text-muted-foreground font-semibold">
+                                                    {item.company} 
+                                                </p>
+                                                {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                                {item.location && (
+                                                    <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                                        <MapPin className="w-4 h-4 mr-2" />
+                                                        <span>{item.location}</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div>
-                </div>
+                </ScrollArea>
             </div>
         </div>
     );

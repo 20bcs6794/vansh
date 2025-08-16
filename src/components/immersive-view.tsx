@@ -142,7 +142,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic landscape with a planet in the sky"
               data-ai-hint="futuristic landscape forest"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </div>
@@ -157,7 +157,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic city with flying vehicles at night"
               data-ai-hint="futuristic city forest"
               fill
-              className="object-contain"
+              className="object-cover"
               priority
             />
           </div>
