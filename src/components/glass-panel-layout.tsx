@@ -137,19 +137,19 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     </BentoCard>
                     
                      {/* Socials */}
-                    <div className="grid grid-cols-3 gap-5">
+                    <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={56} height={56} />
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
-                                <Image src="/social_icons/whatsapp.svg" alt="WhatsApp" width={56} height={56} />
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} />
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/gmail.svg" alt="Gmail" width={56} height={56} />
                             </BentoCard>
                         </a>
@@ -1240,6 +1240,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
