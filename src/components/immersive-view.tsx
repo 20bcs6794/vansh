@@ -57,7 +57,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const horizontalMoveStrength = 100;
         const verticalMoveStrength = 80;
 
-        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
+        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.5)`;
     };
     
     if (isMobile) {
@@ -82,13 +82,13 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const horizontalMoveStrength = 80;
       const verticalMoveStrength = 20;
 
-      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.05)`;
+      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.2)`;
     };
 
     const handleMouseLeave = () => {
       const element = tiltRef.current;
       if (element) {
-        element.style.transform = 'translate3d(0, 0, 0) scale(1.05)';
+        element.style.transform = 'translate3d(0, 0, 0) scale(1.2)';
       }
     };
     
@@ -127,7 +127,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className="absolute inset-0"
         style={{ 
           transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
-          transform: isMobile ? 'scale(1.3)' : 'scale(1.05)',
+          transform: isMobile ? 'scale(1.8)' : 'scale(1.8)',
         }}
       >
         <div className="absolute inset-0">
@@ -142,7 +142,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic landscape with a planet in the sky"
               data-ai-hint="futuristic landscape forest"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>
@@ -157,7 +157,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic city with flying vehicles at night"
               data-ai-hint="futuristic city forest"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>
