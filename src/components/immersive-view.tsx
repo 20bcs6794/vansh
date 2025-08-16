@@ -57,7 +57,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const horizontalMoveStrength = 100;
         const verticalMoveStrength = 80;
 
-        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.5)`;
+        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.6)`;
     };
     
     if (isMobile) {
@@ -127,7 +127,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className="absolute inset-0"
         style={{ 
           transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
-          transform: isMobile ? 'scale(1.8)' : 'scale(1.8)',
+          transform: isMobile ? 'scale(1.6)' : 'scale(1.2)',
         }}
       >
         <div className="absolute inset-0">
