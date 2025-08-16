@@ -32,8 +32,8 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
     const { theme } = useTheme();
     const isMobile = useIsMobile();
 
-    const lightImage = "/images/light_user-removebg.png";
-    const darkImage = "/images/dark_user-removebg-preview.png";
+    const lightImage = "/images/light_user.webp";
+    const darkImage = "/images/dark_user.webp";
     const certificatesLink = "/document/resume.pdf";
 
     const handleCopyEmail = () => {
@@ -607,7 +607,7 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col pt-20"
+      ? "h-full flex flex-col pt-20 px-4"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
@@ -634,10 +634,10 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-4 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
+                <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full hide-scrollbar">
-                        <div className="flex flex-col px-4">
+                        <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
