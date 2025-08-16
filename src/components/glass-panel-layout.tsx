@@ -424,7 +424,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
                                             exit={{ opacity: 0, height: 0 }}
-                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
                                             className="overflow-hidden mt-4"
                                         >
                                             <p className="text-sm text-center mb-4">{project.fullDescription}</p>
@@ -540,7 +540,7 @@ const careerTimelineData = [
   {
     id: 1,
     icon: Briefcase,
-    logo: '/organizations/cache_digitech_pvt_ltd_logo.webp',
+    logo: '/organizations/cache_digitech_pvt_ltd_logo.jpeg',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -562,7 +562,7 @@ const careerTimelineData = [
   {
     id: 2,
     icon: Briefcase,
-    logo: '/organizations/Dabur_Logo.svg',
+    logo: '/organizations/dabur_logo.webp',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -584,7 +584,7 @@ const careerTimelineData = [
   {
     id: 3,
     icon: GraduationCap,
-    logo: '/organizations/cu_logo.webp',
+    logo: '/organizations/cu_logo.jpeg',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University",
     grade: "Grade: A+",
@@ -595,7 +595,7 @@ const careerTimelineData = [
   {
     id: 4,
     icon: GraduationCap,
-    logo: '/organizations/ddps.jpeg',
+    logo: '/organizations/ddps_logo.jpeg',
     title: "Senior Secondary School Diploma",
     company: "Midtown School [D.D.P.S]",
     location: "Bijnor, India",
@@ -638,8 +638,8 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-4 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
-                <div className="flex-grow min-h-0">
+                <h2 className="text-3xl font-extrabold mb-4 px-6 shrink-0 text-white text-left">Where I've Been, What I've Done</h2>
+                <div className="flex-grow px-2 min-h-0">
                     <ScrollArea className="h-full px-4 hide-scrollbar">
                         <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
@@ -687,7 +687,7 @@ const CareerTimeline = () => {
                                                     open: { opacity: 1, height: "auto" },
                                                     collapsed: { opacity: 0, height: 0 }
                                                 }}
-                                                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                                 className="overflow-hidden"
                                             >
                                               <div className="text-sm pt-3">{item.description}</div>
@@ -697,7 +697,7 @@ const CareerTimeline = () => {
                                         <div className="flex justify-end mt-2">
                                             <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
                                                 <span>Read {isExpanded ? "Less" : "More"}</span>
-                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
                                                     <ArrowDown className="w-4 h-4" />
                                                 </motion.div>
                                             </button>
@@ -1081,7 +1081,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
                 break;
             case 'Career':
-                 finalContainerClasses = "h-full w-full flex flex-col";
+                 finalContainerClasses = "h-full w-full flex flex-col pt-20";
                 break;
              case 'Projects':
                 finalContainerClasses = "h-full w-full pt-20 flex flex-col";
@@ -1187,7 +1187,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 350, damping: 35 },
+                            x: { type: "spring", stiffness: 300, damping: 30 },
                             opacity: { duration: 0.2 }
                         }}
                         drag="x"
