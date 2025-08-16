@@ -140,17 +140,17 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} />
+                                <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} />
+                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} priority/>
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} />
+                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                     </div>
@@ -404,7 +404,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 gap-4 p-1 pb-2">
+                        <div className="grid grid-cols-1 gap-4 p-1 pb-4">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
 
@@ -422,10 +422,10 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                     {isExpanded && (
                                         <motion.div
                                             initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto', marginTop: '1rem', marginBottom: '0' }}
-                                            exit={{ opacity: 0, height: 0, marginTop: '0', marginBottom: '0' }}
-                                            transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
-                                            className="overflow-hidden"
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                            className="overflow-hidden mt-4"
                                         >
                                             <p className="text-sm text-center mb-4">{project.fullDescription}</p>
                                             <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
@@ -605,7 +605,6 @@ const CareerTimeline = () => {
     const { theme } = useTheme();
     const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white overflow-hidden"
@@ -615,6 +614,7 @@ const CareerTimeline = () => {
         if (isMobile && expandedCareerId !== null) {
             const careerIndex = careerTimelineData.findIndex(c => c.id === expandedCareerId);
             const element = careerRefs.current[careerIndex];
+
             if (element) {
                 setTimeout(() => {
                     const rect = element.getBoundingClientRect();
@@ -626,11 +626,10 @@ const CareerTimeline = () => {
                             block: 'end'
                         });
                     }
-                }, 300);
+                }, 300); // Animation delay
             }
         }
     }, [expandedCareerId, isMobile]);
-
 
     if (isMobile) {
         const mobileCardClasses = cn(
@@ -641,7 +640,7 @@ const CareerTimeline = () => {
             <div className={containerClasses}>
                 <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I have Been, What I have Done</h2>
                 <div className="flex-grow min-h-0">
-                    <ScrollArea ref={scrollContainerRef} className="h-full pr-4 -mr-4 hide-scrollbar">
+                    <ScrollArea className="h-full pr-4 -mr-4 hide-scrollbar">
                         <div className="flex flex-col gap-y-4 pb-4">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
@@ -677,20 +676,20 @@ const CareerTimeline = () => {
                                     </div>
                                     <AnimatePresence initial={false}>
                                     {isExpanded && (
-                                        <motion.div
+                                        <motion.section
                                             key="content"
                                             initial="collapsed"
                                             animate="open"
                                             exit="collapsed"
                                             variants={{
-                                                open: { opacity: 1, height: "auto", marginTop: '0.75rem' },
-                                                collapsed: { opacity: 0, height: 0, marginTop: 0 }
+                                                open: { opacity: 1, height: "auto" },
+                                                collapsed: { opacity: 0, height: 0 }
                                             }}
                                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                             className="overflow-hidden"
                                         >
-                                          <div className="text-sm">{item.description}</div>
-                                        </motion.div>
+                                          <div className="text-sm pt-3">{item.description}</div>
+                                        </motion.section>
                                     )}
                                     </AnimatePresence>
                                     <div className="flex justify-end mt-2">
@@ -879,19 +878,19 @@ const ContactView = () => {
                 <div className="grid grid-cols-3 gap-4">
                     <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group animate-expand-y" style={{animationDelay: '0.2s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={48} height={48} />
+                            <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={48} height={48} priority />
                             <p className="font-bold mt-2">LinkedIn</p>
                         </BentoCard>
                     </a>
                     <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group animate-expand-y" style={{animationDelay: '0.3s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <Image src="/social_icons/whatsapp.svg" alt="WhatsApp" width={48} height={48} />
+                            <Image src="/social_icons/whatsapp.svg" alt="WhatsApp" width={48} height={48} priority />
                             <p className="font-bold mt-2">WhatsApp</p>
                         </BentoCard>
                     </a>
                     <a href="mailto:mr.vanshverma2001@gmail.com" className="group animate-expand-y" style={{animationDelay: '0.4s'}}>
                         <BentoCard className="h-full items-center justify-center transition-transform group-hover:scale-105">
-                            <Image src="/social_icons/gmail.svg" alt="Gmail" width={48} height={48} />
+                            <Image src="/social_icons/gmail.svg" alt="Gmail" width={48} height={48} priority />
                             <p className="font-bold mt-2">Gmail</p>
                         </BentoCard>
                     </a>
@@ -1068,21 +1067,27 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
   const renderContent = () => {
     let content;
-    const containerClasses = isMobile
-        ? "h-full w-full overflow-y-auto pt-20 px-4"
-        : "h-full";
-        
-    let finalContainerClasses = containerClasses;
-    if (isMobile) {
-      if (activeView === 'Home') {
-        finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-2";
-      } else if (activeView === 'Personal') {
-        finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
-      } else if (activeView === 'Career') {
-        finalContainerClasses = "h-full w-full pt-20 flex flex-col";
-      }
-    }
+    let finalContainerClasses = "h-full";
 
+    if (isMobile) {
+        switch (activeView) {
+            case 'Home':
+                finalContainerClasses = "h-full w-full overflow-hidden pt-20 px-2";
+                break;
+            case 'Personal':
+                finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
+                break;
+            case 'Career':
+                finalContainerClasses = "h-full w-full pt-20 flex flex-col";
+                break;
+             case 'Projects':
+                finalContainerClasses = "h-full w-full pt-20 flex flex-col";
+                break;
+            default:
+                finalContainerClasses = "h-full w-full overflow-y-auto pt-20 px-4";
+        }
+    }
+    
     switch (activeView) {
       case 'Home':
         content = <BentoHomeGrid setActiveView={setActiveView} />;
