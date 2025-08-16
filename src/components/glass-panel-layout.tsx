@@ -197,7 +197,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         <MapPin className="w-4 h-4 mr-2" />
                         <span className="font-bold">New Delhi, India</span>
                     </div>
-                    <div className="mt-auto pt-4">
+                    <div className="mt-auto pt-3">
                          <Button asChild className="w-full bg-primary/20 text-black dark:bg-primary dark:text-primary-foreground font-bold hover:bg-primary/30 dark:hover:bg-primary/90" size="default">
                             <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
                                 <Download className="w-4 h-4 mr-2" />
@@ -1323,3 +1323,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
 
     
+
