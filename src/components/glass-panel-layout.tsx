@@ -386,8 +386,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
     useEffect(() => {
         if (isMobile && expandedProjectId !== null) {
             const projectIndex = projectsData.findIndex(p => p.id === expandedProjectId);
-            if (projectIndex !== -1 && projectRefs.current[projectIndex]) {
-                setTimeout(() => {
+            if (projectIndex !== -1) {
+                 setTimeout(() => {
                     projectRefs.current[projectIndex]?.scrollIntoView({
                         behavior: 'smooth',
                         block: 'end',
@@ -604,10 +604,25 @@ const CareerTimeline = () => {
     const isMobile = useIsMobile();
     const { theme } = useTheme();
     const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
+    const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white overflow-hidden"
       : "h-full flex flex-col p-4";
+
+    useEffect(() => {
+        if (isMobile && expandedCareerId !== null) {
+            const careerIndex = careerTimelineData.findIndex(c => c.id === expandedCareerId);
+            if (careerIndex !== -1 && careerRefs.current[careerIndex]) {
+                setTimeout(() => {
+                    careerRefs.current[careerIndex]?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'end',
+                    });
+                }, 300); // Wait for animation to finish
+            }
+        }
+    }, [expandedCareerId, isMobile]);
 
     if (isMobile) {
         const mobileCardClasses = cn(
@@ -623,7 +638,12 @@ const CareerTimeline = () => {
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
-                                <div key={index} className={mobileCardClasses} onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}>
+                                <div 
+                                    key={index}
+                                    ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} 
+                                    className={mobileCardClasses} 
+                                    onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
+                                >
                                     <div className="flex items-start gap-4">
                                         {item.logo && (
                                             <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
@@ -1282,5 +1302,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
 
+
+    
 
     
