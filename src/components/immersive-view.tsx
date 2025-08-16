@@ -82,13 +82,13 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const horizontalMoveStrength = 80;
       const verticalMoveStrength = 20;
 
-      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.0)`;
+      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.1)`;
     };
 
     const handleMouseLeave = () => {
       const element = tiltRef.current;
       if (element) {
-        element.style.transform = 'translate3d(0, 0, 0) scale(1.0)';
+        element.style.transform = 'translate3d(0, 0, 0) scale(1.1)';
       }
     };
     
@@ -127,7 +127,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className="absolute inset-[-15%]"
         style={{ 
           transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
-          transform: 'scale(1.3)',
+          transform: isMobile ? 'scale(1.3)' : 'scale(1.1)',
         }}
       >
         <div className="absolute inset-0">

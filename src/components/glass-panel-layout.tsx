@@ -611,7 +611,7 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col pt-4"
+      ? "h-full flex flex-col p-4"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
@@ -638,8 +638,8 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-6 shrink-0 text-white text-left">Where I've Been, What I've Done</h2>
-                <div className="flex-grow px-2 min-h-0">
+                <h2 className="text-3xl font-extrabold mb-4 px-3 shrink-0 text-white text-left">Where I've Been, What I've Done</h2>
+                <div className="flex-grow  min-h-0">
                     <ScrollArea className="h-full px-4 hide-scrollbar">
                         <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
