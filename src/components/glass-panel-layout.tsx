@@ -653,15 +653,15 @@ const CareerTimeline = () => {
                                             initial={{ opacity: 0, height: 0, marginTop: 0 }}
                                             animate={{ opacity: 1, height: 'auto', marginTop: '0.75rem' }}
                                             exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                            transition={{ ease: "easeInOut", duration: 0.3 }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
                                             className="overflow-hidden"
                                         >
                                           <div className="text-sm">{item.description}</div>
                                         </motion.div>
                                     )}
                                     </AnimatePresence>
-                                    <div className="flex justify-center mt-2">
-                                        <button className="flex items-center gap-1 text-sm font-semibold text-primary dark:text-accent-foreground">
+                                    <div className="flex justify-end mt-2">
+                                        <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
                                             <span>Read {isExpanded ? "Less" : "More"}</span>
                                             <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
                                                 <ArrowDown className="w-4 h-4" />
@@ -1273,3 +1273,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
