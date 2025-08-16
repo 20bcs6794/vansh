@@ -580,7 +580,7 @@ const careerTimelineData = [
   {
     id: 3,
     icon: GraduationCap,
-    logo: '/organizations/chandigarh_univerisity_logo_1.svg',
+    logo: '/organizations/cu_logo.webp',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University",
     grade: "Grade: A+",
@@ -591,7 +591,7 @@ const careerTimelineData = [
   {
     id: 4,
     icon: GraduationCap,
-    logo: '/organizations/ddps_logo.svg',
+    logo: '/organizations/ddps.jpeg',
     title: "Senior Secondary School Diploma",
     company: "Midtown School [D.D.P.S]",
     location: "Bijnor, India",
@@ -634,7 +634,7 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-white text-center">Where I've Been, What I've Done</h2>
+                <h2 className="text-3xl font-extrabold mb-4 px-4 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full hide-scrollbar">
                         <div className="flex flex-col px-4">
@@ -644,7 +644,7 @@ const CareerTimeline = () => {
                                 <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-6">
                                     <div 
                                         className={cn(
-                                            "p-4 rounded-lg shadow-md w-full",
+                                            "p-4 rounded-xl shadow-md w-full",
                                             "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
                                         )}
                                         onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
@@ -1320,3 +1320,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
 
+
+
+    
