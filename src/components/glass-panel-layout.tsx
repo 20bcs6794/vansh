@@ -607,14 +607,13 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col p-4 text-white overflow-hidden"
+      ? "h-full flex flex-col pt-20 flex flex-col"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
         if (isMobile && expandedCareerId !== null) {
-            const careerIndex = careerTimelineData.findIndex(c => c.id === expandedCareerId);
-            const element = careerRefs.current[careerIndex];
-
+            const element = careerRefs.current[careerTimelineData.findIndex(c => c.id === expandedCareerId)];
+            
             if (element) {
                 setTimeout(() => {
                     const rect = element.getBoundingClientRect();
@@ -631,74 +630,74 @@ const CareerTimeline = () => {
         }
     }, [expandedCareerId, isMobile]);
 
+
     if (isMobile) {
-        const mobileCardClasses = cn(
-            "p-4 rounded-lg shadow-md w-full",
-            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
-        );
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I have Been, What I have Done</h2>
+                <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-white text-center">Where I've Been, What I've Done</h2>
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4 -mr-4 hide-scrollbar">
-                        <div className="flex flex-col gap-y-4 pb-4">
+                        <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
-                                <div 
-                                    key={index}
-                                    ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} 
-                                    className={mobileCardClasses} 
-                                    onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
-                                >
-                                    <div className="flex items-start gap-4">
-                                        {item.logo && (
-                                            <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
+                                <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-4">
+                                    <div 
+                                        className={cn(
+                                            "p-4 rounded-lg shadow-md w-full",
+                                            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
                                         )}
-                                        <div className="flex-grow">
-                                            <h3 className="font-bold text-base">{item.title}</h3>
-                                            <p className="text-sm font-medium">{item.company}</p>
-                                            {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                            
-                                            {item.title === "Bachelor of Engineering in Computer Science" ? (
-                                                <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
-                                                    <span>{item.period}</span>
-                                                    {item.location && <span>•</span>}
-                                                    {item.location && <span>{item.location}</span>}
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
-                                                    {item.location && <p className="text-sm text-muted-foreground">{item.location}</p>}
-                                                </>
+                                        onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
+                                    >
+                                        <div className="flex items-start gap-4">
+                                            {item.logo && (
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
                                             )}
+                                            <div className="flex-grow">
+                                                <h3 className="font-bold text-base">{item.title}</h3>
+                                                <p className="text-sm font-medium">{item.company}</p>
+                                                {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                                
+                                                {item.title === "Bachelor of Engineering in Computer Science" ? (
+                                                    <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
+                                                        <span>{item.period}</span>
+                                                        {item.location && <span>•</span>}
+                                                        {item.location && <span>{item.location}</span>}
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
+                                                        {item.location && <p className="text-sm text-muted-foreground">{item.location}</p>}
+                                                    </>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <AnimatePresence initial={false}>
-                                    {isExpanded && (
-                                        <motion.section
-                                            key="content"
-                                            initial="collapsed"
-                                            animate="open"
-                                            exit="collapsed"
-                                            variants={{
-                                                open: { opacity: 1, height: "auto" },
-                                                collapsed: { opacity: 0, height: 0 }
-                                            }}
-                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                                            className="overflow-hidden"
-                                        >
-                                          <div className="text-sm pt-3">{item.description}</div>
-                                        </motion.section>
-                                    )}
-                                    </AnimatePresence>
-                                    <div className="flex justify-end mt-2">
-                                        <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
-                                            <span>Read {isExpanded ? "Less" : "More"}</span>
-                                            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                                                <ArrowDown className="w-4 h-4" />
-                                            </motion.div>
-                                        </button>
+                                        <AnimatePresence initial={false}>
+                                        {isExpanded && (
+                                            <motion.section
+                                                key="content"
+                                                initial="collapsed"
+                                                animate="open"
+                                                exit="collapsed"
+                                                variants={{
+                                                    open: { opacity: 1, height: "auto" },
+                                                    collapsed: { opacity: 0, height: 0 }
+                                                }}
+                                                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                                                className="overflow-hidden"
+                                            >
+                                              <div className="text-sm pt-3">{item.description}</div>
+                                            </motion.section>
+                                        )}
+                                        </AnimatePresence>
+                                        <div className="flex justify-end mt-2">
+                                            <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
+                                                <span>Read {isExpanded ? "Less" : "More"}</span>
+                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                                    <ArrowDown className="w-4 h-4" />
+                                                </motion.div>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )})}
@@ -1078,7 +1077,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
                 break;
             case 'Career':
-                finalContainerClasses = "h-full w-full pt-20 flex flex-col";
+                 finalContainerClasses = "h-full w-full flex flex-col";
                 break;
              case 'Projects':
                 finalContainerClasses = "h-full w-full pt-20 flex flex-col";
@@ -1319,3 +1318,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
