@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -940,6 +939,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const isMobile = useIsMobile();
   const [direction, setDirection] = useState(0);
   const { theme } = useTheme();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -1008,42 +1008,67 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      const { clientX, clientY } = event;
-      const { innerWidth, innerHeight } = window;
-      const x = (clientX - innerWidth / 2) / (innerWidth / 2);
-      const y = (clientY - innerHeight / 2) / (innerHeight / 2);
-      
-      const horizontalMoveStrength = 60;
-
-      if (panelsContainerRef.current) {
-        panelsContainerRef.current.style.transform = `
-          perspective(2000px)
-          translateX(${-x * horizontalMoveStrength}px)
-          rotateX(${-y * 7}deg)
-        `;
-      }
+        setMousePos({ x: event.clientX, y: event.clientY });
     };
     
     const handleMouseLeave = () => {
-      if (panelsContainerRef.current) {
-        panelsContainerRef.current.style.transform = 'translateX(0px) rotateX(0deg)';
-      }
+      setMousePos({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
     }
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
+    document.body.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
+      document.body.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [isMobile, orientation]);
 
-  const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
-    const baseRotation = panel === 'left' ? 25 : -25;
+  const getPanelContainerStyle = (): CSSProperties => {
+    if (isMobile) return {};
+
+    const { innerWidth, innerHeight } = window;
+    const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
+    const y = (mousePos.y - innerHeight / 2) / (innerHeight / 2); // -1 to 1
+
+    const horizontalMoveStrength = 80; // Pixels
+    const rotationStrength = 15; // Degrees
     
     return {
-      transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
+        transform: `perspective(2000px) translateX(${-x * horizontalMoveStrength}px) rotateY(${x * rotationStrength}deg) rotateX(${-y * (rotationStrength / 2)}deg)`,
+        transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'
+    };
+  };
+
+  const getPanelStyle = (panel: 'left' | 'right'): CSSProperties => {
+     if (isMobile) return {};
+    
+    const { innerWidth } = window;
+    const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
+
+    const baseRotation = panel === 'left' ? 25 : -25;
+    const dynamicRotation = x * 20; // How much it rotates with mouse
+    const scaleFactor = 1 + Math.abs(x) * 0.05;
+
+    let finalRotation = baseRotation;
+    let finalScale = 1;
+
+    if (panel === 'left' && x > 0) { // Mouse on right, left panel is further
+        finalRotation = baseRotation + dynamicRotation;
+        finalScale = 1;
+    } else if (panel === 'left' && x < 0) { // Mouse on left, left panel is closer
+        finalRotation = baseRotation + dynamicRotation;
+        finalScale = scaleFactor;
+    } else if (panel === 'right' && x < 0) { // Mouse on left, right panel is further
+        finalRotation = baseRotation + dynamicRotation;
+        finalScale = 1;
+    } else if (panel === 'right' && x > 0) { // Mouse on right, right panel is closer
+        finalRotation = baseRotation + dynamicRotation;
+        finalScale = scaleFactor;
+    }
+
+    return {
+      transform: `perspective(1000px) rotateY(${finalRotation}deg) scale(${finalScale})`,
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
       transition: 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
     };
@@ -1107,31 +1132,32 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-extrabold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
-                  {!isMobile && (
-                    <Button asChild className="w-full bg-primary/20 text-black dark:bg-primary dark:text-primary-foreground font-bold hover:bg-primary/30 dark:hover:bg-primary/90" size="default">
-                        <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
-                            <Download className="w-4 h-4 mr-2" />
-                            View My Resume
-                        </a>
-                    </Button>
-                  )}
+                  
               </div>
               <div className={cn("relative mb-2 flex-grow min-h-0")}>
                 <div className={cn("space-y-3 text-sm absolute inset-0")}>
                   <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
-                      <p>
-                        I’m <span className="font-bold">Vanshdeep Verma</span>, a technology professional who combines <span className="font-bold">data analytics</span>, <span className="font-bold">frontend development</span>, and <span className="font-bold">process optimization</span> to deliver <span className="font-bold">measurable business impact</span>. 
-                        I bridge the gap between <span className="font-bold">technical execution</span>, <span className="font-bold">business goals</span>, and <span className="font-bold">team collaboration</span>, ensuring every project drives <span className="font-bold">tangible results</span>.
-                      </p>
-                      <ul className="list-disc list-inside space-y-1">
-                        <li><span className="font-bold">40%+ efficiency gains</span> through automation</li>
-                        <li><span className="font-bold">30% faster reporting</span> via workflow optimization</li>
-                        <li><span className="font-bold">Stronger customer engagement</span> with improved digital experiences</li>
-                      </ul>
-                      <p>
-                        I create value at three levels: <span className="font-bold">Technical</span> (scalable tools &amp; platforms), <span className="font-bold">Business</span> (strategic alignment for ROI), and <span className="font-bold">Management</span> (on-time, high-quality delivery). My goal is simple — help organizations <span className="font-bold">scale smarter</span>, <span className="font-bold">operate faster</span>, and make <span className="font-bold">data-driven decisions</span>.
-                      </p>
+                       <p>
+                            I’m <span className="font-bold">Vanshdeep Verma</span>, a technology professional who combines 
+                            <span className="font-bold"> data analytics</span>, <span className="font-bold">frontend development</span>, and 
+                            <span className="font-bold"> process optimization</span> to deliver <span className="font-bold">measurable business impact</span>. 
+                            I bridge the gap between <span className="font-bold">technical execution</span>, <span className="font-bold">business goals</span>, 
+                            and <span className="font-bold">team collaboration</span>, ensuring every project drives 
+                            <span className="font-bold"> tangible results</span>.
+                          </p>
+                          <ul className="list-disc list-inside space-y-1">
+                            <li><span className="font-bold">40%+ efficiency gains</span> through automation</li>
+                            <li><span className="font-bold">30% faster reporting</span> via workflow optimization</li>
+                            <li><span className="font-bold">Stronger customer engagement</span> with improved digital experiences</li>
+                          </ul>
+                          <p>
+                            I create value at three levels: <span className="font-bold">Technical</span> (scalable tools &amp; platforms), 
+                            <span className="font-bold"> Business</span> (strategic alignment for ROI), and <span className="font-bold">Management</span> 
+                            (on-time, high-quality delivery). My goal is simple — help organizations 
+                            <span className="font-bold"> scale smarter</span>, <span className="font-bold">operate faster</span>, and make 
+                            <span className="font-bold"> data-driven decisions</span>.
+                          </p>
                     </div>
                   </ScrollArea>
                 </div>
@@ -1221,12 +1247,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   }
 
   return (
-    <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8">
-      <div style={{ perspective: '2000px' }}>
+    <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden">
+      <div style={{ perspective: '3000px' }}>
         <div 
           ref={panelsContainerRef}
           className="flex items-center justify-center w-full max-w-[1300px]"
-          style={{ transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
+          style={getPanelContainerStyle()}
         >
           <div className="h-auto hidden md:flex items-center">
             <GlassPanel
