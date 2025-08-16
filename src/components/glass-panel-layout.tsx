@@ -606,7 +606,7 @@ const CareerTimeline = () => {
     const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col p-4 text-white"
+      ? "h-full flex flex-col p-4 text-white overflow-hidden"
       : "h-full flex flex-col p-4";
 
     if (isMobile) {
@@ -618,7 +618,7 @@ const CareerTimeline = () => {
             <div className={containerClasses}>
                 <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I have Been, What I have Done</h2>
                 <div className="flex-grow min-h-0">
-                    <ScrollArea className="h-full pr-4 hide-scrollbar">
+                    <ScrollArea className="h-full pr-4 -mr-4 hide-scrollbar">
                         <div className="flex flex-col gap-y-4">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
@@ -647,13 +647,18 @@ const CareerTimeline = () => {
                                             )}
                                         </div>
                                     </div>
-                                    <AnimatePresence>
+                                    <AnimatePresence initial={false}>
                                     {isExpanded && (
                                         <motion.div
-                                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                                            animate={{ opacity: 1, height: 'auto', marginTop: '0.75rem' }}
-                                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                                            key="content"
+                                            initial="collapsed"
+                                            animate="open"
+                                            exit="collapsed"
+                                            variants={{
+                                                open: { opacity: 1, height: "auto", marginTop: '0.75rem' },
+                                                collapsed: { opacity: 0, height: 0, marginTop: 0 }
+                                            }}
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                             className="overflow-hidden"
                                         >
                                           <div className="text-sm">{item.description}</div>
@@ -1045,6 +1050,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         finalContainerClasses = "h-screen w-full overflow-hidden pt-20 px-2";
       } else if (activeView === 'Personal') {
         finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
+      } else if (activeView === 'Career') {
+        finalContainerClasses = "h-full w-full pt-20 flex flex-col";
       }
     }
 
@@ -1274,3 +1281,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
     
 
+
+
+    
