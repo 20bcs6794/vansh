@@ -534,6 +534,7 @@ const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
 
 const careerTimelineData = [
   {
+    id: 1,
     icon: Briefcase,
     logo: '/organizations/cache_digitech_pvt_ltd_logo.webp',
     title: "Data Analyst",
@@ -555,6 +556,7 @@ const careerTimelineData = [
     )
   },
   {
+    id: 2,
     icon: Briefcase,
     logo: '/organizations/Dabur_Logo.svg',
     title: "Software Engineer Intern",
@@ -576,6 +578,7 @@ const careerTimelineData = [
     )
   },
   {
+    id: 3,
     icon: GraduationCap,
     logo: '/organizations/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
@@ -586,6 +589,7 @@ const careerTimelineData = [
     description: "Graduated with honors, specializing in Artificial Intelligence and machine learning. Completed a final year project on an complete AI Model which will reduce the human work on computer Systems. Graduated with a solid academic record and multiple industry-recognized certifications, while actively applying skills through projects and internships."
   },
   {
+    id: 4,
     icon: GraduationCap,
     logo: '/organizations/ddps_logo.svg',
     title: "Senior Secondary School Diploma",
@@ -599,6 +603,7 @@ const careerTimelineData = [
 const CareerTimeline = () => {
     const isMobile = useIsMobile();
     const { theme } = useTheme();
+    const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
 
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white"
@@ -615,8 +620,10 @@ const CareerTimeline = () => {
                 <div className="flex-grow min-h-0">
                     <ScrollArea className="h-full pr-4 hide-scrollbar">
                         <div className="flex flex-col gap-y-4">
-                            {careerTimelineData.map((item, index) => (
-                                <div key={index} className={mobileCardClasses}>
+                            {careerTimelineData.map((item, index) => {
+                                const isExpanded = expandedCareerId === item.id;
+                                return (
+                                <div key={index} className={mobileCardClasses} onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}>
                                     <div className="flex items-start gap-4">
                                         {item.logo && (
                                             <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
@@ -640,9 +647,29 @@ const CareerTimeline = () => {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="text-sm mt-3">{item.description}</div>
+                                    <AnimatePresence>
+                                    {isExpanded && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                            animate={{ opacity: 1, height: 'auto', marginTop: '0.75rem' }}
+                                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                                            transition={{ ease: "easeInOut", duration: 0.3 }}
+                                            className="overflow-hidden"
+                                        >
+                                          <div className="text-sm">{item.description}</div>
+                                        </motion.div>
+                                    )}
+                                    </AnimatePresence>
+                                    <div className="flex justify-center mt-2">
+                                        <button className="flex items-center gap-1 text-sm font-semibold text-primary dark:text-accent-foreground">
+                                            <span>Read {isExpanded ? "Less" : "More"}</span>
+                                            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                                <ArrowDown className="w-4 h-4" />
+                                            </motion.div>
+                                        </button>
+                                    </div>
                                 </div>
-                            ))}
+                            )})}
                         </div>
                     </ScrollArea>
                 </div>
