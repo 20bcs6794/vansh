@@ -1122,23 +1122,16 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                   <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
-                        I’m <strong>Vanshdeep Verma</strong>, a technology professional who blends <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to create solutions that deliver measurable business impact. I bridge the gap between technical execution, business objectives, and cross-team collaboration, ensuring every project achieves tangible ROI.
+                        I’m <strong>Vanshdeep Verma</strong>, a technology professional who combines <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to deliver <strong>measurable business impact</strong>. I bridge the gap between <strong>technical execution</strong>, <strong>business goals</strong>, and <strong>team collaboration</strong>, ensuring every project drives <strong>tangible results</strong>.
                       </p>
-                      <p>My work has consistently resulted in:</p>
-                      <ul className="list-disc list-inside">
-                          <li ><strong>40%+ operational efficiency gains through automation</strong></li>
-                          <li ><strong>30% faster reporting cycles via workflow optimization</strong></li>
-                          <li >Higher customer engagement through improved digital experiences</li>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li><strong>40%+ efficiency gains</strong> through automation</li>
+                        <li><strong>30% faster reporting</strong> via workflow optimization</li>
+                        <li><strong>Stronger customer engagement</strong> with improved digital experiences</li>
                       </ul>
                       <p>
-                        With experience across data-driven strategy, automation, and user-focused innovation, I help organizations scale smarter, operate faster, and make decisions backed by actionable insights.
+                        I create value at three levels: <strong>Technical</strong> (scalable tools &amp; platforms), <strong>Business</strong> (strategic alignment for ROI), and <strong>Management</strong> (on-time, high-quality delivery). My goal is simple — help organizations <strong>scale smarter</strong>, <strong>operate faster</strong>, and make <strong>data-driven decisions</strong>.
                       </p>
-                      <p>I focus on delivering value at three levels:</p>
-                      <ul className="list-disc list-inside space-y-1">
-                          <li><strong>Technical</strong> – Building scalable, data-powered tools and digital platforms</li>
-                          <li><strong>Business</strong> – Aligning solutions with strategic goals to maximize ROI</li>
-                          <li><strong>Management</strong> – Coordinating with stakeholders to ensure on-time, high-quality delivery.</li>
-                      </ul>
                     </div>
                   </ScrollArea>
                 </div>
@@ -1328,5 +1321,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
 
+
+    
 
     
