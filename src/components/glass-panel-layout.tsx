@@ -524,9 +524,9 @@ const technologiesWithIcons = [
 const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
     <div className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105")}>
         <div className="h-12 flex items-center justify-center">
-            <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority />
+            <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority fetchPriority="high" />
         </div>
-        <span className="font-medium text-xs text-neutral-800"><strong>{name}</strong></span>
+        <span className="font-medium text-xs text-neutral-800"><span className="font-bold">{name}</span></span>
     </div>
 );
 
@@ -1104,6 +1104,14 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-extrabold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
+                  {!isMobile && (
+                    <Button asChild className="w-full bg-primary/20 text-black dark:bg-primary dark:text-primary-foreground font-bold hover:bg-primary/30 dark:hover:bg-primary/90" size="default">
+                        <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
+                            <Download className="w-4 h-4 mr-2" />
+                            View My Resume
+                        </a>
+                    </Button>
+                  )}
               </div>
               <div className={cn("relative mb-2 flex-grow min-h-0")}>
                 <div className={cn("space-y-3 text-sm absolute inset-0")}>
