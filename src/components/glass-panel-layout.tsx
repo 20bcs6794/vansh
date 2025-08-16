@@ -392,7 +392,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                         behavior: 'smooth',
                         block: 'end',
                     });
-                }, 300); // Wait for animation to finish
+                }, 300);
             }
         }
     }, [expandedProjectId, isMobile, projectsData]);
@@ -607,7 +607,7 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col pt-20 flex flex-col"
+      ? "h-full flex flex-col pt-20"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
@@ -625,7 +625,7 @@ const CareerTimeline = () => {
                             block: 'end'
                         });
                     }
-                }, 300); // Animation delay
+                }, 300);
             }
         }
     }, [expandedCareerId, isMobile]);
@@ -636,8 +636,8 @@ const CareerTimeline = () => {
             <div className={containerClasses}>
                 <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-white text-center">Where I've Been, What I've Done</h2>
                 <div className="flex-grow min-h-0">
-                    <ScrollArea className="h-full pr-4 -mr-4 hide-scrollbar">
-                        <div className="flex flex-col gap-y-4">
+                    <ScrollArea className="h-full hide-scrollbar">
+                        <div className="flex flex-col px-4">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
