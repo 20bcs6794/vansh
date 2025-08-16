@@ -641,7 +641,7 @@ const CareerTimeline = () => {
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
-                                <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-4">
+                                <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-6">
                                     <div 
                                         className={cn(
                                             "p-4 rounded-lg shadow-md w-full",
@@ -1318,4 +1318,5 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
