@@ -634,8 +634,8 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-2 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
-                <div className="flex-grow min-h-0">
+                <h2 className="text-3xl font-extrabold mb-4 px-3 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
+                <div className="flex-grow px-3 min-h-0">
                     <ScrollArea className="h-full hide-scrollbar">
                         <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
