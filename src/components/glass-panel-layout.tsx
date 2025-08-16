@@ -1013,9 +1013,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
       const x = (clientX - innerWidth / 2) / (innerWidth / 2);
       const y = (clientY - innerHeight / 2) / (innerHeight / 2);
       
+      const horizontalMoveStrength = 60;
+
       if (panelsContainerRef.current) {
         panelsContainerRef.current.style.transform = `
-          rotateY(${x * 7}deg)
+          perspective(2000px)
+          translateX(${-x * horizontalMoveStrength}px)
           rotateX(${-y * 7}deg)
         `;
       }
@@ -1023,7 +1026,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
     const handleMouseLeave = () => {
       if (panelsContainerRef.current) {
-        panelsContainerRef.current.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        panelsContainerRef.current.style.transform = 'translateX(0px) rotateX(0deg)';
       }
     }
 
