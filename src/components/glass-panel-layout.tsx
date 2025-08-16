@@ -407,6 +407,38 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                         <div className="grid grid-cols-1 gap-4 p-1 pb-2">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
+                                const expandUp = index >= projectsData.length - 3;
+
+                                const content = (
+                                    <div className="text-center">
+                                        <h3 className="font-bold text-lg">{project.name}</h3>
+                                        <div className="flex gap-1 flex-wrap mt-1 justify-center">
+                                            {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
+                                        </div>
+                                    </div>
+                                );
+                                
+                                const expandedContent = (
+                                    <AnimatePresence>
+                                    {isExpanded && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0, marginTop: expandUp ? '0' : '0', marginBottom: expandUp ? '1rem' : '0' }}
+                                            animate={{ opacity: 1, height: 'auto', marginTop: expandUp ? '0' : '1rem', marginBottom: expandUp ? '1rem' : '0' }}
+                                            exit={{ opacity: 0, height: 0, marginTop: expandUp ? '0' : '0', marginBottom: '0' }}
+                                            transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <p className="text-sm text-center mb-4">{project.fullDescription}</p>
+                                            <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
+                                                <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                                    View Project
+                                                </a>
+                                            </Button>
+                                        </motion.div>
+                                    )}
+                                    </AnimatePresence>
+                                );
+
                                 return (
                                     <div
                                         key={project.id}
@@ -417,30 +449,9 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                         )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
                                     >
-                                        <div className="text-center">
-                                            <h3 className="font-bold text-lg">{project.name}</h3>
-                                            <div className="flex gap-1 flex-wrap mt-1 justify-center">
-                                                {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
-                                            </div>
-                                        </div>
-                                        <AnimatePresence>
-                                        {isExpanded && (
-                                            <motion.div
-                                                initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                                                animate={{ opacity: 1, height: 'auto', marginTop: '1rem' }}
-                                                exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                                                transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
-                                                className="overflow-hidden"
-                                            >
-                                                <p className="text-sm text-center mb-4">{project.fullDescription}</p>
-                                                <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
-                                                    <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                                                        View Project
-                                                    </a>
-                                                </Button>
-                                            </motion.div>
-                                        )}
-                                        </AnimatePresence>
+                                        {expandUp && expandedContent}
+                                        {content}
+                                        {!expandUp && expandedContent}
                                     </div>
                                 );
                             })}
@@ -504,19 +515,19 @@ const technologiesWithIcons = [
     { name: 'Bootstrap', icon: "/tech_icons/bootstrap.svg" },
     { name: 'SQLite', icon: "/tech_icons/sqlite.svg" },
     { name: 'Git', icon: "/tech_icons/git.svg" },
-    { name: 'Tailwind CSS', icon: "/tech_icons/tailwind-css.svg" },
+    { name: 'Tailwind CSS', icon: "/tech_icons/tailwind.svg" },
     { name: 'React', icon: "/tech_icons/react.svg" },
-    { name: 'Node.js', icon: "/tech_icons/node-js.svg" },
-    { name: 'Next.js', icon: "/tech_icons/next-js.svg" },
+    { name: 'Node.js', icon: "/tech_icons/node-js-icon.svg" },
+    { name: 'Next.js', icon: "/tech_icons/nextjs.svg" },
     { name: 'MySQL', icon: "/tech_icons/mysql.svg" },
     { name: 'AWS', icon: "/tech_icons/aws.svg" },
-    { name: 'Power BI', icon: "/tech_icons/power-bi.svg" },
+    { name: 'Power BI', icon: "/tech_icons/powerbi.svg" },
     { name: 'Excel', icon: "/tech_icons/excel.svg" },
 ];
 
 const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
     <div className="bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105">
-        <Image src={icon} alt={name} width={40} height={40} />
+        <Image src={icon} alt={name} width={40} height={40} priority />
         <span className="font-medium text-xs text-neutral-800"><strong>{name}</strong></span>
     </div>
 );
