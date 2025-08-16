@@ -139,17 +139,17 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                      {/* Socials */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} />
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} />
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} />
                             </BentoCard>
                         </a>
@@ -390,7 +390,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 setTimeout(() => {
                     projectRefs.current[projectIndex]?.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'nearest',
+                        block: 'end',
                     });
                 }, 300); // Wait for animation to finish
             }
@@ -407,7 +407,6 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                         <div className="grid grid-cols-1 gap-4 p-1 pb-2">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
-                                const expandUp = index >= projectsData.length - 3;
 
                                 const content = (
                                     <div className="text-center">
@@ -449,9 +448,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                         )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
                                     >
-                                        {expandUp && expandedContent}
                                         {content}
-                                        {!expandUp && expandedContent}
+                                        {expandedContent}
                                     </div>
                                 );
                             })}
@@ -1248,6 +1246,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
