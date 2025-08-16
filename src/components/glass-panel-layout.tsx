@@ -1246,11 +1246,3 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
-
-
-
-
-
-
-
-
