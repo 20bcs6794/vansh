@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -1122,15 +1120,15 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                   <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
-                        I’m <strong>Vanshdeep Verma</strong>, a technology professional who combines <strong>data analytics</strong>, <strong>frontend development</strong>, and <strong>process optimization</strong> to deliver <strong>measurable business impact</strong>. I bridge the gap between <strong>technical execution</strong>, <strong>business goals</strong>, and <strong>team collaboration</strong>, ensuring every project drives <strong>tangible results</strong>.
+                        I’m <strong className="font-bold">Vanshdeep Verma</strong>, a technology professional who combines <strong className="font-bold">data analytics</strong>, <strong className="font-bold">frontend development</strong>, and <strong className="font-bold">process optimization</strong> to deliver <strong className="font-bold">measurable business impact</strong>. I bridge the gap between <strong className="font-bold">technical execution</strong>, <strong className="font-bold">business goals</strong>, and <strong className="font-bold">team collaboration</strong>, ensuring every project drives <strong className="font-bold">tangible results</strong>.
                       </p>
                       <ul className="list-disc list-inside space-y-1">
-                        <li><strong>40%+ efficiency gains</strong> through automation</li>
-                        <li><strong>30% faster reporting</strong> via workflow optimization</li>
-                        <li><strong>Stronger customer engagement</strong> with improved digital experiences</li>
+                        <li><strong className="font-bold">40%+ efficiency gains</strong> through automation</li>
+                        <li><strong className="font-bold">30% faster reporting</strong> via workflow optimization</li>
+                        <li><strong className="font-bold">Stronger customer engagement</strong> with improved digital experiences</li>
                       </ul>
                       <p>
-                        I create value at three levels: <strong>Technical</strong> (scalable tools &amp; platforms), <strong>Business</strong> (strategic alignment for ROI), and <strong>Management</strong> (on-time, high-quality delivery). My goal is simple — help organizations <strong>scale smarter</strong>, <strong>operate faster</strong>, and make <strong>data-driven decisions</strong>.
+                        I create value at three levels: <strong className="font-bold">Technical</strong> (scalable tools &amp; platforms), <strong className="font-bold">Business</strong> (strategic alignment for ROI), and <strong className="font-bold">Management</strong> (on-time, high-quality delivery). My goal is simple — help organizations <strong className="font-bold">scale smarter</strong>, <strong className="font-bold">operate faster</strong>, and make <strong className="font-bold">data-driven decisions</strong>.
                       </p>
                     </div>
                   </ScrollArea>
@@ -1181,16 +1179,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         transition={{
                             x: { type: "spring", stiffness: 250, damping: 30 },
                             opacity: { duration: 0.2 }
-                        }}
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={0.5}
-                        dragPropagation
-                        onDragEnd={(e, { offset, velocity }) => {
-                            const swipe = Math.abs(offset.x);
-                            if (swipe > 50) {
-                                paginate(offset.x > 0 ? -1 : 1);
-                            }
                         }}
                         className="h-full w-full"
                     >
@@ -1293,35 +1281,4 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
-    
-
-    
-
-
-
-
-
-
-
-
-
-    
-
-    
-
-
-
-    
-
-    
-
-
-
-
-    
-
-
-
-    
-
     
