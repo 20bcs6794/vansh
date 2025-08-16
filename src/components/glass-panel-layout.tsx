@@ -527,7 +527,9 @@ const technologiesWithIcons = [
 
 const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
     <div className="bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105">
-        <Image src={icon} alt={name} width={40} height={40} priority />
+        <div className="h-12 flex items-center justify-center">
+            <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority />
+        </div>
         <span className="font-medium text-xs text-neutral-800"><strong>{name}</strong></span>
     </div>
 );
@@ -535,7 +537,7 @@ const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
 const careerTimelineData = [
   {
     icon: Briefcase,
-    logo: '/organizations/cache_digitech_pvt_ltd_logo.webp',
+    logo: '/icons/cache_digitech_pvt_ltd_logo.webp',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -556,7 +558,7 @@ const careerTimelineData = [
   },
   {
     icon: Briefcase,
-    logo: '/organizations/Dabur_Logo.svg',
+    logo: '/icons/Dabur_Logo.svg',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -577,7 +579,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/organizations/chandigarh_univerisity_logo_1.svg',
+    logo: '/icons/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University",
     grade: "Grade: A+",
@@ -587,7 +589,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/organizations/ddps_logo.svg',
+    logo: '/icons/ddps_logo.svg',
     title: "Senior Secondary School Diploma",
     company: "Midtown School [D.D.P.S Bijnor]",
     location: "Bijnor, India",
@@ -1238,5 +1240,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
