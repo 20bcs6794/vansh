@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -87,12 +88,6 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                                     <MapPin className="w-4 h-4 mr-2" />
                                     <span className="font-bold">New Delhi, India</span>
                                 </div>
-                                <Button asChild variant="secondary" size="sm" className="bg-primary/20 text-black backdrop-blur-sm dark:bg-primary dark:text-primary-foreground h-8">
-                                    <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
-                                        <Download className="w-3 h-3 mr-1" />
-                                        Resume
-                                    </a>
-                                </Button>
                             </div>
                         </div>
                     </BentoCard>
