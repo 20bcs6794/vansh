@@ -82,17 +82,15 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         <div className="flex flex-col text-left mt-2">
                             <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
                             <p className="dark:text-neutral-400 text-neutral-700 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                            <div className="flex items-center justify-between text-muted-foreground mt-2 text-sm">
+                            <div className="flex items-center justify-between text-muted-foreground mt-4 text-sm">
                                 <div className="flex items-center">
                                     <MapPin className="w-4 h-4 mr-2" />
                                     <span className="font-bold">New Delhi, India</span>
                                 </div>
-                            </div>
-                            <div className="mt-4">
-                                <Button asChild className="w-full bg-primary/20 text-black dark:bg-primary dark:text-primary-foreground font-bold hover:bg-primary/30 dark:hover:bg-primary/90" size="default">
-                                    <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer">
-                                        <Download className="w-4 h-4 mr-2" />
-                                        View My Resume
+                                <Button asChild variant="ghost" className="p-0 h-auto text-black dark:text-white font-semibold">
+                                    <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                                        Resume
+                                        <ChevronRight className="w-4 h-4 ml-1" />
                                     </a>
                                 </Button>
                             </div>
@@ -1317,4 +1315,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+    
+
     
