@@ -139,18 +139,18 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                      {/* Socials */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={56} height={56} />
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                                <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} />
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
                                 <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} />
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={56} height={56} />
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} />
                             </BentoCard>
                         </a>
                     </div>
@@ -422,9 +422,9 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                     <AnimatePresence>
                                     {isExpanded && (
                                         <motion.div
-                                            initial={{ opacity: 0, height: 0, marginTop: expandUp ? '0' : '0', marginBottom: expandUp ? '1rem' : '0' }}
+                                            initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto', marginTop: expandUp ? '0' : '1rem', marginBottom: expandUp ? '1rem' : '0' }}
-                                            exit={{ opacity: 0, height: 0, marginTop: expandUp ? '0' : '0', marginBottom: '0' }}
+                                            exit={{ opacity: 0, height: 0, marginTop: '0', marginBottom: '0' }}
                                             transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
                                             className="overflow-hidden"
                                         >
@@ -537,7 +537,7 @@ const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
 const careerTimelineData = [
   {
     icon: Briefcase,
-    logo: '/icons/cache_digitech_pvt_ltd_logo.webp',
+    logo: '/organizations/cache_digitech_pvt_ltd_logo.webp',
     title: "Data Analyst",
     company: "Cache Digitech pvt Ltd.",
     location: "New Delhi, India",
@@ -558,7 +558,7 @@ const careerTimelineData = [
   },
   {
     icon: Briefcase,
-    logo: '/icons/Dabur_Logo.svg',
+    logo: '/organizations/Dabur_Logo.svg',
     title: "Software Engineer Intern",
     company: "Dabur India Limited",
     location: "Noida, India",
@@ -579,7 +579,7 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/icons/chandigarh_univerisity_logo_1.svg',
+    logo: '/organizations/chandigarh_univerisity_logo_1.svg',
     title: "Bachelor of Engineering in Computer Science",
     company: "Chandigarh University",
     grade: "Grade: A+",
@@ -589,9 +589,9 @@ const careerTimelineData = [
   },
   {
     icon: GraduationCap,
-    logo: '/icons/ddps_logo.svg',
+    logo: '/organizations/ddps_logo.svg',
     title: "Senior Secondary School Diploma",
-    company: "Midtown School [D.D.P.S Bijnor]",
+    company: "Midtown School [D.D.P.S]",
     location: "Bijnor, India",
     period: "2019 - 2020",
     description: "Focused on advanced placement courses in Mathematics and Computer Science, setting a strong foundation for a career in technology."
@@ -621,17 +621,24 @@ const CareerTimeline = () => {
                                 <div key={index} className={mobileCardClasses}>
                                     <div className="flex items-start gap-4">
                                         {item.logo && (
-                                            <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" />
+                                            <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
                                         )}
                                         <div className="flex-grow">
                                             <h3 className="font-bold text-base">{item.title}</h3>
-                                            <p className="text-sm font-semibold">{item.company}</p>
+                                            <p className="text-sm font-medium">{item.company}</p>
                                             {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                            <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
-                                                <span>{item.period}</span>
-                                                {item.location && <span>•</span>}
-                                                {item.location && <span>{item.location}</span>}
-                                            </div>
+                                            {item.title === "Bachelor of Engineering in Computer Science" ? (
+                                                <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
+                                                    <span>{item.period}</span>
+                                                    {item.location && <span>•</span>}
+                                                    {item.location && <span>{item.location}</span>}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
+                                                    {item.location && <p className="text-sm text-muted-foreground">{item.location}</p>}
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="text-sm mt-3">{item.description}</div>
@@ -671,7 +678,7 @@ const CareerTimeline = () => {
                                     <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
                                         <div className="flex items-start gap-4">
                                             {item.logo && (
-                                                <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" />
+                                                <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
                                             )}
                                             <div className="flex-grow">
                                                 <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
@@ -1240,6 +1247,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
