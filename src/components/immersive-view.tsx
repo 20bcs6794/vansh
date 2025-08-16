@@ -124,7 +124,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     >
       <div 
         ref={tiltRef} 
-        className="absolute inset-[-15%]"
+        className="absolute inset-0"
         style={{ 
           transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
           transform: isMobile ? 'scale(1.3)' : 'scale(1.05)',
@@ -142,7 +142,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic landscape with a planet in the sky"
               data-ai-hint="futuristic landscape forest"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>
@@ -157,7 +157,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic city with flying vehicles at night"
               data-ai-hint="futuristic city forest"
               fill
-              className="object-cover"
+              className="object-contain"
               priority
             />
           </div>
