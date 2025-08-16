@@ -426,10 +426,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                             animate={{ opacity: 1, height: 'auto', marginTop: '1rem', marginBottom: '0' }}
                                             exit={{ opacity: 0, height: 0, marginTop: '0', marginBottom: '0' }}
                                             transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
-                                            className={cn(
-                                                "overflow-hidden",
-                                                expandUp && "order-first"
-                                            )}
+                                            className="overflow-hidden"
                                         >
                                             <p className="text-sm text-center mb-4">{project.fullDescription}</p>
                                             <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
@@ -452,8 +449,9 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                         )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
                                     >
+                                        {expandUp && expandedContent}
                                         {content}
-                                        {expandedContent}
+                                        {!expandUp && expandedContent}
                                     </div>
                                 );
                             })}
@@ -1250,6 +1248,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
