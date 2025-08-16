@@ -1,3 +1,4 @@
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -526,7 +527,7 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
-    <div className="bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105">
+    <div className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105")}>
         <div className="h-12 flex items-center justify-center">
             <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority />
         </div>
@@ -996,8 +997,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         const yPos = (beta ? beta - 45 : 0) / 45;
         const xPos = (gamma ?? 0) / 45;
         
-        const horizontalMoveStrength = 20;
-        const verticalMoveStrength = 10;
+        const horizontalMoveStrength = 100;
+        const verticalMoveStrength = 80;
         
         if (panelsContainerRef.current) {
             panelsContainerRef.current.style.transform = `
@@ -1108,27 +1109,22 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
             >
               <div className="flex justify-between items-center mb-2 shrink-0">
                   <h3 className={cn("font-extrabold text-lg", isMobile ? "dark:text-white" : "")}>Who Am I ?</h3>
-                   {isMobile && (
-                     <a href="/document/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-white/20 dark:bg-black/30 px-3 py-1 rounded-lg text-xs font-bold">
-                       <Download className="w-3 h-3" />
-                       <span>Resume</span>
-                     </a>
-                   )}
               </div>
               <div className={cn("relative mb-2 flex-grow min-h-0")}>
                 <div className={cn("space-y-3 text-sm absolute inset-0")}>
                   <ScrollArea className={cn("h-full pr-4")}>
                     <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                       <p>
-                        I’m <strong className="font-bold">Vanshdeep Verma</strong>, a technology professional who combines <strong className="font-bold">data analytics</strong>, <strong className="font-bold">frontend development</strong>, and <strong className="font-bold">process optimization</strong> to deliver <strong className="font-bold">measurable business impact</strong>. I bridge the gap between <strong className="font-bold">technical execution</strong>, <strong className="font-bold">business goals</strong>, and <strong className="font-bold">team collaboration</strong>, ensuring every project drives <strong className="font-bold">tangible results</strong>.
+                        I’m <span className="font-bold">Vanshdeep Verma</span>, a technology professional who combines <span className="font-bold">data analytics</span>, <span className="font-bold">frontend development</span>, and <span className="font-bold">process optimization</span> to deliver <span className="font-bold">measurable business impact</span>. 
+                        I bridge the gap between <span className="font-bold">technical execution</span>, <span className="font-bold">business goals</span>, and <span className="font-bold">team collaboration</span>, ensuring every project drives <span className="font-bold">tangible results</span>.
                       </p>
                       <ul className="list-disc list-inside space-y-1">
-                        <li><strong className="font-bold">40%+ efficiency gains</strong> through automation</li>
-                        <li><strong className="font-bold">30% faster reporting</strong> via workflow optimization</li>
-                        <li><strong className="font-bold">Stronger customer engagement</strong> with improved digital experiences</li>
+                        <li><span className="font-bold">40%+ efficiency gains</span> through automation</li>
+                        <li><span className="font-bold">30% faster reporting</span> via workflow optimization</li>
+                        <li><span className="font-bold">Stronger customer engagement</span> with improved digital experiences</li>
                       </ul>
                       <p>
-                        I create value at three levels: <strong className="font-bold">Technical</strong> (scalable tools &amp; platforms), <strong className="font-bold">Business</strong> (strategic alignment for ROI), and <strong className="font-bold">Management</strong> (on-time, high-quality delivery). My goal is simple — help organizations <strong className="font-bold">scale smarter</strong>, <strong className="font-bold">operate faster</strong>, and make <strong className="font-bold">data-driven decisions</strong>.
+                        I create value at three levels: <span className="font-bold">Technical</span> (scalable tools &amp; platforms), <span className="font-bold">Business</span> (strategic alignment for ROI), and <span className="font-bold">Management</span> (on-time, high-quality delivery). My goal is simple — help organizations <span className="font-bold">scale smarter</span>, <span className="font-bold">operate faster</span>, and make <span className="font-bold">data-driven decisions</span>.
                       </p>
                     </div>
                   </ScrollArea>
