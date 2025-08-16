@@ -404,7 +404,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 relative">
                     <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 gap-4 p-1 pb-4">
+                        <div className="grid grid-cols-1 p-1 pb-4">
                             {projectsData.map((project, index) => {
                                 const isExpanded = expandedProjectId === project.id;
 
@@ -439,17 +439,21 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                 );
 
                                 return (
-                                    <div
-                                        key={project.id}
+                                    <div 
+                                        key={project.id} 
                                         ref={el => { if (projectRefs.current) projectRefs.current[index] = el; }}
-                                        className={cn(
-                                            "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
-                                            project.bgColor
-                                        )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
+                                        className="pb-4"
                                     >
-                                        {content}
-                                        {expandedContent}
+                                        <div
+                                            className={cn(
+                                                "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
+                                                project.bgColor
+                                            )}
+                                        >
+                                            {content}
+                                            {expandedContent}
+                                        </div>
                                     </div>
                                 );
                             })}
@@ -607,7 +611,7 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col pt-20 px-4"
+      ? "h-full flex flex-col pt-20"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
@@ -634,9 +638,9 @@ const CareerTimeline = () => {
     if (isMobile) {
         return (
             <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-3 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
-                <div className="flex-grow px-3 min-h-0">
-                    <ScrollArea className="h-full hide-scrollbar">
+                <h2 className="text-3xl font-extrabold mb-4 px-4 shrink-0 text-white text-auto">Where I've Been, What I've Done</h2>
+                <div className="flex-grow min-h-0">
+                    <ScrollArea className="h-full px-4 hide-scrollbar">
                         <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
