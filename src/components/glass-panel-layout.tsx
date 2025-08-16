@@ -139,17 +139,17 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                      {/* Socials */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} />
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
                                 <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} />
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-0")}>
                                 <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} />
                             </BentoCard>
                         </a>
@@ -423,10 +423,13 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                     {isExpanded && (
                                         <motion.div
                                             initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto', marginTop: expandUp ? '0' : '1rem', marginBottom: expandUp ? '1rem' : '0' }}
+                                            animate={{ opacity: 1, height: 'auto', marginTop: '1rem', marginBottom: '0' }}
                                             exit={{ opacity: 0, height: 0, marginTop: '0', marginBottom: '0' }}
                                             transition={{ ease: [0.4, 0, 0.2, 1], duration: 0.4 }}
-                                            className="overflow-hidden"
+                                            className={cn(
+                                                "overflow-hidden",
+                                                expandUp && "order-first"
+                                            )}
                                         >
                                             <p className="text-sm text-center mb-4">{project.fullDescription}</p>
                                             <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
@@ -449,9 +452,8 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                         )}
                                         onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
                                     >
-                                        {expandUp && expandedContent}
                                         {content}
-                                        {!expandUp && expandedContent}
+                                        {expandedContent}
                                     </div>
                                 );
                             })}
@@ -627,6 +629,7 @@ const CareerTimeline = () => {
                                             <h3 className="font-bold text-base">{item.title}</h3>
                                             <p className="text-sm font-medium">{item.company}</p>
                                             {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                            
                                             {item.title === "Bachelor of Engineering in Computer Science" ? (
                                                 <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
                                                     <span>{item.period}</span>
@@ -1247,6 +1250,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
 
     
+
 
 
 
