@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
     <div
-        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 ease-in-out", className)}
+        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 ease-in-out", className)}
         {...props}
     >
         {children}
@@ -165,7 +165,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                 <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                      <div
                         className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                        style={{ opacity: theme === 'light' ? 1 : 0 }}
+                        style={{ opacity: theme === 'light' ? 1 : 0, transition: 'opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
                     >
                         <Image
                             src={lightImage}
@@ -178,7 +178,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     </div>
                     <div
                         className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                        style={{ opacity: theme === 'dark' ? 1 : 0 }}
+                        style={{ opacity: theme === 'dark' ? 1 : 0, transition: 'opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
                     >
                         <Image
                             src={darkImage}
@@ -424,7 +424,7 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
                                             initial={{ opacity: 0, height: 0 }}
                                             animate={{ opacity: 1, height: 'auto' }}
                                             exit={{ opacity: 0, height: 0 }}
-                                            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                            transition={{ type: "spring", stiffness: 180, damping: 20 }}
                                             className="overflow-hidden mt-4"
                                         >
                                             <p className="text-sm text-center mb-4">{project.fullDescription}</p>
@@ -611,7 +611,7 @@ const CareerTimeline = () => {
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const containerClasses = isMobile
-      ? "h-full flex flex-col pt-20"
+      ? "h-full flex flex-col pt-4"
       : "h-full flex flex-col p-4";
 
     useEffect(() => {
@@ -687,7 +687,7 @@ const CareerTimeline = () => {
                                                     open: { opacity: 1, height: "auto" },
                                                     collapsed: { opacity: 0, height: 0 }
                                                 }}
-                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                                transition={{ type: "spring", stiffness: 250, damping: 25 }}
                                                 className="overflow-hidden"
                                             >
                                               <div className="text-sm pt-3">{item.description}</div>
@@ -697,7 +697,7 @@ const CareerTimeline = () => {
                                         <div className="flex justify-end mt-2">
                                             <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
                                                 <span>Read {isExpanded ? "Less" : "More"}</span>
-                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
                                                     <ArrowDown className="w-4 h-4" />
                                                 </motion.div>
                                             </button>
@@ -715,53 +715,98 @@ const CareerTimeline = () => {
     return (
         <div className={containerClasses}>
             <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
-            <div className="flex-grow min-h-0">
-                <ScrollArea className="h-full pr-4 hide-scrollbar">
-                    <div className="relative flex flex-col gap-y-10">
-                        <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2 animate-expand-y" />
-
-                        {careerTimelineData.map((item, index) => {
-                            const Icon = item.icon;
-                            return (
-                                <div key={index} className="grid grid-cols-[auto_auto_1fr] items-start animate-expand-x" style={{animationDelay: `${index * 0.1 + 0.1}s`}}>
-                                    <div className="w-28 text-left">
-                                        <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
-                                            <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center justify-center">
-                                        <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
-                                            <Icon className="w-5 h-5 text-black dark:text-white" />
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
-                                        <div className="flex items-start gap-4">
-                                            {item.logo && (
-                                                <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
-                                            )}
-                                            <div className="flex-grow">
-                                                <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
-                                                <p className="text-md text-muted-foreground font-semibold">
-                                                    {item.company} 
-                                                </p>
-                                                {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                                {item.location && (
-                                                    <div className="flex items-center text-sm text-muted-foreground mt-1">
-                                                        <MapPin className="w-4 h-4 mr-2" />
-                                                        <span>{item.location}</span>
-                                                    </div>
-                                                )}
+            <div className="flex-grow min-h-0 relative">
+                <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_0,black_10%,black_90%,transparent_100%)]">
+                    <div className="h-full w-full animate-scroll-y">
+                        <div className="relative flex flex-col gap-y-10">
+                            <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2" />
+                            {careerTimelineData.map((item, index) => {
+                                const Icon = item.icon;
+                                return (
+                                    <div key={`${item.id}-${index}`} className="grid grid-cols-[auto_auto_1fr] items-start">
+                                        <div className="w-28 text-left">
+                                            <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
+                                                <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
                                             </div>
                                         </div>
-                                        <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+
+                                        <div className="flex items-center justify-center">
+                                            <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
+                                                <Icon className="w-5 h-5 text-black dark:text-white" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
+                                            <div className="flex items-start gap-4">
+                                                {item.logo && (
+                                                    <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
+                                                )}
+                                                <div className="flex-grow">
+                                                    <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
+                                                    <p className="text-md text-muted-foreground font-semibold">
+                                                        {item.company} 
+                                                    </p>
+                                                    {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                                    {item.location && (
+                                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                                            <MapPin className="w-4 h-4 mr-2" />
+                                                            <span>{item.location}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
+                        </div>
+                        {/* Duplicate content for seamless scrolling */}
+                        <div className="relative flex flex-col gap-y-10" aria-hidden="true">
+                            <div className="absolute left-32 top-0 h-full w-1 bg-white/80 dark:bg-black/70 translate-x-1/2" />
+                            {careerTimelineData.map((item, index) => {
+                                const Icon = item.icon;
+                                return (
+                                    <div key={`${item.id}-duplicate-${index}`} className="grid grid-cols-[auto_auto_1fr] items-start">
+                                        <div className="w-28 text-left">
+                                            <div className="bg-white/80 dark:bg-black/70 p-3 rounded-lg shadow-md">
+                                                <p className="font-bold text-base text-black dark:text-white">{item.period}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center justify-center">
+                                            <div className=" relative z-10 bg-background p-1 left-1 rounded-full border-2 border-border">
+                                                <Icon className="w-5 h-5 text-black dark:text-white" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="bg-white/80 dark:bg-black/70 p-4 rounded-lg ml-4 shadow-md">
+                                            <div className="flex items-start gap-4">
+                                                {item.logo && (
+                                                    <Image src={item.logo} alt={`${item.company} logo`} width={56} height={56} className="rounded-md bg-white p-1 shrink-0" priority />
+                                                )}
+                                                <div className="flex-grow">
+                                                    <h3 className="font-bold text-lg text-black dark:text-white">{item.title}</h3>
+                                                    <p className="text-md text-muted-foreground font-semibold">
+                                                        {item.company} 
+                                                    </p>
+                                                    {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                                    {item.location && (
+                                                        <div className="flex items-center text-sm text-muted-foreground mt-1">
+                                                            <MapPin className="w-4 h-4 mr-2" />
+                                                            <span>{item.location}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="text-sm text-neutral-800 dark:text-neutral-100 mt-3">{item.description}</div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                </ScrollArea>
+                </div>
             </div>
         </div>
     );
@@ -1049,7 +1094,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     return {
       transform: `perspective(1000px) rotateY(${baseRotation}deg)`,
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
-      transition: 'transform 0.4s ease-out',
+      transition: 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
     };
   };
 
@@ -1078,13 +1123,13 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 finalContainerClasses = "h-full w-full overflow-hidden pt-20 px-2";
                 break;
             case 'Personal':
-                finalContainerClasses = "h-full w-full pt-20 px-2 flex flex-col";
+                finalContainerClasses = "h-full w-full pt-20 px-4 flex flex-col";
                 break;
             case 'Career':
                  finalContainerClasses = "h-full w-full flex flex-col pt-20";
                 break;
              case 'Projects':
-                finalContainerClasses = "h-full w-full pt-20 flex flex-col";
+                finalContainerClasses = "h-full w-full pt-20 flex flex-col px-4";
                 break;
             default:
                 finalContainerClasses = "h-full w-full overflow-y-auto pt-20 px-4";
@@ -1178,7 +1223,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     return (
         <div className={finalContainerClasses}>
             {isMobile ? (
-                 <AnimatePresence initial={false} custom={direction}>
+                 <AnimatePresence mode="wait" initial={false} custom={direction}>
                     <motion.div
                         key={activeViewIndex}
                         custom={direction}
@@ -1187,7 +1232,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 300, damping: 30 },
+                            x: { type: "spring", stiffness: 250, damping: 30 },
                             opacity: { duration: 0.2 }
                         }}
                         drag="x"
@@ -1231,7 +1276,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
           >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
-              <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.2s ease-out' }}>
+              <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)' }}>
                 {renderContent()}
               </div>
           </div>
@@ -1244,7 +1289,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         <div 
           ref={panelsContainerRef}
           className="flex items-center justify-center w-full max-w-[1300px]"
-          style={{ transition: 'transform 0.3s ease-out' }}
+          style={{ transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
         >
           <div className="h-auto hidden md:flex items-center">
             <GlassPanel

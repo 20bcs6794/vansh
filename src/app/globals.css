@@ -116,7 +116,7 @@
   }
 
   .animate-expand-x {
-    animation: expand-x 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: expand-x 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
   }
   
   @keyframes expand-y {
@@ -131,7 +131,7 @@
   }
 
   .animate-expand-y {
-    animation: expand-y 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: expand-y 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
   }
 
   .hide-scrollbar {
