@@ -605,6 +605,7 @@ const CareerTimeline = () => {
     const { theme } = useTheme();
     const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
     const containerClasses = isMobile
       ? "h-full flex flex-col p-4 text-white overflow-hidden"
@@ -613,16 +614,23 @@ const CareerTimeline = () => {
     useEffect(() => {
         if (isMobile && expandedCareerId !== null) {
             const careerIndex = careerTimelineData.findIndex(c => c.id === expandedCareerId);
-            if (careerIndex !== -1 && careerRefs.current[careerIndex]) {
+            const element = careerRefs.current[careerIndex];
+            if (element) {
                 setTimeout(() => {
-                    careerRefs.current[careerIndex]?.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'end',
-                    });
-                }, 300); // Wait for animation to finish
+                    const rect = element.getBoundingClientRect();
+                    const isVisible = rect.bottom <= window.innerHeight;
+                    
+                    if (!isVisible) {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'end'
+                        });
+                    }
+                }, 300);
             }
         }
     }, [expandedCareerId, isMobile]);
+
 
     if (isMobile) {
         const mobileCardClasses = cn(
@@ -633,8 +641,8 @@ const CareerTimeline = () => {
             <div className={containerClasses}>
                 <h2 className="text-3xl font-extrabold mb-4 shrink-0 text-neutral-800 dark:text-white">Where I have Been, What I have Done</h2>
                 <div className="flex-grow min-h-0">
-                    <ScrollArea className="h-full pr-4 -mr-4 hide-scrollbar">
-                        <div className="flex flex-col gap-y-4">
+                    <ScrollArea ref={scrollContainerRef} className="h-full pr-4 -mr-4 hide-scrollbar">
+                        <div className="flex flex-col gap-y-4 pb-4">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
                                 return (
