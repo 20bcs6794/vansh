@@ -31,12 +31,14 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         console.error("Permission request for device orientation failed:", error);
       }
     } else {
+      // For devices that don't require explicit permission (e.g., Android)
       setGyroPermissionGranted(true);
     }
   }, []);
 
   useEffect(() => {
     if (isMobile === undefined) return;
+    // For non-iOS 13+ devices, permission is not required
     if (isMobile && typeof (DeviceOrientationEvent as any).requestPermission !== 'function') {
        setGyroPermissionGranted(true);
     }
@@ -51,9 +53,11 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
 
         const { beta, gamma } = event; 
         
-        const yPos = (beta ? beta - 45 : 0) / 45; 
-        const xPos = (gamma ?? 0) / 45; 
+        // Normalize and cap values for smoother control
+        const yPos = (beta ? Math.max(-45, Math.min(45, beta - 45)) : 0) / 45; 
+        const xPos = (gamma ? Math.max(-45, Math.min(45, gamma)) : 0) / 45; 
         
+        // You can adjust these values to control the sensitivity of the background movement.
         const horizontalMoveStrength = 100;
         const verticalMoveStrength = 80;
 
@@ -198,5 +202,3 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     </div>
   );
 }
-
-    

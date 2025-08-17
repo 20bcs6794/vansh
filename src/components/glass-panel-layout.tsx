@@ -995,7 +995,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     if (isMobile === undefined) return;
     if (isMobile) {
         const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
-        // Normalize the gyroscope values. Beta is front-back tilt, Gamma is left-right.
+        // Normalize and cap the gyroscope values. Beta is front-back tilt, Gamma is left-right.
         // A common range for a comfortable tilt is around +/- 30 degrees.
         const yPos = (beta ? Math.max(-45, Math.min(45, beta - 45)) : 0) / 45; // -1 to 1
         const xPos = (gamma ? Math.max(-45, Math.min(45, gamma)) : 0) / 45; // -1 to 1
