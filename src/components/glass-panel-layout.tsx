@@ -1037,8 +1037,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
     const y = (mousePos.y - innerHeight / 2) / (innerHeight / 2); // -1 to 1
 
-    const horizontalMoveStrength = 80; // Pixels
-    const rotationStrength = 15; // Degrees
+    // You can adjust these values to control the sensitivity of the panel movement.
+    const horizontalMoveStrength = 80; // Controls how far the panels slide horizontally (in pixels).
+    const rotationStrength = 15; // Controls the 3D rotation intensity (in degrees).
     
     return {
         transform: `perspective(2000px) translateX(${-x * horizontalMoveStrength}px) rotateY(${x * rotationStrength}deg) rotateX(${-y * (rotationStrength / 2)}deg)`,
