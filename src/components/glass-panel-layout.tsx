@@ -62,7 +62,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
             <ScrollArea className="h-full w-full hide-scrollbar">
                 <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
-                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")} style={getCardStyle(15)}>
+                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
                             <div
                                 className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -109,7 +109,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                         </div>
                     </BentoCard>
 
-                    <div className="grid grid-cols-2 gap-4" style={getCardStyle(10)}>
+                    <div className="grid grid-cols-2 gap-4">
                          {/* Deployed Projects */}
                         <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
                             <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center p-2")}>
@@ -132,7 +132,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                     </div>
 
                     {/* Have a project in mind */}
-                    <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")} style={getCardStyle(5)}>
+                    <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                         <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                         <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
                             <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
@@ -148,7 +148,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                     </BentoCard>
                     
                      {/* Socials */}
-                    <div className="grid grid-cols-3 gap-4" style={getCardStyle(8)}>
+                    <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
@@ -1209,9 +1209,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            type: 'tween',
-                            ease: 'easeInOut',
-                            duration: 0.2,
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30,
                         }}
                         className="h-full w-full"
                     >
