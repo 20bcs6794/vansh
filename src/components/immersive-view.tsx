@@ -80,8 +80,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const yPos = (clientY / offsetHeight - 0.5) * 2;
       
       // here chnage the panels moveement on mouse moment 
-      const horizontalMoveStrength = 80;
-      const verticalMoveStrength = 20;
+      const horizontalMoveStrength = 120;
+      const verticalMoveStrength = 60;
 
       element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.2)`;
     };
@@ -127,7 +127,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         ref={tiltRef} 
         className="absolute inset-0"
         style={{ 
-          transition: 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)',
+          transition: 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
           transform: isMobile ? 'scale(1.6)' : 'scale(1.2)',
         }}
       >
@@ -198,3 +198,5 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
     </div>
   );
 }
+
+    

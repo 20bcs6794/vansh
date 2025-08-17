@@ -1004,8 +1004,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         if (panelsContainerRef.current) {
             panelsContainerRef.current.style.transform = `
                 perspective(1000px)
-                rotateY(${xPos * 7}deg)
-                rotateX(${-yPos * 7}deg)
+                rotateY(${xPos * 5}deg)
+                rotateX(${-yPos * 5}deg)
                 translateX(${-xPos * horizontalMoveStrength}px)
                 translateY(${-yPos * verticalMoveStrength}px)
             `;
@@ -1038,12 +1038,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     const y = (mousePos.y - innerHeight / 2) / (innerHeight / 2); // -1 to 1
 
     // You can adjust these values to control the sensitivity of the panel movement.
-    const horizontalMoveStrength = 80; // Controls how far the panels slide horizontally (in pixels).
-    const rotationStrength = 15; // Controls the 3D rotation intensity (in degrees).
+    const horizontalMoveStrength = 120; // Controls how far the panels slide horizontally (in pixels).
+    const rotationStrength = 10; // Controls the 3D rotation intensity (in degrees).
     
     return {
         transform: `perspective(2000px) translateX(${-x * horizontalMoveStrength}px) rotateY(${x * rotationStrength}deg) rotateX(${-y * (rotationStrength / 2)}deg)`,
-        transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'
+        transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)'
     };
   };
 
@@ -1077,7 +1077,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     return {
       transform: `perspective(1000px) rotateY(${finalRotation}deg) scale(${finalScale})`,
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
-      transition: 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)',
+      transition: 'transform 1s cubic-bezier(0.22, 1, 0.36, 1)',
     };
   };
 
@@ -1316,6 +1316,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+    
+
     
 
     
