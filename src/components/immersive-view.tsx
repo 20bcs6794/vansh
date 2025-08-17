@@ -17,8 +17,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
   const [orientation, setOrientation] = useState<{ beta: number | null, gamma: number | null }>({ beta: null, gamma: null });
   
-  const lightImage = isMobile ? "/images/mobile_light_bg.webp" : "/images/light_theme_bg.webp";
-  const darkImage = isMobile ? "/images/mobile_dark_bg.webp" : "/images/dark_theme_bg.webp";
+  const lightImage = isMobile ? "/images/mobile_light_bg.webp" : "/images/exx-day-flip.jpg";
+  const darkImage = isMobile ? "/images/mobile_dark_bg.webp" : "/images/eve-flip.jpg";
   
   const requestDeviceOrientationPermission = useCallback(async () => {
     if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
@@ -85,15 +85,15 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       
       // here chnage the panels moveement on mouse moment 
       const horizontalMoveStrength = 120;
-      const verticalMoveStrength = 60;
+      const verticalMoveStrength = 30;
 
-      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.2)`;
+      element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
     };
 
     const handleMouseLeave = () => {
       const element = tiltRef.current;
       if (element) {
-        element.style.transform = 'translate3d(0, 0, 0) scale(1.1)';
+        element.style.transform = 'translate3d(0, 0, 0) scale(1.0)';
       }
     };
     
@@ -132,7 +132,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         className="absolute inset-0"
         style={{ 
           transition: 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
-          transform: isMobile ? 'scale(1.6)' : 'scale(1.2)',
+          transform: isMobile ? 'scale(1.6)' : 'scale(1.3)',
         }}
       >
         <div className="absolute inset-0">
@@ -147,7 +147,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic landscape with a planet in the sky"
               data-ai-hint="futuristic landscape forest"
               fill
-              className="object-cover"
+              className="object-fit"
               priority
             />
           </div>
@@ -162,7 +162,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
               alt="A futuristic city with flying vehicles at night"
               data-ai-hint="futuristic city forest"
               fill
-              className="object-cover"
+              className="object-fit"
               priority
             />
           </div>

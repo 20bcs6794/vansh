@@ -1209,8 +1209,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         transition={{
-                            x: { type: "spring", stiffness: 250, damping: 30 },
-                            opacity: { duration: 0.2 }
+                            type: 'tween',
+                            ease: 'easeInOut',
+                            duration: 0.2,
                         }}
                         className="h-full w-full"
                     >
