@@ -17,16 +17,17 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
-const BentoCard = ({ children, className, ...props }: { children: ReactNode, className?: string, [key: string]: any }) => (
+const BentoCard = ({ children, className, style, ...props }: { children: ReactNode, className?: string, style?: CSSProperties, [key: string]: any }) => (
     <div
         className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 ease-in-out", className)}
+        style={style}
         {...props}
     >
         {children}
     </div>
 );
 
-const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void}) => {
+const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: string) => void, orientation?: {beta: number | null, gamma: number | null}}) => {
     const [isCopied, setIsCopied] = useState(false);
     const { theme } = useTheme();
     const isMobile = useIsMobile();
@@ -45,12 +46,23 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
 
     if (isMobile) {
         const mobileCardClasses = "bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white";
+        const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
+
+        const getCardStyle = (depth: number): CSSProperties => {
+            if (!beta || !gamma) return {};
+            const yPos = (Math.max(-30, Math.min(30, beta - 45))) / 30; // -1 to 1
+            const xPos = (Math.max(-30, Math.min(30, gamma))) / 30; // -1 to 1
+            return {
+                transform: `translate3d(${-xPos * depth}px, ${-yPos * (depth * 0.5)}px, 0)`,
+                transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
+            }
+        }
         
         return (
             <ScrollArea className="h-full w-full hide-scrollbar">
                 <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
-                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
+                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")} style={getCardStyle(15)}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
                             <div
                                 className="absolute inset-0 transition-opacity duration-500 ease-in-out"
@@ -97,7 +109,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                         </div>
                     </BentoCard>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4" style={getCardStyle(10)}>
                          {/* Deployed Projects */}
                         <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
                             <BentoCard className={cn(mobileCardClasses, "h-full flex flex-col items-center justify-center p-2")}>
@@ -120,7 +132,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     </div>
 
                     {/* Have a project in mind */}
-                    <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
+                    <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")} style={getCardStyle(5)}>
                         <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
                         <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
                             <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
@@ -136,7 +148,7 @@ const BentoHomeGrid = ({setActiveView}: {setActiveView: (view: string) => void})
                     </BentoCard>
                     
                      {/* Socials */}
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-4" style={getCardStyle(8)}>
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
@@ -994,22 +1006,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   useEffect(() => {
     if (isMobile === undefined) return;
     if (isMobile) {
-        const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
-        // Normalize and cap the gyroscope values. Beta is front-back tilt, Gamma is left-right.
-        // A common range for a comfortable tilt is around +/- 30 degrees.
-        const yPos = (beta ? Math.max(-45, Math.min(45, beta - 45)) : 0) / 45; // -1 to 1
-        const xPos = (gamma ? Math.max(-45, Math.min(45, gamma)) : 0) / 45; // -1 to 1
-        
-        // You can adjust these values to control the sensitivity of the panel movement.
-        const horizontalMoveStrength = 60; // Controls how far the panels slide horizontally (in pixels).
-        const verticalMoveStrength = 40; // Controls how far the panels slide vertically (in pixels).
-        
-        if (panelsContainerRef.current) {
-            panelsContainerRef.current.style.transform = `
-                translateX(${-xPos * horizontalMoveStrength}px)
-                translateY(${-yPos * verticalMoveStrength}px)
-            `;
-        }
+        // Mobile-specific logic is now handled inside the components that need it (e.g., BentoHomeGrid).
         return;
     };
 
@@ -1121,7 +1118,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     
     switch (activeView) {
       case 'Home':
-        content = <BentoHomeGrid setActiveView={setActiveView} />;
+        content = <BentoHomeGrid setActiveView={setActiveView} orientation={orientation}/>;
         break;
       case 'Projects':
         content = <ProjectsView onProjectHover={setProjectDescriptionForRightPanel} />;
@@ -1246,7 +1243,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
           >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
-              <div ref={panelsContainerRef} className="w-full h-full" style={{ transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)' }}>
+              <div ref={panelsContainerRef} className="w-full h-full">
                 {renderContent()}
               </div>
           </div>
