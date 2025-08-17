@@ -998,8 +998,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         const yPos = (beta ? beta - 45 : 0) / 45;
         const xPos = (gamma ?? 0) / 45;
         
-        const horizontalMoveStrength = 100;
-        const verticalMoveStrength = 80;
+        // You can adjust these values to control the sensitivity of the panel movement.
+        const horizontalMoveStrength = 100; // Controls how far the panels slide horizontally (in pixels).
+        const verticalMoveStrength = 80; // Controls how far the panels slide vertically (in pixels).
         
         if (panelsContainerRef.current) {
             panelsContainerRef.current.style.transform = `
