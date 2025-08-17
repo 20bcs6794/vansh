@@ -995,18 +995,17 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     if (isMobile === undefined) return;
     if (isMobile) {
         const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
-        const yPos = (beta ? beta - 45 : 0) / 45;
-        const xPos = (gamma ?? 0) / 45;
+        // Normalize the gyroscope values. Beta is front-back tilt, Gamma is left-right.
+        // A common range for a comfortable tilt is around +/- 30 degrees.
+        const yPos = (beta ? Math.max(-45, Math.min(45, beta - 45)) : 0) / 45; // -1 to 1
+        const xPos = (gamma ? Math.max(-45, Math.min(45, gamma)) : 0) / 45; // -1 to 1
         
         // You can adjust these values to control the sensitivity of the panel movement.
-        const horizontalMoveStrength = 100; // Controls how far the panels slide horizontally (in pixels).
-        const verticalMoveStrength = 80; // Controls how far the panels slide vertically (in pixels).
+        const horizontalMoveStrength = 60; // Controls how far the panels slide horizontally (in pixels).
+        const verticalMoveStrength = 40; // Controls how far the panels slide vertically (in pixels).
         
         if (panelsContainerRef.current) {
             panelsContainerRef.current.style.transform = `
-                perspective(1000px)
-                rotateY(${xPos * 5}deg)
-                rotateX(${-yPos * 5}deg)
                 translateX(${-xPos * horizontalMoveStrength}px)
                 translateY(${-yPos * verticalMoveStrength}px)
             `;
@@ -1317,6 +1316,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     </div>
   );
 }
+    
+
     
 
     
