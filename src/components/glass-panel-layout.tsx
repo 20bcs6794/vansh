@@ -1208,12 +1208,28 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         initial="enter"
                         animate="center"
                         exit="exit"
+                        
+                        // EDIT THIS SECTION TO CHANGE SWIPE ANIMATION
+                        // You can change the animation type and its properties here.
+                        // For example, to make it faster, increase "stiffness".
+                        // To make it more "bouncy", decrease "damping".
+                        // You can also change the type to "tween" for a more linear animation.
                         transition={{
                             type: "spring",
                             stiffness: 300,
                             damping: 30,
                         }}
+
                         className="h-full w-full"
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={1}
+                        onDragEnd={(e, { offset, velocity }) => {
+                            const swipe = Math.abs(offset.x);
+                            if (swipe > 50) {
+                                paginate(offset.x > 0 ? -1 : 1);
+                            }
+                        }}
                     >
                         {content}
                     </motion.div>
