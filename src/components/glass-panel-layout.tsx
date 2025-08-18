@@ -50,7 +50,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
         
         return (
             <ScrollArea className="h-full w-full hide-scrollbar">
-                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 pt-2 text-white dark:text-white">
+                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
                     <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
@@ -401,65 +401,62 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
 
     if(isMobile) {
         return (
-            <div className={containerClasses}>
+            <div className="h-full w-full flex flex-col p-4 text-white">
                 <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
-                <div className="flex-grow min-h-0 relative">
-                    <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
-                        <div className="grid grid-cols-1 p-1 pb-4">
-                            {projectsData.map((project, index) => {
-                                const isExpanded = expandedProjectId === project.id;
-
-                                const content = (
-                                    <div className="text-center">
-                                        <h3 className="font-bold text-lg">{project.name}</h3>
-                                        <div className="flex gap-1 flex-wrap mt-1 justify-center">
-                                            {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
-                                        </div>
+                <div className="flex-grow min-h-0 overflow-y-auto hide-scrollbar">
+                    <div className="grid grid-cols-1 p-1 pb-4">
+                        {projectsData.map((project, index) => {
+                            const isExpanded = expandedProjectId === project.id;
+                            const content = (
+                                <div className="text-center">
+                                    <h3 className="font-bold text-lg">{project.name}</h3>
+                                    <div className="flex gap-1 flex-wrap mt-1 justify-center">
+                                        {project.tech.slice(0, 3).map((t: string) => <span key={t} className="text-xs bg-white/20 px-2 py-0.5 rounded-full whitespace-nowrap">{t}</span>)}
                                     </div>
-                                );
-                                
-                                const expandedContent = (
-                                    <AnimatePresence>
-                                    {isExpanded && (
-                                        <motion.div
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto' }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            transition={{ type: "spring", stiffness: 180, damping: 20 }}
-                                            className="overflow-hidden mt-4"
-                                        >
-                                            <p className="text-sm text-center mb-4">{project.fullDescription}</p>
-                                            <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
-                                                <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                                                    View Project
-                                                </a>
-                                            </Button>
-                                        </motion.div>
-                                    )}
-                                    </AnimatePresence>
-                                );
-
-                                return (
-                                    <div 
-                                        key={project.id} 
-                                        ref={el => { if (projectRefs.current) projectRefs.current[index] = el; }}
-                                        onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
-                                        className="pb-4"
+                                </div>
+                            );
+                            
+                            const expandedContent = (
+                                <AnimatePresence>
+                                {isExpanded && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ type: "spring", stiffness: 180, damping: 20 }}
+                                        className="overflow-hidden mt-4"
                                     >
-                                        <div
-                                            className={cn(
-                                                "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
-                                                project.bgColor
-                                            )}
-                                        >
-                                            {content}
-                                            {expandedContent}
-                                        </div>
+                                        <p className="text-sm text-center mb-4">{project.fullDescription}</p>
+                                        <Button asChild variant="secondary" className="bg-white/30 hover:bg-white/40 text-white font-bold backdrop-blur-sm shadow-lg px-4 py-2 rounded-lg w-full">
+                                            <a href={project.link} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                                                View Project
+                                            </a>
+                                        </Button>
+                                    </motion.div>
+                                )}
+                                </AnimatePresence>
+                            );
+
+                            return (
+                                <div 
+                                    key={project.id} 
+                                    ref={el => { if (projectRefs.current) projectRefs.current[index] = el; }}
+                                    onClick={() => setExpandedProjectId(isExpanded ? null : project.id)}
+                                    className="pb-4"
+                                >
+                                    <div
+                                        className={cn(
+                                            "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden p-4 flex flex-col justify-center bg-gradient-to-br",
+                                            project.bgColor
+                                        )}
+                                    >
+                                        {content}
+                                        {expandedContent}
                                     </div>
-                                );
-                            })}
-                        </div>
-                    </ScrollArea>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         )
@@ -611,10 +608,6 @@ const CareerTimeline = () => {
     const [expandedCareerId, setExpandedCareerId] = useState<number | null>(null);
     const careerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    const containerClasses = isMobile
-      ? "h-full flex flex-col p-4"
-      : "h-full flex flex-col p-4";
-
     useEffect(() => {
         if (isMobile && expandedCareerId !== null) {
             const element = careerRefs.current[careerTimelineData.findIndex(c => c.id === expandedCareerId)];
@@ -638,83 +631,81 @@ const CareerTimeline = () => {
 
     if (isMobile) {
         return (
-            <div className={containerClasses}>
-                <h2 className="text-3xl font-extrabold mb-4 px-3 shrink-0 text-white text-left">Where I've Been, What I've Done</h2>
-                <div className="flex-grow min-h-0 relative">
-                    <ScrollArea className="absolute inset-0 h-full px-4 hide-scrollbar">
-                        <div className="flex flex-col">
-                            {careerTimelineData.map((item, index) => {
-                                const isExpanded = expandedCareerId === item.id;
-                                return (
-                                <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-6">
-                                    <div 
-                                        className={cn(
-                                            "p-4 rounded-xl shadow-md w-full",
-                                            "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
+            <div className="h-full w-full flex flex-col p-4">
+                <h2 className="text-2xl font-extrabold mb-2 px-3 shrink-0 text-white text-left">Where I've Been</h2>
+                <div className="flex-grow min-h-0 overflow-y-auto hide-scrollbar">
+                    <div className="flex flex-col px-3">
+                        {careerTimelineData.map((item, index) => {
+                            const isExpanded = expandedCareerId === item.id;
+                            return (
+                            <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-4">
+                                <div 
+                                    className={cn(
+                                        "p-4 rounded-xl shadow-md w-full",
+                                        "bg-white/80 text-neutral-800 dark:bg-black/70 backdrop-blur-sm dark:text-white"
+                                    )}
+                                    onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
+                                >
+                                    <div className="flex items-start gap-4">
+                                        {item.logo && (
+                                            <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
                                         )}
-                                        onClick={() => setExpandedCareerId(isExpanded ? null : item.id)}
-                                    >
-                                        <div className="flex items-start gap-4">
-                                            {item.logo && (
-                                                <Image src={item.logo} alt={`${item.company} logo`} width={48} height={48} className="rounded-md bg-white p-1" priority />
+                                        <div className="flex-grow">
+                                            <h3 className="font-bold text-base">{item.title}</h3>
+                                            <p className="text-sm font-medium">{item.company}</p>
+                                            {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
+                                            
+                                            {item.title === "Bachelor of Engineering in Computer Science" ? (
+                                                <div className="flex items-center gap-x-2 text-xs text-muted-foreground mt-1">
+                                                    <span>{item.period}</span>
+                                                    {item.location && <span>•</span>}
+                                                    {item.location && <span>{item.location}</span>}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <p className="text-xs text-muted-foreground mt-1">{item.period}</p>
+                                                    {item.location && <p className="text-xs text-muted-foreground">{item.location}</p>}
+                                                </>
                                             )}
-                                            <div className="flex-grow">
-                                                <h3 className="font-bold text-base">{item.title}</h3>
-                                                <p className="text-sm font-medium">{item.company}</p>
-                                                {item.grade && <p className="text-sm text-muted-foreground">{item.grade}</p>}
-                                                
-                                                {item.title === "Bachelor of Engineering in Computer Science" ? (
-                                                    <div className="flex items-center gap-x-2 text-sm text-muted-foreground mt-1">
-                                                        <span>{item.period}</span>
-                                                        {item.location && <span>•</span>}
-                                                        {item.location && <span>{item.location}</span>}
-                                                    </div>
-                                                ) : (
-                                                    <>
-                                                        <p className="text-sm text-muted-foreground mt-1">{item.period}</p>
-                                                        {item.location && <p className="text-sm text-muted-foreground">{item.location}</p>}
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-                                        <AnimatePresence initial={false}>
-                                        {isExpanded && (
-                                            <motion.section
-                                                key="content"
-                                                initial="collapsed"
-                                                animate="open"
-                                                exit="collapsed"
-                                                variants={{
-                                                    open: { opacity: 1, height: "auto" },
-                                                    collapsed: { opacity: 0, height: 0 }
-                                                }}
-                                                transition={{ type: "spring", stiffness: 250, damping: 25 }}
-                                                className="overflow-hidden"
-                                            >
-                                              <div className="text-sm pt-3">{item.description}</div>
-                                            </motion.section>
-                                        )}
-                                        </AnimatePresence>
-                                        <div className="flex justify-end mt-2">
-                                            <button className="flex items-center gap-1 text-sm font-semibold text-neutral-600 dark:text-neutral-300">
-                                                <span>Read {isExpanded ? "Less" : "More"}</span>
-                                                <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
-                                                    <ArrowDown className="w-4 h-4" />
-                                                </motion.div>
-                                            </button>
                                         </div>
                                     </div>
+                                    <AnimatePresence initial={false}>
+                                    {isExpanded && (
+                                        <motion.section
+                                            key="content"
+                                            initial="collapsed"
+                                            animate="open"
+                                            exit="collapsed"
+                                            variants={{
+                                                open: { opacity: 1, height: "auto" },
+                                                collapsed: { opacity: 0, height: 0 }
+                                            }}
+                                            transition={{ type: "spring", stiffness: 250, damping: 25 }}
+                                            className="overflow-hidden"
+                                        >
+                                            <div className="text-sm pt-3">{item.description}</div>
+                                        </motion.section>
+                                    )}
+                                    </AnimatePresence>
+                                    <div className="flex justify-end mt-2">
+                                        <button className="flex items-center gap-1 text-xs font-semibold text-neutral-600 dark:text-neutral-300">
+                                            <span>Read {isExpanded ? "Less" : "More"}</span>
+                                            <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3, ease: 'easeOut' }}>
+                                                <ArrowDown className="w-4 h-4" />
+                                            </motion.div>
+                                        </button>
+                                    </div>
                                 </div>
-                            )})}
-                        </div>
-                    </ScrollArea>
+                            </div>
+                        )})}
+                    </div>
                 </div>
             </div>
         )
     }
       
     return (
-        <div className={containerClasses}>
+        <div className="h-full flex flex-col p-4">
             <h2 className="text-2xl font-bold mb-4 shrink-0 animate-expand-x" style={{animationDelay: '0s'}}>Where I’ve Been, What I’ve Done</h2>
             <div className="flex-grow min-h-0 relative">
                 <ScrollArea className="absolute inset-0 h-full w-full hide-scrollbar">
@@ -1085,21 +1076,10 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
 
   const renderContent = () => {
     let content;
-    let finalContainerClasses = "h-full";
+    let finalContainerClasses = "h-full w-full";
 
     if (isMobile) {
-        switch (activeView) {
-            case 'Home':
-                finalContainerClasses = "h-full w-full overflow-hidden pt-20 px-2";
-                break;
-            case 'Personal':
-            case 'Career':
-            case 'Projects':
-                 finalContainerClasses = "h-full w-full flex flex-col pt-20";
-                break;
-            default:
-                finalContainerClasses = "h-full w-full overflow-y-auto pt-20 px-4";
-        }
+      finalContainerClasses = "h-full w-full flex flex-col pt-20";
     }
     
     switch (activeView) {
@@ -1111,7 +1091,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
         break;
       case 'Personal':
         content = (
-          <div className="h-full flex flex-col p-4 gap-4">
+          <div className="h-full flex flex-col p-4 gap-2">
             <div
                 className={cn(
                     "p-4 flex flex-col",
@@ -1125,9 +1105,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                   
               </div>
               <div className={cn("relative mb-2 flex-grow min-h-0")}>
-                <div className={cn("space-y-3 text-sm absolute inset-0")}>
+                <div className={cn("space-y-2 text-sm absolute inset-0")}>
                   <ScrollArea className={cn("h-full pr-4")}>
-                    <div className={cn("space-y-3 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
+                    <div className={cn("space-y-2 text-sm pr-2", isMobile ? "text-neutral-800 dark:text-neutral-100" : "text-neutral-800 dark:text-neutral-100")}>
                        <p>
                             I’m <span className="font-bold">Vanshdeep Verma</span>, a technology professional who combines 
                             <span className="font-bold"> data analytics</span>, <span className="font-bold">frontend development</span>, and 
@@ -1136,7 +1116,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                             and <span className="font-bold">team collaboration</span>, ensuring every project drives 
                             <span className="font-bold"> tangible results</span>.
                           </p>
-                          <ul className="list-disc list-inside space-y-1">
+                          <ul className="list-disc list-inside space-y-1 text-xs">
                             <li><span className="font-bold">40%+ efficiency gains</span> through automation</li>
                             <li><span className="font-bold">30% faster reporting</span> via workflow optimization</li>
                             <li><span className="font-bold">Stronger customer engagement</span> with improved digital experiences</li>
@@ -1154,9 +1134,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-xl font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools and Technologies</h3>
+              <h3 className={cn("text-lg font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools & Technologies</h3>
               <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                <div className="flex w-max animate-scroll-x gap-4 mt-3">
+                <div className="flex w-max animate-scroll-x gap-4">
                   <div className="flex shrink-0 gap-4">
                     {technologiesWithIcons.map((tech, index) => (
                       <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
@@ -1195,12 +1175,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         animate="center"
                         exit="exit"
                         
-                        // EDIT THIS SECTION TO CHANGE SWIPE ANIMATION
-                        // You can change the animation type and its properties here.
-                        // For example, to make it faster, increase "stiffness".
-                        // To make it more "bouncy", decrease "damping".
-                        // You can also change the type to "tween" for a more linear animation.
                         transition={{
+                            // YOU CAN EDIT THE SWIPE ANIMATION HERE
+                            // type: "tween" // for a more linear animation
                             type: "spring",
                             stiffness: 300,
                             damping: 30,
