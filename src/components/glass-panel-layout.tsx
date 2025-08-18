@@ -50,7 +50,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
         
         return (
             <ScrollArea className="h-full w-full hide-scrollbar">
-                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
+                <div className="grid grid-cols-1 gap-3 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
                     <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
@@ -81,10 +81,10 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                                 />
                             </div>
                         </div>
-                        <div className="flex flex-col text-left mt-2">
+                        <div className="flex flex-col text-left mt-1">
                             <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
-                            <p className="dark:text-neutral-400 text-neutral-700 mt-1 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
-                            <div className="flex items-center justify-between text-muted-foreground mt-4 text-sm">
+                            <p className="dark:text-neutral-400 text-neutral-700 mt-0.5 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                            <div className="flex items-center justify-between text-muted-foreground mt-3 text-sm">
                                 <div className="flex items-center">
                                     <MapPin className="w-4 h-4 mr-2" />
                                     <span className="font-bold">New Delhi, India</span>
@@ -124,7 +124,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                     {/* Have a project in mind */}
                     <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                         <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                        <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-90">
+                        <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-[90%]">
                             <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                             <Button
                                 variant="ghost"
@@ -140,17 +140,17 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                      {/* Socials */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
                                 <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} priority/>
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
                                 <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
@@ -1177,7 +1177,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         
                         transition={{
                             // YOU CAN EDIT THE SWIPE ANIMATION HERE
-                            // type: "tween" // for a more linear animation
                             type: "spring",
                             stiffness: 300,
                             damping: 30,
