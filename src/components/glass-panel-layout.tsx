@@ -402,9 +402,9 @@ const ProjectsView = ({ onProjectHover }: { onProjectHover: (description: string
     if(isMobile) {
         return (
             <div className="h-full w-full flex flex-col p-4 text-white">
-                <h2 className="text-2xl font-bold mb-4 shrink-0">My Works</h2>
+                <h2 className="text-2xl font-bold mb-4 px-3 shrink-0">My Works</h2>
                 <div className="flex-grow min-h-0 overflow-y-auto hide-scrollbar">
-                    <div className="grid grid-cols-1 p-1 pb-4">
+                    <div className="grid grid-cols-1 p-1 px-3 pb-4">
                         {projectsData.map((project, index) => {
                             const isExpanded = expandedProjectId === project.id;
                             const content = (
@@ -638,7 +638,7 @@ const CareerTimeline = () => {
                         {careerTimelineData.map((item, index) => {
                             const isExpanded = expandedCareerId === item.id;
                             return (
-                            <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-4">
+                            <div key={index} ref={el => { if(careerRefs.current) careerRefs.current[index] = el; }} className="pb-3">
                                 <div 
                                     className={cn(
                                         "p-4 rounded-xl shadow-md w-full",
@@ -1096,7 +1096,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 className={cn(
                     "p-4 flex flex-col",
                     isMobile 
-                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] h-[70%]" 
+                        ? "bg-white/80 text-neutral-800 dark:bg-black/70 font-semibold backdrop-blur-sm dark:text-white rounded-[20px] h-[75%] mx-3" 
                         : "bg-white/80 dark:bg-black/70 rounded-[20px] flex-grow min-h-0",
                 )}
             >
@@ -1133,7 +1133,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 </div>
               </div>
             </div>
-            <div className={cn("flex flex-col animate-expand-x")} style={{ animationDelay: '0.1s' }}>
+            <div className={cn("flex flex-col animate-expand-x px-3")} style={{ animationDelay: '0.1s' }}>
               <h3 className={cn("text-lg font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools & Technologies</h3>
               <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
                 <div className="flex w-max animate-scroll-x gap-4">
