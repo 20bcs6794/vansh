@@ -946,6 +946,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   const [direction, setDirection] = useState(0);
   const { theme } = useTheme();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  
+  const touchStartRef = useRef<{ x: number, y: number } | null>(null);
 
   const navItems = [
     { icon: HomeIcon, label: "Home" },
@@ -992,28 +994,54 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   };
   
   useEffect(() => {
-    if (isMobile === undefined) return;
-    if (isMobile) {
-        // Mobile-specific logic is now handled inside the components that need it (e.g., BentoHomeGrid).
-        return;
-    };
-
-    const handleMouseMove = (event: MouseEvent) => {
-        setMousePos({ x: event.clientX, y: event.clientY });
-    };
-    
-    const handleMouseLeave = () => {
-      setMousePos({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    if (!isMobile) {
+        const handleMouseMove = (event: MouseEvent) => {
+            setMousePos({ x: event.clientX, y: event.clientY });
+        };
+        const handleMouseLeave = () => {
+            setMousePos({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        document.body.addEventListener('mouseleave', handleMouseLeave);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            document.body.removeEventListener('mouseleave', handleMouseLeave);
+        };
     }
 
-    window.addEventListener('mousemove', handleMouseMove);
-    document.body.addEventListener('mouseleave', handleMouseLeave);
+    const handleTouchStart = (event: TouchEvent) => {
+        touchStartRef.current = {
+            x: event.touches[0].clientX,
+            y: event.touches[0].clientY,
+        };
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+        if (!touchStartRef.current) return;
+
+        const deltaX = event.touches[0].clientX - touchStartRef.current.x;
+        const deltaY = event.touches[0].clientY - touchStartRef.current.y;
+
+        const swipeThreshold = 50;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+            // Horizontal swipe detected
+            event.preventDefault();
+            paginate(deltaX > 0 ? -1 : 1);
+            touchStartRef.current = null; // Reset after swipe
+        }
+    };
+    
+    window.addEventListener('touchstart', handleTouchStart);
+    // Use capture phase to intercept event before it reaches scrollable elements
+    window.addEventListener('touchmove', handleTouchMove, { capture: true, passive: false });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      document.body.removeEventListener('mouseleave', handleMouseLeave);
+        window.removeEventListener('touchstart', handleTouchStart);
+        window.removeEventListener('touchmove', handleTouchMove, { capture: true });
     };
-  }, [isMobile, orientation]);
+
+  }, [isMobile, activeViewIndex]);
 
   const getPanelContainerStyle = (): CSSProperties => {
     if (isMobile) return {};
@@ -1188,15 +1216,6 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         }}
 
                         className="h-full w-full"
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragElastic={1}
-                        onDragEnd={(e, { offset, velocity }) => {
-                            const swipe = Math.abs(offset.x);
-                            if (swipe > 50) {
-                                paginate(offset.x > 0 ? -1 : 1);
-                            }
-                        }}
                     >
                         {content}
                     </motion.div>
