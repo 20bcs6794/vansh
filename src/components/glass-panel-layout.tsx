@@ -50,8 +50,11 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
         
         return (
             <ScrollArea className="h-full w-full hide-scrollbar">
+                {/* EDIT HERE: You can adjust the overall vertical spacing of the home grid. */}
+                {/* `gap-3` controls the space between grid items. `p-4` controls the padding around the entire grid. */}
                 <div className="grid grid-cols-1 gap-3 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
+                    {/* EDIT HERE: `p-4` controls the internal padding of this card. */}
                     <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
                             <div
@@ -81,9 +84,12 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                                 />
                             </div>
                         </div>
+                        {/* EDIT HERE: `mt-1` controls the margin top for the text block. */}
                         <div className="flex flex-col text-left mt-1">
                             <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
+                            {/* EDIT HERE: `mt-0.5` controls the margin top for the paragraph. */}
                             <p className="dark:text-neutral-400 text-neutral-700 mt-0.5 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
+                            {/* EDIT HERE: `mt-3` controls the margin top for the location/resume block. */}
                             <div className="flex items-center justify-between text-muted-foreground mt-3 text-sm">
                                 <div className="flex items-center">
                                     <MapPin className="w-4 h-4 mr-2" />
@@ -98,7 +104,8 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                             </div>
                         </div>
                     </BentoCard>
-
+                    
+                    {/* EDIT HERE: `gap-4` controls the space between the two cards in this row. */}
                     <div className="grid grid-cols-2 gap-4">
                          {/* Deployed Projects */}
                         <a onClick={() => setActiveView("Projects")} className="group col-span-1 cursor-pointer">
@@ -138,6 +145,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                     </BentoCard>
                     
                      {/* Socials */}
+                    {/* EDIT HERE: `gap-4` controls the spacing between the social media icons. */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
