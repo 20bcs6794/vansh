@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
@@ -46,21 +47,10 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
 
     if (isMobile) {
         const mobileCardClasses = "bg-white/50 text-neutral-800 dark:bg-black/70 dark:text-white";
-        const { beta, gamma } = orientation || { beta: 0, gamma: 0 };
-
-        const getCardStyle = (depth: number): CSSProperties => {
-            if (!beta || !gamma) return {};
-            const yPos = (Math.max(-30, Math.min(30, beta - 45))) / 30; // -1 to 1
-            const xPos = (Math.max(-30, Math.min(30, gamma))) / 30; // -1 to 1
-            return {
-                transform: `translate3d(${-xPos * depth}px, ${-yPos * (depth * 0.5)}px, 0)`,
-                transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
-            }
-        }
         
         return (
             <ScrollArea className="h-full w-full hide-scrollbar">
-                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 text-white dark:text-white">
+                <div className="grid grid-cols-1 gap-4 h-full w-full p-4 pt-2 text-white dark:text-white">
                     {/* Profile Card */}
                     <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
@@ -650,8 +640,8 @@ const CareerTimeline = () => {
         return (
             <div className={containerClasses}>
                 <h2 className="text-3xl font-extrabold mb-4 px-3 shrink-0 text-white text-left">Where I've Been, What I've Done</h2>
-                <div className="flex-grow  min-h-0">
-                    <ScrollArea className="h-full px-4 hide-scrollbar">
+                <div className="flex-grow min-h-0 relative">
+                    <ScrollArea className="absolute inset-0 h-full px-4 hide-scrollbar">
                         <div className="flex flex-col">
                             {careerTimelineData.map((item, index) => {
                                 const isExpanded = expandedCareerId === item.id;
@@ -1103,13 +1093,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                 finalContainerClasses = "h-full w-full overflow-hidden pt-20 px-2";
                 break;
             case 'Personal':
-                finalContainerClasses = "h-full w-full pt-20 px-4 flex flex-col";
-                break;
             case 'Career':
+            case 'Projects':
                  finalContainerClasses = "h-full w-full flex flex-col pt-20";
-                break;
-             case 'Projects':
-                finalContainerClasses = "h-full w-full pt-20 flex flex-col px-4";
                 break;
             default:
                 finalContainerClasses = "h-full w-full overflow-y-auto pt-20 px-4";
@@ -1205,7 +1191,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         key={activeViewIndex}
                         custom={direction}
                         variants={animationVariants}
-                        initial="enter"
+                        initial="start"
                         animate="center"
                         exit="exit"
                         
