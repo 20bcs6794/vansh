@@ -7,10 +7,13 @@ import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useDynamicVh } from '@/hooks/use-dynamic-vh';
 import { GlassPanelLayout } from '@/components/glass-panel-layout';
+import { cn } from '@/lib/utils';
 
 
 export function ImmersiveView({ children }: { children?: ReactNode }) {
+  useDynamicVh();
   const { theme, toggleTheme } = useTheme();
   const tiltRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -124,7 +127,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
 
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden bg-background"
+      className={cn("relative w-full overflow-hidden bg-background h-dynamic-screen")}
       onClick={isMobile && !isGyroPermissionGranted ? requestDeviceOrientationPermission : undefined}
     >
       <div 

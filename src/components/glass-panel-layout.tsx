@@ -1220,7 +1220,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   if (isMobile) {
       return (
           <div 
-              className="relative z-20 w-full h-screen flex flex-col items-center justify-start overflow-hidden"
+              className="relative z-20 w-full flex flex-col items-center justify-start overflow-hidden h-dynamic-screen"
           >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
               <div ref={panelsContainerRef} className="w-full h-full">
@@ -1231,7 +1231,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   }
 
   return (
-    <div className="relative z-20 w-full h-screen flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden">
+    <div className="relative z-20 w-full flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden h-dynamic-screen">
       <div style={{ perspective: '3000px' }}>
         <div 
           ref={panelsContainerRef}
