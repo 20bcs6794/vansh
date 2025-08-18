@@ -60,9 +60,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const yPos = (beta ? Math.max(-45, Math.min(45, beta - 45)) : 0) / 45; 
         const xPos = (gamma ? Math.max(-45, Math.min(45, gamma)) : 0) / 45; 
         
-        // You can adjust these values to control the sensitivity of the background movement.
-        const horizontalMoveStrength = 100;
-        const verticalMoveStrength = 80;
+        const horizontalMoveStrength = 80;
+        const verticalMoveStrength = 60;
 
         element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.6)`;
     };
@@ -86,9 +85,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       const xPos = (clientX / offsetWidth - 0.5) * 2;
       const yPos = (clientY / offsetHeight - 0.5) * 2;
       
-      // here chnage the panels moveement on mouse moment 
-      const horizontalMoveStrength = 120;
-      const verticalMoveStrength = 30;
+      const horizontalMoveStrength = 100;
+      const verticalMoveStrength = 20;
 
       element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.3)`;
     };
@@ -134,13 +132,13 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         ref={tiltRef} 
         className="absolute inset-0"
         style={{ 
-          transition: 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)',
+          transition: 'transform 1s cubic-bezier(0.22, 1, 0.36, 1)',
           transform: isMobile ? 'scale(1.6)' : 'scale(1.3)',
         }}
       >
         <div className="absolute inset-0">
           <div 
-            className="absolute inset-0 transition-opacity duration-500 ease-in-out" 
+            className="absolute inset-0 transition-opacity duration-300 ease-in-out" 
             style={{ 
               opacity: theme === 'light' ? 1 : 0,
             }}
@@ -155,7 +153,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
             />
           </div>
           <div 
-            className="absolute inset-0 transition-opacity duration-500 ease-in-out" 
+            className="absolute inset-0 transition-opacity duration-300 ease-in-out" 
             style={{ 
               opacity: theme === 'dark' ? 1 : 0,
             }}
@@ -183,7 +181,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
       {childrenWithProps}
       
       <div 
-        className="absolute inset-0 z-10 pointer-events-none"
+        className="absolute inset-0 z-10 pointer-events-none transition-shadow duration-300"
         style={{ boxShadow: theme === 'dark' ? vignetteStyle.dark : vignetteStyle.light }}
       />
       

@@ -31,14 +31,19 @@ export function ThemeProvider({
     const storedTheme = localStorage.getItem("theme") as Theme | null;
     if (storedTheme) {
       setTheme(storedTheme);
+    } else {
+      setTheme(defaultTheme);
     }
-  }, []);
+  }, [defaultTheme]);
 
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(theme);
     localStorage.setItem("theme", theme);
+    
+    // Add a transition to the body's background and text color
+    document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
   }, [theme]);
 
   const toggleTheme = () => {

@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const BentoCard = ({ children, className, style, ...props }: { children: ReactNode, className?: string, style?: CSSProperties, [key: string]: any }) => (
     <div
-        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 ease-in-out", className)}
+        className={cn("bg-white/80 dark:bg-black/70 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 ease-in-out", className)}
         style={style}
         {...props}
     >
@@ -52,13 +52,13 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
             <ScrollArea className="h-full w-full hide-scrollbar">
                 {/* EDIT HERE: You can adjust the overall vertical spacing of the home grid. */}
                 {/* `gap-3` controls the space between grid items. `p-4` controls the padding around the entire grid. */}
-                <div className="grid grid-cols-1 gap-3 h-full w-full p-4 text-white dark:text-white">
+                <div className="grid grid-cols-1 gap-3 h-full w-full p-3 text-white dark:text-white">
                     {/* Profile Card */}
                     {/* EDIT HERE: `p-4` controls the internal padding of this card. */}
-                    <BentoCard className={cn(mobileCardClasses, "p-4 flex flex-col justify-start")}>
+                    <BentoCard className={cn(mobileCardClasses, "p-3 flex flex-col justify-start")}>
                         <div className="relative w-full max-w-[70%] mx-auto aspect-square rounded-xl overflow-hidden">
                             <div
-                                className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                className="absolute inset-0 transition-opacity duration-300 ease-in-out"
                                 style={{ opacity: theme === 'light' ? 1 : 0 }}
                             >
                                 <Image
@@ -71,7 +71,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                                 />
                             </div>
                             <div
-                                className="absolute inset-0 transition-opacity duration-500 ease-in-out"
+                                className="absolute inset-0 transition-opacity duration-300 ease-in-out"
                                 style={{ opacity: theme === 'dark' ? 1 : 0 }}
                             >
                                 <Image
@@ -84,8 +84,8 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                                 />
                             </div>
                         </div>
-                        {/* EDIT HERE: `mt-1` controls the margin top for the text block. */}
-                        <div className="flex flex-col text-left mt-1">
+                        {/* EDIT HERE: `mt-0.5` controls the margin top for the text block. */}
+                        <div className="flex flex-col text-left mt-0.5">
                             <h2 className="text-lg font-extrabold">Hi, I'm Vanshdeep —</h2>
                             {/* EDIT HERE: `mt-0.5` controls the margin top for the paragraph. */}
                             <p className="dark:text-neutral-400 text-neutral-700 mt-0.5 text-sm">Aspiring Software Engineer, Data Analyst, Web Developer</p>
@@ -131,7 +131,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                     {/* Have a project in mind */}
                     <BentoCard className={cn(mobileCardClasses, "flex flex-col justify-center items-center")}>
                         <h3 className="font-bold text-base mb-2 text-center">Have a project in mind?</h3>
-                        <div className="flex items-center justify-between gap-2 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-[90%]">
+                        <div className="flex items-center justify-between gap-1 backdrop-blur bg-primary/30 dark:bg-primary/80 text-primary-foreground p-2 rounded-lg w-[90%]">
                             <span className="text-sm font-mono font-bold text-black dark:text-white truncate">mr.vanshverma2001@gmail.com</span>
                             <Button
                                 variant="ghost"
@@ -144,22 +144,21 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                         </div>
                     </BentoCard>
                     
-                     {/* Socials */}
-                    {/* EDIT HERE: `gap-4` controls the spacing between the social media icons. */}
+                     {/* EDIT HERE: `gap-4` controls the spacing between the social media icons. */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
+                            <BentoCard className={cn(mobileCardClasses, "items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
-                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={56} height={56} priority/>
+                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
+                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={51} height={51} priority/>
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "aspect-square items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-2")}>
-                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} priority/>
+                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-5")}>
+                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={52} height={52} priority/>
                             </BentoCard>
                         </a>
                     </div>
@@ -173,8 +172,8 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
             <BentoCard className="md:col-span-2 md:row-span-2 p-4 flex flex-col justify-start animate-expand-y" style={{ animationDelay: '0s' }}>
                 <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
                      <div
-                        className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                        style={{ opacity: theme === 'light' ? 1 : 0, transition: 'opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
+                        className="absolute inset-0 transition-opacity"
+                        style={{ opacity: theme === 'light' ? 1 : 0, transition: 'opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
                     >
                         <Image
                             src={lightImage}
@@ -186,8 +185,8 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                         />
                     </div>
                     <div
-                        className="absolute inset-0 transition-opacity duration-500 ease-in-out"
-                        style={{ opacity: theme === 'dark' ? 1 : 0, transition: 'opacity 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
+                        className="absolute inset-0 transition-opacity"
+                        style={{ opacity: theme === 'dark' ? 1 : 0, transition: 'opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1)' }}
                     >
                         <Image
                             src={darkImage}
@@ -273,7 +272,7 @@ const NavItem = ({ icon, label, isActive, onClick }: { icon: React.ElementType, 
   const Icon = icon;
   return (
     <button onClick={onClick} className={cn(
-      "flex items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors duration-300 ease-in-out font-bold text-base",
+      "flex items-center gap-4 px-4 py-2 text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors duration-200 ease-in-out font-bold text-base",
       isActive && "bg-white/10 dark:bg-white/10 shadow-[0_0_8px_1px_rgba(255,255,255,0.4)] text-black dark:text-white"
     )}>
       <Icon className="w-5 h-5" />
@@ -288,7 +287,7 @@ const ProjectBentoCard = ({ project, onHover }: { project: any, onHover: (descri
             onMouseEnter={() => onHover(project.fullDescription)}
             onMouseLeave={() => onHover(null)}
             className={cn(
-                "relative text-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col justify-center items-center h-full group",
+                "relative text-white transition-all duration-200 ease-in-out cursor-pointer rounded-xl overflow-hidden bg-gradient-to-br p-6 flex flex-col justify-center items-center h-full group",
                 project.bgColor
             )}
             style={{ gridArea: project.gridArea }}
@@ -534,7 +533,7 @@ const technologiesWithIcons = [
 ];
 
 const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
-    <div className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-300 ease-in-out hover:scale-105")}>
+    <div className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-200 ease-in-out hover:scale-105")}>
         <div className="h-12 flex items-center justify-center">
             <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority fetchPriority="high" />
         </div>
@@ -912,7 +911,7 @@ const MobileNav = ({ activeView, setActiveView, navItems }: { activeView: string
                         key={item.label}
                         onClick={() => setActiveView(item.label)}
                         className={cn(
-                            "flex flex-col items-center gap-1 text-xs p-1 rounded-md text-white flex-1 transition-colors duration-300 ease-in-out",
+                            "flex flex-col items-center gap-1 text-xs p-1 rounded-md text-white flex-1 transition-colors duration-200 ease-in-out",
                             activeView === item.label ? "bg-white/20" : ""
                         )}
                     >
@@ -1023,13 +1022,12 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
     const y = (mousePos.y - innerHeight / 2) / (innerHeight / 2); // -1 to 1
 
-    // You can adjust these values to control the sensitivity of the panel movement.
-    const horizontalMoveStrength = 120; // Controls how far the panels slide horizontally (in pixels).
-    const rotationStrength = 10; // Controls the 3D rotation intensity (in degrees).
+    const horizontalMoveStrength = 100;
+    const rotationStrength = 8;
     
     return {
         transform: `perspective(2000px) translateX(${-x * horizontalMoveStrength}px) rotateY(${x * rotationStrength}deg) rotateX(${-y * (rotationStrength / 2)}deg)`,
-        transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)'
+        transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)'
     };
   };
 
@@ -1039,23 +1037,23 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     const { innerWidth } = window;
     const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
 
-    const baseRotation = panel === 'left' ? 25 : -25;
-    const dynamicRotation = x * 20; // How much it rotates with mouse
-    const scaleFactor = 1 + Math.abs(x) * 0.05;
+    const baseRotation = panel === 'left' ? 20 : -20;
+    const dynamicRotation = x * 15;
+    const scaleFactor = 1 + Math.abs(x) * 0.03;
 
     let finalRotation = baseRotation;
     let finalScale = 1;
 
-    if (panel === 'left' && x > 0) { // Mouse on right, left panel is further
+    if (panel === 'left' && x > 0) {
         finalRotation = baseRotation + dynamicRotation;
         finalScale = 1;
-    } else if (panel === 'left' && x < 0) { // Mouse on left, left panel is closer
+    } else if (panel === 'left' && x < 0) {
         finalRotation = baseRotation + dynamicRotation;
         finalScale = scaleFactor;
-    } else if (panel === 'right' && x < 0) { // Mouse on left, right panel is further
+    } else if (panel === 'right' && x < 0) {
         finalRotation = baseRotation + dynamicRotation;
         finalScale = 1;
-    } else if (panel === 'right' && x > 0) { // Mouse on right, right panel is closer
+    } else if (panel === 'right' && x > 0) {
         finalRotation = baseRotation + dynamicRotation;
         finalScale = scaleFactor;
     }
@@ -1063,7 +1061,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     return {
       transform: `perspective(1000px) rotateY(${finalRotation}deg) scale(${finalScale})`,
       transformOrigin: panel === 'left' ? 'right center' : 'left center',
-      transition: 'transform 1s cubic-bezier(0.22, 1, 0.36, 1)',
+      transition: 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)',
     };
   };
 
@@ -1184,10 +1182,9 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         exit="exit"
                         
                         transition={{
-                            // YOU CAN EDIT THE SWIPE ANIMATION HERE
                             type: "spring",
-                            stiffness: 300,
-                            damping: 30,
+                            stiffness: 250,
+                            damping: 25,
                         }}
 
                         className="h-full w-full"
@@ -1266,7 +1263,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
           
            <GlassPanel 
                className={cn(
-                   "w-[600px] h-[480px] transition-all duration-500 ease-in-out mx-6"
+                   "w-[600px] h-[480px] transition-all duration-300 ease-in-out mx-6"
                )} 
                isContentPanel={true} 
                activeView={activeView}
