@@ -662,7 +662,7 @@ const careerTimelineData = [
         </p>
         <ul className="list-disc list-inside mt-2 space-y-1 text-sm">
           <li>Developed an AI assistant that <strong>automated 500+ daily customer queries</strong>, reducing manual support by <strong>40%</strong>.</li>
-          <li>Implemented SEO-focused content strategies, resulting in <strong>30% growth in organic traffic</strong> within 3 months.</li>
+          <li>Implemented an SEO-focused content strategies, resulting in <strong>30% growth in organic traffic</strong> within 3 months.</li>
           <li>Collaborated with tech and content teams to enhance chatbot performance and user engagement.</li>
           <li>Improved website structure and meta-tag optimization for better search visibility.</li>
         </ul>
@@ -1127,7 +1127,21 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
   }, [isMobile, activeViewIndex]);
 
   const getPanelContainerStyle = (): CSSProperties => {
-    if (isMobile) return {};
+    if (isMobile) {
+        if (!orientation || orientation.beta === null || orientation.gamma === null) return {};
+        
+        const { beta, gamma } = orientation;
+
+        const maxRotate = 8;
+        // Normalize and cap values for smoother control
+        const rotateX = Math.max(-maxRotate, Math.min(maxRotate, (beta - 45) / 10)); 
+        const rotateY = Math.max(-maxRotate, Math.min(maxRotate, gamma / 10)); 
+        
+        return {
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)'
+        };
+    }
 
     const { innerWidth, innerHeight } = window;
     const x = (mousePos.x - innerWidth / 2) / (innerWidth / 2); // -1 to 1
@@ -1315,7 +1329,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               className="relative z-20 w-full flex flex-col items-center justify-start overflow-hidden h-dynamic-screen"
           >
               <MobileNav activeView={activeView} setActiveView={setActiveView} navItems={mobileNavItems} />
-              <div ref={panelsContainerRef} className="w-full h-full">
+              <div ref={panelsContainerRef} className="w-full h-full" style={getPanelContainerStyle()}>
                 {renderContent()}
               </div>
           </div>
