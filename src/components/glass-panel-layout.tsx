@@ -153,12 +153,12 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
                             <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={51} height={51} priority/>
+                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
                             <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={52} height={52} priority/>
+                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} priority/>
                             </BentoCard>
                         </a>
                     </div>
