@@ -144,21 +144,26 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                         </div>
                     </BentoCard>
                     
-                     {/* EDIT HERE: `gap-4` controls the spacing between the social media icons. */}
                     <div className="grid grid-cols-3 gap-4">
                         <a href="https://www.linkedin.com/in/vanshdeep-verma" target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, "items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} priority/>
+                            <BentoCard className={cn(mobileCardClasses, "transition-transform duration-300 ease-in-out group-hover:scale-105 p-4 flex items-center justify-center")}>
+                                <div className="w-12 h-12 flex items-center justify-center">
+                                    <Image src="/social_icons/linkedin.svg" alt="LinkedIn" width={50} height={50} className="object-contain" priority/>
+                                </div>
                             </BentoCard>
                         </a>
                         <a href={`https://wa.me/918273438007?text=${encodeURIComponent("Hello Vansh..!!!, I came using your portfolio, It is a great feel to catch you up !!!")}`} target="_blank" rel="noopener noreferrer" className="group">
-                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={50} height={50} priority/>
+                            <BentoCard className={cn(mobileCardClasses, "transition-transform duration-300 ease-in-out group-hover:scale-105 p-4 flex items-center justify-center")}>
+                                <div className="w-12 h-12 flex items-center justify-center">
+                                    <Image src="/social_icons/whatsapp.webp" alt="WhatsApp" width={50} height={50} className="object-contain" priority/>
+                                </div>
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
-                                <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} priority/>
+                            <BentoCard className={cn(mobileCardClasses, "transition-transform duration-300 ease-in-out group-hover:scale-105 p-4 flex items-center justify-center")}>
+                                <div className="w-12 h-12 flex items-center justify-center">
+                                    <Image src="/social_icons/gmail.svg" alt="Gmail" width={50} height={50} className="object-contain" priority/>
+                                </div>
                             </BentoCard>
                         </a>
                     </div>
