@@ -63,7 +63,7 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
         const horizontalMoveStrength = 80;
         const verticalMoveStrength = 60;
 
-        element.style.transform = `translate3d(${-xPos * horizontalMoveStrength}px, ${-yPos * verticalMoveStrength}px, 0) scale(1.6)`;
+        element.style.transform = `translate3d(${xPos * horizontalMoveStrength}px, ${yPos * verticalMoveStrength}px, 0) scale(1.6)`;
     };
     
     if (isMobile) {

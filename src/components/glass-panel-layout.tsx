@@ -35,7 +35,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
 
     const lightImage = "/images/light_user.webp";
     const darkImage = "/images/dark_user.webp";
-    const certificatesLink = "/document/resume.pdf";
+    const certificatesLink = "https://drive.google.com/drive/folders/1AkCA6iLV11kG24_Fh57zOzKzvOoywnN5?usp=sharing";
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText('mr.vanshverma2001@gmail.com');
@@ -611,7 +611,7 @@ const TechMarquee = () => {
                 className={cn(
                     "flex w-max py-4",
                     // EDIT HERE: You can change `gap-4` to control the space between icons.
-                    "gap-4",
+                    "gap-2",
                     isPaused ? "[animation-play-state:paused]" : "[animation-play-state:running]",
                     "animate-scroll-x"
                 )}

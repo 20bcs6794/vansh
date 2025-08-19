@@ -100,7 +100,7 @@
   .animate-scroll-x {
     /* EDIT HERE: You can change the duration (e.g., 40s) to control the scroll speed. */
     /* A smaller number means faster, a larger number means slower. */
-    animation: scroll-x 40s linear infinite;
+    animation: scroll-x 20s linear infinite;
   }
 
   @keyframes scroll-y {
