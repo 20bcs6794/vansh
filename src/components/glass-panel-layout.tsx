@@ -157,7 +157,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
                             </BentoCard>
                         </a>
                         <a href="mailto:mr.vanshverma2001@gmail.com" className="group">
-                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-5")}>
+                            <BentoCard className={cn(mobileCardClasses, " items-center justify-center transition-transform duration-300 ease-in-out group-hover:scale-105 p-4")}>
                                 <Image src="/social_icons/gmail.svg" alt="Gmail" width={52} height={52} priority/>
                             </BentoCard>
                         </a>
