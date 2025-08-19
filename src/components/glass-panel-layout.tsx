@@ -52,7 +52,7 @@ const BentoHomeGrid = ({setActiveView, orientation}: {setActiveView: (view: stri
             <ScrollArea className="h-full w-full hide-scrollbar">
                 {/* EDIT HERE: You can adjust the overall vertical spacing of the home grid. */}
                 {/* `gap-3` controls the space between grid items. `p-4` controls the padding around the entire grid. */}
-                <div className="grid grid-cols-1 gap-3 h-full w-full p-3 text-white dark:text-white">
+                <div className="grid grid-cols-1 gap-3 h-full w-full p-4 text-white dark:text-white">
                     {/* Profile Card */}
                     {/* EDIT HERE: `p-4` controls the internal padding of this card. */}
                     <BentoCard className={cn(mobileCardClasses, "p-3 flex flex-col justify-start")}>
@@ -1210,7 +1210,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
     let finalContainerClasses = "h-full w-full";
 
     if (isMobile) {
-      finalContainerClasses = "h-full w-full flex flex-col pt-20";
+      finalContainerClasses = "h-full w-full flex flex-col pt-20 px-3";
     }
     
     switch (activeView) {
