@@ -609,7 +609,9 @@ const TechMarquee = () => {
             <div 
                 ref={contentRef}
                 className={cn(
-                    "flex w-max gap-4 py-4",
+                    "flex w-max py-4",
+                    // EDIT HERE: You can change `gap-4` to control the space between icons.
+                    "gap-4",
                     isPaused ? "[animation-play-state:paused]" : "[animation-play-state:running]",
                     "animate-scroll-x"
                 )}
