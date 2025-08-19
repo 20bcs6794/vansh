@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon, Copy, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/components/theme-provider';
 import { Input } from '@/components/ui/input';
@@ -610,8 +610,7 @@ const TechMarquee = () => {
                 ref={contentRef}
                 className={cn(
                     "flex w-max py-4",
-                    // EDIT HERE: You can change `gap-4` to control the space between icons.
-                    "gap-2",
+                    "gap-4",
                     isPaused ? "[animation-play-state:paused]" : "[animation-play-state:running]",
                     "animate-scroll-x"
                 )}
@@ -1260,6 +1259,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                             <span className="font-bold"> data-driven decisions</span>.
                           </p>
                     </div>
+                  <ScrollBar data-visible="true" />
                   </ScrollArea>
                 </div>
               </div>

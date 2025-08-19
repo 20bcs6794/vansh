@@ -20,8 +20,8 @@ export function ImmersiveView({ children }: { children?: ReactNode }) {
   const [isGyroPermissionGranted, setGyroPermissionGranted] = useState(false);
   const [orientation, setOrientation] = useState<{ beta: number | null, gamma: number | null }>({ beta: null, gamma: null });
   
-  const lightImage = isMobile ? "/images/mobile_light_bg.webp" : "/images/exx-day-flip.jpg";
-  const darkImage = isMobile ? "/images/mobile_dark_bg.webp" : "/images/eve-flip.jpg";
+  const lightImage = isMobile ? "/images/mobile_light_bg.webp" : "/images/a.jpg";
+  const darkImage = isMobile ? "/images/mobile_dark_bg.webp" : "/images/eve.jpg";
   
   const requestDeviceOrientationPermission = useCallback(async () => {
     if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
