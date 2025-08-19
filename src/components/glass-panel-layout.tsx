@@ -539,7 +539,7 @@ const technologiesWithIcons = [
 
 const TechnologyCard = ({ name, icon, style }: { name: string, icon: string, style?: CSSProperties }) => (
     <div 
-        className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-200 ease-in-out hover:scale-105")}
+        className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 shrink-0")}
         style={style}
     >
         <div className="h-12 flex items-center justify-center">
@@ -560,6 +560,7 @@ const TechMarquee = () => {
         if (!marquee || !content) return;
 
         const updateStyles = () => {
+            if (isPaused) return;
             const marqueeRect = marquee.getBoundingClientRect();
             const marqueeCenter = marqueeRect.left + marqueeRect.width / 2;
 
@@ -569,10 +570,13 @@ const TechMarquee = () => {
                 const itemCenter = itemRect.left + itemRect.width / 2;
 
                 const distance = Math.abs(marqueeCenter - itemCenter);
-                const normalizedDistance = distance / (marqueeRect.width / 2);
+                // Normalize distance from 0 (center) to 1 (edge)
+                const normalizedDistance = Math.min(distance / (marqueeRect.width / 2), 1);
 
-                const scale = Math.max(0.6, 1.2 - normalizedDistance * 0.6);
-                const opacity = Math.max(0.6, 1 - normalizedDistance * 0.4);
+                // Scale from 1 (center) down to 0.8 (edge)
+                const scale = 1 - normalizedDistance * 0.2; 
+                // Opacity from 1 (center) down to 0.7 (edge)
+                const opacity = 1 - normalizedDistance * 0.3;
                 
                 item.style.transform = `scale(${scale})`;
                 item.style.opacity = `${opacity}`;
@@ -580,7 +584,7 @@ const TechMarquee = () => {
         };
 
         let animationFrameId: number;
-
+        
         const animate = () => {
             updateStyles();
             animationFrameId = requestAnimationFrame(animate);
@@ -591,7 +595,7 @@ const TechMarquee = () => {
         return () => {
             cancelAnimationFrame(animationFrameId);
         };
-    }, []);
+    }, [isPaused]);
 
     return (
         <div 
@@ -599,11 +603,13 @@ const TechMarquee = () => {
             className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)] group"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
         >
             <div 
                 ref={contentRef}
                 className={cn(
-                    "flex w-max gap-4",
+                    "flex w-max gap-4 py-4",
                     isPaused ? "[animation-play-state:paused]" : "[animation-play-state:running]",
                     "animate-scroll-x"
                 )}
@@ -1267,17 +1273,15 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                         key={activeViewIndex}
                         custom={direction}
                         variants={animationVariants}
-                        initial="start"
+                        initial="enter"
                         animate="center"
                         exit="exit"
-                        
                         transition={{
                             type: "spring",
-                            stiffness: 250,
-                            damping: 25,
+                            stiffness: 300,
+                            damping: 30,
                             duration: 0.5,
                         }}
-
                         className="h-full w-full"
                     >
                         {content}
