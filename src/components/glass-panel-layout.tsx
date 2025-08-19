@@ -2,7 +2,7 @@
 
 "use client";
 
-import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode } from 'react';
+import { type CSSProperties, forwardRef, useRef, useEffect, useState, type ReactNode, useCallback } from 'react';
 import Image from 'next/image';
 import { Home as HomeIcon, Heart, User, Briefcase, Bell, Download, Check, MapPin, Link as LinkIcon, Award, ChevronRight, GraduationCap, Phone, Instagram, Send, Mail, ArrowRight, Loader2, AlertCircle, X, Maximize, Sun, Moon, Copy, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -537,14 +537,84 @@ const technologiesWithIcons = [
     { name: 'Excel', icon: "/tech_icons/excel.svg" },
 ];
 
-const TechnologyCard = ({ name, icon }: { name: string, icon: string }) => (
-    <div className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-200 ease-in-out hover:scale-105")}>
+const TechnologyCard = ({ name, icon, style }: { name: string, icon: string, style?: CSSProperties }) => (
+    <div 
+        className={cn("bg-white rounded-lg p-2 flex flex-col items-center justify-center text-center gap-2 w-24 h-24 transition-transform duration-200 ease-in-out hover:scale-105")}
+        style={style}
+    >
         <div className="h-12 flex items-center justify-center">
             <Image src={icon} alt={name} width={40} height={40} className="object-contain" priority fetchPriority="high" />
         </div>
         <span className="font-medium text-xs text-neutral-800"><span className="font-bold">{name}</span></span>
     </div>
 );
+
+const TechMarquee = () => {
+    const marqueeRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        const marquee = marqueeRef.current;
+        const content = contentRef.current;
+        if (!marquee || !content) return;
+
+        const updateStyles = () => {
+            const marqueeRect = marquee.getBoundingClientRect();
+            const marqueeCenter = marqueeRect.left + marqueeRect.width / 2;
+
+            Array.from(content.children).forEach(child => {
+                const item = child as HTMLDivElement;
+                const itemRect = item.getBoundingClientRect();
+                const itemCenter = itemRect.left + itemRect.width / 2;
+
+                const distance = Math.abs(marqueeCenter - itemCenter);
+                const normalizedDistance = distance / (marqueeRect.width / 2);
+
+                const scale = Math.max(0.6, 1.2 - normalizedDistance * 0.6);
+                const opacity = Math.max(0.6, 1 - normalizedDistance * 0.4);
+                
+                item.style.transform = `scale(${scale})`;
+                item.style.opacity = `${opacity}`;
+            });
+        };
+
+        let animationFrameId: number;
+
+        const animate = () => {
+            updateStyles();
+            animationFrameId = requestAnimationFrame(animate);
+        };
+        
+        animate();
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, []);
+
+    return (
+        <div 
+            ref={marqueeRef}
+            className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)] group"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+        >
+            <div 
+                ref={contentRef}
+                className={cn(
+                    "flex w-max gap-4",
+                    isPaused ? "[animation-play-state:paused]" : "[animation-play-state:running]",
+                    "animate-scroll-x"
+                )}
+            >
+                {[...technologiesWithIcons, ...technologiesWithIcons].map((tech, index) => (
+                    <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
+                ))}
+            </div>
+        </div>
+    );
+}
 
 const careerTimelineData = [
   {
@@ -1173,21 +1243,8 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
               </div>
             </div>
             <div className={cn("flex flex-col animate-expand-x px-3")} style={{ animationDelay: '0.1s' }}>
-              <h3 className={cn("text-lg font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools & Technologies</h3>
-              <div className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent_0,black_20px,black_calc(100%-20px),transparent_100%)]">
-                <div className="flex w-max animate-scroll-x gap-4">
-                  <div className="flex shrink-0 gap-4">
-                    {technologiesWithIcons.map((tech, index) => (
-                      <TechnologyCard key={`${tech.name}-${index}`} name={tech.name} icon={tech.icon} />
-                    ))}
-                  </div>
-                  <div className="flex shrink-0 gap-4" aria-hidden="true">
-                    {technologiesWithIcons.map((tech, index) => (
-                      <TechnologyCard key={`${tech.name}-duplicate-${index}`} name={tech.name} icon={tech.icon} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+                <h3 className={cn("text-lg font-bold text-left shrink-0 mb-2", isMobile ? "text-white" : "")}>Tools & Technologies</h3>
+                <TechMarquee />
             </div>
           </div>
         );
@@ -1218,6 +1275,7 @@ export function GlassPanelLayout({ orientation }: { orientation?: { beta: number
                             type: "spring",
                             stiffness: 250,
                             damping: 25,
+                            duration: 0.5,
                         }}
 
                         className="h-full w-full"
